@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: CalibrationParameters.cpp,v 1.3 2004/08/21 18:19:55 cygnus78 Exp $
+   $Id: CalibrationParameters.cpp,v 1.4 2004/10/02 11:09:05 cygnus78 Exp $
 
 *************************************************/
 
@@ -20,7 +20,7 @@ CalibrationParameters::CalibrationParameters( CCOCV* c,
 				QWidget* parent, 
 				const char* name,
 				WFlags fl) 
-  : CalibrationParametersBase(parent, name, fl), gui(p), calib(c) 
+  : CalibrationParametersBase(parent, name, fl), gui(p), calib(c), m_block_signals(false) 
 {
   
   connect( matrixLE,   SIGNAL( textChanged(const QString&) ), 
@@ -98,9 +98,12 @@ CalibrationParameters::parametersChanged()
 }
 
 void 
-CalibrationParameters::updateParameters(struct CameraParams cp)
+CalibrationParameters::updateParameters(struct CameraParams cp, bool block_signals )
 {
   if(ccv::debug) std::cerr << "CalibrationParameters::updateParameters\n";
+
+  m_block_signals = block_signals;
+
   QString s;
 
   gui->setCalibrated( false, 1 );
@@ -132,13 +135,21 @@ CalibrationParameters::updateParameters(struct CameraParams cp)
   enableCB->setChecked( true );
   enableCB->setEnabled( false );
 
+
+  qApp->processEvents();
+  m_block_signals = false;
+
+  slot_parametersEdited();
+
 }
 
 void 
 CalibrationParameters::slot_parametersEdited()
 {
-  parametersChanged();
-  emit parametersEdited();
+  if( !m_block_signals ) {
+    parametersChanged();
+    emit parametersEdited();
+  }
 }
 
 void

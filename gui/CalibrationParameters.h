@@ -10,7 +10,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: CalibrationParameters.h,v 1.3 2004/08/21 17:18:56 cygnus78 Exp $
+   $Id: CalibrationParameters.h,v 1.4 2004/10/02 11:09:05 cygnus78 Exp $
 
 *************************************************/
 
@@ -39,7 +39,7 @@ public:
 			 WFlags fl = 0 );
   ~CalibrationParameters();
  
-  void updateParameters(struct CameraParams cp);
+  void updateParameters(struct CameraParams cp, bool block_signals=false);
 
 public slots:
   void parametersChanged();
@@ -47,6 +47,7 @@ public slots:
 private:
   Peru* gui;
   CCOCV* calib;
+  bool m_block_signals;
 
 private slots:
 
