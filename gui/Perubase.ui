@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>Perubase</class>
 <widget class="QMainWindow">
     <property name="name">
@@ -81,30 +81,6 @@
         </property>
         <property name="toolTip" stdset="0">
             <string>Save shown image as save.bmp</string>
-        </property>
-    </widget>
-    <widget class="QCheckBox">
-        <property name="name">
-            <cstring>calibCB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>220</x>
-                <y>420</y>
-                <width>70</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Undistort</string>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Undistort displayed image</string>
         </property>
     </widget>
     <widget class="QCheckBox">
@@ -1745,6 +1721,30 @@
             </widget>
         </widget>
     </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>calibCB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>210</x>
+                <y>420</y>
+                <width>70</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Undistort</string>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Undistort displayed image</string>
+        </property>
+    </widget>
     <widget class="QLabel">
         <property name="name">
             <cstring>TextLabel1</cstring>
@@ -1764,7 +1764,7 @@
             </font>
         </property>
         <property name="text">
-            <string>PERU - Version pre0.2.2</string>
+            <string>PERU - Version 0.2.2</string>
         </property>
     </widget>
 </widget>
@@ -1957,7 +1957,7 @@
 </actions>
 <images>
     <image name="image0">
-        <data format="XPM.GZ" length="45">789cd3d7528808f055d0d2e72a2e492cc94c5648ce482c52d04a29cdcdad8c8eb5ade6523250004143a55a6b2e0026630c4f</data>
+        <data format="XBM.GZ" length="79">789c534e494dcbcc4b554829cdcdad8c2fcf4c29c95030e0524611cd48cd4ccf28010a1797249664262b2467241641a592324b8aa363156c15aab914146aadb90067111b1f</data>
     </image>
 </images>
 <connections>
