@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: BlockMatch.h,v 1.4 2003/09/25 23:49:26 cygnus78 Exp $
+   $Id: BlockMatch.h,v 1.5 2004/09/24 21:36:42 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,6 +17,7 @@
 #define BLOCKMATCH_H
 
 #include "stereo.h"
+#include "../ccv.h"
 
 using namespace std;
 

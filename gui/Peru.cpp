@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.18 2004/09/03 21:53:19 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.19 2004/09/24 21:36:42 cygnus78 Exp $
 
 *************************************************/
 
@@ -710,7 +710,7 @@ Peru::calculateStereo()
     clock_t start_time = clock(); 
 
     // Reset global errorflag before use
-    ccv::ERRFLAG = false;
+    ccv::resetError();
 
     for( int i = start; i <=stop; i++ ) {
 
@@ -769,8 +769,9 @@ Peru::calculateStereo()
 	}
       }
       else {
-	ccv::ERRFLAG = false;
-	throw ccv::error("ERROR - Stereoparameters\n");
+	throw ccv::error( ccv::ERROR_MESSAGE.isEmpty() ? "ERROR - Stereoparameters\n" : 
+			  ccv::ERROR_MESSAGE );
+	ccv::resetError();
       }
       
       // Make time for the ui to update

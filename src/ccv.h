@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ccv.h,v 1.4 2003/09/25 23:49:27 cygnus78 Exp $
+   $Id: ccv.h,v 1.5 2004/09/24 21:36:42 cygnus78 Exp $
 
 *************************************************/
 
@@ -30,9 +30,13 @@ namespace ccv{
   
   extern int debug;
 
+  extern QString ERROR_MESSAGE;
+
   enum{ERROR, NOTUSED};
 
   extern bool ERRFLAG;
+
+  void resetError();
 
   struct error{
     QString msg;

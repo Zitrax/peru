@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: BlockMatch.cpp,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
+   $Id: BlockMatch.cpp,v 1.3 2004/09/24 21:36:42 cygnus78 Exp $
 
 *************************************************/
 
@@ -121,7 +121,9 @@ BlockMatch::calculateDisparity()
   if(fast) { return calculateDisparityFast(); }
 
   if(bs%2==0) {
-    if(ccv::debug) std::cerr << "Must use odd number for blocksize\n";
+    ccv::ERRFLAG = true;
+    ccv::ERROR_MESSAGE = QString("Must use odd number for blocksize\n");
+    if(ccv::debug) std::cerr << ccv::ERROR_MESSAGE;
     return false;
   }
 

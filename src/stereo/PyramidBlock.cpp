@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: PyramidBlock.cpp,v 1.3 2003/09/25 23:49:26 cygnus78 Exp $
+   $Id: PyramidBlock.cpp,v 1.4 2004/09/24 21:36:42 cygnus78 Exp $
 
 *************************************************/
 
@@ -89,7 +89,9 @@ PyramidBlock::calculateDisparity()
   for(int i=0; i<levels; i++) {
     tmpw/=2; tmph/=2;
     if(tmpw<1 || tmph<1) {
-      if(ccv::debug) std::cerr << "ERROR - Too many levels\n";
+      ccv::ERRFLAG = true;
+      ccv::ERROR_MESSAGE = "ERROR - Too many levels\n";
+      if(ccv::debug) std::cerr << ccv::ERROR_MESSAGE;
       error = true;
       return false;
     }
