@@ -1,3 +1,4 @@
+// -*- mode: C++; -*-
 /*************************************************
 
  Purpose:
@@ -7,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: PyramidBlock.h,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: PyramidBlock.h,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
 
 *************************************************/
 
@@ -19,6 +20,7 @@ class PyramidBlock : public Stereo
   int* tolerance;                    //!< Disp tolerance between levels
   bool color;
   bool error;                        //!< Used to tell destructor about fails
+  int MAXD;
 
   IplImage** pyramid_left;
   IplImage** pyramid_right;
@@ -26,8 +28,8 @@ class PyramidBlock : public Stereo
   int*** pyr_disp;                   //!< Disparities found in different levels
 
  public:
-  PyramidBlock(int argc, 
-	       char** argv, 
+  PyramidBlock(string left, string right, string out, 
+	       int maxd,
 	       int levels,
 	       int tol,
 	       bool c);

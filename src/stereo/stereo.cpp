@@ -8,143 +8,78 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.cpp,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
 
 *************************************************/
 
 #include "stereo.h"
 
-///////////////////////////////////////////////
-// This constructor should really be rewritten !!
-// to deal better with alg that do not read OpenCV
-///////////////////////////////////////////////
-
-///////////////////////////////////////////////
-//REALLY!!!!
-///////////////////////////////////////////////
-
-Stereo::Stereo(int argc, char** argv, bool m)
-{
-  dispI=0; left=0; right=0; 
-
+Stereo::Stereo(string left,
+	       string right,
+	       string out,
+	       bool m){ 
   if(ccv::debug) std::cerr << "Running Stereo constructor\n";
   iterations=0; 
-  
+
   memory=m;
+
+  dispI=0; leftI=0; rightI=0;
+
   status=false;
 
-  if (cmdLine.SplitLine(argc, argv) < 1)
-    {
-      // no switches were given on the command line, abort
-      if(ccv::debug) std::cerr << "\nOptions -left and -right are required\n\n";
-      show_help();
-      return;
-    }   
+  left_file  = left;
+  right_file = right;
+  out_file   = out;
+
+//   if (cmdLine.SplitLine(argc, argv) < 1)
+//     {
+//       // no switches were given on the command line, abort
+//       if(ccv::debug) std::cerr << "\nOptions -left and -right are required\n\n";
+//       show_help();
+//       return;
+//     }   
   
-  if (cmdLine.HasSwitch("-h"))
-    {
-      show_help();
-      exit(0);
-    }   
+//   if (cmdLine.HasSwitch("-h"))
+//     {
+//       show_help();
+//       exit(0);
+//     }   
   
-  if(!memory) {
-    try
-      {
-	left_file  = cmdLine.GetArgument("-left",  0);      
-	right_file = cmdLine.GetArgument("-right", 0);      
-      }
-    catch (...)
-      {
-	// one of the required arguments was missing, abort
-	if(ccv::debug) std::cerr << "\nOptions -left and -right are required\nCatched\n";
-	return;
-      }  
-  }
+//   if(!memory) {
+//     try
+//       {
+// 	left_file  = cmdLine.GetArgument("-left",  0);      
+// 	right_file = cmdLine.GetArgument("-right", 0);      
+//       }
+//     catch (...)
+//       {
+// 	// one of the required arguments was missing, abort
+// 	if(ccv::debug) std::cerr << "\nOptions -left and -right "
+// 				 << "are required\nCatched\n";
+// 	return;
+//       }  
+//   }
+
+//   // get the optional parameters   
+//   BSIZE = str2int( cmdLine.GetSafeArgument( "-bs", 0, "3" ) );   
+//   MAXD  = str2int( cmdLine.GetSafeArgument( "-md", 0, "30" ) );
+//   outfile = cmdLine.GetSafeArgument("-outf", 0, "disparity.bmp" );    
+//   method = cmdLine.GetSafeArgument( "-method", 0, "rojas" );   
+
   
-  // get the optional parameters   
-  BSIZE = str2int( cmdLine.GetSafeArgument( "-bs", 0, "3" ) );   
-  MAXD  = str2int( cmdLine.GetSafeArgument( "-md", 0, "30" ) );
-  outfile = cmdLine.GetSafeArgument("-outf", 0, "disparity.bmp" );    
-  method = cmdLine.GetSafeArgument( "-method", 0, "rojas" );   
   
   if(!memory) {
     if(ccv::debug) std::cerr << "Loading images...\n";
-    if(ccv::debug) std::cerr << "left = " << left_file .c_str() << "\n";
-    left  = cvvLoadImage(left_file .c_str());  
-    right = cvvLoadImage(right_file.c_str());  
-    if( left  == 0 ) if(ccv::debug) std::cerr << "ERROR - left image\n";
-    if( right == 0 ) if(ccv::debug) std::cerr << "ERROR - right image\n";
-    if( left != 0 && right != 0 )  status = true; 
-    else return;
-    if(ccv::debug) std::cerr << "Loaded!\n";
-
-  
-    cvGetImageRawData(left, 0, 0, &imageSize);         // Get size of image
-    width = imageSize.width;
-    height = imageSize.height;
-  }
-  
-  preFilters = new vector<Filter*>;
-  postFilters = new vector<Filter*>;
-
-  status=true;
-} 
-
-Stereo::Stereo(int argc, char** argv){ 
-  if(ccv::debug) std::cerr << "Running Stereo constructor\n";
-  iterations=0; 
-  
-  dispI=0; left=0; right=0;
-
-  memory=false;
-  status=false;
-
-  if (cmdLine.SplitLine(argc, argv) < 1)
-    {
-      // no switches were given on the command line, abort
-      if(ccv::debug) std::cerr << "\nOptions -left and -right are required\n\n";
-      show_help();
-      return;
-    }   
-  
-  if (cmdLine.HasSwitch("-h"))
-    {
-      show_help();
-      exit(0);
-    }   
-  
-  if(!memory) {
-    try
-      {
-	left_file  = cmdLine.GetArgument("-left",  0);      
-	right_file = cmdLine.GetArgument("-right", 0);      
-      }
-    catch (...)
-      {
-	// one of the required arguments was missing, abort
-	if(ccv::debug) std::cerr << "\nOptions -left and -right are required\nCatched\n";
-	return;
-      }  
-  }
-  
-  // get the optional parameters   
-  BSIZE = str2int( cmdLine.GetSafeArgument( "-bs", 0, "3" ) );   
-  MAXD  = str2int( cmdLine.GetSafeArgument( "-md", 0, "30" ) );
-  outfile = cmdLine.GetSafeArgument("-outf", 0, "disparity.bmp" );    
-  method = cmdLine.GetSafeArgument( "-method", 0, "rojas" );   
-  
-  if(!memory) {
-    if(ccv::debug) std::cerr << "Loading images...\n";
-    left  = cvvLoadImage(left_file .c_str());  
-    right = cvvLoadImage(right_file.c_str());  
-    if( left  == 0 ) if(ccv::debug) std::cerr << "ERROR - left image\n";
-    if( right == 0 ) if(ccv::debug) std::cerr << "ERROR - right image\n";
-    if( left != 0 && right != 0 )  status = true; 
+    leftI  = cvvLoadImage(left_file .c_str());  
+    rightI = cvvLoadImage(right_file.c_str());  
+    if( leftI  == 0 ) if(ccv::debug) std::cerr << "ERROR - left image\n";
+    if( rightI == 0 ) if(ccv::debug) std::cerr << "ERROR - right image\n";
+    if( leftI != 0 && rightI != 0 )  status = true; 
     else return;
     if(ccv::debug) std::cerr << "Loaded!\n";
   }
-  
-  cvGetImageRawData(left, 0, 0, &imageSize);         // Get size of image
+
+  cvGetImageRawData(leftI, 0, 0, &imageSize);         // Get size of image
   width = imageSize.width;
   height = imageSize.height;
 
@@ -157,8 +92,8 @@ Stereo::~Stereo()
 { 
   if(ccv::debug) std::cerr << "Stereo main destructor\n";
   zapImg(dispI);
-  zapImg(left);
-  zapImg(right);
+  zapImg(leftI);
+  zapImg(rightI);
 
   zap(postFilters);
   zap(preFilters);
@@ -169,41 +104,27 @@ Stereo::~Stereo()
   if(ccv::debug) std::cerr << "Destructing Stereo\n";
 }
   
-
-void Stereo::show_help() 
-{
-  cout << "\nUsage:\n" 
-       << "-md n     : Max disparityn"
-       << "-bs n     : Blocksize\n"
-       << "-blur     : Blurs the images before computation\n"
-       << "-edge n   : Edgelimit value (rojas)\n"
-       << "-outf s   : Genereates a disparity image with file name s\n"
-       << "-method s : s = 'cvblock' or 'magickblock' or 'rojas'\n";
-}
-
 bool Stereo::start() 
 { 
-
   if(status) {
 
-    times = str2int( cmdLine.GetSafeArgument( "-t", 0, "1"));
-   
     preProcess();
     
-    for(int i=0;i<times;i++) {
-      if(ccv::debug) std::cerr << "Running stereo algorithm...\n";
-      if(!calculateDisparity())
-	return false;
-    }
-
+    if(ccv::debug) std::cerr << "Running stereo algorithm...\n";
+    if(ccv::debug) std::cerr << "Left = " << left_file << endl
+			     << "Right = " << right_file << endl
+			     << "Out = " << out_file << endl;
+    if(!calculateDisparity())
+      return false;
+    
     postProcess();
 
     if(writeToDisk) saveDisparityImage();
     
   }
   
-  zapImg(left);     // CAREFUL HERE ! 
-  zapImg(right);    // What if we need these later
+  zapImg(leftI);     // CAREFUL HERE ! 
+  zapImg(rightI);    // What if we need these later
   
   if(ccv::debug) std::cerr << "Number of iterations made: " << iterations << "\n";
   return true; 
@@ -212,9 +133,9 @@ bool Stereo::start()
 void
 Stereo::setImages(IplImage* l, IplImage* r) 
 {
-  zapImg(left);
-  zapImg(right);
-  left = l; right = r;
+  zapImg(leftI);
+  zapImg(rightI);
+  leftI = l; rightI = r;
   memory = true;
   if(ccv::debug) std::cerr << "Stereo class has received image pointers\n";
 }
@@ -226,21 +147,21 @@ void
 Stereo::loadImages(char* l, char* r)
 {
   if(ccv::debug) std::cerr << "Loading images\n";
-  zapImg(left);
-  zapImg(right);
+  zapImg(leftI);
+  zapImg(rightI);
   left_file = l; right_file = r;
-  left = cvvLoadImage(left_file.c_str());  
-  right = cvvLoadImage(right_file.c_str());  
+  leftI = cvvLoadImage(left_file.c_str());  
+  rightI = cvvLoadImage(right_file.c_str());  
 }
 
 void
 Stereo::saveDisparityImage()
 {
-  cvvSaveImage( outfile.c_str(), dispI );
+  cvvSaveImage( out_file.c_str(), dispI );
 }
 
 void
-Stereo::setOutFileName(string out) { outfile = out; }
+Stereo::setOutFileName(string out) { out_file = out; }
 
 bool
 Stereo::getStatus() { return status; }
@@ -251,11 +172,11 @@ Stereo::blurImages()
   // Create temporary images
   IplImage* tmpL;
   IplImage* tmpR;
-  tmpL = cvCloneImage( left );        
-  tmpR = cvCloneImage( right );  
+  tmpL = cvCloneImage( leftI );        
+  tmpR = cvCloneImage( rightI );  
 
-  cvSmooth(tmpL, left, CV_GAUSSIAN, 3, 3); 
-  cvSmooth(tmpR, right, CV_GAUSSIAN, 3, 3); 
+  cvSmooth(tmpL, leftI, CV_GAUSSIAN, 3, 3); 
+  cvSmooth(tmpR, rightI, CV_GAUSSIAN, 3, 3); 
 
 //   iplBlur(tmpL ,left,3,3,1,1);         
 //   iplBlur(tmpR,right,3,3,1,1);
@@ -367,8 +288,8 @@ Stereo::preProcess()
   if(preFilters->size()>0) {
     vector<Filter*>::iterator p = preFilters->begin();
     for(p; p!=preFilters->end(); p++) {
-      static_cast<Filter*>(*p)->apply(left);
-      static_cast<Filter*>(*p)->apply(right);
+      static_cast<Filter*>(*p)->apply(leftI);
+      static_cast<Filter*>(*p)->apply(rightI);
     }
   }
 //   if(cmdLine.HasSwitch("-premean")) {
@@ -431,10 +352,15 @@ Stereo::addPostFilter(Filter* f)
 }
 
 IplImage**
-Stereo::leftImagePointer() { return &left; }
+Stereo::leftImagePointer() { return &leftI; }
 
 IplImage**
-Stereo::rightImagePointer() { 
-  if(ccv::debug) std::cerr << "Returning: " << &right << "\n";
-  return &right; 
+Stereo::rightImagePointer() { return &rightI; }
+
+void
+Stereo::setFileNames(string left, string right)
+{
+  if(ccv::debug) std::cerr << "Stereo::setFileNames\n";
+  left_file = left; 
+  right_file = right;
 }

@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.1 2003/09/04 21:11:23 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.2 2003/09/05 12:15:11 cygnus78 Exp $
 
 *************************************************/
 
@@ -554,17 +554,6 @@ Peru::setCalibrated(bool c, int cam)
 void
 Peru::calculateStereo()
 {
-  
-  char** commandstring;
-  const int LENGTH = 30;
-  const int CLENGTH = 2000;
-
-  commandstring = (char**) malloc(sizeof(char*)*LENGTH);
-  for( int i=0; i<LENGTH; i++) 
-    commandstring[i] = (char*) malloc(sizeof(char)*CLENGTH);
-
-  int argc;
-
   int start             = framestartLE->text().toInt();
   int stop              = frameendLE->text().toInt();
 
@@ -581,6 +570,11 @@ Peru::calculateStereo()
   bool perspectiveCorrect = perspectivecCB->isChecked();
   bool contrast         = contrastCB->isChecked();
 
+  // Set up filename strings
+  char* c_left  = static_cast<char*>(malloc(300));
+  char* c_right = static_cast<char*>(malloc(300));
+  char* c_out   = static_cast<char*>(malloc(300));
+
   try {
 
     if( undistort_frames && (!calibrated2 || !calibrated)) {
@@ -589,43 +583,29 @@ Peru::calculateStereo()
     
     int sw=0;
     
-    strcpy(commandstring[sw++],"stereo");
+    if(ccv::debug) std::cerr << "Method = " 
+			     << stereo_algCOB->currentText() << endl;
     
-    strcpy(commandstring[sw++],"-md");
-    sprintf(commandstring[sw++],"%d",md);
-  
-    strcpy(commandstring[sw++],"-bs");
-    sprintf(commandstring[sw++],"%d",bs);
-
-    strcpy(commandstring[sw++],"-method");
-    strcpy(commandstring[sw++],stereo_algCOB->currentText().latin1());
-
-    if(ccv::debug) std::cerr << "Method = " << stereo_algCOB->currentText() << endl;
-
-    strcpy(commandstring[sw++],"-left");
-    int left_index=sw;
-    sprintf( commandstring[sw++],  leftframeLE->text().latin1(), start);
-    strcpy(commandstring[sw++],"-right");
-    int right_index=sw;
-    sprintf( commandstring[sw++], rightframeLE->text().latin1(), start);
-
-    strcpy(commandstring[sw++],"-outf");
-    int outf_index=sw;
-
-    argc = sw+1;
+    //  Fill filename strings
+    sprintf( c_left,  leftframeLE->text().latin1(), start);
+    sprintf( c_right, rightframeLE->text().latin1(), start);
+    strcpy( c_out, "out.bmp" );
+    
+    string left  = string(c_left);
+    string right = string(c_right);
+    string out   = string(c_out);
 
     // Create the chosen stereo algorithm
     if(stereo_algCOB->currentText()=="cvblock(abs)") 
-      stereo = new BlockMatch(argc, commandstring, colorCB->isChecked(), bs);
+      stereo = new BlockMatch(left, right, out, colorCB->isChecked(), md, bs);
     else if(stereo_algCOB->currentText()=="cvblock(fast)") 
-      stereo = new BlockMatch(argc, commandstring, colorCB->isChecked(), bs, true);
+      stereo = new BlockMatch(left, right, out, colorCB->isChecked(), md, bs, true);
     else if(stereo_algCOB->currentText()=="cvblock(mse)") 
-      stereo = new BlockMatch(argc, commandstring, colorCB->isChecked(), bs, false, true);
+      stereo = new BlockMatch(left, right, out, colorCB->isChecked(), md, bs, false, true);
     else if(stereo_algCOB->currentText()=="cvbirchfield")
-      stereo = new CvBirchfield(argc, commandstring);
+      stereo = new CvBirchfield(left, right, out, md);
     else if(stereo_algCOB->currentText()=="pyramidblock")
-      stereo = new PyramidBlock(argc, 
-				commandstring, 
+      stereo = new PyramidBlock(left, right, out, md, 
 				pyrSB->value(), 
 				pyrtSB->value(),
 				colorCB->isChecked() );
@@ -677,25 +657,21 @@ Peru::calculateStereo()
 
     for( int i = start; i <=stop; i++ ) {
 
-      sprintf( commandstring[left_index ],  leftframeLE->text().latin1(), i);
-      sprintf( commandstring[right_index], rightframeLE->text().latin1(), i);
+      sprintf( c_left,  leftframeLE->text().latin1(), i);
+      sprintf( c_right, rightframeLE->text().latin1(), i);
+      stereo->setFileNames(left, right);
 
       if( undistort_frames ) {
 	if(ccv::debug) std::cerr << "Undistorting frames\n";
 	stereo->setImages
-	  ( ccocv ->undistortImage( commandstring[left_index], false ),
-	    ccocv2->undistortImage( commandstring[right_index], false ) );
+	  ( ccocv ->undistortImage( c_left , false ),
+	    ccocv2->undistortImage( c_right, false ) );
       }
-      else stereo->loadImages( commandstring[left_index ], 
-			       commandstring[right_index] );
+      else stereo->loadImages( c_left, c_right );
     
-      sprintf( commandstring[outf_index] , "disparity_frame%05d.ppm", i );
-      stereo->setOutFileName(string(commandstring[outf_index]));
+      sprintf( c_out , "disparity_frame%05d.ppm", i );
+      stereo->setOutFileName(string(c_out));
 
-      for(int j=0;j<argc;j++)
-	if(ccv::debug) std::cerr << commandstring[j] << " ";
-      if(ccv::debug) std::cerr << endl;
-    
       if(stereo->start()) {
 	if(ccv::debug) std::cerr << "after start\n";
 	calibPB->setProgress(calibPB->progress()+1);
@@ -728,18 +704,19 @@ Peru::calculateStereo()
     zap(stereo);
     if(ccv::debug) std::cerr << "deleted stereo...\n";
 
-    for( int i=0; i<LENGTH; i++) free(commandstring[i]);
-    free(commandstring);
-    if(ccv::debug) std::cerr << "freed commandline\n";
-  }
-   catch (ccv::error e) {
+    free(c_left);
+    free(c_right);
+    free(c_out);
     
+  }
+  catch (ccv::error e) {
+    
+    free(c_left);
+    free(c_right);
+    free(c_out);
     emit stringSignal(e.msg);
-
-    for( int i=0; i<LENGTH; i++) free(commandstring[i]);
-    free(commandstring);
-    if(ccv::debug) std::cerr << "freed commandline\n";
-   }
+    
+  }
 
 }
 

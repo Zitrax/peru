@@ -1,3 +1,4 @@
+// -*- mode: C++; -*-
 /*************************************************
 
  Purpose:
@@ -8,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: CvBirchfield.h,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: CvBirchfield.h,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,7 +18,9 @@
 
 class CvBirchfield : public Stereo
 {
- public:
-  CvBirchfield(int argc, char** argv);  
+private:
+  int MAXD;
+public:
+  CvBirchfield(string left, string right, string out, int maxd);  
   bool calculateDisparity();            //!< Starts the algorithm
 };

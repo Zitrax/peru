@@ -1,3 +1,4 @@
+// -*- mode: C++; -*-
 /*************************************************
 
  Purpose:
@@ -8,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.h,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: stereo.h,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
 
 *************************************************/
 
@@ -31,15 +32,8 @@ class Stereo
  protected:
  
   CCmdLine cmdLine;   
-  StringType 
-    method, 
-    left_file, 
-    right_file;
+  string left_file, right_file, out_file;
   CvSize imageSize;                      //! Size of images
-
-  int MAXD;                              //!< Max disperity
-  int MIND;                              //!< Min disparity
-  int BSIZE;                             //!< Block Size
 
   int iterations;
 
@@ -47,13 +41,12 @@ class Stereo
 
   int width, height;                     //!< Resolution of image
 
-  string outfile;
   bool memory;                           /*!< Indicates wheter we have 
 					   the images in memory or on disk*/
   bool writeToDisk;                      //!< Write disparity maps to disc
 
-  IplImage* left;                        //!< Left image frame
-  IplImage* right;                       //!< Right image frame
+  IplImage* leftI;                       //!< Left image frame
+  IplImage* rightI;                      //!< Right image frame
   IplImage* dispI;                       //!< The resulting disparity image
   IplImage* ground;                      //!< Ground Truth Image
 
@@ -61,8 +54,6 @@ class Stereo
 
   vector<Filter*>* preFilters;           //!< Filters applied before algorithm
   vector<Filter*>* postFilters;          //!< Filters applied after algorithm
-
-  void show_help();                      //!< Show the help on commands
 
   void saveDisparityImage();             //!< Call this when a disparity image has been
                                          //!< calculated
@@ -77,8 +68,11 @@ class Stereo
   void addC(IplImage* img, int value);   //!< Adds a constant to an image
 
  public:
-  Stereo(int argc, char** argv);         //!< Constructor
-  Stereo(int argc, char** argv, bool m); //!< Constructor (memory)
+  Stereo(string left,                    //!< Constructor
+	 string right,
+	 string out,
+	 bool m=false); 
+
   virtual ~Stereo();                     //!< Destructor (virtual)
 
   bool start();                          //!< Start the algorithm
@@ -95,6 +89,8 @@ class Stereo
     () = 0;                              // pure virtual -> ABSTRACT CLASS
 
   void setOutFileName(string out);  
+  void setFileNames(string left,
+		    string right);
   bool getStatus();                      //!< Status indicates startable
 
   void addPreFilter(Filter* f);          //!< Adds a filter to prefilter vector

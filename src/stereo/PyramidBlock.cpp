@@ -7,16 +7,15 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: PyramidBlock.cpp,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: PyramidBlock.cpp,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
 
 *************************************************/
 
 #include "PyramidBlock.h"
 
-PyramidBlock::PyramidBlock(int argc, char** argv, 
-			   int nlevels, int tol,
-			   bool c) 
-  : Stereo(argc, argv), levels(nlevels), color(c)
+PyramidBlock::PyramidBlock(string left, string right, string out, 
+			   int maxd, int nlevels, int tol, bool c) 
+  : Stereo(left, right, out), levels(nlevels), color(c), MAXD(maxd)
 {
   // Should change nr of lvls as we do not look at lvl+1
 
@@ -97,11 +96,11 @@ PyramidBlock::calculateDisparity()
   }
 
   zapImg(dispI);
-  dispI = cvCreateImage( cvGetSize(right), IPL_DEPTH_8U, 1);
+  dispI = cvCreateImage( cvGetSize(rightI), IPL_DEPTH_8U, 1);
   cvSetZero( dispI );
 
-  pyramid_left [0] = left;
-  pyramid_right[0] = right;
+  pyramid_left [0] = leftI;
+  pyramid_right[0] = rightI;
 
   //  char* file = new char[20];
 
@@ -183,7 +182,7 @@ PyramidBlock::blockmatch(int level)
 
 	  if(ccv::debug) std::cerr << "(" << mind << "," << maxd << ") \n";
 
-	  lptr+=left->nChannels*mind;
+	  lptr+=leftI->nChannels*mind;
 	}
 	else { maxd = gmaxd; mind = 0; }
 	
@@ -201,7 +200,7 @@ PyramidBlock::blockmatch(int level)
 	  abs( (rptr+wStep+0)[0] - (lptr+wStep+0)[0] ) +
 	  abs( (rptr+wStep+3)[0] - (lptr+wStep+3)[0] );
 	  
-	if(left->nChannels > 1 && color) {
+	if(leftI->nChannels > 1 && color) {
 	  diffV += 
 	    abs( (rptr-wStep-3)[1] - (lptr-wStep-3)[1] ) +
 	    abs( (rptr-wStep+0)[1] - (lptr-wStep+0)[1] ) +
@@ -228,7 +227,7 @@ PyramidBlock::blockmatch(int level)
 	  iterations++;
 	  if(diffV<mse) { mse = diffV; disparity = offset; }
 	  
-	  lptr+=left->nChannels;
+	  lptr+=leftI->nChannels;
 	}
 	
 // 	if(ccv::debug) std::cerr 
