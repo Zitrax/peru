@@ -4,17 +4,20 @@
     <property name="name">
         <cstring>Perubase</cstring>
     </property>
+    <property name="enabled">
+        <bool>true</bool>
+    </property>
     <property name="geometry">
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>812</width>
-            <height>725</height>
+            <width>884</width>
+            <height>746</height>
         </rect>
     </property>
     <property name="minimumSize">
         <size>
-            <width>812</width>
+            <width>870</width>
             <height>404</height>
         </size>
     </property>
@@ -97,128 +100,6 @@
         <widget class="QLed" row="4" column="0">
             <property name="name">
                 <cstring>calibLed1</cstring>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="2" column="7">
-            <property name="name">
-                <cstring>saveImageB</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="font">
-                <font>
-                    <pointsize>8</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>Save</string>
-            </property>
-            <property name="flat">
-                <bool>false</bool>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Save displayed image</string>
-            </property>
-        </widget>
-        <widget class="QProgressBar" row="2" column="8">
-            <property name="name">
-                <cstring>calibPB</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>4</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="minimumSize">
-                <size>
-                    <width>241</width>
-                    <height>0</height>
-                </size>
-            </property>
-        </widget>
-        <widget class="QTextEdit" row="1" column="8" rowspan="1" colspan="2">
-            <property name="name">
-                <cstring>infoText</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>4</hsizetype>
-                    <vsizetype>7</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="minimumSize">
-                <size>
-                    <width>300</width>
-                    <height>0</height>
-                </size>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Bitstream Charter</family>
-                    <pointsize>9</pointsize>
-                </font>
-            </property>
-            <property name="frameShape">
-                <enum>HLine</enum>
-            </property>
-            <property name="readOnly">
-                <bool>true</bool>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Info field</string>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="2" column="9">
-            <property name="name">
-                <cstring>quitB</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Helvetica</family>
-                    <pointsize>9</pointsize>
-                    <bold>1</bold>
-                </font>
-            </property>
-            <property name="text">
-                <string>Quit</string>
-            </property>
-        </widget>
-        <widget class="QCheckBox" row="4" column="9">
-            <property name="name">
-                <cstring>debugCB</cstring>
-            </property>
-            <property name="font">
-                <font>
-                    <pointsize>11</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>Debug</string>
-            </property>
-            <property name="checked">
-                <bool>false</bool>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Turn on debug to cerr</string>
             </property>
         </widget>
         <widget class="QCheckBox" row="2" column="2" rowspan="1" colspan="2">
@@ -311,6 +192,55 @@
                 <string>Global camera parameters (or left cam for stereo)</string>
             </property>
         </widget>
+        <widget class="QLed" row="4" column="2">
+            <property name="name">
+                <cstring>calibLed2</cstring>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="7">
+            <property name="name">
+                <cstring>saveImageB</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Save</string>
+            </property>
+            <property name="flat">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Save displayed image</string>
+            </property>
+        </widget>
+        <spacer row="4" column="6" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>spacer4</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>310</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
         <widget class="QLabel" row="4" column="3" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>ledCalibL_2</cstring>
@@ -336,29 +266,49 @@
                 <string>If green - parameters also assigned to right camera</string>
             </property>
         </widget>
-        <widget class="QLed" row="4" column="2">
+        <widget class="QCheckBox" row="4" column="9">
             <property name="name">
-                <cstring>calibLed2</cstring>
+                <cstring>debugCB</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>11</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Debug</string>
+            </property>
+            <property name="checked">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Turn on debug to cerr</string>
             </property>
         </widget>
-        <spacer row="4" column="6" rowspan="1" colspan="3">
+        <widget class="QPushButton" row="4" column="10">
             <property name="name">
-                <cstring>spacer4</cstring>
+                <cstring>quitB</cstring>
             </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
             </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                    <bold>1</bold>
+                </font>
             </property>
-            <property name="sizeHint">
-                <size>
-                    <width>430</width>
-                    <height>20</height>
-                </size>
+            <property name="text">
+                <string>Quit</string>
             </property>
-        </spacer>
-        <widget class="QTabWidget" row="3" column="0" rowspan="1" colspan="10">
+        </widget>
+        <widget class="QTabWidget" row="3" column="0" rowspan="1" colspan="11">
             <property name="name">
                 <cstring>tabWidget</cstring>
             </property>
@@ -1877,6 +1827,85 @@
                     </property>
                 </widget>
             </widget>
+        </widget>
+        <widget class="QProgressBar" row="2" column="8" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>calibPB</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>241</width>
+                    <height>0</height>
+                </size>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="10">
+            <property name="name">
+                <cstring>stopB</cstring>
+            </property>
+            <property name="enabled">
+                <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>Stop</string>
+            </property>
+        </widget>
+        <widget class="QTextEdit" row="1" column="8" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>infoText</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>7</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>300</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Bitstream Charter</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+            <property name="frameShape">
+                <enum>HLine</enum>
+            </property>
+            <property name="readOnly">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Info field</string>
+            </property>
         </widget>
     </grid>
 </widget>

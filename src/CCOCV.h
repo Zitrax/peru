@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.h,v 1.7 2004/10/02 11:14:29 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.8 2004/10/18 22:43:59 cygnus78 Exp $
 
 *************************************************/
 
@@ -78,6 +78,8 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
     (string name);
 
   int getNumberOfFilesInList(); //!< Selfexplained
+  void clearFileList()      //!< Empty the list of files to be calibrated on
+  { filenames.clear(); }
 
   QStringList getFiles();   //!< Get the list of files of calibration images
 

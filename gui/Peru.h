@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.10 2004/10/02 11:10:56 cygnus78 Exp $
+   $Id: Peru.h,v 1.11 2004/10/18 22:44:00 cygnus78 Exp $
 
 *************************************************/
 
@@ -124,7 +124,12 @@ class Peru : public Perubase
 
    void viewTopHatSettings();           //!< View top hat settings dialog
    void viewParams();                   //!< View parameters in a dialog
+
+   void stopCalculation()               //!< Will stop the current calculation
+   { calc_stop_flag = true; } 
+
  signals:
+
    void stringSignal(const QString&);   //!< Emits a signal with a string ;)
 
  private:
@@ -158,6 +163,7 @@ class Peru : public Perubase
    bool calibrated;                     //!< Do we have parameter values ?
    bool calibrated2;                    //!< Is camera2 calibrated
    bool matcherAllocated;               //!< Marks if matcher class object exists
+   bool calc_stop_flag;                 //!< True if a calculation should stop
 
    const static QString tmpImage;       //!< Temporary filename of montage image
 

@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.23 2004/10/18 21:50:31 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.24 2004/10/18 22:44:00 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,7 +17,8 @@
 const QString Peru::tmpImage = QString("tmp_montage.bmp");
 
 Peru::Peru( QWidget* parent, const char* name,
-	    WFlags fl) : Perubase(parent,name,fl)
+	    WFlags fl) : Perubase(parent,name,fl), 
+			 calc_stop_flag(false)
 {
   prefs = new Preferences(this);
   prefs->readSettings();
@@ -212,6 +213,12 @@ Peru::connectSignalsToSlots()
 	   SLOT( undistortImage() )
 	   );
 
+  connect( stopB,
+	   SIGNAL( clicked() ),
+	   this,
+	   SLOT( stopCalculation() )
+	   );
+
 }
 
 void 
@@ -319,9 +326,17 @@ Peru::calibrate()
 {
   int corners;
   int orig_nr_images = ccocv->getNumberOfFilesInList();
+
+  if( !orig_nr_images ) {
+    err("ERROR - Must add some images to calibrate first\n");
+    return;
+  }
+
   correct_images = 0;
 
   initializeCCOCV();
+
+  stopB->setEnabled( true );
 
   QString str;
   QTextStream ts( &str, IO_WriteOnly );
@@ -348,7 +363,17 @@ Peru::calibrate()
     write(str);
     repaint();
     qApp->processEvents();
+    if( calc_stop_flag ) {
+      calc_stop_flag = false;
+      correct_images = 0;
+      err("\nABORTED - Throwing away data\n");
+      ccocv->clearFileList();
+      break;
+    }
+      
   }
+
+  updateImagesInQueueL();
 
   str = QString::null;
   ts << "\n" << correct_images << " images correctly calibrated\n";
@@ -388,6 +413,8 @@ Peru::calibrate()
     setCalibrated(false,1);
     err(str);
   }
+
+  stopB->setEnabled( false );
 }
 
 void
@@ -625,6 +652,8 @@ Peru::calculateStereo()
   char* c_right = static_cast<char*>(malloc(300));
   char* c_out   = static_cast<char*>(malloc(300));
 
+  stopB->setEnabled( true );
+
   try {
 
     if( undistort_frames && (!calibrated2 || !calibrated)) {
@@ -784,6 +813,10 @@ Peru::calculateStereo()
       
       // Make time for the ui to update
       qApp->processEvents();
+      if( calc_stop_flag ) {
+	calc_stop_flag = false;
+	throw ccv::error("ABORTED\n");
+      }
     }
 
     clock_t stop_time = clock();
@@ -815,8 +848,9 @@ Peru::calculateStereo()
     free(c_right);
     free(c_out);
     err(e.msg);
-    
   }
+
+  stopB->setEnabled( false );
 
 }
 
