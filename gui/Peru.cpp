@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.20 2004/09/25 11:46:05 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.21 2004/09/25 11:56:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -454,7 +454,7 @@ Peru::montage(QStringList flist)
 
     while( ! flist.isEmpty() )
       {
-	image_list.prepend(flist.back()+" ");
+	image_list.prepend("'"+flist.back()+"' ");
 	images++;
 	flist.pop_back();
       }
