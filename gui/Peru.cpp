@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.19 2004/09/24 21:36:42 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.20 2004/09/25 11:46:05 cygnus78 Exp $
 
 *************************************************/
 
@@ -242,9 +242,7 @@ Peru::calibImageOpen()
   
   if(filelist.isEmpty()) { err("Error - No files\n"); }
   else { 
-    // Reset progress bar
     calibPB->reset();
-    calibPB->setTotalSteps(filelist.size()-1);
     // Add images to calibration class
     while(!filelist.isEmpty()){
       filename = filelist.back();
@@ -322,6 +320,8 @@ Peru::calibrate()
   QString str;
   QTextStream ts( &str, IO_WriteOnly );
   
+  // Reset progress bar
+  calibPB->setTotalSteps(ccocv->getNumberOfFilesInList()-1);
   calibPB->reset();
   
   // Run through all images in CCOCV
@@ -344,6 +344,7 @@ Peru::calibrate()
     qApp->processEvents();
   }
 
+  str = QString::null;
   ts << "\n" << correct_images << " images correctly calibrated\n";
 
   // If we have camera parameters (successful calibration)
@@ -375,11 +376,12 @@ Peru::calibrate()
 
     updateParamsDialog();
     setCalibrated(true,1);
+    write(str);
   }
   else {
     setCalibrated(false,1);
+    err(str);
   }
-  err(str);
 }
 
 void
@@ -937,7 +939,7 @@ Peru::saveImage()
 
     if( formats.find( suffix.upper() ) != -1 ) {
       if( Image_widget->saveImage( filename, suffix.upper() ) )
-	err("\nSaved image as " + filename + "\n");
+	write("\nSaved image as " + filename + "\n");
       else
 	err("\nERROR - Could not save image\n");
       return;
