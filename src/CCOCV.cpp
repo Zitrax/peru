@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.11 2004/09/25 11:45:24 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.12 2004/10/02 11:14:29 cygnus78 Exp $
 
 *************************************************/
 
@@ -51,7 +51,7 @@ CCOCV::~CCOCV()
   zapArr(failcorners);
   zapArr(corners);
   zapArr(objectPoints);
-  delete &cp;
+
   delete ths;
 
   zapImg(rgb_image);
@@ -392,9 +392,6 @@ CCOCV::printCorners(int nr)
     if(ccv::debug) 
       std::cerr << "x=" << corners[i].x << " y=" << corners[i].y << endl;
 }
-
-CameraParams
-CCOCV::getParams() { return cp; }
 
 void
 CCOCV::printParams(int no_images) 

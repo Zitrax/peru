@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.h,v 1.6 2004/08/21 18:19:55 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.7 2004/10/02 11:14:29 cygnus78 Exp $
 
 *************************************************/
 
@@ -82,8 +82,8 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   QStringList getFiles();   //!< Get the list of files of calibration images
 
 
-  CameraParams 
-    getParams();            //!< Returns the camera-parameters struct
+  CameraParams getParams()  //!< Returns the camera-parameters struct
+  { return cp; }
 
   void printParams          //!< Prints all found parameters to stdout
     (int no_images);    
