@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.13 2004/06/21 23:58:11 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.14 2004/08/21 11:55:16 cygnus78 Exp $
 
 *************************************************/
 
@@ -757,6 +757,8 @@ Peru::calculateStereo()
 	ccv::ERRFLAG = false;
       }
       
+      // Make time for the ui to update
+      qApp->processEvents();
     }
 
     clock_t stop_time = clock();
