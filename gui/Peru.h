@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.5 2003/09/25 23:49:27 cygnus78 Exp $
+   $Id: Peru.h,v 1.6 2004/05/20 22:23:11 cygnus78 Exp $
 
 *************************************************/
 
@@ -77,7 +77,7 @@ class Peru : public Perubase
 	    const char* name = 0,
 	    WFlags fl = 0 );
    ~Peru();
-   void imageOpen(QImage image);        //!< Displays image on widget
+   void imageOpen(QImage& image);       //!< Displays image on widget
    void calibImageOpen(const QString&); //!< Adds an image to CCOCV
    bool scaled();                       //!< Returns true if image
                                         //!< should be scaled
@@ -137,6 +137,8 @@ class Peru : public Perubase
 					  calculates the disparity maps */
    Matcher* matcher;                    //<! Matcher for ct/disp data
 
+   QImage* currentDisplayedImage;       //<! Image displayed in ImageWidget
+
    ImageWidget* Image_widget;           //!< Displays images
    
    TopHatSettings* ths;                 //!< Dialog for TopHatSettings
@@ -155,6 +157,8 @@ class Peru : public Perubase
    bool calibrated;                     //!< Do we have parameter values ?
    bool calibrated2;                    //!< Is camera2 calibrated
    bool matcherAllocated;               //!< Marks if matcher class object exists
+
+   const static QString tmpImage;       //!< Temporary filename of montage image
 
    void loadParams(int cam);            //!< Loads saved parameter file
    void connectSignalsToSlots();        //!< Take a wild guess

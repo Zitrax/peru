@@ -8,11 +8,13 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.10 2003/10/01 20:19:33 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.11 2004/05/20 22:23:11 cygnus78 Exp $
 
 *************************************************/
 
 #include "Peru.h"
+
+const QString Peru::tmpImage = QString("tmp_montage.bmp");
 
 Peru::Peru( QWidget* parent, const char* name,
 	    WFlags fl) : Perubase(parent,name,fl)
@@ -39,8 +41,6 @@ Peru::Peru( QWidget* parent, const char* name,
   stereo = 0;
 
   Image_widget = new ImageWidget(scrollView->viewport());     
-  Image_widget->setFixedWidth(3000);
-  Image_widget->setFixedHeight(3000);
   scrollView->addChild(Image_widget);
 
   if(ccv::debug) std::cerr << endl;
@@ -234,6 +234,7 @@ Peru::imageOpen()
     if (*p_image==NULL) { emit stringSignal("ERROR - image\n"); }
     else {
       imageOpen(*p_image);
+      zap(p_image);
     }
   }
     
@@ -274,7 +275,7 @@ Peru::openFiles()
 }
 
 void 
-Peru::imageOpen(QImage image)
+Peru::imageOpen(QImage& image)
 {
   if(ccv::debug) std::cerr << "Running imageOpen2\n";
   Image_widget->displayImage(image);
@@ -348,8 +349,7 @@ Peru::calibrate()
     repaint();
   }
 
-  str="\n";
-  ts << correct_images << " images correctly calibrated\n";
+  ts << "\n" << correct_images << " images correctly calibrated\n";
 
   // If we have camera parameters (successful calibration)
   // we draw the corners onto the montage image (if used)
@@ -360,7 +360,7 @@ Peru::calibrate()
     if(tiles*tiles<orig_nr_images) tiles++;
 
     if( montageCB->isChecked() ){
-      ccocv->drawCorners("tmp_montage.bmp",1,12,
+      ccocv->drawCorners(tmpImage,1,12,
 			 tiles,
 			 100,
 			 static_cast<int> (100*(static_cast<float> 
@@ -369,9 +369,10 @@ Peru::calibrate()
 			 ccocv->getImageSizeX(),
 			 ccocv->getImageSizeY(), true);
       
-      QImage* p_image = new QImage("tmp_montage.bmp",0);
+      QImage* p_image = new QImage(tmpImage,0);
       if (*p_image==NULL) { emit stringSignal("ERROR - image (drawCorners)\n"); }
       else {
+	fileName = tmpImage.operator std::string();
 	imageOpen(*p_image);
 	zap(p_image);
       }
@@ -396,6 +397,7 @@ Peru::undistortImage(bool undistort)
   QImage *p_image;
 
   if(calibrated) {
+    if(ccv::debug) std::cerr << "File: " << fileName << "\n";
     if(undistort && fileName.size()>0){
       ccocv->undistortImage(fileName,true);
       strcat(s,"_undistorted");
@@ -451,7 +453,7 @@ Peru::montage(QStringList flist)
   if(montageCB->isChecked() && !flist.isEmpty()){
     
     QString image_list;
-    QString tmp = "tmp_montage.bmp";
+    QString tmp = tmpImage;
 
     while( ! flist.isEmpty() )
       {
@@ -639,6 +641,7 @@ Peru::calculateStereo()
 
     // Create the chosen stereo algorithm
     // ----------------------------------
+    zap(stereo);
     if(stereo_algCOB->currentText()=="cvblock(abs)") 
       stereo = new BlockMatch(left, right, out, 
 			      colorCB->isChecked(), md, bs);
