@@ -1,3 +1,11 @@
+0.3.1
+* 1013743 String with spaces to montage
+* 1034537 The drawn found corners are displaced
+* 1013741 Progressbar on single image
+* 1021493 Find error tooltip is wrong
+* 1021487 Even value for block should give better error message
+* Also some smaller bugs fixed.
+
 0.3
 * We are not saving tmp files to disk as often as earlier
 * We can manually enter camera params and change them
