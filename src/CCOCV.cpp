@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.10 2004/08/22 10:06:11 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.11 2004/09/25 11:45:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -639,7 +639,7 @@ CCOCV::drawCorners(string filename, int xgap, int pointsize,
   double ohdow = static_cast<double>(oh)/ow;
 
   int ytop = 0; // static_cast<int>(100*(1-ohdow)/2)+1;
-  int ygap = 18; // 2*ytop+pointsize+6;
+  int ygap = 20; // 2*ytop+pointsize+6;
 
   uchar* iptr;
  
