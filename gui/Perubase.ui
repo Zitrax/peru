@@ -15,7 +15,7 @@
     <property name="minimumSize">
         <size>
             <width>812</width>
-            <height>414</height>
+            <height>404</height>
         </size>
     </property>
     <property name="caption">
@@ -1076,100 +1076,6 @@
                         <set>AlignAuto</set>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>perspectivecCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>680</x>
-                            <y>60</y>
-                            <width>100</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>Bitstream Charter</family>
-                            <pointsize>7</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Perspective correct</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>gradientrCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>680</x>
-                            <y>40</y>
-                            <width>100</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>Bitstream Charter</family>
-                            <pointsize>7</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Gradient removal</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>postMedianCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>680</x>
-                            <y>20</y>
-                            <width>80</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Median</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>contrastCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>680</x>
-                            <y>80</y>
-                            <width>100</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>Bitstream Charter</family>
-                            <pointsize>7</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Contrast Stretch</string>
-                    </property>
-                    <property name="checked">
-                        <bool>true</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Stretches contrast for better visualization</string>
-                    </property>
-                </widget>
                 <widget class="QLineEdit">
                     <property name="name">
                         <cstring>leftframeLE</cstring>
@@ -1390,28 +1296,6 @@
                         <string>...</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>errorCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>300</x>
-                            <y>80</y>
-                            <width>110</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Find Error</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Use all RGB channels, otherwise just the first</string>
-                    </property>
-                </widget>
                 <widget class="QSpinBox">
                     <property name="name">
                         <cstring>mdSB</cstring>
@@ -1615,82 +1499,6 @@
                 </widget>
                 <widget class="QLabel">
                     <property name="name">
-                        <cstring>pyrtL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>470</x>
-                            <y>70</y>
-                            <width>105</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Pyramid tolerance</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>How much could the disparity change from one pyramid level to another</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>pyrL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>470</x>
-                            <y>50</y>
-                            <width>90</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Pyramid levels</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>How many levels the pyramid should consist of</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>bsL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>470</x>
-                            <y>30</y>
-                            <width>75</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Block Size</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Size of the window for the algorithms that uses windows</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>mdL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>470</x>
-                            <y>10</y>
-                            <width>75</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Max disparity</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Upper limit of disparity to look for</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
                         <cstring>frameendL</cstring>
                     </property>
                     <property name="geometry">
@@ -1809,6 +1617,224 @@
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Undistorts the frames before computing disparity map</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>gradientrCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>40</y>
+                            <width>100</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Bitstream Charter</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Gradient removal</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Tries to remove gradients caused by some algorithms</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>perspectivecCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>60</y>
+                            <width>100</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Bitstream Charter</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Perspective correct</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Resizes areas according to distance</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>contrastCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>80</y>
+                            <width>100</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Bitstream Charter</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Contrast Stretch</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Stretches contrast for better visualization</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>postMedianCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>20</y>
+                            <width>80</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Median</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>errorCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>300</x>
+                            <y>80</y>
+                            <width>110</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Find Error</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Check this box to calculate the error against the ground truth image</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>pyrL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>50</y>
+                            <width>100</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Pyramid levels</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>How many levels the pyramid should consist of</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>bsL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>30</y>
+                            <width>75</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Block Size</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Size of the window for the algorithms that uses windows</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>mdL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>10</y>
+                            <width>90</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Max disparity</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Upper limit of disparity to look for</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>pyrtL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>70</y>
+                            <width>108</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Pyramid tolerance</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>How much could the disparity change from one pyramid level to another</string>
                     </property>
                 </widget>
             </widget>
