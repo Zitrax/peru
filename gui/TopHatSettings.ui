@@ -1,0 +1,243 @@
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<class>TopHatSettings</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>TopHatSettings</cstring>
+    </property>
+    <property name="enabled">
+        <bool>true</bool>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>198</width>
+            <height>167</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>TopHat Settings</string>
+    </property>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>topL2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>40</y>
+                <width>50</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <family>helvetica</family>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Shape</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>topL1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>50</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <family>helvetica</family>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Iterations</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>topL3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>70</y>
+                <width>50</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <family>helvetica</family>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>X Size</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>topL4</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>100</y>
+                <width>50</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <family>helvetica</family>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Y Size</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>topL5</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>130</y>
+                <width>50</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <family>helvetica</family>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Threshold</string>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>ysizeSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>100</y>
+                <width>40</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="value">
+            <number>9</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Use only odd values here</string>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>iterationsSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>10</y>
+                <width>40</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="value">
+            <number>1</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Number of iterations for the opening</string>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>xsizeSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>70</y>
+                <width>40</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="value">
+            <number>9</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Use only odd values here</string>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>thresholdSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>130</y>
+                <width>40</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxValue">
+            <number>255</number>
+        </property>
+        <property name="value">
+            <number>220</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Thresholding value to binarize the image with</string>
+        </property>
+    </widget>
+    <widget class="QComboBox">
+        <item>
+            <property name="text">
+                <string>Ellipse</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Rectangle</string>
+            </property>
+        </item>
+        <item>
+            <property name="text">
+                <string>Cross</string>
+            </property>
+        </item>
+        <property name="name">
+            <cstring>shapeCB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>40</y>
+                <width>92</width>
+                <height>23</height>
+            </rect>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Shape of the structuring element</string>
+        </property>
+    </widget>
+</widget>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

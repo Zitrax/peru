@@ -1,0 +1,181 @@
+/*************************************************
+
+ Purpose:
+   Class CCOCV will take calibration inputimages 
+   and calculate the cameras intrinsic parameters.
+   Using Intels OpenCV
+
+ Author:
+   Daniel Bengtsson 2002, danielbe@ifi.uio.no
+
+ Version:
+   $Id: CCOCV.h,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+
+*************************************************/
+
+#ifndef CCOCV_H
+#define CCOCV_H
+
+#include <ipl/ipl.h>
+#include <opencv/cv.h>
+
+#include "Peru.h"
+//#include "SortCorners.h"
+#include "ccv.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
+#include <fstream>
+
+
+using namespace std;
+
+const int MAXFILES = 20;
+const int CORRECT_IMAGE = 1;
+const int FAILED_IMAGE = -1;
+
+//! Holds all camera parameters
+struct CameraParams {
+  double focalLength[2];
+  double distortion[4];
+  float distortionf[4]; 
+  double principalPoint[2];
+  double matrix[9];
+  float matrixf[9];
+  double* rotMatr;
+  double* transVect;
+
+};
+
+//! All settings to the TopHat function
+struct sTopHatSettings {
+  int iterations;
+  int shape;
+  int xsize;
+  int ysize;
+  int threshold;
+};
+
+class CCOCV                 //!< abbr: Camera Calibration OpenCV
+{
+ public:
+  CCOCV();                  //!< Constructor is silent for now
+  ~CCOCV();                 //!< Hmm destruction, danger, horror, terror...
+  
+  void setEtalonSize        //!< Set number of inner corners on chessboard 
+    (int x, int y);  
+
+  void printCorners();
+
+  void printObjectPoints(int no_images);
+
+  void setDimension         //!< Set the x an y dimension of the chesstiles
+    (double x, double y);   
+
+  int findCorners           //!< Find chessboard corners in image, and initializes
+    (int& corners_found);
+
+  void calcCamParams();     //!< Calculate camera parameters
+
+  void addFileName          //!< Add filenames of calibration images
+    (string name);
+
+  int getNumberOfFilesInList(); //!< Selfexplained
+
+  CameraParams 
+    getParams();            //!< Returns the camera-parameters struct
+
+  void printParams          //!< Prints all found parameters to stdout
+    (int no_images);    
+
+  void saveParams           //!< Saves found parameters to file with name file
+    (const char* file);     
+
+  bool loadParams           //!< Load parameters from file with name file
+    (const char* file);     
+
+  IplImage* undistortImage  //!< Takes an inputimage and undistort 
+    (string srcImageName,   //!< using found parameters
+     bool write);  
+
+  IplImage* rectifyImage    //!< Takes an inputimage and undistort 
+    (string srcImageName,   //!< using found parameters
+     bool write);  
+
+  void setSort(bool b);     //!< Sets value of sortCorners
+  void setWth(bool b);      //!< Shall we try with white top hat
+
+  int getImageSizeX();
+
+  int getImageSizeY();
+
+  void drawCorners          //!< Draw found corners on montageimage
+    ( string filename,
+      int xgap, int pointsize,
+      int nx, 
+      int bw, int bh,
+      int ow, int oh,
+      bool drawFailed=false);
+
+  void setTopHatSettings
+    (int iterations, 
+     int shape,
+     int xsize,
+     int ysize,
+     int threshold);
+
+ private:
+  bool sortCorners;         //!< Indicates if we should run improved sort corners
+  bool wth;                 //!< Perform white top hat on difficult images
+  CameraParams cp;          //!< Holds the calculated cameraparameters
+  bool initialized;         //!< Is the calibration initialized for all images
+  bool calibrated;          //!< Have a calibration been successfully performed
+  CameraParams camP;        //!< Camera parameters will be stored here
+  CvSize etalon_size;       /*! Number of inner corners per chessboard 
+			      row and column. The width (the number of columns) 
+			      must be less or equal to the height (the number 
+			      of rows) */
+  CvPoint2D32f* corners;    //!< Pointer to the corner array found
+  CvPoint2D64d* allcorners; //!< Corners found in correct calibration images
+  CvPoint2D64d* failcorners;//!< Corners found in failed calibration images
+  CvPoint3D64d*             //!< Coordinates of the chessboard
+    objectPoints;
+  int*   numPoints;         //!< Number of points in each image
+  int  corner_count;        //!< Numbers of corners found... 
+  int totalFailedCorners;   //!< Total number of failed corners found
+  CvSize imageSize;         //!< Size of images
+  IplImage* rgb_image;      //!< Source chessboard view; must have IPL_DEPTH_8U
+  IplImage* gray_image;     //!< Source chessboard view; must have IPL_DEPTH_8U 
+  IplImage* thresh;         //!< Tmp image same size and format as source image
+  IplImage* opened;         //!< White top hat applied
+
+  vector<string> *filenames;//!< Filenames for calibration images         
+
+  double dimx,dimy;         //!< The dimension of the chesstiles in x any y 
+
+  int t_no_images;          //!< Total number of images tried
+
+  int images_processed;     //!< Number of images that has curr been searched 
+
+  int failed_index;         //!< Keeps track of the failed images
+
+  int no_images;            //!< Images correctly processed
+
+  int* correct;             //!< Indexes of correct images
+  int* failed;              //!< Indexes of failed images
+
+  struct sTopHatSettings* ths; 
+
+  int findCorners2          //!< Find chessboard corners in image 
+    (int& corners_found);
+
+  void whiteTopHat          //!< Perform white top hat on source
+    (IplImage* source,
+     struct sTopHatSettings*);   
+
+  void complement
+    (IplImage* source);     //!< Calculates negative/positive of source
+};
+
+#endif

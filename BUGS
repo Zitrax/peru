@@ -1,0 +1,80 @@
+-------------------------------------------------------------------
+General meaning of priority
+
+LOW:    Cosmetic things which can wait to the medium and high
+        bugs are fixed. And wanted features.
+
+MEDIUM: In general problems that makes the interface confusing
+        to a user that not knows about the code (or one that does).
+
+HIGH:   All that is actually an ERROR in the results, and all 
+        SEGFAULTS goes here.
+--------------------------------------------------------------------
+
+14 Feb 2003 22:23:03 
+Should also display corners detected in images where not all 
+corners are detected.
+STATUS: FIXED
+PRIORITY: MEDIUM
+
+14 Feb 2003 22:23:34
+Comparison wth/sv normal
+STATUS: NOT FIXED
+PRORITY: LOW
+
+14 Feb 2003 22:25:00
+Test if checkerboard with rectangular squares work
+STATUS: NOT FIXED
+PRIORITY: LOW
+
+21 Feb 2003 12:30:55
+When loading using read calib images twice without calibrating
+all images goes into the vector with possible complications
+STATUS: NOT FIXED
+PRIORITY: MEDIUM
+
+21 Feb 2003 12:34:11
+Clear window trouble
+STATUS: NOT FIXED
+PRIORITY: LOW
+
+21 Feb 2003 13:12:14
+Fixe lot's of warnings
+STATUS: NOT FIXED
+PRIORITY: MEDIUM
+
+8 Apr 2003 21:29:58
+When sorting corners not all failed images corners are drawn
+STATUS: NOT FIXED
+PRIORITY: MEDIUM
+
+9 Apr 2003 12:28:59
+Remove IPL-dependence
+STATUS: FIXED
+PRIORITY: LOW (for user) MEDIUM (for developer)
+
+11 Apr 2003 13:27:36
+Segmentation fault when selecting too many pyramid levels
+STATUS: FIXED
+PRIORITY: HIGH
+
+1 May 2003 17:00:54
+Reading slices severeal times prints the volume to gui as 
+history (several times)
+STATUS: NOT FIXED
+PRIORITY: LOW
+
+3 May 2003 15:47:53
+CVblock fast has some strange bug.. left edge is destroyed
+STATUS: FIXED
+PRIORITY: MEDIUM
+
+11 May 2003 15:30:58
+string with filnames to montage does not tolerate any spaces in the filenames
+STATUS: NOT FIXED
+PRIORIY: MEDIUM
+
+30 May 2003 17:46:51
+gradient removal filter works poor on pyramid blockmatching
+STAUS: NOT FIXED
+PRIORITY: LOW
