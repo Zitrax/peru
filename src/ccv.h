@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ccv.h,v 1.2 2003/09/07 19:59:54 cygnus78 Exp $
+   $Id: ccv.h,v 1.3 2003/09/18 21:25:55 cygnus78 Exp $
 
 *************************************************/
 
@@ -18,7 +18,6 @@
 #include <qstring.h>
 #include <qimage.h>
 
-#include <ipl/ipl.h>
 #include <opencv/cv.h>
 #include <iostream>
 

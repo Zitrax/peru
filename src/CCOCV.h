@@ -10,14 +10,13 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.h,v 1.4 2003/09/17 12:00:15 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.5 2003/09/18 21:25:55 cygnus78 Exp $
 
 *************************************************/
 
 #ifndef CCOCV_H
 #define CCOCV_H
 
-#include <ipl/ipl.h>
 #include <opencv/cv.h>
 
 #include "Peru.h"
