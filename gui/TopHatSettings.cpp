@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: TopHatSettings.cpp,v 1.2 2003/09/17 12:00:17 cygnus78 Exp $
+   $Id: TopHatSettings.cpp,v 1.3 2004/05/20 22:47:51 cygnus78 Exp $
 
 *************************************************/
 
@@ -19,7 +19,7 @@ TopHatSettings::TopHatSettings( CCOCV* c,
 				QWidget* parent, 
 				const char* name,
 				WFlags fl) 
-  : TopHatSettingsBase(parent, name, fl), gui(p), calib(c) {}
+  : TopHatSettingsBase(parent, name, fl), gui(p), calib(c), trialImage(0) {}
 
 TopHatSettings::~TopHatSettings(){}
  
@@ -36,11 +36,16 @@ TopHatSettings::calculate()
     IplImage* image = calib->trialCalib(corners_found);
     foundLCD->display(corners_found);
 
-    QImage* qimage = ccv::iplImageToQImage(image);
+    if( trialImage ) {
+      delete trialImage;
+      trialImage = 0;
+    }
+
+    trialImage = ccv::iplImageToQImage(image);
 
     zapImg(image);
 
-    gui->imageOpen(*qimage);
+    gui->imageOpen(*trialImage);
 
   }
   else if (realTimeCB->isChecked() && calib->getNumberOfFilesInList() < 1 ) { 

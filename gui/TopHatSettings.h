@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: TopHatSettings.h,v 1.2 2003/09/25 23:49:27 cygnus78 Exp $
+   $Id: TopHatSettings.h,v 1.3 2004/05/20 22:47:51 cygnus78 Exp $
 
 *************************************************/
 
@@ -44,6 +44,7 @@ public slots:
 private:
   Peru* gui;
   CCOCV* calib;
+  QImage *trialImage;
 
 };
 
