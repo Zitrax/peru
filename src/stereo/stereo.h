@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.h,v 1.5 2003/09/25 23:49:26 cygnus78 Exp $
+   $Id: stereo.h,v 1.6 2004/09/03 21:53:19 cygnus78 Exp $
 
 *************************************************/
 
@@ -106,7 +106,10 @@ class Stereo
   double findError();                    /*!< Finds mse between contrast 
 					   stretched dispI and ground */
 
-  void setFindError(bool fe);
+  void setFindError(bool fe) 
+  { find_error = fe; }
+  bool getFindError() const              //!< Returns if we are calculating error agains groundtruth
+  { return find_error; }
 };
 
 #endif

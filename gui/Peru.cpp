@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.17 2004/08/22 10:35:16 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.18 2004/09/03 21:53:19 cygnus78 Exp $
 
 *************************************************/
 
@@ -221,13 +221,13 @@ Peru::imageOpen()
  
   if(filename.isEmpty()) { if(ccv::debug) std::cerr << "Error empty file\n"; }
   else { 
-    emit stringSignal("\nOpened image: "+filename+"\n");
     fileName = filename.latin1();
     if(ccv::debug) std::cerr << filename << "\n"; 
     QImage *p_image = new QImage(filename,0);
-    if (*p_image==NULL) { emit stringSignal("ERROR - image\n"); }
+    if (*p_image==NULL) { err("ERROR - Could not open image\n"); }
     else {
       imageOpen(*p_image);
+      write("\nOpened image: "+filename+"\n");
       zap(p_image);
     }
   }
@@ -240,7 +240,7 @@ Peru::calibImageOpen()
   QStringList filelist = openFiles();
   QString filename;
   
-  if(filelist.isEmpty()) { emit stringSignal("Error no files\n"); }
+  if(filelist.isEmpty()) { err("Error - No files\n"); }
   else { 
     // Reset progress bar
     calibPB->reset();
@@ -248,7 +248,7 @@ Peru::calibImageOpen()
     // Add images to calibration class
     while(!filelist.isEmpty()){
       filename = filelist.back();
-      emit stringSignal("Added calib image: "+filename+"\n");
+      write("Added calib image: "+filename+"\n");
       if(ccv::debug) std::cerr << filename << "\n"; 
       calibImageOpen(filename);
       filelist.pop_back();
@@ -339,7 +339,7 @@ Peru::calibrate()
       updateImagesInQueueL();
     }
   
-    emit stringSignal(str);
+    write(str);
     repaint();
     qApp->processEvents();
   }
@@ -365,7 +365,7 @@ Peru::calibrate()
 			 ccocv->getImageSizeY(), true);
       
       QImage* p_image = new QImage(tmpImage,0);
-      if (*p_image==NULL) { emit stringSignal("ERROR - image (drawCorners)\n"); }
+      if (*p_image==NULL) { err("ERROR - Image (drawCorners)\n"); }
       else {
 	fileName = tmpImage.operator std::string();
 	imageOpen(*p_image);
@@ -379,7 +379,7 @@ Peru::calibrate()
   else {
     setCalibrated(false,1);
   }
-  emit stringSignal(str);
+  err(str);
 }
 
 void
@@ -422,12 +422,12 @@ Peru::undistortSerie()
     while( !filelist.isEmpty() ) {
       filename = filelist.back();
       ccocv->undistortImage(filename.latin1(),true);
-      emit stringSignal("\nUndistorted image "+filename);
+      write("\nUndistorted image "+filename);
       filelist.pop_back();
     }
   }
-  else emit stringSignal("WARNING - You have not calibrated "
-			 "or calibration has failed\n");
+  else err("WARNING - You have not calibrated "
+	   "or calibration has failed\n");
 
 }
 
@@ -470,14 +470,14 @@ Peru::montage(QStringList flist)
     command.append(image_list);
     command.append(tmp);
     
-    emit stringSignal("Making thumbnails...\n");
+    write("Making thumbnails...\n");
 
     system(command.latin1());
 
-    emit stringSignal("Done\n");
+    write("Done\n");
 
     QImage* p_image = new QImage(tmp,0);
-    if (*p_image==NULL) { emit stringSignal("ERROR - image\n"); }
+    if (*p_image==NULL) { err("ERROR - image\n"); }
     else {
       imageOpen(*p_image);
       zap(p_image);
@@ -493,7 +493,7 @@ Peru::montageCheck(bool checked)
 {
   if(!magick && checked) {
     montageCB->setChecked(false);
-    emit stringSignal("Sorry - can't fint montage in your path\n");
+    err("ERROR - Can't fint montage in your path\n");
   }
   
 }
@@ -705,7 +705,7 @@ Peru::calculateStereo()
     calibPB->setTotalSteps(stop-start+1);
     calibPB->setProgress(calibPB->progress()+1);
 
-    emit stringSignal("Calculating stereo...\n");
+    write("Calculating stereo...\n");
 
     clock_t start_time = clock(); 
 
@@ -734,7 +734,13 @@ Peru::calculateStereo()
 	stereo->loadGround( groundframeLE->text().latin1() );
 	stereo->setFindError(true);
       }
-      else stereo->setFindError(false);
+      else {
+	if( errorCB->isChecked() ) {
+	  err("ERROR - Could not calculate error (turned off)\n");
+	  errorCB->setChecked(false);
+	}
+	stereo->setFindError(false);
+      }
       
       double error = stereo->start();
 
@@ -746,12 +752,12 @@ Peru::calculateStereo()
 	calibPB->setProgress(calibPB->progress()+1);
 	if(ccv::debug) std::cerr << "after setProgress\n";
 
-	if(errorCB->isChecked()) {
+	if(errorCB->isChecked() && stereo->getFindError() ) {
 	  QString str;
 	  QTextStream ts( &str, IO_WriteOnly );
 	  ts << "Error: " 
 	     << error << "\n";
-	  emit stringSignal(str);
+	  write(str);
 	}	  
 
 	if( display_disparityCB->isChecked() ){
@@ -763,8 +769,8 @@ Peru::calculateStereo()
 	}
       }
       else {
-	emit stringSignal("ERROR - Stereoparameters\n");
 	ccv::ERRFLAG = false;
+	throw ccv::error("ERROR - Stereoparameters\n");
       }
       
       // Make time for the ui to update
@@ -779,11 +785,11 @@ Peru::calculateStereo()
     ts << "Total time used: " 
        << running_time
        << " seconds, fps = " << ((stop-start)+1)/running_time << endl;
-    emit stringSignal(str);
+    write(str);
 
     if(ccv::debug) std::cerr << "freeing commandstring and stereo\n";
 
-       emit stringSignal("Done\n");
+       write("Done\n");
 
     zap(stereo);
     if(ccv::debug) std::cerr << "deleted stereo...\n";
@@ -799,7 +805,7 @@ Peru::calculateStereo()
     free(c_left);
     free(c_right);
     free(c_out);
-    emit stringSignal(e.msg);
+    err(e.msg);
     
   }
 
@@ -870,7 +876,7 @@ void
 Peru::write(const string& str)
 {
   QString s(str.c_str());
-  emit stringSignal(s);
+  write(s);
 }
 
 
@@ -930,18 +936,18 @@ Peru::saveImage()
 
     if( formats.find( suffix.upper() ) != -1 ) {
       if( Image_widget->saveImage( filename, suffix.upper() ) )
-	emit stringSignal("\nSaved image as " + filename + "\n");
+	err("\nSaved image as " + filename + "\n");
       else
-	emit stringSignal("\nERROR - Could not save image\n");
+	err("\nERROR - Could not save image\n");
       return;
     }
     else {
-      emit stringSignal("\nERROR - Not a valid filetype\n");
+      err("\nERROR - Not a valid filetype\n");
       return;
     }
   }
   
-  emit stringSignal("\nERROR - Not a valid filename (must have valid suffix)\n");
+  err("\nERROR - Not a valid filename (must have valid suffix)\n");
   
 }  
 
@@ -980,3 +986,11 @@ Peru::updateParamsDialog()
   
   calPar->updateParameters(cp);
 }
+
+void Peru::err( const QString& err )
+{
+  QColor c = infoText->color();
+  infoText->setColor( "red" );
+  emit stringSignal( err );
+  infoText->setColor( c );  
+} 

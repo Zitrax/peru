@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.8 2004/08/21 17:18:56 cygnus78 Exp $
+   $Id: Peru.h,v 1.9 2004/09/03 21:53:19 cygnus78 Exp $
 
 *************************************************/
 
@@ -163,6 +163,7 @@ class Peru : public Perubase
    void setFileName(QLineEdit* le);     //!< Fill in filename in line-edit
    void updateImagesInQueueL();         //!< Updates label imgqL with correct data
    void updateParamsDialog();
+   void err( const QString& err );      //!< Give error message to the textEdit
 };
 
 #endif

@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.cpp,v 1.6 2004/05/22 22:43:19 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.7 2004/09/03 21:53:19 cygnus78 Exp $
 
 *************************************************/
 
@@ -274,8 +274,3 @@ Stereo::loadGround(const char* filename)
     if(ccv::debug) std::cerr << "ERROR - No filename\n";
 }
 
-void
-Stereo::setFindError(bool fe)
-{
-  find_error = fe;
-}
