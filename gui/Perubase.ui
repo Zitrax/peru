@@ -15,7 +15,7 @@
     <property name="minimumSize">
         <size>
             <width>812</width>
-            <height>383</height>
+            <height>404</height>
         </size>
     </property>
     <property name="caption">
@@ -397,30 +397,6 @@
                 </attribute>
                 <widget class="QPushButton">
                     <property name="name">
-                        <cstring>readCalibB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>10</y>
-                            <width>110</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Read calib images</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Read/Load all images of the calibration pattern</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
                         <cstring>calibB</cstring>
                     </property>
                     <property name="geometry">
@@ -499,30 +475,6 @@
                         <string>Will sort the found corners from top left to bottom right (recommended) (CURRENTLY NOT AVAILABLE)</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>wthCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>440</x>
-                            <y>30</y>
-                            <width>180</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>White top hat on difficult images</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Perform a morphological operation to remove uneven lightning</string>
-                    </property>
-                </widget>
                 <widget class="QPushButton">
                     <property name="name">
                         <cstring>topHatB</cstring>
@@ -540,59 +492,6 @@
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Settings for the tophat algorithm</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>imgqL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>440</x>
-                            <y>110</y>
-                            <width>110</width>
-                            <height>16</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Images in queue: 0</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>loadParamsB</cstring>
-                    </property>
-                    <property name="enabled">
-                        <bool>true</bool>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>280</x>
-                            <y>10</y>
-                            <width>130</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Load parameters</string>
-                    </property>
-                    <property name="flat">
-                        <bool>false</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Load camera parameters from file</string>
                     </property>
                 </widget>
                 <widget class="QPushButton">
@@ -817,31 +716,28 @@
                         <set>AlignAuto</set>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="QPushButton">
                     <property name="name">
-                        <cstring>montageCB</cstring>
+                        <cstring>readCalibB</cstring>
                     </property>
                     <property name="geometry">
                         <rect>
-                            <x>440</x>
-                            <y>50</y>
-                            <width>100</width>
-                            <height>20</height>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>110</width>
+                            <height>31</height>
                         </rect>
                     </property>
                     <property name="font">
                         <font>
-                            <pointsize>8</pointsize>
+                            <pointsize>7</pointsize>
                         </font>
                     </property>
                     <property name="text">
-                        <string>Montage</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
+                        <string>Read calib images</string>
                     </property>
                     <property name="toolTip" stdset="0">
-                        <string>Makes a montage on load of calibration images</string>
+                        <string>Read/Load all images of the calibration pattern</string>
                     </property>
                 </widget>
                 <widget class="QPushButton">
@@ -861,8 +757,7 @@
                     </property>
                     <property name="font">
                         <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
+                            <pointsize>7</pointsize>
                         </font>
                     </property>
                     <property name="text">
@@ -873,6 +768,108 @@
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>View the loaded/calculated camera parameters</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>loadParamsB</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>280</x>
+                            <y>10</y>
+                            <width>130</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Load parameters</string>
+                    </property>
+                    <property name="flat">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Load camera parameters from file</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>imgqL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>110</y>
+                            <width>110</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Images in queue: 0</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>montageCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>50</y>
+                            <width>100</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Montage</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Makes a montage on load of calibration images</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>wthCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>30</y>
+                            <width>180</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>White top hat on difficult images</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Perform a morphological operation to remove uneven lightning</string>
                     </property>
                 </widget>
             </widget>
@@ -1005,63 +1002,6 @@
                         <string>Postfilters</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>mdL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>470</x>
-                            <y>10</y>
-                            <width>75</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Max disparity</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Upper limit of disparity to look for</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>pyrL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>470</x>
-                            <y>50</y>
-                            <width>90</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Pyramid levels</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>How many levels the pyramid should consist of</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>bsL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>470</x>
-                            <y>30</y>
-                            <width>75</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Block Size</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Size of the window for the algorithms that uses windows</string>
-                    </property>
-                </widget>
                 <widget class="QLineEdit">
                     <property name="name">
                         <cstring>frameendLE</cstring>
@@ -1082,50 +1022,6 @@
                     </property>
                     <property name="text">
                         <string>0</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>framestartL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>300</x>
-                            <y>10</y>
-                            <width>76</width>
-                            <height>16</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Frame start #</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>frameendL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>300</x>
-                            <y>30</y>
-                            <width>76</width>
-                            <height>16</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Frame end #</string>
                     </property>
                 </widget>
                 <widget class="QPushButton">
@@ -1274,25 +1170,6 @@
                         <string>Stretches contrast for better visualization</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>pyrtL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>470</x>
-                            <y>70</y>
-                            <width>105</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Pyramid tolerance</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>How much could the disparity change from one pyramid level to another</string>
-                    </property>
-                </widget>
                 <widget class="QLineEdit">
                     <property name="name">
                         <cstring>leftframeLE</cstring>
@@ -1335,138 +1212,6 @@
                     </property>
                     <property name="text">
                         <string>...</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>leftframeL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>0</y>
-                            <width>100</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Left Frame Name</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>display_disparityCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>120</y>
-                            <width>170</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Display disparity images</string>
-                    </property>
-                    <property name="checked">
-                        <bool>true</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Display the disparity image in the output window after it's calculated</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>undist_stCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>100</y>
-                            <width>120</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Undistort frames</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Undistorts the frames before computing disparity map</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>write_disparityCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>190</x>
-                            <y>120</y>
-                            <width>170</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Write disparity images</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Writes the disparity images to disc (in the directory you started from)</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>right_paramsB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>210</x>
-                            <y>100</y>
-                            <width>70</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Right params</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>left_paramsB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>130</x>
-                            <y>100</y>
-                            <width>70</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Left params</string>
                     </property>
                 </widget>
                 <widget class="QComboBox">
@@ -1535,31 +1280,6 @@
                         <string>Stereo algorithm</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>rightframeL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>20</y>
-                            <width>95</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Right Frame Name</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
-                    </property>
-                </widget>
                 <widget class="QLineEdit">
                     <property name="name">
                         <cstring>rightframeLE</cstring>
@@ -1624,31 +1344,6 @@
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Use all RGB channels, otherwise just the first</string>
-                    </property>
-                </widget>
-                <widget class="QLabel">
-                    <property name="name">
-                        <cstring>groundL</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>40</y>
-                            <width>95</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Ground Truth</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string></string>
                     </property>
                 </widget>
                 <widget class="QLineEdit">
@@ -1797,6 +1492,323 @@
                     </property>
                     <property name="value">
                         <number>5</number>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>leftframeL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>0</y>
+                            <width>100</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Left Frame Name</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>rightframeL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>20</y>
+                            <width>95</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Right Frame Name</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>groundL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>40</y>
+                            <width>95</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Ground Truth</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>left_paramsB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>130</x>
+                            <y>100</y>
+                            <width>70</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Left params</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>right_paramsB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>210</x>
+                            <y>100</y>
+                            <width>70</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Right params</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>pyrtL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>70</y>
+                            <width>105</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Pyramid tolerance</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>How much could the disparity change from one pyramid level to another</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>pyrL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>50</y>
+                            <width>90</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Pyramid levels</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>How many levels the pyramid should consist of</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>bsL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>30</y>
+                            <width>75</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Block Size</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Size of the window for the algorithms that uses windows</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>mdL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>10</y>
+                            <width>75</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Max disparity</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Upper limit of disparity to look for</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>frameendL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>300</x>
+                            <y>30</y>
+                            <width>76</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Frame end #</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>framestartL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>300</x>
+                            <y>10</y>
+                            <width>76</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Frame start #</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>display_disparityCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>120</y>
+                            <width>170</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Display disparity images</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Display the disparity image in the output window after it's calculated</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>write_disparityCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>190</x>
+                            <y>120</y>
+                            <width>170</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Write disparity images</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Writes the disparity images to disc (in the directory you started from)</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>undist_stCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>100</y>
+                            <width>120</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Undistort frames</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Undistorts the frames before computing disparity map</string>
                     </property>
                 </widget>
             </widget>

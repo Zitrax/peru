@@ -39,6 +39,12 @@
                 <pointsize>8</pointsize>
             </font>
         </property>
+        <property name="frameShape">
+            <enum>NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+            <enum>Plain</enum>
+        </property>
         <property name="text">
             <string>Shape</string>
         </property>
@@ -162,22 +168,6 @@
             <string>Shape of the structuring element</string>
         </property>
     </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>textLabel1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>210</y>
-                <width>90</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>Corners found</string>
-        </property>
-    </widget>
     <widget class="QCheckBox">
         <property name="name">
             <cstring>realTimeCB</cstring>
@@ -284,6 +274,27 @@
         </property>
         <property name="toolTip" stdset="0">
             <string>Number of iterations for the opening</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>210</y>
+                <width>90</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Corners found</string>
         </property>
     </widget>
 </widget>
