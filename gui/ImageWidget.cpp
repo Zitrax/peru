@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.cpp,v 1.3 2004/05/22 22:40:44 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.4 2004/08/21 12:00:25 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,14 +17,10 @@
 #include <iostream>
 #include <qapplication.h>
 
-ImageWidget::ImageWidget( QWidget *parent,
-			  const char *name) : QWidget( parent, name) 
+ImageWidget::ImageWidget( QWidget *parent, const char *name) 
+  : QWidget( parent, name), scaled(false)
 {
-  scaled=false;
-
-  m_scaledsize = parent->frameGeometry().size();
-
-  //  setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Maximum );
+  parent->installEventFilter(this);
 }
 
 ImageWidget::~ImageWidget(){}
@@ -36,6 +32,7 @@ ImageWidget::displayImage(QImage& im)
   sImage=oImage;
   smoothScaleImage();
 
+  repaint();
   // Check this later
   // bitBlt( this, 0, 0, &rendermap, 0, 0 ); 
 }
@@ -43,10 +40,13 @@ ImageWidget::displayImage(QImage& im)
 void
 ImageWidget::paintEvent( QPaintEvent *e)
 {
-  if( sImage.isNull() )
+  if(ccv::debug) std::cerr << "PaintEvent\n";
+  if( sImage.isNull() ) 
     smoothScaleImage();
 
   if( !sImage.isNull() ) {
+    if(ccv::debug) std::cerr << "Drawing image (" << sImage.width() << "," 
+			     << sImage.height() << ")\n";
     QPainter qpainter( this );
     qpainter.drawImage( 0, 0, sImage );
   }
@@ -55,16 +55,29 @@ ImageWidget::paintEvent( QPaintEvent *e)
 void 
 ImageWidget::smoothScaleImage()
 {
-  
+  QScrollView* parent = static_cast<QScrollView*>( this->parent() );
+
+  QSize scaledsize;
+  if( parent ) {
+
+    if(scaled) {
+      parent->setHScrollBarMode( QScrollView::AlwaysOff );
+      parent->setVScrollBarMode( QScrollView::AlwaysOff );
+      adjustSize();
+    }
+
+    scaledsize = parent->frameGeometry().size();
+  }
+  else 
+    return;
+
   if(!oImage.isNull()){                                     // Do not scale null-images
 
-    if(scaled && (sImage.size() != m_scaledsize) ){
+    if(scaled && ( sImage.size() != scaledsize ) ){
       if(ccv::debug) std::cerr << "Scaling\n";
-      sImage=oImage.smoothScale(m_scaledsize);
+      sImage=oImage.smoothScale( scaledsize );
     }
     else { sImage=oImage; }
-    repaint();
-    qApp->processEvents();
   }
   adjustSize();
 }
@@ -185,4 +198,15 @@ QSize
 ImageWidget::sizeHint() const
 {
   return sImage.size();
+}
+
+bool
+ImageWidget::eventFilter( QObject* target, QEvent* event )
+{
+  if( target == parentWidget() && event->type() == QEvent::Resize ) {
+    if(ccv::debug) std::cerr << "Resize event\n";
+    smoothScaleImage();
+  }
+
+  return QWidget::eventFilter( target, event );
 }

@@ -7,7 +7,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.h,v 1.3 2004/05/22 22:40:44 cygnus78 Exp $
+   $Id: ImageWidget.h,v 1.4 2004/08/21 12:00:25 cygnus78 Exp $
 *************************************************/
 
 #ifndef IMAGEWIDGET_H
@@ -55,11 +55,11 @@ protected:
   void mousePressEvent(QMouseEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
   QSize sizeHint() const;
+  bool eventFilter( QObject* target, QEvent* event );
 
 private:
   QImage oImage;                      //!< Original image
   QImage sImage;                      //!< Scaled image
-  QSize m_scaledsize;
   bool scaled;                        //!< Should the image be scaled ?
 
 };

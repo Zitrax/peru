@@ -8,9 +8,15 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>821</width>
-            <height>674</height>
+            <width>812</width>
+            <height>725</height>
         </rect>
+    </property>
+    <property name="minimumSize">
+        <size>
+            <width>812</width>
+            <height>383</height>
+        </size>
     </property>
     <property name="caption">
         <string>Peru</string>
@@ -18,1755 +24,1784 @@
     <property name="toolTip" stdset="0">
         <string></string>
     </property>
-    <widget class="QProgressBar">
+    <grid>
         <property name="name">
-            <cstring>calibPB</cstring>
+            <cstring>unnamed</cstring>
         </property>
-        <property name="geometry">
-            <rect>
-                <x>480</x>
-                <y>420</y>
-                <width>231</width>
-                <height>31</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>ledCalibL_2</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>180</x>
-                <y>630</y>
-                <width>120</width>
-                <height>21</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>Helvetica</family>
-                <pointsize>9</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Stereo Calib. params</string>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>If green - parameters also assigned to right camera</string>
-        </property>
-    </widget>
-    <widget class="QPushButton">
-        <property name="name">
-            <cstring>saveImageB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>410</x>
-                <y>420</y>
-                <width>50</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Save</string>
-        </property>
-        <property name="flat">
-            <bool>false</bool>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Save shown image as save.bmp</string>
-        </property>
-    </widget>
-    <widget class="QCheckBox">
-        <property name="name">
-            <cstring>scaleCB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>150</x>
-                <y>420</y>
-                <width>50</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Scale</string>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Check if the image should be scaled to fit in window</string>
-        </property>
-    </widget>
-    <widget class="QPushButton">
-        <property name="name">
-            <cstring>quitB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>730</x>
-                <y>420</y>
-                <width>60</width>
-                <height>30</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>Helvetica</family>
-                <pointsize>9</pointsize>
-                <bold>1</bold>
-            </font>
-        </property>
-        <property name="text">
-            <string>Quit</string>
-        </property>
-    </widget>
-    <widget class="QTextEdit">
-        <property name="name">
-            <cstring>infoText</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>470</x>
-                <y>40</y>
-                <width>341</width>
-                <height>370</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>Bitstream Charter</family>
-                <pointsize>9</pointsize>
-            </font>
-        </property>
-        <property name="frameShape">
-            <enum>HLine</enum>
-        </property>
-        <property name="readOnly">
-            <bool>true</bool>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Info field</string>
-        </property>
-    </widget>
-    <widget class="QPushButton">
-        <property name="name">
-            <cstring>openImageB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>420</y>
-                <width>111</width>
-                <height>31</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Open single image</string>
-        </property>
-        <property name="flat">
-            <bool>false</bool>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Open a new image</string>
-        </property>
-    </widget>
-    <widget class="QCheckBox">
-        <property name="name">
-            <cstring>debugCB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>740</x>
-                <y>630</y>
-                <width>70</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>11</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Debug</string>
-        </property>
-        <property name="checked">
-            <bool>false</bool>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Turn on debug to cerr</string>
-        </property>
-    </widget>
-    <widget class="QScrollView">
-        <property name="name">
-            <cstring>scrollView</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>10</x>
-                <y>40</y>
-                <width>451</width>
-                <height>370</height>
-            </rect>
-        </property>
-        <property name="sizePolicy">
-            <sizepolicy>
-                <hsizetype>5</hsizetype>
-                <vsizetype>5</vsizetype>
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-            </sizepolicy>
-        </property>
-        <property name="font">
-            <font>
-                <family>Helvetica</family>
-                <pointsize>9</pointsize>
-            </font>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>ledCalibL</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>60</x>
-                <y>630</y>
-                <width>80</width>
-                <height>21</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>Helvetica</family>
-                <pointsize>9</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Calib. params</string>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Global camera parameters (or left cam for stereo)</string>
-        </property>
-    </widget>
-    <widget class="QLed">
-        <property name="name">
-            <cstring>calibLed2</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>150</x>
-                <y>630</y>
-                <width>28</width>
-                <height>20</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QLed">
-        <property name="name">
-            <cstring>calibLed1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>30</x>
-                <y>630</y>
-                <width>28</width>
-                <height>20</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QTabWidget">
-        <property name="name">
-            <cstring>tabWidget</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>460</y>
-                <width>790</width>
-                <height>170</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>Helvetica</family>
-                <pointsize>9</pointsize>
-            </font>
-        </property>
-        <widget class="QWidget">
+        <widget class="QPushButton" row="2" column="0" rowspan="1" colspan="2">
             <property name="name">
-                <cstring>tab</cstring>
+                <cstring>openImageB</cstring>
             </property>
-            <attribute name="title">
-                <string>Calib</string>
-            </attribute>
-            <widget class="QPushButton">
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Open single image</string>
+            </property>
+            <property name="flat">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Open a new image</string>
+            </property>
+        </widget>
+        <widget class="QScrollView" row="1" column="0" rowspan="1" colspan="8">
+            <property name="name">
+                <cstring>scrollView</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>100</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="0" rowspan="1" colspan="7">
+            <property name="name">
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Bitstream Charter</family>
+                    <pointsize>14</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>PERU - Version 0.2.2</string>
+            </property>
+        </widget>
+        <widget class="QLed" row="4" column="0">
+            <property name="name">
+                <cstring>calibLed1</cstring>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="7">
+            <property name="name">
+                <cstring>saveImageB</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Save</string>
+            </property>
+            <property name="flat">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Save shown image as save.bmp</string>
+            </property>
+        </widget>
+        <widget class="QProgressBar" row="2" column="8">
+            <property name="name">
+                <cstring>calibPB</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>241</width>
+                    <height>0</height>
+                </size>
+            </property>
+        </widget>
+        <widget class="QTextEdit" row="1" column="8" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>infoText</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>7</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>300</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Bitstream Charter</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+            <property name="frameShape">
+                <enum>HLine</enum>
+            </property>
+            <property name="readOnly">
+                <bool>true</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Info field</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="2" column="9">
+            <property name="name">
+                <cstring>quitB</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>Quit</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox" row="4" column="9">
+            <property name="name">
+                <cstring>debugCB</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>11</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Debug</string>
+            </property>
+            <property name="checked">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Turn on debug to cerr</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox" row="2" column="2" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>scaleCB</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Scale</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Check if the image should be scaled to fit in window</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox" row="2" column="4">
+            <property name="name">
+                <cstring>calibCB</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Undistort</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Undistort displayed image</string>
+            </property>
+        </widget>
+        <spacer row="2" column="5" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>spacer3</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>160</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QLabel" row="4" column="1">
+            <property name="name">
+                <cstring>ledCalibL</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Calib. params</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Global camera parameters (or left cam for stereo)</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="4" column="3" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>ledCalibL_2</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Stereo Calib. params</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>If green - parameters also assigned to right camera</string>
+            </property>
+        </widget>
+        <widget class="QLed" row="4" column="2">
+            <property name="name">
+                <cstring>calibLed2</cstring>
+            </property>
+        </widget>
+        <spacer row="4" column="6" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>spacer4</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>430</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QTabWidget" row="3" column="0" rowspan="1" colspan="10">
+            <property name="name">
+                <cstring>tabWidget</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>790</width>
+                    <height>177</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>32767</width>
+                    <height>32767</height>
+                </size>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+            <widget class="QWidget">
                 <property name="name">
-                    <cstring>readCalibB</cstring>
+                    <cstring>tab</cstring>
                 </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>10</y>
-                        <width>110</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Read calib images</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Read/Load all images of the calibration pattern</string>
-                </property>
+                <attribute name="title">
+                    <string>Calib</string>
+                </attribute>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>readCalibB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>110</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Read calib images</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Read/Load all images of the calibration pattern</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>calibB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>50</y>
+                            <width>111</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                            <bold>1</bold>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Calibrate</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Starts the calibration</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>undistortB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>90</y>
+                            <width>111</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Undistort images</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Undistorts a serie of images</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>sortCornersCB</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>10</y>
+                            <width>100</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Sort Corners</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Will sort the found corners from top left to bottom right (recommended) (CURRENTLY NOT AVAILABLE)</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>wthCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>30</y>
+                            <width>180</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>White top hat on difficult images</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Perform a morphological operation to remove uneven lightning</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>topHatB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>620</x>
+                            <y>30</y>
+                            <width>60</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Settings</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Settings for the tophat algorithm</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>imgqL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>110</y>
+                            <width>110</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Images in queue: 0</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>loadParamsB</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>280</x>
+                            <y>10</y>
+                            <width>130</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Load parameters</string>
+                    </property>
+                    <property name="flat">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Load camera parameters from file</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>saveParamsB</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>280</x>
+                            <y>90</y>
+                            <width>130</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Save parameters</string>
+                    </property>
+                    <property name="flat">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Save found camera parameters</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>etyL_2</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>140</x>
+                            <y>90</y>
+                            <width>74</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Y-Dimension</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>etyL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>140</x>
+                            <y>40</y>
+                            <width>77</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Etalon y-size</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>etxL_2</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>140</x>
+                            <y>70</y>
+                            <width>76</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>X-Dimension</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>etySB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>220</x>
+                            <y>40</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="buttonSymbols">
+                        <enum>PlusMinus</enum>
+                    </property>
+                    <property name="value">
+                        <number>6</number>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Number of chess tiles in y direction</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>etxL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>140</x>
+                            <y>20</y>
+                            <width>76</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Etalon x-size</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>etxSB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>220</x>
+                            <y>20</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="buttonSymbols">
+                        <enum>PlusMinus</enum>
+                    </property>
+                    <property name="value">
+                        <number>4</number>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Number of chess tiles in x direction</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>dimyLE</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>220</x>
+                            <y>90</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>1</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>dimxLE</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>220</x>
+                            <y>70</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>1</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignAuto</set>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>montageCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>50</y>
+                            <width>100</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Montage</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Makes a montage on load of calibration images</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>viewParamsB</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>280</x>
+                            <y>50</y>
+                            <width>130</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>View/Modify Parameters</string>
+                    </property>
+                    <property name="flat">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>View the loaded/calculated camera parameters</string>
+                    </property>
+                </widget>
             </widget>
-            <widget class="QPushButton">
+            <widget class="QWidget">
                 <property name="name">
-                    <cstring>calibB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>50</y>
-                        <width>111</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>8</pointsize>
-                        <bold>1</bold>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Calibrate</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Starts the calibration</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>undistortB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>90</y>
-                        <width>111</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Undistort images</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Undistorts a serie of images</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>sortCornersCB</cstring>
-                </property>
-                <property name="enabled">
-                    <bool>false</bool>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>440</x>
-                        <y>10</y>
-                        <width>100</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Sort Corners</string>
-                </property>
-                <property name="checked">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Will sort the found corners from top left to bottom right (recommended) (CURRENTLY NOT AVAILABLE)</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>wthCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>440</x>
-                        <y>30</y>
-                        <width>180</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>White top hat on difficult images</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Perform a morphological operation to remove uneven lightning</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>topHatB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>620</x>
-                        <y>30</y>
-                        <width>60</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Settings</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Settings for the tophat algorithm</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>imgqL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>440</x>
-                        <y>110</y>
-                        <width>110</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Images in queue: 0</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>loadParamsB</cstring>
-                </property>
-                <property name="enabled">
-                    <bool>true</bool>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>280</x>
-                        <y>10</y>
-                        <width>130</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Load parameters</string>
-                </property>
-                <property name="flat">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Load camera parameters from file</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>saveParamsB</cstring>
-                </property>
-                <property name="enabled">
-                    <bool>false</bool>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>280</x>
-                        <y>90</y>
-                        <width>130</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Save parameters</string>
-                </property>
-                <property name="flat">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Save found camera parameters</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>etyL_2</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>140</x>
-                        <y>90</y>
-                        <width>74</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Y-Dimension</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>etyL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>140</x>
-                        <y>40</y>
-                        <width>77</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Etalon y-size</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>etxL_2</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>140</x>
-                        <y>70</y>
-                        <width>76</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>X-Dimension</string>
-                </property>
-            </widget>
-            <widget class="QSpinBox">
-                <property name="name">
-                    <cstring>etySB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>220</x>
-                        <y>40</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="buttonSymbols">
-                    <enum>PlusMinus</enum>
-                </property>
-                <property name="value">
-                    <number>6</number>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Number of chess tiles in y direction</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>etxL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>140</x>
-                        <y>20</y>
-                        <width>76</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Etalon x-size</string>
-                </property>
-            </widget>
-            <widget class="QSpinBox">
-                <property name="name">
-                    <cstring>etxSB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>220</x>
-                        <y>20</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="buttonSymbols">
-                    <enum>PlusMinus</enum>
-                </property>
-                <property name="value">
-                    <number>4</number>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Number of chess tiles in x direction</string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>dimyLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>220</x>
-                        <y>90</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>1</string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>dimxLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>220</x>
-                        <y>70</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>1</string>
-                </property>
-                <property name="alignment">
-                    <set>AlignAuto</set>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>montageCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>440</x>
-                        <y>50</y>
-                        <width>100</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Montage</string>
-                </property>
-                <property name="checked">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Makes a montage on load of calibration images</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>viewParamsB</cstring>
-                </property>
-                <property name="enabled">
-                    <bool>true</bool>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>280</x>
-                        <y>50</y>
-                        <width>130</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>View/Modify Parameters</string>
-                </property>
-                <property name="flat">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>View the loaded/calculated camera parameters</string>
-                </property>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Stereo</string>
+                </attribute>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>preMeanCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>580</x>
+                            <y>80</y>
+                            <width>90</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Mean corr</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Makes mean value same in both images</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>blurCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>580</x>
+                            <y>20</y>
+                            <width>80</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Gaussian</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Gaussian smoothing</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>hieqCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>580</x>
+                            <y>40</y>
+                            <width>80</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>HistEq</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Histogram equalization</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>preMedianCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>580</x>
+                            <y>60</y>
+                            <width>90</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Median</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Median noise filter</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>TextLabel1_3</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>580</x>
+                            <y>0</y>
+                            <width>64</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="paletteForegroundColor">
+                        <color>
+                            <red>170</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                    </property>
+                    <property name="text">
+                        <string>Prefilters</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>TextLabel2</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>0</y>
+                            <width>64</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="paletteForegroundColor">
+                        <color>
+                            <red>170</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                    </property>
+                    <property name="text">
+                        <string>Postfilters</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>mdL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>10</y>
+                            <width>75</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Max disparity</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Upper limit of disparity to look for</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>pyrL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>50</y>
+                            <width>90</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Pyramid levels</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>How many levels the pyramid should consist of</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>bsL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>30</y>
+                            <width>75</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Block Size</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Size of the window for the algorithms that uses windows</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>frameendLE</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>380</x>
+                            <y>30</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>0</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>framestartL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>300</x>
+                            <y>10</y>
+                            <width>76</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Frame start #</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>frameendL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>300</x>
+                            <y>30</y>
+                            <width>76</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Frame end #</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>calculateB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>670</x>
+                            <y>120</y>
+                            <width>111</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <bold>1</bold>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Calculate</string>
+                    </property>
+                    <property name="flat">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Calculate disparity maps for the image(s)</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>framestartLE</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>380</x>
+                            <y>10</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>0</string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignAuto</set>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>perspectivecCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>60</y>
+                            <width>100</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Bitstream Charter</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Perspective correct</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>gradientrCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>40</y>
+                            <width>100</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Bitstream Charter</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Gradient removal</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>postMedianCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>20</y>
+                            <width>80</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Median</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>contrastCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>680</x>
+                            <y>80</y>
+                            <width>100</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Bitstream Charter</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Contrast Stretch</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Stretches contrast for better visualization</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>pyrtL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>470</x>
+                            <y>70</y>
+                            <width>105</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Pyramid tolerance</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>How much could the disparity change from one pyramid level to another</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>leftframeLE</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>110</x>
+                            <y>0</y>
+                            <width>160</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignAuto</set>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>load_leftB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>270</x>
+                            <y>0</y>
+                            <width>21</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>...</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>leftframeL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>0</y>
+                            <width>100</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Left Frame Name</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>display_disparityCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>120</y>
+                            <width>170</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Display disparity images</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Display the disparity image in the output window after it's calculated</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>undist_stCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>100</y>
+                            <width>120</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Undistort frames</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Undistorts the frames before computing disparity map</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>write_disparityCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>190</x>
+                            <y>120</y>
+                            <width>170</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Write disparity images</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Writes the disparity images to disc (in the directory you started from)</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>right_paramsB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>210</x>
+                            <y>100</y>
+                            <width>70</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Right params</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>left_paramsB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>130</x>
+                            <y>100</y>
+                            <width>70</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Left params</string>
+                    </property>
+                </widget>
+                <widget class="QComboBox">
+                    <item>
+                        <property name="text">
+                            <string>cvbirchfield</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>cvblock(abs)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>cvblock(mse)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>cvblock(fast)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>pyramidblock</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>stereo_algCOB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>110</x>
+                            <y>70</y>
+                            <width>160</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="currentItem">
+                        <number>1</number>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Select the stereo algorithm to use</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>TextLabel3</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>70</y>
+                            <width>99</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Stereo algorithm</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>rightframeL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>20</y>
+                            <width>95</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Right Frame Name</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>rightframeLE</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>110</x>
+                            <y>20</y>
+                            <width>160</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignAuto</set>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>load_rightB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>270</x>
+                            <y>20</y>
+                            <width>21</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>...</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>colorCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>300</x>
+                            <y>60</y>
+                            <width>110</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Use colorinfo</string>
+                    </property>
+                    <property name="checked">
+                        <bool>true</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use all RGB channels, otherwise just the first</string>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>groundL</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>40</y>
+                            <width>95</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Ground Truth</string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>groundframeLE</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>110</x>
+                            <y>40</y>
+                            <width>160</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignAuto</set>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use c style format strings (see man 3 printf on unix systems)</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>load_groundB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>270</x>
+                            <y>40</y>
+                            <width>21</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>...</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>errorCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>300</x>
+                            <y>80</y>
+                            <width>110</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Find Error</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Use all RGB channels, otherwise just the first</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>mdSB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>424</x>
+                            <y>10</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="maxValue">
+                        <number>999</number>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                    <property name="value">
+                        <number>30</number>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>bsSB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>424</x>
+                            <y>30</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                    <property name="value">
+                        <number>3</number>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>pyrSB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>424</x>
+                            <y>50</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="minValue">
+                        <number>0</number>
+                    </property>
+                    <property name="value">
+                        <number>3</number>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>pyrtSB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>424</x>
+                            <y>70</y>
+                            <width>40</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                    <property name="value">
+                        <number>5</number>
+                    </property>
+                </widget>
             </widget>
         </widget>
-        <widget class="QWidget">
-            <property name="name">
-                <cstring>tab</cstring>
-            </property>
-            <attribute name="title">
-                <string>Stereo</string>
-            </attribute>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>preMeanCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>580</x>
-                        <y>80</y>
-                        <width>90</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Mean corr</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Makes mean value same in both images</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>blurCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>580</x>
-                        <y>20</y>
-                        <width>80</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Gaussian</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Gaussian smoothing</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>hieqCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>580</x>
-                        <y>40</y>
-                        <width>80</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>HistEq</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Histogram equalization</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>preMedianCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>580</x>
-                        <y>60</y>
-                        <width>90</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Median</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Median noise filter</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>TextLabel1_3</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>580</x>
-                        <y>0</y>
-                        <width>64</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="paletteForegroundColor">
-                    <color>
-                        <red>170</red>
-                        <green>0</green>
-                        <blue>0</blue>
-                    </color>
-                </property>
-                <property name="text">
-                    <string>Prefilters</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>TextLabel2</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>680</x>
-                        <y>0</y>
-                        <width>64</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="paletteForegroundColor">
-                    <color>
-                        <red>170</red>
-                        <green>0</green>
-                        <blue>0</blue>
-                    </color>
-                </property>
-                <property name="text">
-                    <string>Postfilters</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>mdL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>470</x>
-                        <y>10</y>
-                        <width>75</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Max disparity</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Upper limit of disparity to look for</string>
-                </property>
-            </widget>
-            <widget class="QSpinBox">
-                <property name="name">
-                    <cstring>bsSB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>430</x>
-                        <y>30</y>
-                        <width>34</width>
-                        <height>18</height>
-                    </rect>
-                </property>
-                <property name="minValue">
-                    <number>1</number>
-                </property>
-                <property name="value">
-                    <number>3</number>
-                </property>
-            </widget>
-            <widget class="QSpinBox">
-                <property name="name">
-                    <cstring>pyrSB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>430</x>
-                        <y>50</y>
-                        <width>34</width>
-                        <height>18</height>
-                    </rect>
-                </property>
-                <property name="minValue">
-                    <number>0</number>
-                </property>
-                <property name="value">
-                    <number>3</number>
-                </property>
-            </widget>
-            <widget class="QSpinBox">
-                <property name="name">
-                    <cstring>pyrtSB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>430</x>
-                        <y>70</y>
-                        <width>34</width>
-                        <height>18</height>
-                    </rect>
-                </property>
-                <property name="minValue">
-                    <number>1</number>
-                </property>
-                <property name="value">
-                    <number>5</number>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>pyrL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>470</x>
-                        <y>50</y>
-                        <width>90</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Pyramid levels</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>How many levels the pyramid should consist of</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>bsL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>470</x>
-                        <y>30</y>
-                        <width>75</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Block Size</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Size of the window for the algorithms that uses windows</string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>frameendLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>380</x>
-                        <y>30</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>0</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>framestartL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>300</x>
-                        <y>10</y>
-                        <width>76</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Frame start #</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>frameendL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>300</x>
-                        <y>30</y>
-                        <width>76</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Frame end #</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>calculateB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>670</x>
-                        <y>120</y>
-                        <width>111</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <bold>1</bold>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Calculate</string>
-                </property>
-                <property name="flat">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Calculate disparity maps for the image(s)</string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>framestartLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>380</x>
-                        <y>10</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>0</string>
-                </property>
-                <property name="alignment">
-                    <set>AlignAuto</set>
-                </property>
-            </widget>
-            <widget class="QSpinBox">
-                <property name="name">
-                    <cstring>mdSB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>430</x>
-                        <y>10</y>
-                        <width>34</width>
-                        <height>18</height>
-                    </rect>
-                </property>
-                <property name="maxValue">
-                    <number>999</number>
-                </property>
-                <property name="minValue">
-                    <number>1</number>
-                </property>
-                <property name="value">
-                    <number>30</number>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string></string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>perspectivecCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>680</x>
-                        <y>60</y>
-                        <width>100</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>Bitstream Charter</family>
-                        <pointsize>7</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Perspective correct</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>gradientrCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>680</x>
-                        <y>40</y>
-                        <width>100</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>Bitstream Charter</family>
-                        <pointsize>7</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Gradient removal</string>
-                </property>
-                <property name="checked">
-                    <bool>false</bool>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>postMedianCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>680</x>
-                        <y>20</y>
-                        <width>80</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Median</string>
-                </property>
-                <property name="checked">
-                    <bool>false</bool>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>contrastCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>680</x>
-                        <y>80</y>
-                        <width>100</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>Bitstream Charter</family>
-                        <pointsize>7</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Contrast Stretch</string>
-                </property>
-                <property name="checked">
-                    <bool>true</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Stretches contrast for better visualization</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>pyrtL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>470</x>
-                        <y>70</y>
-                        <width>105</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Pyramid tolerance</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>How much could the disparity change from one pyramid level to another</string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>leftframeLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>110</x>
-                        <y>0</y>
-                        <width>160</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string></string>
-                </property>
-                <property name="alignment">
-                    <set>AlignAuto</set>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Use c style format strings (see man 3 printf on unix systems)</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>load_leftB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>270</x>
-                        <y>0</y>
-                        <width>21</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>...</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>leftframeL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>0</y>
-                        <width>100</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Left Frame Name</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Use c style format strings (see man 3 printf on unix systems)</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>display_disparityCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>120</y>
-                        <width>170</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Display disparity images</string>
-                </property>
-                <property name="checked">
-                    <bool>true</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Display the disparity image in the output window after it's calculated</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>undist_stCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>100</y>
-                        <width>120</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Undistort frames</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Undistorts the frames before computing disparity map</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>write_disparityCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>190</x>
-                        <y>120</y>
-                        <width>170</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Write disparity images</string>
-                </property>
-                <property name="checked">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Writes the disparity images to disc (in the directory you started from)</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>right_paramsB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>210</x>
-                        <y>100</y>
-                        <width>70</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Right params</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>left_paramsB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>130</x>
-                        <y>100</y>
-                        <width>70</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Left params</string>
-                </property>
-            </widget>
-            <widget class="QComboBox">
-                <item>
-                    <property name="text">
-                        <string>cvbirchfield</string>
-                    </property>
-                </item>
-                <item>
-                    <property name="text">
-                        <string>cvblock(abs)</string>
-                    </property>
-                </item>
-                <item>
-                    <property name="text">
-                        <string>cvblock(mse)</string>
-                    </property>
-                </item>
-                <item>
-                    <property name="text">
-                        <string>cvblock(fast)</string>
-                    </property>
-                </item>
-                <item>
-                    <property name="text">
-                        <string>pyramidblock</string>
-                    </property>
-                </item>
-                <property name="name">
-                    <cstring>stereo_algCOB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>110</x>
-                        <y>70</y>
-                        <width>160</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="currentItem">
-                    <number>1</number>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Select the stereo algorithm to use</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>TextLabel3</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>70</y>
-                        <width>99</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Stereo algorithm</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>rightframeL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>20</y>
-                        <width>95</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Right Frame Name</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Use c style format strings (see man 3 printf on unix systems)</string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>rightframeLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>110</x>
-                        <y>20</y>
-                        <width>160</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string></string>
-                </property>
-                <property name="alignment">
-                    <set>AlignAuto</set>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Use c style format strings (see man 3 printf on unix systems)</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>load_rightB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>270</x>
-                        <y>20</y>
-                        <width>21</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>...</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>colorCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>300</x>
-                        <y>60</y>
-                        <width>110</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Use colorinfo</string>
-                </property>
-                <property name="checked">
-                    <bool>true</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Use all RGB channels, otherwise just the first</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>groundL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>10</x>
-                        <y>40</y>
-                        <width>95</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Ground Truth</string>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string></string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>groundframeLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>110</x>
-                        <y>40</y>
-                        <width>160</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string></string>
-                </property>
-                <property name="alignment">
-                    <set>AlignAuto</set>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Use c style format strings (see man 3 printf on unix systems)</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>load_groundB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>270</x>
-                        <y>40</y>
-                        <width>21</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>...</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
-                    <cstring>errorCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>300</x>
-                        <y>80</y>
-                        <width>110</width>
-                        <height>21</height>
-                    </rect>
-                </property>
-                <property name="text">
-                    <string>Find Error</string>
-                </property>
-                <property name="checked">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Use all RGB channels, otherwise just the first</string>
-                </property>
-            </widget>
-        </widget>
-    </widget>
-    <widget class="QCheckBox">
-        <property name="name">
-            <cstring>calibCB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>210</x>
-                <y>420</y>
-                <width>70</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Undistort</string>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Undistort displayed image</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>TextLabel1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>0</y>
-                <width>204</width>
-                <height>31</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>Bitstream Charter</family>
-                <pointsize>14</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>PERU - Version 0.2.2</string>
-        </property>
-    </widget>
+    </grid>
 </widget>
 <menubar>
     <property name="name">
