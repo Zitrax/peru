@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.6 2004/03/04 17:48:58 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.7 2004/05/20 22:49:16 cygnus78 Exp $
 
 *************************************************/
 
@@ -20,6 +20,11 @@ CCOCV::CCOCV() :
   calibrated(false),
   sortCorners(false),
   wth(false),
+  corners(0),
+  allcorners(0),
+  failcorners(0),
+  objectPoints(0),
+  numPoints(0),
   rgb_image(0),
   thresh(0),
   gray_image(0),
@@ -41,13 +46,15 @@ CCOCV::CCOCV() :
 
 CCOCV::~CCOCV()
 {
-  delete[] correct;
-  delete[] failed;
-  delete[] allcorners;
-  delete[] failcorners;
-  delete[] corners;
-  delete[] objectPoints;
+  zapArr(filenames);
+  zapArr(correct);
+  zapArr(failed);
+  zapArr(allcorners);
+  zapArr(failcorners);
+  zapArr(corners);
+  zapArr(objectPoints);
   delete &cp;
+  delete ths;
 
   zapImg(rgb_image);
   zapImg(thresh);
@@ -62,6 +69,7 @@ CCOCV::setEtalonSize(int x, int y)
   etalon_size.height=y;
   if(ccv::debug) 
     std::cerr << "etalon_size set to x=" << x << " , y=" << y << "\n";
+  zapArr(corners);
   corners = new CvPoint2D32f[x*y];
 }
 
@@ -88,6 +96,8 @@ CCOCV::initializeCalibration()
 
   int no_corners = etalon_size.width * etalon_size.height;
   
+  zapArr(allcorners);
+  zapArr(failcorners);
   allcorners    = new CvPoint2D64d[no_images*no_corners];
   failcorners   = new CvPoint2D64d[no_images*no_corners];
   
@@ -127,12 +137,14 @@ CCOCV::findCorners(int& corners_found){
       if(ccv::debug) 
 	std::cerr << "no_images=" << no_images << endl;
       
+      zapArr(numPoints);
       numPoints = new int[no_images];
       for(int i=0;i<no_images;i++) numPoints[i]=no_corners;
       
       if(ccv::debug) 
 	std::cerr << "numPoints initialized..." << endl;
       
+      zapArr(objectPoints);
       objectPoints = new CvPoint3D64d[no_images*no_corners];
 
       for(int i=0;i<no_images;i++)               //number of images
@@ -230,6 +242,7 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
       std::cerr << "Loading image: '" << filenames->back() << "'\n";
 
     // Read last file from list
+    zapImg( rgb_image );
     rgb_image = cvvLoadImage(filenames->back().c_str()); 
 
     // Remove from list when done
@@ -252,6 +265,7 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
     cvCvtColor(rgb_image,gray_image,CV_BGR2GRAY);
 
     // Make thresh contain copy of image
+    zapImg(thresh);
     thresh = cvCloneImage( gray_image );
 
     if(ccv::debug) std::cerr << "Image depth = " << gray_image->depth << "\n";
@@ -839,8 +853,8 @@ CCOCV::trialCalib(int& corners_found)
     findCorners2(corners_found, true);
 
     // Importans such that real calib starts from scratch
-    delete[] allcorners;
-    delete[] failcorners;
+    zapArr(allcorners);
+    zapArr(failcorners);
     initialized = false;
 
 
