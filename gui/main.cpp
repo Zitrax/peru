@@ -7,5 +7,10 @@ int main( int argc, char ** argv )
     Peru *w = new Peru;
     w->show();
     a.connect( &a, SIGNAL( lastWindowClosed() ), &a, SLOT( quit() ) );
-    return a.exec();
+    
+    int ret = a.exec();
+
+    delete w;
+
+    return ret;
 }
