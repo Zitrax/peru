@@ -1,8 +1,8 @@
 <!DOCTYPE UI><UI version="3.1" stdsetdef="1">
-<class>TopHatSettings</class>
+<class>TopHatSettingsBase</class>
 <widget class="QDialog">
     <property name="name">
-        <cstring>TopHatSettings</cstring>
+        <cstring>TopHatSettingsBase</cstring>
     </property>
     <property name="enabled">
         <bool>true</bool>
@@ -12,7 +12,7 @@
             <x>0</x>
             <y>0</y>
             <width>198</width>
-            <height>167</height>
+            <height>252</height>
         </rect>
     </property>
     <property name="caption">
@@ -149,25 +149,6 @@
     </widget>
     <widget class="QSpinBox">
         <property name="name">
-            <cstring>iterationsSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>10</y>
-                <width>40</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="value">
-            <number>1</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Number of iterations for the opening</string>
-        </property>
-    </widget>
-    <widget class="QSpinBox">
-        <property name="name">
             <cstring>xsizeSB</cstring>
         </property>
         <property name="geometry">
@@ -238,6 +219,105 @@
             <string>Shape of the structuring element</string>
         </property>
     </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>iterationsSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>10</y>
+                <width>40</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="value">
+            <number>1</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Number of iterations for the opening</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>210</y>
+                <width>90</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Corners found</string>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>realTimeCB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>170</y>
+                <width>110</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Realtime trial</string>
+        </property>
+    </widget>
+    <widget class="QLCDNumber">
+        <property name="name">
+            <cstring>foundLCD</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>120</x>
+                <y>210</y>
+                <width>64</width>
+                <height>23</height>
+            </rect>
+        </property>
+    </widget>
 </widget>
+<connections>
+    <connection>
+        <sender>iterationsSB</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>TopHatSettingsBase</receiver>
+        <slot>calculate()</slot>
+    </connection>
+    <connection>
+        <sender>shapeCB</sender>
+        <signal>activated(int)</signal>
+        <receiver>TopHatSettingsBase</receiver>
+        <slot>calculate()</slot>
+    </connection>
+    <connection>
+        <sender>xsizeSB</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>TopHatSettingsBase</receiver>
+        <slot>calculate()</slot>
+    </connection>
+    <connection>
+        <sender>ysizeSB</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>TopHatSettingsBase</receiver>
+        <slot>calculate()</slot>
+    </connection>
+    <connection>
+        <sender>thresholdSB</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>TopHatSettingsBase</receiver>
+        <slot>calculate()</slot>
+    </connection>
+</connections>
+<slots>
+    <slot>calculate()</slot>
+</slots>
 <layoutdefaults spacing="6" margin="11"/>
 </UI>

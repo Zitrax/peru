@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.h,v 1.2 2003/09/05 12:36:36 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.3 2003/09/07 19:59:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -67,7 +67,7 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   void setEtalonSize        //!< Set number of inner corners on chessboard 
     (int x, int y);  
 
-  void printCorners();
+  void printCorners(int nr);
 
   void printObjectPoints(int no_images);
 
@@ -76,8 +76,6 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
 
   int findCorners           //!< Find chessboard corners in image, and initializes
     (int& corners_found);
-
-  void calcCamParams();     //!< Calculate camera parameters
 
   void addFileName          //!< Add filenames of calibration images
     (string name);
@@ -126,6 +124,9 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
      int ysize,
      int threshold);
 
+  IplImage* trialCalib      //!< Finds corner in one image to test the preproc.
+  (int& corners_found);
+
  private:
   bool sortCorners;         //!< Indicates if we should run improved sort corners
   bool wth;                 //!< Perform white top hat on difficult images
@@ -149,7 +150,7 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   IplImage* rgb_image;      //!< Source chessboard view; must have IPL_DEPTH_8U
   IplImage* gray_image;     //!< Source chessboard view; must have IPL_DEPTH_8U 
   IplImage* thresh;         //!< Tmp image same size and format as source image
-  IplImage* opened;         //!< White top hat applied
+  IplImage* tmpwth;         //!< TopHat transformed image
 
   vector<string> *filenames;//!< Filenames for calibration images         
 
@@ -169,7 +170,8 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   struct sTopHatSettings* ths; 
 
   int findCorners2          //!< Find chessboard corners in image 
-    (int& corners_found);
+    (int& corners_found,
+     bool singleTrial=false);
 
   void whiteTopHat          //!< Perform white top hat on source
     (IplImage* source,
@@ -177,6 +179,8 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
 
   void complement
     (IplImage* source);     //!< Calculates negative/positive of source
+
+  void initializeCalibration(); //!< Initializes some variables before calibration
 };
 
 #endif

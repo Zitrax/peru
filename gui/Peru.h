@@ -1,3 +1,4 @@
+// -*- mode: C++; -*-
 /*************************************************
 
  Purpose:
@@ -8,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.1 2003/09/04 21:11:23 cygnus78 Exp $
+   $Id: Peru.h,v 1.2 2003/09/07 19:59:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -32,7 +33,7 @@
 #include "GradientRemoval.h"
 #include "PerspectiveCorrect.h"
 #include "ContrastStretch.h"
-#include ".ui/TopHatSettings.h"
+#include "TopHatSettings.h"
 
 #include <string>
 #include <iostream>
@@ -62,6 +63,7 @@ using namespace std;
 
 class CCOCV;
 class Matcher;
+class TopHatSettings;
 
 class Peru : public Perubase
 {
@@ -77,20 +79,14 @@ class Peru : public Perubase
                                         //!< should be scaled
 
    void montage(QStringList flist);     //!< Makes a montage image
-   QImage*                              //!< Converts an iplimage to a qimage
-     iplImageToQImage
-     (IplImage* ipl_img, 
-      bool special=false,
-      int color=1);
-   IplImage*                            //!< Converts a qimage to an iplimage
-     qImageToIplImage
-     (QImage* qimg);
+
    void write(const QString& str);      //!< Emits string signals from outside
    void write(const char* str);         //!< Emits string signals from outside
    void write(const string& str);       //!< Emits string signals from outside
    void initProgressBar(int start,      //!< Init and reset progressbar
 			int stop);      //!< Progress progressbar
    void increaseProgressBar();
+   void initializeCCOCV();               //!< Transfer settings to CCOCV
 
  public slots:
    void imageOpen();                    //!< Opens fdialog and display image
@@ -155,6 +151,7 @@ class Peru : public Perubase
    void loadParams(int cam);            //!< Loads saved parameter file
    void connectSignalsToSlots();        //!< Take a wild guess
    void setFileName(QLineEdit* le);     //!< Fill in filename in line-edit
+   void updateImagesInQueueL();         //!< Updates label imgqL with correct data
 };
 
 #endif

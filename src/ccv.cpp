@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ccv.cpp,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: ccv.cpp,v 1.2 2003/09/07 19:59:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -55,7 +55,99 @@ namespace ccv {
     delete max;
     delete notused;
   }
+ 
+  /*!
+   * The special flag is specially for disparity point clouds
+   * and should prefferably be defaulted to false as is the case
+   * in Peru.h. This method should be splitted in two..!
+   */
+  QImage*
+  iplImageToQImage(IplImage* ipl_img, bool special, int color) 
+  {
+    if(ccv::debug) std::cerr << "Converting\n";
+    if(ccv::debug) std::cerr << "nChannels = " << ipl_img->nChannels << "\n";
+    if(ccv::debug) std::cerr << "depth = " << ipl_img->depth << "\n";
+    if(ccv::debug) std::cerr << "special = " << special << "\n";
+    
+    QImage* q = new QImage(ipl_img->width,ipl_img->height,32);
+    
+    int x; int xxx;
+    int y;
+    char *data = ipl_img->imageData;
+    if(!special && ipl_img->nChannels==3) {
+      for( y = 0; y < ipl_img->height; y++, data += ipl_img->widthStep )
+	for( x = 0; x < ipl_img->width; x++ )
+	  {
+	    xxx = 3*x;
+	    uint *p = (uint*)q->scanLine(y) + x;
+	    *p = qRgb(data[xxx + 2],
+		      data[xxx + 1],
+		      data[xxx + 0]);
+	    
+	  }
+      return q;
+    }
+    if(!special && ipl_img->nChannels==1) {
+      for( y = 0; y < ipl_img->height; y++, data += ipl_img->widthStep )
+	for( x = 0; x < ipl_img->width; x++ )
+	  {
+	    uint *p = (uint*)q->scanLine(y) + x;
+	    int color = qRgb(data[x],
+			     data[x],
+			     data[x]);
+	    *p = color;
+	    //if(ccv::debug) std::cerr << "data[x] = " << (uint)data[x] << "\n";  
+	  }
+      return q;
+    }
+    else if(special)
+      for( y = 0; y < ipl_img->height; y++, data += ipl_img->widthStep )
+	for( x = 0; x < ipl_img->width; x++ )
+	  {
+	    uint *p = (uint*)q->scanLine(y) + x;
+	    if(data[x]!=0)
+	      switch(color) {
+	      case 1:
+		*p = qRgb(data[x],
+			  255-data[x],
+			  255-data[x]);
+		break;
+	      case 2:
+		*p = qRgb(data[x],
+			  0,
+			  255-data[x]);
+		break;
+	      case 3:
+		*p = qRgb(0,
+			  255-data[x],
+			  data[x]);
+		break;
+	      }
+	    else
+	      *p = qRgb(0,
+			0,
+			0);
+	  }
+    else
+      if(ccv::debug) std::cerr << "ERROR - No conversion ipltoqimage available\n";
+    
+    return q;
+  } 
   
+  //! Only 1 channel currently
+  IplImage*
+  qImageToIplImage(QImage* qimg)
+  {
+    IplImage* iplimg = cvCreateImage
+      ( cvSize(qimg->width(),qimg->height()), IPL_DEPTH_8U, 1);
+    //qimg->pixel(x,y)
+    for(int x=0; x<iplimg->width; x++)
+      for(int y=0; y<iplimg->height; y++) {
+	QRgb c = qimg->pixel(x,y);
+	*(iplimg->imageData + y*iplimg->widthStep + x*iplimg->nChannels) 
+	  = qRed(c);
+      }
+  }
   
 }
 

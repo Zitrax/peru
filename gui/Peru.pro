@@ -11,6 +11,7 @@ SOURCES	+= Peru.cpp                              \
            ImageWidget.cpp                       \
            ../src/CCOCV.cpp                      \
            kstartuplogo.cpp                      \
+           TopHatSettings.cpp                    \
            ../src/stereo/stereo.cpp              \
 #          ../src/SortCorners.cpp                \
            ../src/stereo/BlockMatch.cpp          \
@@ -31,6 +32,7 @@ HEADERS	+= Peru.h                                \
            ../src/CCOCV.h                        \ 
            ImageWidget.h                         \
            kstartuplogo.h                        \
+           TopHatSettings.h                      \
            ../src/stereo/stereo.h                \
  #         ../src/SortCorners.h                  \
            ../src/stereo/BlockMatch.h            \
@@ -69,7 +71,7 @@ unix {
   OBJECTS_DIR = .obj
 }
 
-FORMS	= Perubase.ui TopHatSettings.ui
+FORMS	= Perubase.ui TopHatSettingsBase.ui
 
 IMAGES	= images/filenew    \
           images/fileopen   \

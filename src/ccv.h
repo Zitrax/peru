@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ccv.h,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: ccv.h,v 1.2 2003/09/07 19:59:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -16,6 +16,8 @@
 #define CCV_H
 
 #include <qstring.h>
+#include <qimage.h>
+
 #include <ipl/ipl.h>
 #include <opencv/cv.h>
 #include <iostream>
@@ -42,6 +44,12 @@ namespace ccv{
 
   //! Stretches the contrast of an image (min->0 max->255)
   void contrastStretch(IplImage* img); 
+
+  QImage* iplImageToQImage(IplImage* ipl_img,
+			   bool special=false,
+			   int color = 1 );
+
+  IplImage* qImageToIplImage(QImage* qimg);
 }
 
 std::ostream& operator<<(std::ostream& os, const CvMat& m);

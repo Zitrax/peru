@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.2 2003/09/05 12:15:11 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.3 2003/09/07 19:59:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -59,7 +59,7 @@ Peru::Peru( QWidget* parent, const char* name,
 
   supportedFormats = "Images (*.bmp *.jpg *.ppm *.png)";
 
-  ths = new TopHatSettings( this );
+  ths = new TopHatSettings( ccocv, this, this );
   ths->hide();
 }
 
@@ -271,23 +271,16 @@ Peru::calibImageOpen(const QString& name)
 {
   if(ccv::debug) std::cerr << "Inside calibImageOpen with string " << name << "\n";
   ccocv->addFileName(name.latin1());
+  updateImagesInQueueL();
 }
 
 void
-Peru::calibrate()
+Peru::initializeCCOCV()
 {
-  int corners;
-  int orig_nr_images = ccocv->getNumberOfFilesInList();
-
-  correct_images=0;
   ccocv->setEtalonSize(etxSB->value()-1,etySB->value()-1);
   ccocv->setDimension(dimxLE->text().toDouble(),
 		      dimyLE->text().toDouble() );
-  QString str;
-  QTextStream ts( &str, IO_WriteOnly );
-  
-  calibPB->reset();
-  
+
   // Apply settings from dialog
   int shape=0;
   if(ths->shapeCB->currentText()=="Ellipse")
@@ -302,7 +295,21 @@ Peru::calibrate()
 			   ths->xsizeSB->value(),
 			   ths->ysizeSB->value(),
 			   ths->thresholdSB->value());
+}
 
+void
+Peru::calibrate()
+{
+  int corners;
+  int orig_nr_images = ccocv->getNumberOfFilesInList();
+
+  initializeCCOCV();
+
+  QString str;
+  QTextStream ts( &str, IO_WriteOnly );
+  
+  calibPB->reset();
+  
   while(ccocv->findCorners(corners)==1){
     if(corners==(etxSB->value()-1)*(etySB->value()-1)) correct_images++;
     calibPB->setProgress(calibPB->progress()+1);
@@ -313,6 +320,7 @@ Peru::calibrate()
       ts << "\nFound " << corners << " chess corners";
       if(corners==(etxSB->value()-1)*(etySB->value()-1))
 	ts << " *";
+      updateImagesInQueueL();
     }
   
     emit stringSignal(str);
@@ -679,7 +687,7 @@ Peru::calculateStereo()
 	if( display_disparityCB->isChecked() ){
 	  IplImage* idisp = stereo->getDisparityImage(); 
 	  QImage* disp;
-	  disp = iplImageToQImage(idisp);
+	  disp = ccv::iplImageToQImage(idisp);
 	  imageOpen(*disp);
 	  zap(disp);
 	}
@@ -763,99 +771,6 @@ Peru::setFileNameR() {  setFileName( rightframeLE ); }
 void
 Peru::setWth(bool b) { ccocv->setWth(b); }
 
-/*!
- * The special flag is specially for disparity point clouds
- * and should prefferably be defaulted to false as is the case
- * in Peru.h. This method should be splitted in two..!
- */
-QImage*
-Peru::iplImageToQImage(IplImage* ipl_img, bool special, int color) 
-{
-  if(ccv::debug) std::cerr << "Converting\n";
-  if(ccv::debug) std::cerr << "nChannels = " << ipl_img->nChannels << "\n";
-  if(ccv::debug) std::cerr << "depth = " << ipl_img->depth << "\n";
-  if(ccv::debug) std::cerr << "special = " << special << "\n";
-  
-  QImage* q = new QImage(ipl_img->width,ipl_img->height,32);
-
-  int x; int xxx;
-  int y;
-  char *data = ipl_img->imageData;
-  if(!special && ipl_img->nChannels==3) {
-    for( y = 0; y < ipl_img->height; y++, data += ipl_img->widthStep )
-      for( x = 0; x < ipl_img->width; x++ )
-	{
-	  xxx = 3*x;
-	  uint *p = (uint*)q->scanLine(y) + x;
-	  *p = qRgb(data[xxx + 2],
-		    data[xxx + 1],
-		    data[xxx + 0]);
-	  
-	}
-    return q;
-  }
-  if(!special && ipl_img->nChannels==1) {
-    for( y = 0; y < ipl_img->height; y++, data += ipl_img->widthStep )
-      for( x = 0; x < ipl_img->width; x++ )
-	{
-	  uint *p = (uint*)q->scanLine(y) + x;
-	  int color = qRgb(data[x],
-			   data[x],
-			   data[x]);
- 	  *p = color;
-	  //if(ccv::debug) std::cerr << "data[x] = " << (uint)data[x] << "\n";  
-	}
-    return q;
-  }
-  else if(special)
-    for( y = 0; y < ipl_img->height; y++, data += ipl_img->widthStep )
-      for( x = 0; x < ipl_img->width; x++ )
-	{
-	  uint *p = (uint*)q->scanLine(y) + x;
-	  if(data[x]!=0)
-	    switch(color) {
-	    case 1:
-	      *p = qRgb(data[x],
-			255-data[x],
-			255-data[x]);
-	      break;
-	    case 2:
-	      *p = qRgb(data[x],
-			0,
-			255-data[x]);
-	      break;
-	    case 3:
-	      *p = qRgb(0,
-			255-data[x],
-			data[x]);
-	      break;
-	    }
-	  else
-	    *p = qRgb(0,
-		      0,
-		      0);
-	}
-  else
-    if(ccv::debug) std::cerr << "ERROR - No conversion ipltoqimage available\n";
-
-  return q;
-} 
-
-//! Only 1 channel currently
-IplImage*
-Peru::qImageToIplImage(QImage* qimg)
-{
-  IplImage* iplimg = cvCreateImage( cvSize(qimg->width(),qimg->height()), IPL_DEPTH_8U, 1);
-  //qimg->pixel(x,y)
-  for(int x=0; x<iplimg->width; x++)
-    for(int y=0; y<iplimg->height; y++) {
-      QRgb c = qimg->pixel(x,y);
-      *(iplimg->imageData + y*iplimg->widthStep + x*iplimg->nChannels) = qRed(c);
-    }
-	
-
-}
-
 void
 Peru::write(const QString& str)
 {
@@ -927,4 +842,17 @@ void
 Peru::viewTopHatSettings()
 {
   ths->show();
+}
+
+void
+Peru::updateImagesInQueueL()
+{
+  int nr = ccocv->getNumberOfFilesInList();
+
+  QString str;
+  QTextStream ts( &str, IO_WriteOnly );
+
+  ts << "Images in queue: " << nr;
+
+  imgqL->setText(str);
 }
