@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.12 2004/05/22 22:41:52 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.13 2004/06/21 23:58:11 cygnus78 Exp $
 
 *************************************************/
 
@@ -335,6 +335,7 @@ Peru::calibrate()
   
     emit stringSignal(str);
     repaint();
+    qApp->processEvents();
   }
 
   ts << "\n" << correct_images << " images correctly calibrated\n";
