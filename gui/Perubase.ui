@@ -15,7 +15,7 @@
     <property name="minimumSize">
         <size>
             <width>812</width>
-            <height>404</height>
+            <height>414</height>
         </size>
     </property>
     <property name="caption">
@@ -91,7 +91,7 @@
                 </font>
             </property>
             <property name="text">
-                <string>PERU - Version 0.2.2</string>
+                <string>PERU - Version 0.3</string>
             </property>
         </widget>
         <widget class="QLed" row="4" column="0">
