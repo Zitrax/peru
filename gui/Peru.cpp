@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.11 2004/05/20 22:23:11 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.12 2004/05/22 22:41:52 cygnus78 Exp $
 
 *************************************************/
 
@@ -188,18 +188,6 @@ Peru::connectSignalsToSlots()
 	   SLOT( debugToggle(bool) )
 	   );
 
-  connect( Image_widget,
-	   SIGNAL( sendMousePressed(QMouseEvent*) ),
-	   this,
-	   SLOT( mousePressed(QMouseEvent*) )
-	   );
-
-  connect( Image_widget,
-	   SIGNAL( sendMouseReleased(QMouseEvent*) ),
-	   this,
-	   SLOT( mouseReleased(QMouseEvent*) )
-	   );
-  
   connect( saveImageB,
 	   SIGNAL( clicked() ),
 	   this,
@@ -894,30 +882,56 @@ Peru::debugToggle( bool deb )
 }
 
 void
-Peru::mousePressed(QMouseEvent* e)
-{
-  if(ccv::debug) std::cerr << "Peru::mousePressed()\n";
-  //   int x = e->x();
-  //   int y = e->y();
-  //   int z = viewSliceSB->value();
-
-}
-
-void
-Peru::mouseReleased(QMouseEvent* e)
-{
-  if(ccv::debug) std::cerr << "Peru::mouseReleased()\n";
-  //   int x = e->x();
-  //   int y = e->y();
-  //   int z = viewSliceSB->value();
-
-}
-
-void
 Peru::saveImage()
 {
-  Image_widget->saveImage();
-}
+
+  QStrList formats = QImage::outputFormats();
+
+  QString saveFormats;
+
+  QStrListIterator it( formats );
+
+  QString format;
+  while( (format = it.current()) != 0 ) {
+    ++it;
+    saveFormats += "*.";
+    saveFormats += format.lower();
+    saveFormats += " ";
+  }
+
+  QString filename = 
+    QFileDialog::getSaveFileName( "",
+				  saveFormats,
+				  this,
+				  "Save Image Dialog"
+				  "Choose a file" );
+
+  QStringList file = QStringList::split( QChar('.'), filename );
+
+  QString suffix;
+  if( file.size() == 2 ) {
+    suffix = file[1];
+
+    if( suffix.upper() == QString("JPG") )
+      suffix = QString("JPEG");
+
+    if( formats.find( suffix.upper() ) != -1 ) {
+      if( Image_widget->saveImage( filename, suffix.upper() ) )
+	emit stringSignal("\nSaved image as " + filename + "\n");
+      else
+	emit stringSignal("\nERROR - Could not save image\n");
+      return;
+    }
+    else {
+      emit stringSignal("\nERROR - Not a valid filetype\n");
+      return;
+    }
+  }
+  
+  emit stringSignal("\nERROR - Not a valid filename (must have valid suffix)\n");
+  
+}  
+
 
 void
 Peru::viewTopHatSettings()

@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.6 2004/05/20 22:23:11 cygnus78 Exp $
+   $Id: Peru.h,v 1.7 2004/05/22 22:41:52 cygnus78 Exp $
 
 *************************************************/
 
@@ -118,8 +118,6 @@ class Peru : public Perubase
    void setFileNameG();      
 
    void debugToggle(bool deb);          //!< Toggle debug output
-   void mousePressed(QMouseEvent* e);   //!< Set marker in matcher
-   void mouseReleased(QMouseEvent* e);  //!< Set marker in matcher
 
    void saveImage();
 
