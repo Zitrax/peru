@@ -415,33 +415,6 @@
             </widget>
             <widget class="QCheckBox">
                 <property name="name">
-                    <cstring>montageCB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>440</x>
-                        <y>50</y>
-                        <width>100</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Montage</string>
-                </property>
-                <property name="checked">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Makes a montage on load of calibration images</string>
-                </property>
-            </widget>
-            <widget class="QCheckBox">
-                <property name="name">
                     <cstring>sortCornersCB</cstring>
                 </property>
                 <property name="enabled">
@@ -763,6 +736,58 @@
                     <string>1</string>
                 </property>
             </widget>
+            <widget class="QLineEdit">
+                <property name="name">
+                    <cstring>dimxLE</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>220</x>
+                        <y>70</y>
+                        <width>40</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>1</string>
+                </property>
+                <property name="alignment">
+                    <set>AlignAuto</set>
+                </property>
+            </widget>
+            <widget class="QCheckBox">
+                <property name="name">
+                    <cstring>montageCB</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>440</x>
+                        <y>50</y>
+                        <width>100</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>Montage</string>
+                </property>
+                <property name="checked">
+                    <bool>false</bool>
+                </property>
+                <property name="toolTip" stdset="0">
+                    <string>Makes a montage on load of calibration images</string>
+                </property>
+            </widget>
             <widget class="QPushButton">
                 <property name="name">
                     <cstring>viewParamsB</cstring>
@@ -791,32 +816,7 @@
                     <bool>false</bool>
                 </property>
                 <property name="toolTip" stdset="0">
-                    <string>Load camera parameters from file</string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>dimxLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>220</x>
-                        <y>70</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>1</string>
-                </property>
-                <property name="alignment">
-                    <set>AlignAuto</set>
+                    <string>View the loaded/calculated camera parameters</string>
                 </property>
             </widget>
         </widget>
