@@ -7,7 +7,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.h,v 1.4 2004/08/21 12:00:25 cygnus78 Exp $
+   $Id: ImageWidget.h,v 1.5 2004/10/02 11:10:02 cygnus78 Exp $
 *************************************************/
 
 #ifndef IMAGEWIDGET_H
@@ -26,7 +26,8 @@ class ImageWidget : public QWidget
   Q_OBJECT
 public:
   ImageWidget( QWidget *parent=0,
-	       const char *name=0);
+	       const char *name=0,
+	       bool scale=false);
   ~ImageWidget();
 
   QImage getImage();

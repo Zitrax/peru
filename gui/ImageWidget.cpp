@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.cpp,v 1.4 2004/08/21 12:00:25 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.5 2004/10/02 11:10:02 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,10 +17,11 @@
 #include <iostream>
 #include <qapplication.h>
 
-ImageWidget::ImageWidget( QWidget *parent, const char *name) 
-  : QWidget( parent, name), scaled(false)
+ImageWidget::ImageWidget( QWidget *parent, const char *name, bool scale) 
+  : QWidget( parent, name)
 {
   parent->installEventFilter(this);
+  setScaled( scale );
 }
 
 ImageWidget::~ImageWidget(){}
