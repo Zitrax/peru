@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.21 2004/09/25 11:56:54 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.22 2004/10/02 11:10:56 cygnus78 Exp $
 
 *************************************************/
 
@@ -19,6 +19,9 @@ const QString Peru::tmpImage = QString("tmp_montage.bmp");
 Peru::Peru( QWidget* parent, const char* name,
 	    WFlags fl) : Perubase(parent,name,fl)
 {
+  prefs = new Preferences(this);
+  prefs->readSettings();
+
   ccv::debug = debugCB->isChecked();
 
   pyrSB->hide();
@@ -30,17 +33,12 @@ Peru::Peru( QWidget* parent, const char* name,
   setCalibrated(false,1);
   setCalibrated(false,2);
   
-  magick = !system("montage > /dev/null");             // Check if montage 
-                                                       // exists in path
-  if(magick) montageCB->setChecked(true);
-  else montageCB->setEnabled(false);
-
   ccocv = new CCOCV();                                 // Create camera 
   ccocv2 = 0;                                          // calibration objects
 
   stereo = 0;
 
-  Image_widget = new ImageWidget(scrollView->viewport());     
+  Image_widget = new ImageWidget(scrollView->viewport(),"Image view", scaleCB->isChecked());     
   scrollView->addChild(Image_widget);
 
   if(ccv::debug) std::cerr << endl;
@@ -48,6 +46,13 @@ Peru::Peru( QWidget* parent, const char* name,
   calPar = new CalibrationParameters( ccocv, this, this );
   calPar->hide();
   
+  magick = !system("montage > /dev/null");             // Check if montage 
+                                                       // exists in path
+  if(!magick) {
+    montageCB->setChecked(false);
+    montageCB->setEnabled(false);
+  }
+
   connectSignalsToSlots();
 
   KStartupLogo *start_logo = new KStartupLogo();
@@ -70,6 +75,11 @@ Peru::Peru( QWidget* parent, const char* name,
 // Not strictly needed...
 Peru::~Peru(){
   if(ccv::debug) std::cerr << "DESTRUCTING Peru\n"; 
+
+  prefs->writeSettings();
+
+  delete prefs;
+
   zap(ccocv);
   zap(ccocv2);
   zap(stereo);
@@ -987,7 +997,7 @@ Peru::updateParamsDialog()
   if(ccv::debug) std::cerr << "Peru::updateParamsDialog\n";
   CameraParams cp = ccocv->getParams();
   
-  calPar->updateParameters(cp);
+  calPar->updateParameters(cp,true);
 }
 
 void Peru::err( const QString& err )

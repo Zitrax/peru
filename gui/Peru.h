@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.9 2004/09/03 21:53:19 cygnus78 Exp $
+   $Id: Peru.h,v 1.10 2004/10/02 11:10:56 cygnus78 Exp $
 
 *************************************************/
 
@@ -36,6 +36,7 @@
 #include "TopHatSettings.h"
 #include "CalibrationParameters.h"
 #include "QLed.h"
+#include "preferences.h"
 
 #include <string>
 #include <iostream>
@@ -142,6 +143,8 @@ class Peru : public Perubase
    TopHatSettings* ths;                 //!< Dialog for TopHatSettings
 
    CalibrationParameters* calPar;       //!< Constatnly updates parameters dialog
+
+   Preferences* prefs;                  //!< This file handles the stored settings
 
    QString supportedFormats;            //!< Image extensions
 
