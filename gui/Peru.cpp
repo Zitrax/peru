@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.16 2004/08/21 18:19:55 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.17 2004/08/22 10:35:16 cygnus78 Exp $
 
 *************************************************/
 
@@ -394,27 +394,19 @@ Peru::undistortImage(bool undistort)
 {
   if(ccv::debug) std::cerr << "Peru::undistortImage(bool undistort)\n";
   
-  char* s = new char[200];         // Allocate memory for string
-  s[0]='\0';                       // Empty string
-  strcat(s,fileName.c_str());      // Append filename
-  QImage *p_image;
+  QImage* p_image = 0;
 
   if(calibrated) {
-    if(ccv::debug) std::cerr << "File: " << fileName << "\n";
+    if(ccv::debug) std::cerr << "Undistorting\n";
     if(undistort && fileName.size()>0){
-      ccocv->undistortImage(fileName,true);
-      strcat(s,"_undistorted");
-      p_image = new QImage(QString(s),0);  
-      if(ccv::debug) std::cerr << "p_image is " << s << endl;
+      p_image = ccv::iplImageToQImage(ccocv->undistortImage(fileName,false) );
     }
     else {
-      if(ccv::debug) std::cerr << "Taking back - " << s << endl;
-      p_image = new QImage(QString(s),0);    
+      if(ccv::debug) std::cerr << "Reverting\n";
+      p_image = new QImage(fileName,0);    
     }
     imageOpen(*p_image);
     zap(p_image);
-    delete[] s;
-
   }
   else
     if(ccv::debug) std::cerr << "Not undistorting - no params\n";
