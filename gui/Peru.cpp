@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.22 2004/10/02 11:10:56 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.23 2004/10/18 21:50:31 cygnus78 Exp $
 
 *************************************************/
 
@@ -21,13 +21,9 @@ Peru::Peru( QWidget* parent, const char* name,
 {
   prefs = new Preferences(this);
   prefs->readSettings();
+  toggleParameters( stereo_algCOB->currentText() );
 
   ccv::debug = debugCB->isChecked();
-
-  pyrSB->hide();
-  pyrL->hide();
-  pyrtSB->hide();
-  pyrtL->hide();
 
   correct_images=0;
   setCalibrated(false,1);
