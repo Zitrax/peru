@@ -11,11 +11,6 @@ HIGH:   All that is actually an ERROR in the results, and all
         SEGFAULTS goes here.
 --------------------------------------------------------------------
 
-14 Feb 2003 22:23:03 
-Should also display corners detected in images where not all 
-corners are detected.
-STATUS: FIXED
-PRIORITY: MEDIUM
 
 14 Feb 2003 22:23:34
 Comparison wth/sv normal
@@ -46,21 +41,6 @@ PRIORITY: MEDIUM
 8 Apr 2003 21:29:58
 When sorting corners not all failed images corners are drawn
 STATUS: NOT FIXED
-PRIORITY: MEDIUM
-
-9 Apr 2003 12:28:59
-Remove IPL-dependence
-STATUS: FIXED
-PRIORITY: LOW (for user) MEDIUM (for developer)
-
-11 Apr 2003 13:27:36
-Segmentation fault when selecting too many pyramid levels
-STATUS: FIXED
-PRIORITY: HIGH
-
-3 May 2003 15:47:53
-CVblock fast has some strange bug.. left edge is destroyed
-STATUS: FIXED
 PRIORITY: MEDIUM
 
 11 May 2003 15:30:58
@@ -94,8 +74,31 @@ Look at calibration values
 STATUS: NOT FIXED
 PRIORITY: LOW
 
-17 Sep 2003 12:25:00
-Colors of diods hides in current kde settings
-STATUS: NOT FIXED
+FIXED
+-----
+
+14 Feb 2003 22:23:03 
+Should also display corners detected in images where not all 
+corners are detected.
+STATUS: FIXED
 PRIORITY: MEDIUM
 
+9 Apr 2003 12:28:59
+Remove IPL-dependence
+STATUS: FIXED
+PRIORITY: LOW (for user) MEDIUM (for developer)
+
+11 Apr 2003 13:27:36
+Segmentation fault when selecting too many pyramid levels
+STATUS: FIXED
+PRIORITY: HIGH
+
+3 May 2003 15:47:53
+CVblock fast has some strange bug.. left edge is destroyed
+STATUS: FIXED
+PRIORITY: MEDIUM
+
+17 Sep 2003 12:25:00
+Colors of diods hides in current kde settings
+STATUS: FIXED
+PRIORITY: MEDIUM
