@@ -314,28 +314,6 @@
             </rect>
         </property>
     </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>TextLabel1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>0</y>
-                <width>178</width>
-                <height>31</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>Bitstream Charter</family>
-                <pointsize>14</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>PERU - Version 0.2.2</string>
-        </property>
-    </widget>
     <widget class="QTabWidget">
         <property name="name">
             <cstring>tabWidget</cstring>
@@ -1766,6 +1744,28 @@
                 </property>
             </widget>
         </widget>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>TextLabel1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>0</y>
+                <width>204</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <family>Bitstream Charter</family>
+                <pointsize>14</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>PERU - Version pre0.2.2</string>
+        </property>
     </widget>
 </widget>
 <menubar>

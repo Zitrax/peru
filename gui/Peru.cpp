@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.9 2003/09/25 23:49:27 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.10 2003/10/01 20:19:33 cygnus78 Exp $
 
 *************************************************/
 
@@ -247,9 +247,12 @@ Peru::calibImageOpen()
   
   if(filelist.isEmpty()) { emit stringSignal("Error no files\n"); }
   else { 
+    // Make montage (thumbnails)
     montage(filelist);
+    // Reset progress bar
     calibPB->reset();
     calibPB->setTotalSteps(filelist.size()-1);
+    // Add images to calibration class
     while(!filelist.isEmpty()){
       filename = filelist.back();
       emit stringSignal("Added calib image: "+filename+"\n");
@@ -277,6 +280,7 @@ Peru::imageOpen(QImage image)
   Image_widget->displayImage(image);
 }
 
+// Adds calibration pattern images to calibration class
 void
 Peru::calibImageOpen(const QString& name)
 {
@@ -286,7 +290,7 @@ Peru::calibImageOpen(const QString& name)
 }
 
 
-// Run to initialice ccocv with current settins
+// Run to initialize ccocv with current settings
 // applied in the gui.
 void
 Peru::initializeCCOCV()
@@ -325,6 +329,8 @@ Peru::calibrate()
   
   calibPB->reset();
   
+  // Run through all images in CCOCV
+  // findCorners returns 1 as long as there are more images to read
   while(ccocv->findCorners(corners)==1){
     if(corners==(etxSB->value()-1)*(etySB->value()-1)) correct_images++;
     calibPB->setProgress(calibPB->progress()+1);
@@ -434,6 +440,10 @@ Peru::scaled()
   return scaleCB->isChecked();
 }
 
+// This makes small thumbnails of all
+// the images chosen as input calibration patterns.
+// Currently a system call to ImageMagicks montage is 
+// made.
 void
 Peru::montage(QStringList flist)
 {
@@ -555,6 +565,8 @@ Peru::loadParams(int cam)
   }
 }
 
+// Set the led's to green or red
+// depending on the state of calibration parameters.
 void
 Peru::setCalibrated(bool c, int cam)
 {
@@ -581,6 +593,8 @@ Peru::setCalibrated(bool c, int cam)
 void
 Peru::calculateStereo()
 {
+  // Many variables are initialized here to make 
+  // code in the rest of this method block easier to read.
   int start             = framestartLE->text().toInt();
   int stop              = frameendLE->text().toInt();
 
@@ -611,7 +625,7 @@ Peru::calculateStereo()
     if(ccv::debug) std::cerr << "Method = " 
 			     << stereo_algCOB->currentText() << endl;
     
-    //  Fill filename strings
+    //  Fill filename strings with correct numbers
     sprintf( c_left,  leftframeLE->text().latin1(), start);
     sprintf( c_right, rightframeLE->text().latin1(), start);
     strcpy( c_out, "out.bmp" );
@@ -654,7 +668,7 @@ Peru::calculateStereo()
       throw ccv::error("ERROR - loading images\n");
     // ----------------------------------
 
-    // Add Filters
+    // START FILTERS *****
 
     // PREFILTERS
     if(preMedian) 
@@ -678,7 +692,7 @@ Peru::calculateStereo()
     if(contrast) 
       stereo->addPostFilter(new ContrastStretch());
 
-    // END - FILTERS
+    // END - FILTERS *****
     
     if(!undistort_frames && 
        stereo_algCOB->currentText()!="magickblock") stereo->unSetImages();
@@ -714,7 +728,6 @@ Peru::calculateStereo()
       sprintf( c_out , "disparity_frame%05d.ppm", i );
       stereo->setOutFileName(string(c_out));
 
-
       if(errorCB->isChecked() && groundframeLE->text().length() > 0) {
 	stereo->loadGround( groundframeLE->text().latin1() );
 	stereo->setFindError(true);
@@ -723,6 +736,8 @@ Peru::calculateStereo()
       
       double error = stereo->start();
 
+      // ERRFLAG is raised if there are problems
+      // with the parameters in the stereo class.
       if( !ccv::ERRFLAG ) {
 	if(ccv::debug) std::cerr << "after start\n";
 
@@ -775,7 +790,8 @@ Peru::calculateStereo()
     
   }
   catch (ccv::error e) {
-    
+    // Must free everything allocated until error is throws
+    // Should probably change this to the zap-macros later.
     free(c_left);
     free(c_right);
     free(c_out);
