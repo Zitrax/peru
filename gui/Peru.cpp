@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.5 2003/09/17 12:00:19 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.6 2003/09/20 02:17:34 cygnus78 Exp $
 
 *************************************************/
 
@@ -607,6 +607,9 @@ Peru::calculateStereo()
     string left  = string(c_left);
     string right = string(c_right);
     string out   = string(c_out);
+
+    if(left.length()==0 || right.length()==0) 
+      throw ccv::error("ERROR - No filename provided\n");
 
     // Create the chosen stereo algorithm
     // ----------------------------------
