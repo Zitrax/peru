@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.cpp,v 1.5 2003/09/25 23:49:26 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.6 2004/05/22 22:43:19 cygnus78 Exp $
 
 *************************************************/
 
@@ -243,7 +243,7 @@ Stereo::findError()
   
   if(ground->width != dispI->width ||
      ground->height != dispI->height ) {
-    if(ccv::debug) std::cerr << "ERROR - Not same dimensions\n";
+    if(ccv::debug) std::cerr << "ERROR - Ground truth has wrong dimensions\n";
     return -1;
   }
   
