@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.9 2004/08/21 18:19:55 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.10 2004/08/22 10:06:11 cygnus78 Exp $
 
 *************************************************/
 
@@ -891,8 +891,8 @@ CCOCV::trialCalib(int& corners_found)
       for(int i=0; i<corners_found;i++) {
 	p.x = corners[i].x;
 	p.y = corners[i].y;
-	cvEllipseAA(tmp, p, axes1, 0, 0, 360, CV_RGB(255,0,0) );
-	cvEllipseAA(tmp, p, axes2, 0, 0, 360, CV_RGB(255,255,0) );
+	cvEllipse(tmp, p, axes1, 0, 0, 360, CV_RGB(255,0,0) );
+	cvEllipse(tmp, p, axes2, 0, 0, 360, CV_RGB(255,255,0) );
       }
 
     }

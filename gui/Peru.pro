@@ -100,7 +100,8 @@ LANGUAGE = C++
 count( CVPATH, 1 ) {
 LIBS += -L$$CVPATH/lib -Wl,-rpath,$$CVPATH/lib 
 }
-LIBS += -lopencv  \
+LIBS += -lcv  \
+        -lcxcore \
         -lhighgui \
         -lavcodec \
         -lcvaux   \
