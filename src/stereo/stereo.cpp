@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.cpp,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.1.1.1 2003/09/04 21:11:25 cygnus78 Exp $
 
 *************************************************/
 

@@ -13,7 +13,7 @@
      - Quadruple commented out unused variables   
 
  Version:
-   $Id: SortCorners.cpp,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: SortCorners.cpp,v 1.1.1.1 2003/09/04 21:11:25 cygnus78 Exp $
 
 *************************************************/
 

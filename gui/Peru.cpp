@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.1 2003/09/04 21:11:23 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.1.1.1 2003/09/04 21:11:23 cygnus78 Exp $
 
 *************************************************/
 
