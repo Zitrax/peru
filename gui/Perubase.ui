@@ -1999,21 +1999,28 @@
     </connection>
 </connections>
 <tabstops>
+    <tabstop>openImageB</tabstop>
+    <tabstop>scaleCB</tabstop>
+    <tabstop>calibCB</tabstop>
+    <tabstop>saveImageB</tabstop>
+    <tabstop>quitB</tabstop>
+    <tabstop>tabWidget</tabstop>
     <tabstop>readCalibB</tabstop>
+    <tabstop>calibB</tabstop>
+    <tabstop>undistortB</tabstop>
     <tabstop>etxSB</tabstop>
     <tabstop>etySB</tabstop>
     <tabstop>dimxLE</tabstop>
     <tabstop>dimyLE</tabstop>
-    <tabstop>calibB</tabstop>
-    <tabstop>undistortB</tabstop>
     <tabstop>loadParamsB</tabstop>
-    <tabstop>sortCornersCB</tabstop>
+    <tabstop>viewParamsB</tabstop>
     <tabstop>saveParamsB</tabstop>
-    <tabstop>tabWidget</tabstop>
-    <tabstop>scaleCB</tabstop>
-    <tabstop>calibCB</tabstop>
+    <tabstop>sortCornersCB</tabstop>
+    <tabstop>wthCB</tabstop>
     <tabstop>montageCB</tabstop>
-    <tabstop>openImageB</tabstop>
+    <tabstop>topHatB</tabstop>
+    <tabstop>debugCB</tabstop>
+    <tabstop>infoText</tabstop>
     <tabstop>framestartLE</tabstop>
     <tabstop>frameendLE</tabstop>
     <tabstop>leftframeLE</tabstop>
@@ -2023,10 +2030,6 @@
     <tabstop>bsSB</tabstop>
     <tabstop>blurCB</tabstop>
     <tabstop>calculateB</tabstop>
-    <tabstop>quitB</tabstop>
-    <tabstop>infoText</tabstop>
-    <tabstop>debugCB</tabstop>
-    <tabstop>wthCB</tabstop>
     <tabstop>pyrSB</tabstop>
     <tabstop>pyrtSB</tabstop>
     <tabstop>postMedianCB</tabstop>
@@ -2038,6 +2041,15 @@
     <tabstop>colorCB</tabstop>
     <tabstop>load_leftB</tabstop>
     <tabstop>left_paramsB</tabstop>
+    <tabstop>preMeanCB</tabstop>
+    <tabstop>preMedianCB</tabstop>
+    <tabstop>perspectivecCB</tabstop>
+    <tabstop>gradientrCB</tabstop>
+    <tabstop>contrastCB</tabstop>
+    <tabstop>write_disparityCB</tabstop>
+    <tabstop>groundframeLE</tabstop>
+    <tabstop>load_groundB</tabstop>
+    <tabstop>errorCB</tabstop>
 </tabstops>
 <slots>
     <slot>calibImageOpen()</slot>
