@@ -24,7 +24,6 @@ SOURCES	+= Peru.cpp                              \
            ../src/Gaussian.cpp                   \
            ../src/MeanCorrection.cpp             \
            ../src/HistoEq.cpp                    \
-           ../src/pixels.cpp                     \
            ../src/GradientRemoval.cpp            \
            ../src/ContrastStretch.cpp            \
            ../src/PerspectiveCorrect.cpp         \
@@ -46,7 +45,6 @@ HEADERS	+= Peru.h                                \
            ../src/Gaussian.h                     \
            ../src/MeanCorrection.h               \
            ../src/HistoEq.h                      \
-           ../src/pixels.h                       \
            ../src/GradientRemoval.h              \
            ../src/ContrastStretch.h              \
            ../src/PerspectiveCorrect.h           \
