@@ -2,4 +2,8 @@
 
 * Fixed up lots of ugly code
 * Realtime preview of TopHat parameters
-* Nr of images in queue, plus empty button
+* Nr of images in queue info field
+* Nr of images correctly calibrated not always correct, fixed
+* Fixed a bug where calibration parameters where not converted to float
+* A dialog with modification and viewing of calibration parameters
+* More correct info in INSTALL file

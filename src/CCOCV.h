@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.h,v 1.3 2003/09/07 19:59:54 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.4 2003/09/17 12:00:15 cygnus78 Exp $
 
 *************************************************/
 
@@ -124,6 +124,9 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
      int ysize,
      int threshold);
 
+  void setCameraParams
+  (struct CameraParams cp);
+
   IplImage* trialCalib      //!< Finds corner in one image to test the preproc.
   (int& corners_found);
 
@@ -181,6 +184,8 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
     (IplImage* source);     //!< Calculates negative/positive of source
 
   void initializeCalibration(); //!< Initializes some variables before calibration
+  
+  void convertParametersToFloat();
 };
 
 #endif

@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.4 2003/09/14 18:24:00 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.5 2003/09/17 12:00:16 cygnus78 Exp $
 
 *************************************************/
 
@@ -165,12 +165,6 @@ CCOCV::findCorners(int& corners_found){
     
       calibrated = true;             // Should also check if successfull!
     
-      // Convert to float to use in undistort
-      for(int i=0; i<9; i++)
-	cp.matrixf[i] = static_cast<float>(cp.matrix[i]);
-      for(int i=0; i<4; i++)
-	cp.distortionf[i] = static_cast<float>(cp.distortion[i]);
-
       cp.focalLength[0]    = cp.matrix[0];  // So this is actually stored twice
       cp.focalLength[1]    = cp.matrix[4];  // just for the confusion =)
       cp.principalPoint[0] = cp.matrix[2];  // (Or actually portability with
@@ -413,15 +407,15 @@ CCOCV::printParams(int no_images)
       if(ccv::debug) std::cerr << cp.matrix[i] << " ";
     if(ccv::debug) std::cerr << endl;
 
-    if(ccv::debug) std::cerr << "rotMatr = "; 
-    for(int i=0;i<no_images*9;i++)
-      if(ccv::debug) std::cerr << cp.rotMatr[i] << " ";
-    if(ccv::debug) std::cerr << endl;
+//     if(ccv::debug) std::cerr << "rotMatr = "; 
+//     for(int i=0;i<no_images*9;i++)
+//       if(ccv::debug) std::cerr << cp.rotMatr[i] << " ";
+//     if(ccv::debug) std::cerr << endl;
 
-    if(ccv::debug) std::cerr << "transVect = ";
-    for(int i=0;i<no_images*9;i++)
-      if(ccv::debug) std::cerr << cp.transVect[i] << " ";
-    if(ccv::debug) std::cerr << endl;
+//     if(ccv::debug) std::cerr << "transVect = ";
+//     for(int i=0;i<no_images*9;i++)
+//       if(ccv::debug) std::cerr << cp.transVect[i] << " ";
+//     if(ccv::debug) std::cerr << endl;
 
     
   }
@@ -492,6 +486,8 @@ CCOCV::undistortImage(string srcImageName, bool write)
   dstImage = cvCloneImage(srcImage);
 
   if(ccv::debug) std::cerr << "Opened srcImage\n";
+
+  convertParametersToFloat();
 
   if(calibrated){
     cvUnDistortOnce( srcImage, dstImage, cp.matrixf, cp.distortionf, 1 );
@@ -596,13 +592,6 @@ CCOCV::loadParams(const char* file)
   cp.matrix[8]         = atof(words[24]);
   
   printParams(0);
-
-  // Convert to float to use in undistort
-  for(int i=0; i<9; i++)
-    cp.matrixf[i] = static_cast<float>(cp.matrix[i]);
-  for(int i=0; i<4; i++)
-    cp.distortionf[i] = static_cast<float>(cp.distortion[i]);
-  
 
   return true;
 
@@ -722,10 +711,8 @@ CCOCV::drawCorners(string filename, int xgap, int pointsize,
 	//    234
 	//     5
       
-	int value = i%no_corners;  // [ 0 - no_corners-1 ]
-      
-	value *= static_cast<int>( 255.0/failcorners[total].x );
-      
+	int value = static_cast<int> ( (j-1)*(255.0/(failcorners[total].x-1)));
+
 	// Blue to yellow transition 
 	// 1
 	(iptr-image->widthStep)[0] = 255-value;
@@ -899,4 +886,23 @@ CCOCV::trialCalib(int& corners_found)
     return tmp;
 
   }    
+}
+
+void
+CCOCV::setCameraParams(struct CameraParams cp)
+{
+  if(ccv::debug) std::cerr << "CCOCV::setCameraParameters\n";
+  this->cp = cp;
+  if(ccv::debug) 
+    printParams(1);
+}
+
+void
+CCOCV::convertParametersToFloat()
+{
+  if(ccv::debug) std::cerr << "CCOCV::convertParametersToFloat\n";
+  for(int i=0; i<9; i++)
+    cp.matrixf[i] = static_cast<float>(cp.matrix[i]);
+  for(int i=0; i<4; i++)
+    cp.distortionf[i] = static_cast<float>(cp.distortion[i]);
 }

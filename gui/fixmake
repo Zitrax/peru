@@ -1,3 +1,4 @@
 #!/bin/bash
 
-cat Makefile | perl -p -e 's/-fno-exceptions//' > Makefile
+cat Makefile | perl -p -e 's/-fno-exceptions//' > tmpMakefile
+mv tmpMakefile Makefile

@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.4 2003/09/14 18:24:00 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.5 2003/09/17 12:00:19 cygnus78 Exp $
 
 *************************************************/
 
@@ -59,18 +59,25 @@ Peru::Peru( QWidget* parent, const char* name,
 
   supportedFormats = "Images (*.bmp *.jpg *.ppm *.png)";
 
+  // Create Forms and Initially hide them
   ths = new TopHatSettings( ccocv, this, this );
   ths->hide();
+
+  calPar = new CalibrationParameters( ccocv, this, this );
+  calPar->hide();
 }
 
 
-// Hmm using WDestructiveClose makes the destructor being called
-// but then we get segmentation fault on a.exec(); 
+// Not strictly needed...
 Peru::~Peru(){
   if(ccv::debug) std::cerr << "DESTRUCTING Peru\n"; 
   zap(ccocv);
   zap(ccocv2);
   zap(stereo);
+
+  zap(ths);
+  zap(calPar);
+  zap(Image_widget);
 }
 
 void
@@ -302,6 +309,7 @@ Peru::calibrate()
 {
   int corners;
   int orig_nr_images = ccocv->getNumberOfFilesInList();
+  correct_images = 0;
 
   initializeCCOCV();
 
@@ -523,7 +531,7 @@ Peru::loadParams(int cam)
   }
   else {
     if( cam==1 ) {
-      if(ccocv->loadParams( filename.latin1() ))
+      if(ccocv->loadParams( filename.latin1() )) 
 	setCalibrated(true,cam);
       saveParamsB->setEnabled(true);
     }
@@ -544,6 +552,7 @@ Peru::setCalibrated(bool c, int cam)
       calibLed->setPaletteBackgroundColor(QColor::QColor(255,0,0));
     else {
       calibLed->setPaletteBackgroundColor(QColor::QColor(0,255,0));
+      updateParamsDialog();
       if( calibrated2 )
 	calibLed_2->setPaletteBackgroundColor(QColor::QColor(0,255,0));
     }
@@ -861,4 +870,20 @@ Peru::updateImagesInQueueL()
   ts << "Images in queue: " << nr;
 
   imgqL->setText(str);
+}
+
+void
+Peru::viewParams()
+{
+  if(ccv::debug) std::cerr << "Peru::viewParams\n";
+  calPar->show();
+}
+
+void
+Peru::updateParamsDialog()
+{
+  if(ccv::debug) std::cerr << "Peru::updateParams\n";
+  CameraParams cp = ccocv->getParams();
+  
+  calPar->updateParameters(cp);
 }

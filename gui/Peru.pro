@@ -3,6 +3,7 @@
 
 # Next line sets path to opencv
 CVPATH = /usr/local
+
 # Path to directory over directory magick
 MAGICKPATH =
 
@@ -12,6 +13,7 @@ SOURCES	+= Peru.cpp                              \
            ../src/CCOCV.cpp                      \
            kstartuplogo.cpp                      \
            TopHatSettings.cpp                    \
+           CalibrationParameters.cpp             \
            ../src/stereo/stereo.cpp              \
 #          ../src/SortCorners.cpp                \
            ../src/stereo/BlockMatch.cpp          \
@@ -33,6 +35,7 @@ HEADERS	+= Peru.h                                \
            ImageWidget.h                         \
            kstartuplogo.h                        \
            TopHatSettings.h                      \
+           CalibrationParameters.h               \
            ../src/stereo/stereo.h                \
  #         ../src/SortCorners.h                  \
            ../src/stereo/BlockMatch.h            \
@@ -71,7 +74,9 @@ unix {
   OBJECTS_DIR = .obj
 }
 
-FORMS	= Perubase.ui TopHatSettingsBase.ui
+FORMS	= Perubase.ui \
+          TopHatSettingsBase.ui \
+          CalibrationParametersBase.ui
 
 IMAGES	= images/filenew    \
           images/fileopen   \

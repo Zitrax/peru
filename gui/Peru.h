@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.2 2003/09/07 19:59:54 cygnus78 Exp $
+   $Id: Peru.h,v 1.3 2003/09/17 12:00:18 cygnus78 Exp $
 
 *************************************************/
 
@@ -34,6 +34,7 @@
 #include "PerspectiveCorrect.h"
 #include "ContrastStretch.h"
 #include "TopHatSettings.h"
+#include "CalibrationParameters.h"
 
 #include <string>
 #include <iostream>
@@ -64,6 +65,7 @@ using namespace std;
 class CCOCV;
 class Matcher;
 class TopHatSettings;
+class CalibrationParameters;
 
 class Peru : public Perubase
 {
@@ -119,6 +121,7 @@ class Peru : public Perubase
    void saveImage();
 
    void viewTopHatSettings();           //!< View top hat settings dialog
+   void viewParams();                   //!< View parameters in a dialog
  signals:
    void stringSignal(const QString&);   //!< Emits a signal with a string ;)
 
@@ -134,6 +137,8 @@ class Peru : public Perubase
    ImageWidget* Image_widget;           //!< Displays images
    
    TopHatSettings* ths;                 //!< Dialog for TopHatSettings
+
+   CalibrationParameters* calPar;       //!< Constatnly updates parameters dialog
 
    QString supportedFormats;            //!< Image extensions
 
@@ -152,6 +157,7 @@ class Peru : public Perubase
    void connectSignalsToSlots();        //!< Take a wild guess
    void setFileName(QLineEdit* le);     //!< Fill in filename in line-edit
    void updateImagesInQueueL();         //!< Updates label imgqL with correct data
+   void updateParamsDialog();
 };
 
 #endif

@@ -78,3 +78,24 @@ Would be nice to have an automatical optimal tophat parameter
 finding function
 STATUS: NOT FIXED
 PRIORITY: LOW
+
+15 Sep 2003 22:13:04
+Progressbar not correct on single calibration image
+STATUS: NOT FIXED
+PRIORITY: LOW
+
+15 Sep 2003 22:43:38
+For some reason many calibration attempts fail
+STATUS: NOT FIXED
+PRIORITY: MEDIUM
+
+16 Sep 2003 23:10:57
+Look at calibration values
+STATUS: NOT FIXED
+PRIORITY: LOW
+
+17 Sep 2003 12:25:00
+Colors of diods hides in current kde settings
+STATUS: NOT FIXED
+PRIORITY: MEDIUM
+

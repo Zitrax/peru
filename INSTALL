@@ -50,7 +50,8 @@ Run 'qmake Peru.pro'
 Due to use of exceptions we have to make a change in the generated Makefile.
 This is definitely going to be changed in later versions, but until now you 
 have to manually remove the two occurrences of -fno-exceptions in the 
-generated Makefile.
+generated Makefile. ( Update: This can now be done more easily by running
+the file fixmake in the gui folder )
 
 then run 'make' in the gui folder. 
 
@@ -62,6 +63,14 @@ PROBLEMS ?
 * See so that no old version of the libraries are used at runtime
   this can generate segmentation faults. ( Built with the new libs
   and runned with the old ) What ? Noo I did not do that ! ;)
+
+* See that the angle and position of the calibration
+  pattern is different enough, otherwise faulty calibration
+  results will occur. For example using frames from 
+  a videosequence where two frames next to each other
+  in time are very similar. Even using for example five different 
+  pattern and a sixth that is too similar to one of the first 
+  five can give faulty results.
 
 -----------------------------------------------------
 

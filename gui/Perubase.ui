@@ -31,28 +31,6 @@
             </rect>
         </property>
     </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>TextLabel1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>0</y>
-                <width>160</width>
-                <height>31</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>Bitstream Charter</family>
-                <pointsize>14</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>PERU Project</string>
-        </property>
-    </widget>
     <widget class="QScrollView">
         <property name="name">
             <cstring>scrollView</cstring>
@@ -251,33 +229,6 @@
             <string>Check if the image should be scaled to fit in window</string>
         </property>
     </widget>
-    <widget class="QCheckBox">
-        <property name="name">
-            <cstring>debugCB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>740</x>
-                <y>630</y>
-                <width>70</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>11</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Debug</string>
-        </property>
-        <property name="checked">
-            <bool>true</bool>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Turn on debug to cerr</string>
-        </property>
-    </widget>
     <widget class="QPushButton">
         <property name="name">
             <cstring>quitB</cstring>
@@ -356,6 +307,33 @@
             <string>Open a new image</string>
         </property>
     </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>debugCB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>740</x>
+                <y>630</y>
+                <width>70</width>
+                <height>16</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <pointsize>11</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Debug</string>
+        </property>
+        <property name="checked">
+            <bool>false</bool>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Turn on debug to cerr</string>
+        </property>
+    </widget>
     <widget class="QTabWidget">
         <property name="name">
             <cstring>tabWidget</cstring>
@@ -381,147 +359,6 @@
             <attribute name="title">
                 <string>Calib</string>
             </attribute>
-            <widget class="QSpinBox">
-                <property name="name">
-                    <cstring>etySB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>210</x>
-                        <y>40</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="buttonSymbols">
-                    <enum>PlusMinus</enum>
-                </property>
-                <property name="value">
-                    <number>6</number>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Number of chess tiles in y direction</string>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>dimxLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>210</x>
-                        <y>70</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>1</string>
-                </property>
-                <property name="alignment">
-                    <set>AlignAuto</set>
-                </property>
-            </widget>
-            <widget class="QLineEdit">
-                <property name="name">
-                    <cstring>dimyLE</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>210</x>
-                        <y>90</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>1</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>etyL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>130</x>
-                        <y>40</y>
-                        <width>77</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Etalon y-size</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>etxL_2</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>130</x>
-                        <y>70</y>
-                        <width>76</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>X-Dimension</string>
-                </property>
-            </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>etxL</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>130</x>
-                        <y>20</y>
-                        <width>76</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Etalon x-size</string>
-                </property>
-            </widget>
             <widget class="QPushButton">
                 <property name="name">
                     <cstring>readCalibB</cstring>
@@ -544,68 +381,6 @@
                 </property>
                 <property name="toolTip" stdset="0">
                     <string>Read/Load all images of the calibration pattern</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>loadParamsB</cstring>
-                </property>
-                <property name="enabled">
-                    <bool>true</bool>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>270</x>
-                        <y>10</y>
-                        <width>111</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Load parameters</string>
-                </property>
-                <property name="flat">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Load camera parameters from file</string>
-                </property>
-            </widget>
-            <widget class="QPushButton">
-                <property name="name">
-                    <cstring>saveParamsB</cstring>
-                </property>
-                <property name="enabled">
-                    <bool>false</bool>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>270</x>
-                        <y>80</y>
-                        <width>111</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Save parameters</string>
-                </property>
-                <property name="flat">
-                    <bool>false</bool>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Save found camera parameters</string>
                 </property>
             </widget>
             <widget class="QPushButton">
@@ -664,7 +439,7 @@
                 </property>
                 <property name="geometry">
                     <rect>
-                        <x>420</x>
+                        <x>440</x>
                         <y>50</y>
                         <width>100</width>
                         <height>16</height>
@@ -685,34 +460,6 @@
                     <string>Makes a montage on load of calibration images</string>
                 </property>
             </widget>
-            <widget class="QSpinBox">
-                <property name="name">
-                    <cstring>etxSB</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>210</x>
-                        <y>20</y>
-                        <width>40</width>
-                        <height>20</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="buttonSymbols">
-                    <enum>PlusMinus</enum>
-                </property>
-                <property name="value">
-                    <number>4</number>
-                </property>
-                <property name="toolTip" stdset="0">
-                    <string>Number of chess tiles in x direction</string>
-                </property>
-            </widget>
             <widget class="QCheckBox">
                 <property name="name">
                     <cstring>sortCornersCB</cstring>
@@ -722,7 +469,7 @@
                 </property>
                 <property name="geometry">
                     <rect>
-                        <x>420</x>
+                        <x>440</x>
                         <y>10</y>
                         <width>100</width>
                         <height>20</height>
@@ -749,7 +496,7 @@
                 </property>
                 <property name="geometry">
                     <rect>
-                        <x>420</x>
+                        <x>440</x>
                         <y>30</y>
                         <width>180</width>
                         <height>20</height>
@@ -767,35 +514,13 @@
                     <string>Perform a morphological operation to remove uneven lightning</string>
                 </property>
             </widget>
-            <widget class="QLabel">
-                <property name="name">
-                    <cstring>etyL_2</cstring>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>130</x>
-                        <y>90</y>
-                        <width>74</width>
-                        <height>16</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <family>helvetica</family>
-                        <pointsize>8</pointsize>
-                    </font>
-                </property>
-                <property name="text">
-                    <string>Y-Dimension</string>
-                </property>
-            </widget>
             <widget class="QPushButton">
                 <property name="name">
                     <cstring>topHatB</cstring>
                 </property>
                 <property name="geometry">
                     <rect>
-                        <x>600</x>
+                        <x>620</x>
                         <y>30</y>
                         <width>60</width>
                         <height>20</height>
@@ -814,7 +539,7 @@
                 </property>
                 <property name="geometry">
                     <rect>
-                        <x>420</x>
+                        <x>440</x>
                         <y>110</y>
                         <width>110</width>
                         <height>16</height>
@@ -832,21 +557,286 @@
             </widget>
             <widget class="QPushButton">
                 <property name="name">
-                    <cstring>emptyB</cstring>
+                    <cstring>loadParamsB</cstring>
+                </property>
+                <property name="enabled">
+                    <bool>true</bool>
                 </property>
                 <property name="geometry">
                     <rect>
-                        <x>520</x>
-                        <y>110</y>
-                        <width>60</width>
+                        <x>280</x>
+                        <y>10</y>
+                        <width>130</width>
+                        <height>31</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>Load parameters</string>
+                </property>
+                <property name="flat">
+                    <bool>false</bool>
+                </property>
+                <property name="toolTip" stdset="0">
+                    <string>Load camera parameters from file</string>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>saveParamsB</cstring>
+                </property>
+                <property name="enabled">
+                    <bool>false</bool>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>280</x>
+                        <y>90</y>
+                        <width>130</width>
+                        <height>31</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>Save parameters</string>
+                </property>
+                <property name="flat">
+                    <bool>false</bool>
+                </property>
+                <property name="toolTip" stdset="0">
+                    <string>Save found camera parameters</string>
+                </property>
+            </widget>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>etyL_2</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>140</x>
+                        <y>90</y>
+                        <width>74</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>Y-Dimension</string>
+                </property>
+            </widget>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>etyL</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>140</x>
+                        <y>40</y>
+                        <width>77</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>Etalon y-size</string>
+                </property>
+            </widget>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>etxL_2</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>140</x>
+                        <y>70</y>
+                        <width>76</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>X-Dimension</string>
+                </property>
+            </widget>
+            <widget class="QSpinBox">
+                <property name="name">
+                    <cstring>etySB</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>220</x>
+                        <y>40</y>
+                        <width>40</width>
                         <height>20</height>
                     </rect>
                 </property>
-                <property name="text">
-                    <string>Empty</string>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="buttonSymbols">
+                    <enum>PlusMinus</enum>
+                </property>
+                <property name="value">
+                    <number>6</number>
                 </property>
                 <property name="toolTip" stdset="0">
-                    <string>Settings for the tophat algorithm</string>
+                    <string>Number of chess tiles in y direction</string>
+                </property>
+            </widget>
+            <widget class="QLabel">
+                <property name="name">
+                    <cstring>etxL</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>140</x>
+                        <y>20</y>
+                        <width>76</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>Etalon x-size</string>
+                </property>
+            </widget>
+            <widget class="QSpinBox">
+                <property name="name">
+                    <cstring>etxSB</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>220</x>
+                        <y>20</y>
+                        <width>40</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="buttonSymbols">
+                    <enum>PlusMinus</enum>
+                </property>
+                <property name="value">
+                    <number>4</number>
+                </property>
+                <property name="toolTip" stdset="0">
+                    <string>Number of chess tiles in x direction</string>
+                </property>
+            </widget>
+            <widget class="QLineEdit">
+                <property name="name">
+                    <cstring>dimyLE</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>220</x>
+                        <y>90</y>
+                        <width>40</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>1</string>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>viewParamsB</cstring>
+                </property>
+                <property name="enabled">
+                    <bool>true</bool>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>280</x>
+                        <y>50</y>
+                        <width>130</width>
+                        <height>31</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>View/Modify Parameters</string>
+                </property>
+                <property name="flat">
+                    <bool>false</bool>
+                </property>
+                <property name="toolTip" stdset="0">
+                    <string>Load camera parameters from file</string>
+                </property>
+            </widget>
+            <widget class="QLineEdit">
+                <property name="name">
+                    <cstring>dimxLE</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>220</x>
+                        <y>70</y>
+                        <width>40</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <family>helvetica</family>
+                        <pointsize>8</pointsize>
+                    </font>
+                </property>
+                <property name="text">
+                    <string>1</string>
+                </property>
+                <property name="alignment">
+                    <set>AlignAuto</set>
                 </property>
             </widget>
         </widget>
@@ -1722,6 +1712,28 @@
             </widget>
         </widget>
     </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>TextLabel1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>0</y>
+                <width>160</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <family>Bitstream Charter</family>
+                <pointsize>14</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>PERU - Version 0.2</string>
+        </property>
+    </widget>
 </widget>
 <menubar>
     <property name="name">
@@ -1930,6 +1942,12 @@
         <receiver>Perubase</receiver>
         <slot>viewTopHatSettings()</slot>
     </connection>
+    <connection>
+        <sender>viewParamsB</sender>
+        <signal>clicked()</signal>
+        <receiver>Perubase</receiver>
+        <slot>viewParams()</slot>
+    </connection>
 </connections>
 <tabstops>
     <tabstop>readCalibB</tabstop>
@@ -1979,6 +1997,7 @@
     <slot>calibImageOpen()</slot>
     <slot>viewTopHatSettings()</slot>
     <slot>imageOpen()</slot>
+    <slot>viewParams()</slot>
 </slots>
 <pixmapinproject/>
 <layoutdefaults spacing="6" margin="11"/>

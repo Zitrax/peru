@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: TopHatSettings.cpp,v 1.1 2003/09/07 19:59:54 cygnus78 Exp $
+   $Id: TopHatSettings.cpp,v 1.2 2003/09/17 12:00:17 cygnus78 Exp $
 
 *************************************************/
 
@@ -43,7 +43,7 @@ TopHatSettings::calculate()
     gui->imageOpen(*qimage);
 
   }
-  else if (calib->getNumberOfFilesInList() < 1 ) { 
+  else if (realTimeCB->isChecked() && calib->getNumberOfFilesInList() < 1 ) { 
     if(ccv::debug) std::cerr << "ERROR - No file(s)\n"; 
   }
     
