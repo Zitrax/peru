@@ -14,13 +14,14 @@ OpenCV        Version: 0.9.5
               http://sourceforge.net/projects/opencvlibrary/
               http://www.intel.com/research/mrl/research/opencv/
 
-Qt            Version: 3.1.1
+Qt            Version: 3.1.1 ( Currently using 3.3.2 )
               http://www.trolltech.com/      
 
 ImageMagick   Version: 5.5.5 (Do not use earlier versions!)
               http://www.imagemagick.org/
               Newer versions (5.5.5+) has changed the height of label
               and thus ygap to drawCorners had to be modified.
+              ( Future versions will probably remove need of ImageMagick )
 
 INSTALL INSTRUCTIONS
 --------------------
@@ -51,7 +52,7 @@ Due to use of exceptions we have to make a change in the generated Makefile.
 This is definitely going to be changed in later versions, but until now you 
 have to manually remove the two occurrences of -fno-exceptions in the 
 generated Makefile. ( Update: This can now be done more easily by running
-the file fixmake in the gui folder )
+the file fixmake in the gui folder if you have perl installed )
 
 then run 'make' in the gui folder. 
 
