@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: TopHatSettings.cpp,v 1.3 2004/05/20 22:47:51 cygnus78 Exp $
+   $Id: TopHatSettings.cpp,v 1.4 2004/05/22 23:22:55 cygnus78 Exp $
 
 *************************************************/
 
@@ -52,4 +52,15 @@ TopHatSettings::calculate()
     if(ccv::debug) std::cerr << "ERROR - No file(s)\n"; 
   }
     
+}
+
+void
+TopHatSettings::showEvent( QShowEvent* e )
+{
+  if( !gui->wthCB->isChecked() )
+    setDisabled(true);
+  else 
+    setEnabled(true);
+
+  TopHatSettingsBase::showEvent(e);
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>TopHatSettingsBase</class>
 <widget class="QDialog">
     <property name="name">
@@ -12,11 +12,14 @@
             <x>0</x>
             <y>0</y>
             <width>198</width>
-            <height>252</height>
+            <height>251</height>
         </rect>
     </property>
     <property name="caption">
         <string>TopHat Settings</string>
+    </property>
+    <property name="toolTip" stdset="0">
+        <string>Trial is performed on the first image in the calib image queue</string>
     </property>
     <widget class="QLabel">
         <property name="name">
@@ -128,66 +131,6 @@
             <string>Threshold</string>
         </property>
     </widget>
-    <widget class="QSpinBox">
-        <property name="name">
-            <cstring>ysizeSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>100</y>
-                <width>40</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="value">
-            <number>9</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Use only odd values here</string>
-        </property>
-    </widget>
-    <widget class="QSpinBox">
-        <property name="name">
-            <cstring>xsizeSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>70</y>
-                <width>40</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="value">
-            <number>9</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Use only odd values here</string>
-        </property>
-    </widget>
-    <widget class="QSpinBox">
-        <property name="name">
-            <cstring>thresholdSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>130</y>
-                <width>40</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="maxValue">
-            <number>255</number>
-        </property>
-        <property name="value">
-            <number>220</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Thresholding value to binarize the image with</string>
-        </property>
-    </widget>
     <widget class="QComboBox">
         <item>
             <property name="text">
@@ -217,25 +160,6 @@
         </property>
         <property name="toolTip" stdset="0">
             <string>Shape of the structuring element</string>
-        </property>
-    </widget>
-    <widget class="QSpinBox">
-        <property name="name">
-            <cstring>iterationsSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>10</y>
-                <width>40</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="value">
-            <number>1</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Number of iterations for the opening</string>
         </property>
     </widget>
     <widget class="QLabel">
@@ -281,6 +205,85 @@
                 <width>64</width>
                 <height>23</height>
             </rect>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>thresholdSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>130</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="maxValue">
+            <number>255</number>
+        </property>
+        <property name="value">
+            <number>220</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Thresholding value to binarize the image with</string>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>ysizeSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>100</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="value">
+            <number>9</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Use only odd values here</string>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>xsizeSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>70</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="value">
+            <number>9</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Use only odd values here</string>
+        </property>
+    </widget>
+    <widget class="QSpinBox">
+        <property name="name">
+            <cstring>iterationsSB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>70</x>
+                <y>10</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="value">
+            <number>1</number>
+        </property>
+        <property name="toolTip" stdset="0">
+            <string>Number of iterations for the opening</string>
         </property>
     </widget>
 </widget>

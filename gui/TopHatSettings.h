@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: TopHatSettings.h,v 1.3 2004/05/20 22:47:51 cygnus78 Exp $
+   $Id: TopHatSettings.h,v 1.4 2004/05/22 23:22:55 cygnus78 Exp $
 
 *************************************************/
 
@@ -40,6 +40,9 @@ public:
  
 public slots:
   void calculate();
+
+protected:
+  void showEvent( QShowEvent* );
 
 private:
   Peru* gui;
