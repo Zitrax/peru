@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.cpp,v 1.3 2003/09/05 12:36:36 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.4 2003/09/14 18:24:00 cygnus78 Exp $
 
 *************************************************/
 
@@ -61,9 +61,6 @@ Stereo::~Stereo()
   zap(postFilters);
   zap(preFilters);
 
-//   delete &left_file;
-//   delete &right_file;
-
   if(ccv::debug) std::cerr << "Destructing Stereo\n";
 }
   
@@ -71,23 +68,28 @@ bool Stereo::start()
 { 
   if(status) {
 
+    // STEP 1
     preProcess();
     
     if(ccv::debug) std::cerr << "Running stereo algorithm...\n";
     if(ccv::debug) std::cerr << "Left = " << left_file << endl
 			     << "Right = " << right_file << endl
 			     << "Out = " << out_file << endl;
+
+    // STEP 2
     if(!calculateDisparity())
       return false;
     
+
+    // STEP 3
     postProcess();
 
     if(writeToDisk) saveDisparityImage();
     
   }
   
-  zapImg(leftI);     // CAREFUL HERE ! 
-  zapImg(rightI);    // What if we need these later
+  zapImg(leftI);
+  zapImg(rightI);
   
   if(ccv::debug) std::cerr << "Number of iterations made: " << iterations << "\n";
   return true; 
@@ -141,106 +143,8 @@ Stereo::blurImages()
   cvSmooth(tmpL, leftI, CV_GAUSSIAN, 3, 3); 
   cvSmooth(tmpR, rightI, CV_GAUSSIAN, 3, 3); 
 
-//   iplBlur(tmpL ,left,3,3,1,1);         
-//   iplBlur(tmpR,right,3,3,1,1);
   zapImg(tmpL);
   zapImg(tmpR);
-}
-
-void
-Stereo::histogramEqualize()
-{
-  if(ccv::debug) std::cerr << "WARNING - Stereo::histogramEqualize does"
-			   << " nothing at the moment... (needs remake)\n";
-  
-//   IplImage* tmpL;
-//   IplImage* tmpR;
-//   tmpL = cvCloneImage( left );        
-//   tmpR = cvCloneImage( right );  
-	
-//   // To equalize the histogram we first need a lookup table
-//   int range = 256;
-//   IplLUT** plutL = new IplLUT*[3];
-//   IplLUT** plutR = new IplLUT*[3];
-
-//   // Yiiiikes you scream, why not a loop ?
-//   // Well I thought about that too but...  fix it if you are pedantic ;)
-//   // If you want to use only one channel that is probably a good idea
-//   IplLUT lutL = { range+1, NULL,NULL,NULL, IPL_LUT_INTER };
-//   IplLUT lutR = { range+1, NULL,NULL,NULL, IPL_LUT_INTER };
-//   lutL.key    = new int[range+1];
-//   lutL.value  = new int[range];
-//   lutL.factor = new int[range];
-//   lutR.key    = new int[range+1];
-//   lutR.value  = new int[range];
-//   lutR.factor = new int[range];
-      
-//   for( int i=0; i<=range; i++) {
-//     lutL.key[i] = i;
-//     lutR.key[i] = i;
-//   }
-	
-//   IplLUT lutL2 = { range+1, NULL,NULL,NULL, IPL_LUT_INTER };
-//   IplLUT lutR2 = { range+1, NULL,NULL,NULL, IPL_LUT_INTER };
-//   lutL2.key    = new int[range+1];
-//   lutL2.value  = new int[range];
-//   lutL2.factor = new int[range];
-//   lutR2.key    = new int[range+1];
-//   lutR2.value  = new int[range];
-//   lutR2.factor = new int[range];
-      
-//   for( int i=0; i<=range; i++) {
-//     lutL2.key[i] = i;
-//     lutR2.key[i] = i;
-//   }
-
-//   IplLUT lutL3 = { range+1, NULL,NULL,NULL, IPL_LUT_INTER };
-//   IplLUT lutR3 = { range+1, NULL,NULL,NULL, IPL_LUT_INTER };
-//   lutL3.key    = new int[range+1];
-//   lutL3.value  = new int[range];
-//   lutL3.factor = new int[range];
-//   lutR3.key    = new int[range+1];
-//   lutR3.value  = new int[range];
-//   lutR3.factor = new int[range];
-      
-//   for( int i=0; i<=range; i++) {
-//     lutL3.key[i] = i;
-//     lutR3.key[i] = i;
-//   }
-
-//   plutL[0] = &lutL; plutL[1] = &lutL2; plutL[2] = &lutL3; 
-//   plutR[0] = &lutR; plutR[1] = &lutR2; plutR[2] = &lutR3; 
-
-//   iplComputeHisto( tmpL, plutL );
-//   iplComputeHisto( tmpR, plutR );
-//   iplHistoEqualize( tmpL, left , plutL); 
-//   iplHistoEqualize( tmpR, right, plutR); 
-//   cvvSaveImage("barkmannen.bmp",left);
-//   cvvSaveImage("snorkelfröken.bmp",right);
-	
-//   delete [] lutL.key;
-//   delete [] lutL.value;
-//   delete [] lutL.factor;
-//   delete [] lutR.key;
-//   delete [] lutR.value;
-//   delete [] lutR.factor;
-//   delete [] lutL2.key;
-//   delete [] lutL2.value;
-//   delete [] lutL2.factor;
-//   delete [] lutR2.key;
-//   delete [] lutR2.value;
-//   delete [] lutR2.factor;
-//   delete [] lutL3.key;
-//   delete [] lutL3.value;
-//   delete [] lutL3.factor;
-//   delete [] lutR3.key;
-//   delete [] lutR3.value;
-//   delete [] lutR3.factor;
-
-//   delete [] plutL;
-//   delete [] plutR;
-//   zapImg(tmpL);
-//   zapImg(tmpR);
 }
 
 void
@@ -255,21 +159,6 @@ Stereo::preProcess()
       static_cast<Filter*>(*p)->apply(rightI);
     }
   }
-//   if(cmdLine.HasSwitch("-premean")) {
-//     if(ccv::debug) std::cerr << "Mean: " << findMean(left) << "," << findMean(right) << "\n";
-//     int add = cvRound(findMean(left)-findMean(right));
-//     if(ccv::debug) std::cout << "Add: " << add << "\n";
-//     addC(right,add);
-//   }
-//   if(cmdLine.HasSwitch("-premedian")){
-//     medianFilter(left,3);
-//     medianFilter(right,3);
-//   }
-//   if(cmdLine.HasSwitch("-blur")) 
-//     blurImages();
-//   if(cmdLine.HasSwitch("-hieq"))
-//     histogramEqualize();
- 
 }
 
 void
@@ -288,7 +177,6 @@ Stereo::medianFilter(IplImage* img, int size)
   IplImage* tmpD;
   tmpD = cvCloneImage( img );  
   
-  //  iplMedianFilter(tmpD, img, size, size, 1, 1);
   cvSmooth( tmpD, img, CV_MEDIAN, size, size);
 
   zapImg(tmpD);

@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.3 2003/09/07 22:43:55 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.4 2003/09/14 18:24:00 cygnus78 Exp $
 
 *************************************************/
 
@@ -105,7 +105,7 @@ CCOCV::findCorners(int& corners_found){
 
   if(!(filenames->size()==0 && !initialized) ) {
 
-  if(!initialized){     // Special treatment before the first image
+  if(!initialized){       // Special treatment before the first image
     
     initializeCalibration();
 

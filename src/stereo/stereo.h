@@ -4,12 +4,13 @@
  Purpose:
    Subclasses of Stereo will contain stereo-
    algorithms that generates disparity maps.
+   Stero is an abstract class.
 
  Author:
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.h,v 1.3 2003/09/05 12:36:36 cygnus78 Exp $
+   $Id: stereo.h,v 1.4 2003/09/14 18:24:00 cygnus78 Exp $
 
 *************************************************/
 
@@ -52,15 +53,15 @@ class Stereo
 
   bool status;                           //!< Set to true if we have loaded images
 
-  vector<Filter*>* preFilters;      //!< Filters applied before algorithm
-  vector<Filter*>* postFilters;     //!< Filters applied after algorithm
+  vector<Filter*>* preFilters;           //!< Filters applied before algorithm
+  vector<Filter*>* postFilters;          //!< Filters applied after algorithm
 
   void saveDisparityImage();             //!< Call this when a disparity image has been
                                          //!< calculated
 
   void postProcess();                    //!< Median filtering
   void preProcess();                     //!< Blur and histogram equalization  
-  void histogramEqualize();              //!< Histogram equalization (1 - 3 channels)
+
   void blurImages();                     //!< Gaussian smoothing
   void medianFilter(IplImage* img, 
 		    int size);           //!< Noise removal by median filtering
@@ -100,7 +101,8 @@ class Stereo
   IplImage** rightImagePointer();        //!< Get pointer to the right image
 
   void loadGround(const char* filename);
-  double findError();                    //!< Finds mse between contrast stretched dispI and ground
+  double findError();                    /*!< Finds mse between contrast 
+					   stretched dispI and ground */
 };
 
 #endif

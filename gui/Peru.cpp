@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.3 2003/09/07 19:59:54 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.4 2003/09/14 18:24:00 cygnus78 Exp $
 
 *************************************************/
 
@@ -499,7 +499,10 @@ Peru::saveParams()
 void Peru::loadParams()  { loadParams(1); }
 void Peru::loadParams2() 
 {
-  if( !ccocv2 ) { if(ccv::debug) std::cerr << "Creating ccocv2\n"; ccocv2 = new CCOCV; }
+  if( !ccocv2 ) { 
+    if(ccv::debug) 
+      std::cerr << "Creating ccocv2\n"; ccocv2 = new CCOCV; 
+  }
   loadParams(2); 
 }
 
@@ -554,11 +557,6 @@ Peru::setCalibrated(bool c, int cam)
   }
 }
 
-/*!
-  The stereo class is built to handle commandline arguments
-  and therefore the 'strange' commandline building here in
-  the calculateStereo method.
- */
 void
 Peru::calculateStereo()
 {
@@ -589,8 +587,6 @@ Peru::calculateStereo()
       throw ccv::error("ERROR - You have not calibrated all cameras\n");
     }
     
-    int sw=0;
-    
     if(ccv::debug) std::cerr << "Method = " 
 			     << stereo_algCOB->currentText() << endl;
     
@@ -604,14 +600,22 @@ Peru::calculateStereo()
     string out   = string(c_out);
 
     // Create the chosen stereo algorithm
+    // ----------------------------------
     if(stereo_algCOB->currentText()=="cvblock(abs)") 
-      stereo = new BlockMatch(left, right, out, colorCB->isChecked(), md, bs);
+      stereo = new BlockMatch(left, right, out, 
+			      colorCB->isChecked(), md, bs);
+
     else if(stereo_algCOB->currentText()=="cvblock(fast)") 
-      stereo = new BlockMatch(left, right, out, colorCB->isChecked(), md, bs, true);
+      stereo = new BlockMatch(left, right, out, 
+			      colorCB->isChecked(), md, bs, true);
+
     else if(stereo_algCOB->currentText()=="cvblock(mse)") 
-      stereo = new BlockMatch(left, right, out, colorCB->isChecked(), md, bs, false, true);
+      stereo = new BlockMatch(left, right, out, 
+			      colorCB->isChecked(), md, bs, false, true);
+
     else if(stereo_algCOB->currentText()=="cvbirchfield")
       stereo = new CvBirchfield(left, right, out, md);
+
     else if(stereo_algCOB->currentText()=="pyramidblock")
       stereo = new PyramidBlock(left, right, out, md, 
 				pyrSB->value(), 
@@ -624,8 +628,10 @@ Peru::calculateStereo()
 
     if( !stereo->getStatus() ) 
       throw ccv::error("ERROR - loading images\n");
+    // ----------------------------------
 
     // Add Filters
+
     // PREFILTERS
     if(preMedian) 
       stereo->addPreFilter(new MedianFilter()); 
@@ -637,6 +643,7 @@ Peru::calculateStereo()
 			    stereo->rightImagePointer()));
     if(hieq)
       stereo->addPreFilter(new HistoEq());
+
     // POSTFILTERS
     if(postMedian) 
       stereo->addPostFilter(new MedianFilter());
@@ -649,7 +656,6 @@ Peru::calculateStereo()
 
     // END - FILTERS
     
-
     if(!undistort_frames && 
        stereo_algCOB->currentText()!="magickblock") stereo->unSetImages();
 
