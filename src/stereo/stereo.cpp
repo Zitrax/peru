@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.cpp,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.3 2003/09/05 12:36:36 cygnus78 Exp $
 
 *************************************************/
 
@@ -31,43 +31,6 @@ Stereo::Stereo(string left,
   right_file = right;
   out_file   = out;
 
-//   if (cmdLine.SplitLine(argc, argv) < 1)
-//     {
-//       // no switches were given on the command line, abort
-//       if(ccv::debug) std::cerr << "\nOptions -left and -right are required\n\n";
-//       show_help();
-//       return;
-//     }   
-  
-//   if (cmdLine.HasSwitch("-h"))
-//     {
-//       show_help();
-//       exit(0);
-//     }   
-  
-//   if(!memory) {
-//     try
-//       {
-// 	left_file  = cmdLine.GetArgument("-left",  0);      
-// 	right_file = cmdLine.GetArgument("-right", 0);      
-//       }
-//     catch (...)
-//       {
-// 	// one of the required arguments was missing, abort
-// 	if(ccv::debug) std::cerr << "\nOptions -left and -right "
-// 				 << "are required\nCatched\n";
-// 	return;
-//       }  
-//   }
-
-//   // get the optional parameters   
-//   BSIZE = str2int( cmdLine.GetSafeArgument( "-bs", 0, "3" ) );   
-//   MAXD  = str2int( cmdLine.GetSafeArgument( "-md", 0, "30" ) );
-//   outfile = cmdLine.GetSafeArgument("-outf", 0, "disparity.bmp" );    
-//   method = cmdLine.GetSafeArgument( "-method", 0, "rojas" );   
-
-  
-  
   if(!memory) {
     if(ccv::debug) std::cerr << "Loading images...\n";
     leftI  = cvvLoadImage(left_file .c_str());  

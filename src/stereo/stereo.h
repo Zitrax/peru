@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.h,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
+   $Id: stereo.h,v 1.3 2003/09/05 12:36:36 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,21 +17,21 @@
 #define STEREO_H
 
 #include "../ccv.h"
-#include <ipl/ipl.h>
 #include <opencv/cv.h>
-#include <opencv/highgui.h>
 #include <iostream> 
 #include <math.h>
+#include <string>
+#include <vector>
 
-#include "../CmdLine.h"
 #include "../Filter.h"
+
+using namespace std;
 
 class Stereo 
 {
 
  protected:
  
-  CCmdLine cmdLine;   
   string left_file, right_file, out_file;
   CvSize imageSize;                      //! Size of images
 
@@ -52,8 +52,8 @@ class Stereo
 
   bool status;                           //!< Set to true if we have loaded images
 
-  vector<Filter*>* preFilters;           //!< Filters applied before algorithm
-  vector<Filter*>* postFilters;          //!< Filters applied after algorithm
+  vector<Filter*>* preFilters;      //!< Filters applied before algorithm
+  vector<Filter*>* postFilters;     //!< Filters applied after algorithm
 
   void saveDisparityImage();             //!< Call this when a disparity image has been
                                          //!< calculated

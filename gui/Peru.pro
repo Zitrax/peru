@@ -12,7 +12,6 @@ SOURCES	+= Peru.cpp                              \
            ../src/CCOCV.cpp                      \
            kstartuplogo.cpp                      \
            ../src/stereo/stereo.cpp              \
-           ../src/CmdLine.cpp                    \
 #          ../src/SortCorners.cpp                \
            ../src/stereo/BlockMatch.cpp          \
            ../src/stereo/CvBirchfield.cpp        \
@@ -33,7 +32,6 @@ HEADERS	+= Peru.h                                \
            ImageWidget.h                         \
            kstartuplogo.h                        \
            ../src/stereo/stereo.h                \
-           ../src/CmdLine.h                      \
  #         ../src/SortCorners.h                  \
            ../src/stereo/BlockMatch.h            \
            ../src/stereo/CvBirchfield.h          \
