@@ -1,4 +1,9 @@
-0.21
+0.2.2
+
+* Switched colored buttons against a new led class which works better
+  in different environments
+
+0.2.1
 
 * Removed some unused code
 * Fixed bug when trying to calculate stereo with no filenames

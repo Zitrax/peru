@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.7 2003/09/20 02:43:20 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.8 2003/09/22 19:37:43 cygnus78 Exp $
 
 *************************************************/
 
@@ -557,20 +557,20 @@ Peru::setCalibrated(bool c, int cam)
   if( cam==1 ) {
     calibrated = c;
     if(!c)
-      calibLed->setPaletteBackgroundColor(QColor::QColor(255,0,0));
+      calibLed1->setLed(false);
     else {
-      calibLed->setPaletteBackgroundColor(QColor::QColor(0,255,0));
+      calibLed1->setLed(true);
       updateParamsDialog();
       if( calibrated2 )
-	calibLed_2->setPaletteBackgroundColor(QColor::QColor(0,255,0));
+	calibLed2->setLed(true);
     }
   }
   if( cam==2 ) {
     calibrated2 = c;
     if(!c)
-      calibLed_2->setPaletteBackgroundColor(QColor::QColor(255,0,0));
+      calibLed2->setLed(false);
     else if ( calibrated )
-      calibLed_2->setPaletteBackgroundColor(QColor::QColor(0,255,0));
+      calibLed2->setLed(true);
   }
 }
 

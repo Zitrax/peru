@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.3 2003/09/17 12:00:18 cygnus78 Exp $
+   $Id: Peru.h,v 1.4 2003/09/22 19:37:43 cygnus78 Exp $
 
 *************************************************/
 
@@ -35,6 +35,7 @@
 #include "ContrastStretch.h"
 #include "TopHatSettings.h"
 #include "CalibrationParameters.h"
+#include "QLed.h"
 
 #include <string>
 #include <iostream>

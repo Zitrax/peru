@@ -14,6 +14,7 @@ SOURCES	+= Peru.cpp                              \
            kstartuplogo.cpp                      \
            TopHatSettings.cpp                    \
            CalibrationParameters.cpp             \
+           QLed.cpp                              \
            ../src/stereo/stereo.cpp              \
 #          ../src/SortCorners.cpp                \
            ../src/stereo/BlockMatch.cpp          \
@@ -35,6 +36,7 @@ HEADERS	+= Peru.h                                \
            kstartuplogo.h                        \
            TopHatSettings.h                      \
            CalibrationParameters.h               \
+           QLed.h                                \
            ../src/stereo/stereo.h                \
  #         ../src/SortCorners.h                  \
            ../src/stereo/BlockMatch.h            \
