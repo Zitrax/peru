@@ -7,7 +7,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.h,v 1.2 2004/05/20 22:21:27 cygnus78 Exp $
+   $Id: ImageWidget.h,v 1.3 2004/05/22 22:40:44 cygnus78 Exp $
 *************************************************/
 
 #ifndef IMAGEWIDGET_H
@@ -39,7 +39,8 @@ public:
   int valueAt(int x, int y);
   void colormap(bool map);            //!< Applies colormap
   void displayCurrentImage();     
-  void saveImage();
+  bool saveImage(const QString& filename, 
+		 const char* format);
 
 public slots:
   void displayImage(QImage& im);

@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.cpp,v 1.2 2004/05/20 22:21:27 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.3 2004/05/22 22:40:44 cygnus78 Exp $
 
 *************************************************/
 
@@ -175,10 +175,10 @@ ImageWidget::displayCurrentImage()
   update();
 }
 
-void
-ImageWidget::saveImage()
+bool
+ImageWidget::saveImage( const QString& filename, const char* format )
 {
-  oImage.save(QString("saved.bmp"),"BMP");
+  return oImage.save(filename,format);
 }
 
 QSize
