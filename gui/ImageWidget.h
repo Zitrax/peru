@@ -7,7 +7,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.h,v 1.1 2003/09/04 21:11:23 cygnus78 Exp $
+   $Id: ImageWidget.h,v 1.2 2004/05/20 22:21:27 cygnus78 Exp $
 *************************************************/
 
 #ifndef IMAGEWIDGET_H
@@ -31,7 +31,7 @@ public:
 
   QImage getImage();
   void setImage(QImage img);
-  void smoothScaleImage( bool ); 
+  void smoothScaleImage(); 
   float getXScale();                  //!< Original/Scale
   float getYScale();                  //!< Original/Scale
   int getWidth();
@@ -42,7 +42,7 @@ public:
   void saveImage();
 
 public slots:
-  void displayImage(QImage im);
+  void displayImage(QImage& im);
   void setScaled(bool scale);         //!< Should the image be scaled ?
 
 signals:
@@ -53,10 +53,12 @@ protected:
   void paintEvent(QPaintEvent *e);
   void mousePressEvent(QMouseEvent* e);
   void mouseReleaseEvent(QMouseEvent* e);
+  QSize sizeHint() const;
 
 private:
   QImage oImage;                      //!< Original image
-  QImage dImage;                      //!< Scaled image
+  QImage sImage;                      //!< Scaled image
+  QSize m_scaledsize;
   bool scaled;                        //!< Should the image be scaled ?
 
 };

@@ -7,32 +7,34 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.cpp,v 1.1 2003/09/04 21:11:23 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.2 2004/05/20 22:21:27 cygnus78 Exp $
 
 *************************************************/
 
 #include "ImageWidget.h"
 #include <qcheckbox.h>
+#include <qscrollview.h>
 #include <iostream>
+#include <qapplication.h>
 
 ImageWidget::ImageWidget( QWidget *parent,
 			  const char *name) : QWidget( parent, name) 
 {
   scaled=false;
+
+  m_scaledsize = parent->frameGeometry().size();
+
+  //  setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Maximum );
 }
 
-ImageWidget::~ImageWidget()
-{
-  delete &dImage;
-  delete &oImage;
-}
+ImageWidget::~ImageWidget(){}
 
 void 
-ImageWidget::displayImage(QImage im)
+ImageWidget::displayImage(QImage& im)
 {
   oImage=im;
-  dImage=oImage;
-  smoothScaleImage(scaled);
+  sImage=oImage;
+  smoothScaleImage();
 
   // Check this later
   // bitBlt( this, 0, 0, &rendermap, 0, 0 ); 
@@ -41,47 +43,51 @@ ImageWidget::displayImage(QImage im)
 void
 ImageWidget::paintEvent( QPaintEvent *e)
 {
-  if(!oImage.isNull()){
-    smoothScaleImage(scaled);
-  }
+  if( sImage.isNull() )
+    smoothScaleImage();
 
+  if( !sImage.isNull() ) {
+    QPainter qpainter( this );
+    qpainter.drawImage( 0, 0, sImage );
+  }
 }
 
 void 
-ImageWidget::smoothScaleImage(bool scale)
+ImageWidget::smoothScaleImage()
 {
+  
   if(!oImage.isNull()){                                     // Do not scale null-images
-    if(scale){
-      dImage=oImage.smoothScale(parentWidget()->size());
+
+    if(scaled && (sImage.size() != m_scaledsize) ){
+      if(ccv::debug) std::cerr << "Scaling\n";
+      sImage=oImage.smoothScale(m_scaledsize);
     }
-    else { dImage=oImage; }
-    QPainter qpainter( this );
-    //qpainter.eraseRect( this->frameGeometry() );            // Should be modified, leaves edges
-    qpainter.drawImage( 0, 0, dImage );
+    else { sImage=oImage; }
+    repaint();
+    qApp->processEvents();
   }
+  adjustSize();
 }
 
 QImage
 ImageWidget::getImage()
 {
-  return oImage; // Maybe dImage ?
+  return oImage; // Maybe sImage ?
 }
 
 void
 ImageWidget::setImage(QImage img)
 {
-  dImage=img;
-  QPainter qpainter( this );
-  qpainter.eraseRect( this->frameGeometry() );            // Should be modified, leaves edges
-  qpainter.drawImage( 0, 0, dImage );
-
+  oImage = img;
+  sImage = QImage();
+  smoothScaleImage();
 }
 
 void
 ImageWidget::setScaled(bool scale)
 {
   scaled = scale;
-  update();
+  smoothScaleImage();
 }
 
 void
@@ -105,13 +111,13 @@ ImageWidget::mouseReleaseEvent(QMouseEvent* e)
 float
 ImageWidget::getXScale()
 {
-  return oImage.width()/static_cast<float>(dImage.width());
+  return oImage.width()/static_cast<float>(sImage.width());
 }
 
 float
 ImageWidget::getYScale()
 {
-  return oImage.height()/static_cast<float>(dImage.height());
+  return oImage.height()/static_cast<float>(sImage.height());
 }
 
 int
@@ -166,11 +172,17 @@ ImageWidget::colormap(bool map)
 void
 ImageWidget::displayCurrentImage()
 {
-  smoothScaleImage(scaled); 
+  update();
 }
 
 void
 ImageWidget::saveImage()
 {
   oImage.save(QString("saved.bmp"),"BMP");
+}
+
+QSize
+ImageWidget::sizeHint() const
+{
+  return sImage.size();
 }
