@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.2 2003/09/07 19:59:54 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.3 2003/09/07 22:43:55 cygnus78 Exp $
 
 *************************************************/
 
@@ -339,6 +339,7 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
     // we can use the same image all the time
 
     cvReleaseMemStorage( &storage );
+    if(ccv::debug) std::cerr << "storage is released...\n";
 
     cvReleaseImage(&gray_image);            // Should maybe be moved later
     if(ccv::debug) std::cerr << "gray_mage is released...\n";
@@ -348,9 +349,6 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
     if(ccv::debug) std::cerr << "thresh is released...\n";
 
     printCorners(corners_found);
-
-    cvFree( (void**)&storage );
-    if(ccv::debug) std::cerr << "storage is released...\n";
 
     if(corners_found==etalon_points)
       return CORRECT_IMAGE;
@@ -859,17 +857,43 @@ CCOCV::trialCalib(int& corners_found)
     delete[] failcorners;
     initialized = false;
 
-    // Create new color image to paint corners on
-    CvSize imageSize;
-    cvGetImageRawData(tmpwth, 0, 0, &imageSize);         
-    IplImage* tmp = cvCreateImage(imageSize,IPL_DEPTH_8U, 3);
-    cvCvtColor(tmpwth,tmp,CV_GRAY2BGR);    
 
+    CvSize imageSize;
     CvPoint p;
-    for(int i=0; i<corners_found;i++) {
-      p.x = corners[i].x;
-      p.y = corners[i].y;
-      cvCircle(tmp, p, 3, CV_RGB(0,255,0), -1 );
+    IplImage* tmp;
+
+    // If we did find every corner without TopHat
+    if(!tmpwth) {
+      imageSize.width  = 400;
+      imageSize.height = 100;
+      p.x = 10;
+      p.y = 50;
+      CvFont font;
+      cvInitFont( &font, CV_FONT_VECTOR0, 0.5f, 0.5f, 0, 1.0f );
+      tmp = cvCreateImage(imageSize, IPL_DEPTH_8U, 1);
+      cvZero( tmp );
+      cvPutText( tmp, "TopHat not needed on this image", p,
+		 &font, CV_RGB(255,255,255));
+    }
+
+    else {
+      // Create new color image to paint corners on
+      cvGetImageRawData(tmpwth, 0, 0, &imageSize);         
+      tmp = cvCreateImage(imageSize,IPL_DEPTH_8U, 3);
+      cvCvtColor(tmpwth,tmp,CV_GRAY2BGR);    
+      
+      CvSize axes1;
+      CvSize axes2;
+      axes1.width = 3; axes1.height = 3;
+      axes2.width = 5; axes2.height = 5;
+
+      for(int i=0; i<corners_found;i++) {
+	p.x = corners[i].x;
+	p.y = corners[i].y;
+	cvEllipseAA(tmp, p, axes1, 0, 0, 360, CV_RGB(255,0,0) );
+	cvEllipseAA(tmp, p, axes2, 0, 0, 360, CV_RGB(255,255,0) );
+      }
+
     }
 
     return tmp;

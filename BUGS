@@ -58,12 +58,6 @@ Segmentation fault when selecting too many pyramid levels
 STATUS: FIXED
 PRIORITY: HIGH
 
-1 May 2003 17:00:54
-Reading slices severeal times prints the volume to gui as 
-history (several times)
-STATUS: NOT FIXED
-PRIORITY: LOW
-
 3 May 2003 15:47:53
 CVblock fast has some strange bug.. left edge is destroyed
 STATUS: FIXED
@@ -76,5 +70,11 @@ PRIORIY: MEDIUM
 
 30 May 2003 17:46:51
 gradient removal filter works poor on pyramid blockmatching
-STAUS: NOT FIXED
+STATUS: NOT FIXED
+PRIORITY: LOW
+
+7 Sep 2003 23:57:24
+Would be nice to have an automatical optimal tophat parameter
+finding function
+STATUS: NOT FIXED
 PRIORITY: LOW
