@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.7 2004/05/20 22:49:16 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.8 2004/08/21 17:18:56 cygnus78 Exp $
 
 *************************************************/
 
@@ -906,6 +906,7 @@ CCOCV::setCameraParams(struct CameraParams cp)
 {
   if(ccv::debug) std::cerr << "CCOCV::setCameraParameters\n";
   this->cp = cp;
+  calibrated = true;
   if(ccv::debug) 
     printParams(1);
 }

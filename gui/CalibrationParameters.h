@@ -10,7 +10,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: CalibrationParameters.h,v 1.2 2003/09/25 23:49:27 cygnus78 Exp $
+   $Id: CalibrationParameters.h,v 1.3 2004/08/21 17:18:56 cygnus78 Exp $
 
 *************************************************/
 
@@ -47,6 +47,15 @@ public slots:
 private:
   Peru* gui;
   CCOCV* calib;
+
+private slots:
+
+  void slot_parametersEdited();
+  void enable(); //!< Enable the dialog for manual entering
+
+signals:
+
+  void parametersEdited();
 
 };
 

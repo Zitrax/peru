@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.14 2004/08/21 11:55:16 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.15 2004/08/21 17:18:56 cygnus78 Exp $
 
 *************************************************/
 
@@ -44,6 +44,9 @@ Peru::Peru( QWidget* parent, const char* name,
   scrollView->addChild(Image_widget);
 
   if(ccv::debug) std::cerr << endl;
+
+  calPar = new CalibrationParameters( ccocv, this, this );
+  calPar->hide();
   
   connectSignalsToSlots();
 
@@ -61,9 +64,6 @@ Peru::Peru( QWidget* parent, const char* name,
   // Create Forms and Initially hide them
   ths = new TopHatSettings( ccocv, this, this );
   ths->hide();
-
-  calPar = new CalibrationParameters( ccocv, this, this );
-  calPar->hide();
 }
 
 
@@ -199,6 +199,13 @@ Peru::connectSignalsToSlots()
 	   this,
 	   SLOT( setFileNameG() )
 	   );
+
+  connect( calPar,
+	   SIGNAL( parametersEdited() ),
+	   this,
+	   SLOT( undistortImage() )
+	   );
+
 }
 
 void 
@@ -215,7 +222,6 @@ Peru::imageOpen()
   if(filename.isEmpty()) { if(ccv::debug) std::cerr << "Error empty file\n"; }
   else { 
     emit stringSignal("\nOpened image: "+filename+"\n");
-    calibCB->setChecked(false);
     fileName = filename.latin1();
     if(ccv::debug) std::cerr << filename << "\n"; 
     QImage *p_image = new QImage(filename,0);
@@ -367,19 +373,27 @@ Peru::calibrate()
       }
     }
 
-    saveParamsB->setEnabled(true);
+    updateParamsDialog();
     setCalibrated(true,1);
   }
   else {
-    saveParamsB->setEnabled(false);
     setCalibrated(false,1);
   }
   emit stringSignal(str);
 }
 
 void
+Peru::undistortImage()
+{
+  if(ccv::debug) std::cerr << "Peru::undistortImage()\n";
+  undistortImage( calibCB->isChecked() );
+}
+
+void
 Peru::undistortImage(bool undistort)
 {
+  if(ccv::debug) std::cerr << "Peru::undistortImage(bool undistort)\n";
+  
   char* s = new char[200];         // Allocate memory for string
   s[0]='\0';                       // Empty string
   strcat(s,fileName.c_str());      // Append filename
@@ -402,8 +416,8 @@ Peru::undistortImage(bool undistort)
     delete[] s;
 
   }
-  else emit stringSignal("WARNING - You have not calibrated "
-			 "or calibration has failed\n");
+  else
+    if(ccv::debug) std::cerr << "Not undistorting - no params\n";
 }
 
 void 
@@ -544,9 +558,11 @@ Peru::loadParams(int cam)
   }
   else {
     if( cam==1 ) {
-      if(ccocv->loadParams( filename.latin1() )) 
+      if(ccocv->loadParams( filename.latin1() )) {
 	setCalibrated(true,cam);
-      saveParamsB->setEnabled(true);
+	updateParamsDialog();
+	undistortImage();
+      }
     }
     else if( cam==2 ) {
       if(ccocv2->loadParams( filename.latin1() ))
@@ -563,11 +579,13 @@ Peru::setCalibrated(bool c, int cam)
 {
   if( cam==1 ) {
     calibrated = c;
-    if(!c)
+    if(!c) {
       calibLed1->setLed(false);
+      saveParamsB->setEnabled(false);
+    }
     else {
       calibLed1->setLed(true);
-      updateParamsDialog();
+      saveParamsB->setEnabled(true);
       if( calibrated2 )
 	calibLed2->setLed(true);
     }
@@ -965,7 +983,7 @@ Peru::viewParams()
 void
 Peru::updateParamsDialog()
 {
-  if(ccv::debug) std::cerr << "Peru::updateParams\n";
+  if(ccv::debug) std::cerr << "Peru::updateParamsDialog\n";
   CameraParams cp = ccocv->getParams();
   
   calPar->updateParameters(cp);

@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: CalibrationParameters.cpp,v 1.1 2003/09/17 11:59:37 cygnus78 Exp $
+   $Id: CalibrationParameters.cpp,v 1.2 2004/08/21 17:18:56 cygnus78 Exp $
 
 *************************************************/
 
@@ -20,7 +20,49 @@ CalibrationParameters::CalibrationParameters( CCOCV* c,
 				QWidget* parent, 
 				const char* name,
 				WFlags fl) 
-  : CalibrationParametersBase(parent, name, fl), gui(p), calib(c) {}
+  : CalibrationParametersBase(parent, name, fl), gui(p), calib(c) 
+{
+  
+  connect( matrixLE,   SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( matrixLE_2, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( matrixLE_3, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( matrixLE_4, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( matrixLE_5, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( matrixLE_6, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( matrixLE_7, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( matrixLE_8, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( matrixLE_9, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+
+  connect( distortionLE,   SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( distortionLE_2, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( distortionLE_3, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+  connect( distortionLE_4, SIGNAL( textChanged(const QString&) ), 
+	   this, SLOT( slot_parametersEdited() ) );
+
+  connect( enableCB, SIGNAL( clicked() ), this, SLOT( enable() ) );
+
+  connect( matrixLE,        SIGNAL( textChanged(const QString&) ),
+	   focalLengthLE,   SLOT( setText(const QString&) ) );
+  connect( matrixLE_5,      SIGNAL( textChanged(const QString&) ),
+	   focalLengthLE_2, SLOT( setText(const QString&) ) );
+  connect( matrixLE_3,      SIGNAL( textChanged(const QString&) ),
+	   principalLE,     SLOT( setText(const QString&) ) );
+  connect( matrixLE_6,      SIGNAL( textChanged(const QString&) ),
+	   principalLE_2,   SLOT( setText(const QString&) ) );
+
+}
 
 CalibrationParameters::~CalibrationParameters(){}
  
@@ -61,6 +103,8 @@ CalibrationParameters::updateParameters(struct CameraParams cp)
   if(ccv::debug) std::cerr << "CalibrationParameters::updateParameters\n";
   QString s;
 
+  gui->setCalibrated( false, 1 );
+
   focalLengthLE  ->setText( s.setNum(cp.focalLength[0]) );
   focalLengthLE_2->setText( s.setNum(cp.focalLength[1]) );
 
@@ -80,6 +124,48 @@ CalibrationParameters::updateParameters(struct CameraParams cp)
   matrixLE_6->setText( s.setNum(cp.matrix[5]) );
   matrixLE_7->setText( s.setNum(cp.matrix[6]) );
   matrixLE_8->setText( s.setNum(cp.matrix[7]) );
+
+  gui->setCalibrated( true, 1 );
+
   matrixLE_9->setText( s.setNum(cp.matrix[8]) );
+
+}
+
+void 
+CalibrationParameters::slot_parametersEdited()
+{
+  parametersChanged();
+  emit parametersEdited();
+}
+
+void
+CalibrationParameters::enable()
+{
+  focalLengthLE  ->setText( "0" );
+  focalLengthLE_2->setText( "0" );
+
+  distortionLE  ->setText( "0" );
+  distortionLE_2->setText( "0" );
+  distortionLE_3->setText( "0" );
+  distortionLE_4->setText( "0" );
+
+  principalLE  ->setText( "0" );
+  principalLE_2->setText( "0" );
+
+  matrixLE  ->setText( "0" );
+  matrixLE_2->setText( "0" );
+  matrixLE_3->setText( "0" );
+  matrixLE_4->setText( "0" );
+  matrixLE_5->setText( "0" );
+  matrixLE_6->setText( "0" );
+  matrixLE_7->setText( "0" );
+  matrixLE_8->setText( "0" );
+  matrixLE_9->setText( "0" );
+
+  gui->setCalibrated( true, 1 );
+
+  parametersChanged();
+
+  enableCB->setEnabled( false );
 
 }

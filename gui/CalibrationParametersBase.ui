@@ -8,13 +8,100 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>299</width>
-            <height>396</height>
+            <width>310</width>
+            <height>422</height>
         </rect>
     </property>
     <property name="caption">
         <string>CalibrationParameters</string>
     </property>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>10</y>
+                <width>71</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Focallength</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1_3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>270</y>
+                <width>40</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+                <pointsize>8</pointsize>
+            </font>
+        </property>
+        <property name="text">
+            <string>Matrix</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>focalLengthLE</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>160</x>
+                <y>10</y>
+                <width>120</width>
+                <height>23</height>
+            </rect>
+        </property>
+        <property name="readOnly">
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>focalLengthLE_2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>160</x>
+                <y>40</y>
+                <width>120</width>
+                <height>23</height>
+            </rect>
+        </property>
+        <property name="readOnly">
+            <bool>true</bool>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>matrixLE</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>290</y>
+                <width>80</width>
+                <height>23</height>
+            </rect>
+        </property>
+    </widget>
     <widget class="QLineEdit">
         <property name="name">
             <cstring>matrixLE_2</cstring>
@@ -121,93 +208,12 @@
     </widget>
     <widget class="QLineEdit">
         <property name="name">
-            <cstring>matrixLE</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>290</y>
-                <width>80</width>
-                <height>23</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QLineEdit">
-        <property name="name">
-            <cstring>distortionLE</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>160</x>
-                <y>80</y>
-                <width>120</width>
-                <height>23</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QLineEdit">
-        <property name="name">
-            <cstring>distortionLE_2</cstring>
+            <cstring>principalLE_2</cstring>
         </property>
         <property name="geometry">
             <rect>
                 <x>160</x>
                 <y>110</y>
-                <width>120</width>
-                <height>23</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QLineEdit">
-        <property name="name">
-            <cstring>distortionLE_3</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>160</x>
-                <y>140</y>
-                <width>120</width>
-                <height>23</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QLineEdit">
-        <property name="name">
-            <cstring>distortionLE_4</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>160</x>
-                <y>170</y>
-                <width>120</width>
-                <height>23</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QLineEdit">
-        <property name="name">
-            <cstring>focalLengthLE</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>160</x>
-                <y>10</y>
-                <width>120</width>
-                <height>23</height>
-            </rect>
-        </property>
-        <property name="readOnly">
-            <bool>true</bool>
-        </property>
-    </widget>
-    <widget class="QLineEdit">
-        <property name="name">
-            <cstring>focalLengthLE_2</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>160</x>
-                <y>40</y>
                 <width>120</width>
                 <height>23</height>
             </rect>
@@ -223,71 +229,13 @@
         <property name="geometry">
             <rect>
                 <x>160</x>
-                <y>210</y>
-                <width>120</width>
-                <height>23</height>
-            </rect>
-        </property>
-        <property name="readOnly">
-            <bool>true</bool>
-        </property>
-    </widget>
-    <widget class="QLineEdit">
-        <property name="name">
-            <cstring>principalLE_2</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>160</x>
-                <y>240</y>
-                <width>120</width>
-                <height>23</height>
-            </rect>
-        </property>
-        <property name="readOnly">
-            <bool>true</bool>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>textLabel1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>10</y>
-                <width>71</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Focallength</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>textLabel1_2</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
                 <y>80</y>
-                <width>132</width>
-                <height>20</height>
+                <width>120</width>
+                <height>23</height>
             </rect>
         </property>
-        <property name="font">
-            <font>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Distortion Coefficients</string>
+        <property name="readOnly">
+            <bool>true</bool>
         </property>
     </widget>
     <widget class="QLabel">
@@ -297,7 +245,7 @@
         <property name="geometry">
             <rect>
                 <x>20</x>
-                <y>210</y>
+                <y>80</y>
                 <width>90</width>
                 <height>20</height>
             </rect>
@@ -313,13 +261,13 @@
     </widget>
     <widget class="QLabel">
         <property name="name">
-            <cstring>textLabel1_3</cstring>
+            <cstring>textLabel1_2</cstring>
         </property>
         <property name="geometry">
             <rect>
                 <x>20</x>
-                <y>270</y>
-                <width>40</width>
+                <y>150</y>
+                <width>132</width>
                 <height>20</height>
             </rect>
         </property>
@@ -329,7 +277,75 @@
             </font>
         </property>
         <property name="text">
-            <string>Matrix</string>
+            <string>Distortion Coefficients</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>distortionLE_2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>160</x>
+                <y>180</y>
+                <width>120</width>
+                <height>23</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>distortionLE_4</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>160</x>
+                <y>240</y>
+                <width>120</width>
+                <height>23</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>distortionLE_3</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>160</x>
+                <y>210</y>
+                <width>120</width>
+                <height>23</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>distortionLE</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>160</x>
+                <y>150</y>
+                <width>120</width>
+                <height>23</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QCheckBox">
+        <property name="name">
+            <cstring>enableCB</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>390</y>
+                <width>70</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Enable</string>
         </property>
     </widget>
 </widget>
@@ -437,6 +453,25 @@
         <slot>parametersChanged()</slot>
     </connection>
 </connections>
+<tabstops>
+    <tabstop>matrixLE</tabstop>
+    <tabstop>matrixLE_2</tabstop>
+    <tabstop>matrixLE_3</tabstop>
+    <tabstop>matrixLE_4</tabstop>
+    <tabstop>matrixLE_5</tabstop>
+    <tabstop>matrixLE_6</tabstop>
+    <tabstop>matrixLE_7</tabstop>
+    <tabstop>matrixLE_8</tabstop>
+    <tabstop>matrixLE_9</tabstop>
+    <tabstop>focalLengthLE</tabstop>
+    <tabstop>focalLengthLE_2</tabstop>
+    <tabstop>principalLE</tabstop>
+    <tabstop>principalLE_2</tabstop>
+    <tabstop>distortionLE</tabstop>
+    <tabstop>distortionLE_2</tabstop>
+    <tabstop>distortionLE_3</tabstop>
+    <tabstop>distortionLE_4</tabstop>
+</tabstops>
 <slots>
     <slot>parametersChanged()</slot>
 </slots>
