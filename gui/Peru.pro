@@ -28,7 +28,8 @@ SOURCES	+= Peru.cpp                              \
            ../src/GradientRemoval.cpp            \
            ../src/ContrastStretch.cpp            \
            ../src/PerspectiveCorrect.cpp         \
-           ../src/ccv.cpp
+           ../src/ccv.cpp                        \
+           ../src/preferences.cpp
 
 HEADERS	+= Peru.h                                \
            ../src/CCOCV.h                        \ 
@@ -50,7 +51,8 @@ HEADERS	+= Peru.h                                \
            ../src/GradientRemoval.h              \
            ../src/ContrastStretch.h              \
            ../src/PerspectiveCorrect.h           \
-           ../src/ccv.h
+           ../src/ccv.h                          \
+           ../src/preferences.h
 
 count( CVPATH, 1 ) {
 INCLUDEPATH += $$CVPATH/include                  \
@@ -91,7 +93,7 @@ IMAGES	= images/filenew    \
 
 TEMPLATE = app
 
-CONFIG	+= qt warn_off #debug
+CONFIG	+= qt warn_off release #debug
 
 DBFILE	 = Peru.db
 
