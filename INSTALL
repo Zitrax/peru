@@ -10,11 +10,11 @@ You will need the following installed on your computer:
 
 REQUIREMENTS  
 ------------
-OpenCV        Version: 0.9.5  
+OpenCV        Version: 0.9.6  
               http://sourceforge.net/projects/opencvlibrary/
               http://www.intel.com/research/mrl/research/opencv/
 
-Qt            Version: 3.1.1 ( Currently using 3.3.2 )
+Qt            Version: 3.1.1 ( Currently using 3.3.3 )
               http://www.trolltech.com/      
 
 ImageMagick   Version: 5.5.5 (Do not use earlier versions!)
@@ -38,7 +38,7 @@ but if you use 0.9.3 you need to remove the line that redefines resize.
 
 OpenCV 0.9.4 change line in cv.h that includes "ipl.h" to <ipl/ipl.h>
 
-** The above errors does not apply to OpenCV 0.9.5 **
+** The above errors does not apply to OpenCV >= 0.9.5 **
 
 Install qt3. (Using rpm's for redhat, install both qt and qt-devel). 
 
