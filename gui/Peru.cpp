@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.24 2004/10/18 22:44:00 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.24.2.1 2004/12/21 23:02:11 cygnus78 Exp $
 
 *************************************************/
 
@@ -18,7 +18,11 @@ const QString Peru::tmpImage = QString("tmp_montage.bmp");
 
 Peru::Peru( QWidget* parent, const char* name,
 	    WFlags fl) : Perubase(parent,name,fl), 
-			 calc_stop_flag(false)
+			 calc_stop_flag(false),
+			 montage_v(0),
+			 correct_images(0),
+			 ccocv2(0),
+			 stereo(0)
 {
   prefs = new Preferences(this);
   prefs->readSettings();
@@ -26,14 +30,10 @@ Peru::Peru( QWidget* parent, const char* name,
 
   ccv::debug = debugCB->isChecked();
 
-  correct_images=0;
   setCalibrated(false,1);
   setCalibrated(false,2);
   
   ccocv = new CCOCV();                                 // Create camera 
-  ccocv2 = 0;                                          // calibration objects
-
-  stereo = 0;
 
   Image_widget = new ImageWidget(scrollView->viewport(),"Image view", scaleCB->isChecked());     
   scrollView->addChild(Image_widget);
@@ -479,45 +479,55 @@ Peru::scaled()
 void
 Peru::montage(QStringList flist)
 {
-  int images=0;
   if(montageCB->isChecked() && !flist.isEmpty()){
     
-    QString image_list;
-    QString tmp = tmpImage;
+    if( !montage_v ){
+      montage_v = new MontageView(scrollView->viewport());
+      scrollView->addChild(montage_v);
+    }
+    montage_v->show();
 
-    while( ! flist.isEmpty() )
+    QStringList::ConstIterator it  = flist.begin();
+    QStringList::ConstIterator end = flist.end();
+    
+    QSize icon_size(100,100);
+    for( it; it!=end; ++it )
       {
-	image_list.prepend("'"+flist.back()+"' ");
-	images++;
-	flist.pop_back();
+	QImage icon( *it );
+	QPixmap icon_p = icon.smoothScale( icon_size );
+	
+	if(ccv::debug) std::cerr << "Adding " << *it << " to montage view\n";
+	QIconViewItem* item = new QIconViewItem(montage_v, *it, icon_p );
       }
 
-    QString command;
-    QTextStream ts( &command, IO_WriteOnly );
-    int tiles = static_cast<int>(sqrt(static_cast<float>(images)));
-    if(tiles*tiles<images) tiles++;
-    ts << "montage -geometry 100x+1+0 -borderwidth 0x0 -label \"%f\""
-       << " -filter triangle -font ps:courier -pointsize 12"
-       << " -tile " 
-       << tiles << "x" << tiles << " ";
-    if(ccv::debug) std::cerr << command;;
+
+
+//     QString command;
+//     QTextStream ts( &command, IO_WriteOnly );
+//     int tiles = static_cast<int>(sqrt(static_cast<float>(images)));
+//     if(tiles*tiles<images) tiles++;
+//     ts << "montage -geometry 100x+1+0 -borderwidth 0x0 -label \"%f\""
+//        << " -filter triangle -font ps:courier -pointsize 12"
+//        << " -tile " 
+//        << tiles << "x" << tiles << " ";
+//     if(ccv::debug) std::cerr << command;;
     
-    command.append(image_list);
-    command.append(tmp);
+//     command.append(image_list);
+//     command.append(tmp);
     
-    write("Making thumbnails...\n");
+//     write("Making thumbnails...\n");
 
-    system(command.latin1());
+//     system(command.latin1());
 
-    write("Done\n");
+//     write("Done\n");
 
-    QImage* p_image = new QImage(tmp,0);
-    if (*p_image==NULL) { err("ERROR - image\n"); }
-    else {
-      imageOpen(*p_image);
-      zap(p_image);
-      // system("rm "+tmp);
-    }
+//     QImage* p_image = new QImage(tmp,0);
+//     if (*p_image==NULL) { err("ERROR - image\n"); }
+//     else {
+//       imageOpen(*p_image);
+//       zap(p_image);
+//       // system("rm "+tmp);
+//     }
 
   }
   else return;

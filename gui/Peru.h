@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.11 2004/10/18 22:44:00 cygnus78 Exp $
+   $Id: Peru.h,v 1.11.2.1 2004/12/21 23:02:11 cygnus78 Exp $
 
 *************************************************/
 
@@ -37,6 +37,7 @@
 #include "CalibrationParameters.h"
 #include "QLed.h"
 #include "preferences.h"
+#include "MontageView.h"
 
 #include <string>
 #include <iostream>
@@ -146,6 +147,8 @@ class Peru : public Perubase
    ImageWidget* Image_widget;           //!< Displays images
    
    TopHatSettings* ths;                 //!< Dialog for TopHatSettings
+
+   MontageView* montage_v;              //!< The thumbnail view of images
 
    CalibrationParameters* calPar;       //!< Constatnly updates parameters dialog
 

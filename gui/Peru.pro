@@ -10,6 +10,7 @@ MAGICKPATH =
 SOURCES	+= Peru.cpp                              \
            main.cpp                              \
            ImageWidget.cpp                       \
+           MontageView.cpp                       \
            ../src/CCOCV.cpp                      \
            kstartuplogo.cpp                      \
            TopHatSettings.cpp                    \
@@ -34,6 +35,7 @@ SOURCES	+= Peru.cpp                              \
 HEADERS	+= Peru.h                                \
            ../src/CCOCV.h                        \ 
            ImageWidget.h                         \
+           MontageView.h                         \
            kstartuplogo.h                        \
            TopHatSettings.h                      \
            CalibrationParameters.h               \
