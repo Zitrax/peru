@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.h,v 1.5 2003/09/18 21:25:55 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.6 2004/08/21 18:19:55 cygnus78 Exp $
 
 *************************************************/
 
@@ -24,10 +24,8 @@
 #include "ccv.h"
 
 #include <string>
-#include <vector>
 #include <iostream>
 #include <fstream>
-
 
 using namespace std;
 
@@ -80,6 +78,9 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
     (string name);
 
   int getNumberOfFilesInList(); //!< Selfexplained
+
+  QStringList getFiles();   //!< Get the list of files of calibration images
+
 
   CameraParams 
     getParams();            //!< Returns the camera-parameters struct
@@ -154,7 +155,7 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   IplImage* thresh;         //!< Tmp image same size and format as source image
   IplImage* tmpwth;         //!< TopHat transformed image
 
-  vector<string> *filenames;//!< Filenames for calibration images         
+  QStringList filenames;    //!< Filenames for calibration images         
 
   double dimx,dimy;         //!< The dimension of the chesstiles in x any y 
 

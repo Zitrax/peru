@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: CalibrationParameters.cpp,v 1.2 2004/08/21 17:18:56 cygnus78 Exp $
+   $Id: CalibrationParameters.cpp,v 1.3 2004/08/21 18:19:55 cygnus78 Exp $
 
 *************************************************/
 
@@ -128,6 +128,9 @@ CalibrationParameters::updateParameters(struct CameraParams cp)
   gui->setCalibrated( true, 1 );
 
   matrixLE_9->setText( s.setNum(cp.matrix[8]) );
+
+  enableCB->setChecked( true );
+  enableCB->setEnabled( false );
 
 }
 

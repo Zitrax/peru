@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.8 2004/08/21 17:18:56 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.9 2004/08/21 18:19:55 cygnus78 Exp $
 
 *************************************************/
 
@@ -30,7 +30,6 @@ CCOCV::CCOCV() :
   gray_image(0),
   tmpwth(0)
 {
-  filenames = new vector<string>();
   correct = new int[100];
   failed = new int[100];
 
@@ -46,7 +45,6 @@ CCOCV::CCOCV() :
 
 CCOCV::~CCOCV()
 {
-  zapArr(filenames);
   zapArr(correct);
   zapArr(failed);
   zapArr(allcorners);
@@ -89,7 +87,7 @@ CCOCV::initializeCalibration()
   failed_index = 0;
   totalFailedCorners = 0;
 
-  no_images = filenames->size();
+  no_images = filenames.size();
   
   images_processed = 0;
   t_no_images = 0;
@@ -111,7 +109,7 @@ CCOCV::findCorners(int& corners_found){
   
   int no_corners = etalon_size.width * etalon_size.height;
 
-  if(!(filenames->size()==0 && !initialized) ) {
+  if(!(filenames.size()==0 && !initialized) ) {
 
   if(!initialized){       // Special treatment before the first image
     
@@ -227,9 +225,9 @@ int
 CCOCV::findCorners2(int& corners_found, bool singleTrial)
 {
   if(ccv::debug) 
-    std::cerr << "running findCorners()... filenames->size()= " 
-	      << filenames->size() << "\n";
-  if(filenames->size()>0){
+    std::cerr << "running findCorners()... filenames.size()= " 
+	      << filenames.size() << "\n";
+  if(filenames.size()>0){
     int etalon_points = etalon_size.width * etalon_size.height;
 
     /* Obviously it's important to declare
@@ -239,15 +237,15 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
     corner_count = etalon_points; 
 					
     if(ccv::debug) 
-      std::cerr << "Loading image: '" << filenames->back() << "'\n";
+      std::cerr << "Loading image: '" << filenames.back() << "'\n";
 
     // Read last file from list
     zapImg( rgb_image );
-    rgb_image = cvvLoadImage(filenames->back().c_str()); 
+    rgb_image = cvvLoadImage(filenames.back().latin1()); 
 
     // Remove from list when done
     if(!singleTrial) 
-      filenames->pop_back();
+      filenames.pop_back();
 
     // Get size of image
     cvGetImageRawData(rgb_image, 0, 0, &imageSize);         
@@ -369,14 +367,17 @@ CCOCV::addFileName(string name)
 {
   if(ccv::debug) 
     std::cerr << "Inside addFileName with string '" << name << "'\n";
-  filenames->push_back(name);
+  filenames.push_back(name);
   if(ccv::debug) 
-    std::cerr << "Filenames now has string '" << filenames->back() 
+    std::cerr << "Filenames now has string '" << filenames.back() 
 	      << "' as last element\n";
 }
 
 int 
-CCOCV::getNumberOfFilesInList() { return filenames->size(); }
+CCOCV::getNumberOfFilesInList() { return filenames.size(); }
+
+QStringList
+CCOCV::getFiles() { return filenames; }
 
 int
 CCOCV::getImageSizeX() { return imageSize.width; }
@@ -846,7 +847,7 @@ CCOCV::trialCalib(int& corners_found)
 {
   if(ccv::debug) std::cerr << "CCOCV::trialCalib\n";
 
-  if(filenames->size() > 0) {
+  if(filenames.size() > 0) {
 
     initializeCalibration();
 

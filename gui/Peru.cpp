@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.15 2004/08/21 17:18:56 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.16 2004/08/21 18:19:55 cygnus78 Exp $
 
 *************************************************/
 
@@ -242,8 +242,6 @@ Peru::calibImageOpen()
   
   if(filelist.isEmpty()) { emit stringSignal("Error no files\n"); }
   else { 
-    // Make montage (thumbnails)
-    montage(filelist);
     // Reset progress bar
     calibPB->reset();
     calibPB->setTotalSteps(filelist.size()-1);
@@ -255,6 +253,8 @@ Peru::calibImageOpen()
       calibImageOpen(filename);
       filelist.pop_back();
     }
+    // Make montage (thumbnails)
+    montage(ccocv->getFiles());
   }
 }
 
@@ -460,7 +460,7 @@ Peru::montage(QStringList flist)
 
     while( ! flist.isEmpty() )
       {
-	image_list.append(flist.back()+" ");
+	image_list.prepend(flist.back()+" ");
 	images++;
 	flist.pop_back();
       }
