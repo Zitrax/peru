@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.6 2003/09/20 02:17:34 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.7 2003/09/20 02:43:20 cygnus78 Exp $
 
 *************************************************/
 
@@ -281,6 +281,9 @@ Peru::calibImageOpen(const QString& name)
   updateImagesInQueueL();
 }
 
+
+// Run to initialice ccocv with current settins
+// applied in the gui.
 void
 Peru::initializeCCOCV()
 {
@@ -337,6 +340,10 @@ Peru::calibrate()
 
   str="\n";
   ts << correct_images << " images correctly calibrated\n";
+
+  // If we have camera parameters (successful calibration)
+  // we draw the corners onto the montage image (if used)
+  // and enable saving of parameters.
   if(correct_images>0) {
 
     int tiles = static_cast<int>(sqrt(static_cast<float>(orig_nr_images)));
@@ -509,7 +516,8 @@ void Peru::loadParams2()
 {
   if( !ccocv2 ) { 
     if(ccv::debug) 
-      std::cerr << "Creating ccocv2\n"; ccocv2 = new CCOCV; 
+      std::cerr << "Creating ccocv2\n"; 
+    ccocv2 = new CCOCV; 
   }
   loadParams(2); 
 }
@@ -683,6 +691,7 @@ Peru::calculateStereo()
 
     for( int i = start; i <=stop; i++ ) {
 
+      // Fill the filenames with current framenumbers
       sprintf( c_left,  leftframeLE->text().latin1(), i);
       sprintf( c_right, rightframeLE->text().latin1(), i);
       stereo->setFileNames(left, right);
@@ -795,6 +804,8 @@ Peru::write(const QString& str)
   emit stringSignal(str);
 }
 
+// The write functions writes to 
+// gui output window.
 void
 Peru::write(const char* str)
 {
