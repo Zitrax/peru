@@ -9,21 +9,25 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.5 2003/09/17 12:00:16 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.6 2004/03/04 17:48:58 cygnus78 Exp $
 
 *************************************************/
 
 #include "CCOCV.h"
 
-CCOCV::CCOCV()
+CCOCV::CCOCV() : 
+  initialized(false),
+  calibrated(false),
+  sortCorners(false),
+  wth(false),
+  rgb_image(0),
+  thresh(0),
+  gray_image(0),
+  tmpwth(0)
 {
   filenames = new vector<string>();
   correct = new int[100];
   failed = new int[100];
-  initialized = false;
-  calibrated  = false;
-  sortCorners = false;
-  wth         = false;
 
   // Make the settings for tophat and apply some 
   // default values.
@@ -33,12 +37,6 @@ CCOCV::CCOCV()
   ths->xsize      = 9;
   ths->ysize      = 9;
   ths->threshold  = 220;
-
-  // Nullify pointers (for zapping)
-  rgb_image  = 0;
-  thresh     = 0;
-  gray_image = 0;
-  tmpwth     = 0;
 }
 
 CCOCV::~CCOCV()
@@ -811,6 +809,7 @@ CCOCV::complement(IplImage* source)
        *pixel=lut[*pixel];
     }
   
+  delete [] lut;
 }
 
 void
