@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.h,v 1.4 2003/09/14 18:24:00 cygnus78 Exp $
+   $Id: stereo.h,v 1.5 2003/09/25 23:49:26 cygnus78 Exp $
 
 *************************************************/
 
@@ -34,7 +34,7 @@ class Stereo
  protected:
  
   string left_file, right_file, out_file;
-  CvSize imageSize;                      //! Size of images
+  CvSize imageSize;                      //!< Size of images
 
   int iterations;
 
@@ -45,6 +45,8 @@ class Stereo
   bool memory;                           /*!< Indicates wheter we have 
 					   the images in memory or on disk*/
   bool writeToDisk;                      //!< Write disparity maps to disc
+
+  bool find_error;                       //!< If we have ground truth to compare
 
   IplImage* leftI;                       //!< Left image frame
   IplImage* rightI;                      //!< Right image frame
@@ -76,7 +78,7 @@ class Stereo
 
   virtual ~Stereo();                     //!< Destructor (virtual)
 
-  bool start();                          //!< Start the algorithm
+  double start();                        //!< Start the algorithm
 
   void setImages(IplImage* l,            //!< Sets the two images to use
 		 IplImage* r); 
@@ -103,6 +105,8 @@ class Stereo
   void loadGround(const char* filename);
   double findError();                    /*!< Finds mse between contrast 
 					   stretched dispI and ground */
+
+  void setFindError(bool fe);
 };
 
 #endif

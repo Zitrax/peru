@@ -8,15 +8,16 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.8 2003/09/22 19:37:43 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.9 2003/09/25 23:49:27 cygnus78 Exp $
 
 *************************************************/
 
 #include "Peru.h"
 
 Peru::Peru( QWidget* parent, const char* name,
-		  WFlags fl) : Perubase(parent,name,fl)
+	    WFlags fl) : Perubase(parent,name,fl)
 {
+  ccv::debug = debugCB->isChecked();
 
   pyrSB->hide();
   pyrL->hide();
@@ -41,8 +42,6 @@ Peru::Peru( QWidget* parent, const char* name,
   Image_widget->setFixedWidth(3000);
   Image_widget->setFixedHeight(3000);
   scrollView->addChild(Image_widget);
-
-  ccv::debug = debugCB->isChecked();
 
   if(ccv::debug) std::cerr << endl;
   
@@ -207,6 +206,11 @@ Peru::connectSignalsToSlots()
 	   SLOT( saveImage() )
 	   );
 
+  connect( load_groundB,
+	   SIGNAL( clicked() ),
+	   this,
+	   SLOT( setFileNameG() )
+	   );
 }
 
 void 
@@ -634,10 +638,10 @@ Peru::calculateStereo()
 			      colorCB->isChecked(), md, bs, false, true);
 
     else if(stereo_algCOB->currentText()=="cvbirchfield")
-      stereo = new CvBirchfield(left, right, out, md);
+      stereo = new CvBirchfield(left, right, out,  md);
 
     else if(stereo_algCOB->currentText()=="pyramidblock")
-      stereo = new PyramidBlock(left, right, out, md, 
+      stereo = new PyramidBlock(left, right, out,  md, 
 				pyrSB->value(), 
 				pyrtSB->value(),
 				colorCB->isChecked() );
@@ -689,6 +693,9 @@ Peru::calculateStereo()
 
     clock_t start_time = clock(); 
 
+    // Reset global errorflag before use
+    ccv::ERRFLAG = false;
+
     for( int i = start; i <=stop; i++ ) {
 
       // Fill the filenames with current framenumbers
@@ -707,10 +714,29 @@ Peru::calculateStereo()
       sprintf( c_out , "disparity_frame%05d.ppm", i );
       stereo->setOutFileName(string(c_out));
 
-      if(stereo->start()) {
+
+      if(errorCB->isChecked() && groundframeLE->text().length() > 0) {
+	stereo->loadGround( groundframeLE->text().latin1() );
+	stereo->setFindError(true);
+      }
+      else stereo->setFindError(false);
+      
+      double error = stereo->start();
+
+      if( !ccv::ERRFLAG ) {
 	if(ccv::debug) std::cerr << "after start\n";
+
 	calibPB->setProgress(calibPB->progress()+1);
 	if(ccv::debug) std::cerr << "after setProgress\n";
+
+	if(errorCB->isChecked()) {
+	  QString str;
+	  QTextStream ts( &str, IO_WriteOnly );
+	  ts << "Error: " 
+	     << error << "\n";
+	  emit stringSignal(str);
+	}	  
+
 	if( display_disparityCB->isChecked() ){
 	  IplImage* idisp = stereo->getDisparityImage(); 
 	  QImage* disp;
@@ -719,7 +745,11 @@ Peru::calculateStereo()
 	  zap(disp);
 	}
       }
-      else emit stringSignal("ERROR - Stereoparameters\n");
+      else {
+	emit stringSignal("ERROR - Stereoparameters\n");
+	ccv::ERRFLAG = false;
+      }
+      
     }
 
     clock_t stop_time = clock();
@@ -794,6 +824,9 @@ Peru::setFileNameL() { setFileName( leftframeLE ); }
 
 void 
 Peru::setFileNameR() {  setFileName( rightframeLE ); }
+
+void 
+Peru::setFileNameG() { setFileName( groundframeLE ); }
 
 void
 Peru::setWth(bool b) { ccocv->setWth(b); }

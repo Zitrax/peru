@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: TopHatSettings.h,v 1.1 2003/09/07 19:59:54 cygnus78 Exp $
+   $Id: TopHatSettings.h,v 1.2 2003/09/25 23:49:27 cygnus78 Exp $
 
 *************************************************/
 
@@ -18,8 +18,8 @@
 
 #include "ccv.h"
 #include "TopHatSettingsBase.h"
-#include "Peru.h"
 #include "CCOCV.h"
+#include "Peru.h"
 
 #include <qwidget.h>
 #include <qlcdnumber.h>
@@ -42,8 +42,8 @@ public slots:
   void calculate();
 
 private:
-  CCOCV* calib;
   Peru* gui;
+  CCOCV* calib;
 
 };
 

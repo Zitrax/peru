@@ -7,13 +7,13 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: PyramidBlock.cpp,v 1.2 2003/09/05 12:15:12 cygnus78 Exp $
+   $Id: PyramidBlock.cpp,v 1.3 2003/09/25 23:49:26 cygnus78 Exp $
 
 *************************************************/
 
 #include "PyramidBlock.h"
 
-PyramidBlock::PyramidBlock(string left, string right, string out, 
+PyramidBlock::PyramidBlock(string left, string right, string out,
 			   int maxd, int nlevels, int tol, bool c) 
   : Stereo(left, right, out), levels(nlevels), color(c), MAXD(maxd)
 {

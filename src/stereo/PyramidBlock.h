@@ -8,9 +8,12 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: PyramidBlock.h,v 1.3 2003/09/05 12:36:36 cygnus78 Exp $
+   $Id: PyramidBlock.h,v 1.4 2003/09/25 23:49:26 cygnus78 Exp $
 
 *************************************************/
+
+#ifndef PYRAMIDBLOCK_H
+#define PYRAMIDBLOCK_H
 
 #include "stereo.h"
 
@@ -30,7 +33,7 @@ class PyramidBlock : public Stereo
   int*** pyr_disp;                   //!< Disparities found in different levels
 
  public:
-  PyramidBlock(string left, string right, string out, 
+  PyramidBlock(string left, string right, string out,
 	       int maxd,
 	       int levels,
 	       int tol,
@@ -40,3 +43,5 @@ class PyramidBlock : public Stereo
   bool calculateDisparity();
   void blockmatch(int level);
 };
+
+#endif

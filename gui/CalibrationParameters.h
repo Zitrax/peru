@@ -10,7 +10,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: CalibrationParameters.h,v 1.1 2003/09/17 11:59:37 cygnus78 Exp $
+   $Id: CalibrationParameters.h,v 1.2 2003/09/25 23:49:27 cygnus78 Exp $
 
 *************************************************/
 
@@ -19,8 +19,8 @@
 
 #include "ccv.h"
 #include "CalibrationParametersBase.h"
-#include "Peru.h"
 #include "CCOCV.h"
+#include "Peru.h"
 
 #include <qwidget.h>
 
@@ -45,8 +45,8 @@ public slots:
   void parametersChanged();
 
 private:
-  CCOCV* calib;
   Peru* gui;
+  CCOCV* calib;
 
 };
 

@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.4 2003/09/22 19:37:43 cygnus78 Exp $
+   $Id: Peru.h,v 1.5 2003/09/25 23:49:27 cygnus78 Exp $
 
 *************************************************/
 
@@ -67,6 +67,7 @@ class CCOCV;
 class Matcher;
 class TopHatSettings;
 class CalibrationParameters;
+class Stereo;
 
 class Peru : public Perubase
 {
@@ -114,6 +115,7 @@ class Peru : public Perubase
      (const QString& string);
    void setFileNameL();      
    void setFileNameR();      
+   void setFileNameG();      
 
    void debugToggle(bool deb);          //!< Toggle debug output
    void mousePressed(QMouseEvent* e);   //!< Set marker in matcher

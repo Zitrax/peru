@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.cpp,v 1.4 2003/09/14 18:24:00 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.5 2003/09/25 23:49:26 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,15 +17,20 @@
 Stereo::Stereo(string left,
 	       string right,
 	       string out,
-	       bool m){ 
+	       bool m)
+{ 
+
   if(ccv::debug) std::cerr << "Running Stereo constructor\n";
+
   iterations=0; 
 
   memory=m;
 
-  dispI=0; leftI=0; rightI=0;
+  dispI=0; leftI=0; rightI=0; ground=0;
 
   status=false;
+
+  find_error = false;
 
   left_file  = left;
   right_file = right;
@@ -57,15 +62,20 @@ Stereo::~Stereo()
   zapImg(dispI);
   zapImg(leftI);
   zapImg(rightI);
+  zapImg(ground);
 
   zap(postFilters);
   zap(preFilters);
 
   if(ccv::debug) std::cerr << "Destructing Stereo\n";
 }
-  
-bool Stereo::start() 
+
+// Returns -1 if errormeasuring is not used or the
+// error otherwise.  
+double Stereo::start() 
 { 
+  double error = ccv::NOTUSED;
+
   if(status) {
 
     // STEP 1
@@ -77,10 +87,14 @@ bool Stereo::start()
 			     << "Out = " << out_file << endl;
 
     // STEP 2
-    if(!calculateDisparity())
-      return false;
+    if(!calculateDisparity()) {
+      ccv::ERRFLAG = true;
+      return ccv::ERROR;
+    }
     
-
+    if(find_error)
+      error = findError();
+    
     // STEP 3
     postProcess();
 
@@ -92,7 +106,7 @@ bool Stereo::start()
   zapImg(rightI);
   
   if(ccv::debug) std::cerr << "Number of iterations made: " << iterations << "\n";
-  return true; 
+  return error; 
 }
 
 void
@@ -214,4 +228,54 @@ Stereo::setFileNames(string left, string right)
   if(ccv::debug) std::cerr << "Stereo::setFileNames\n";
   left_file = left; 
   right_file = right;
+}
+
+double
+Stereo::findError()
+{
+  if(ccv::debug) std::cerr << "Stereo::findError\n";
+  if(ccv::debug) std::cerr << "ground = " << ground << "\n";
+
+  if(!ground || !dispI) {
+    if(ccv::debug) std::cerr << "ERROR - Ground or Disp not available\n";
+    return -1;
+  }
+  
+  if(ground->width != dispI->width ||
+     ground->height != dispI->height ) {
+    if(ccv::debug) std::cerr << "ERROR - Not same dimensions\n";
+    return -1;
+  }
+  
+  double errsum=0;
+  for(int x=0; x<dispI->width; x++)
+    for(int y=0; y<dispI->height; y++) 
+      if(*ccv::pixel_u(ground,x,y)!=255) // Values without known disparity
+	errsum += pow( static_cast<double>
+		       (*ccv::pixel_u(ground,x,y) - *ccv::pixel_u(dispI,x,y)), 2);
+  
+  errsum /= (dispI->width*dispI->height); 
+  
+  return errsum;
+}
+
+void
+Stereo::loadGround(const char* filename)
+{
+  if(ccv::debug) std::cerr << "Stereo::loadGround\n";
+
+  zapImg(ground);
+  if(ccv::debug) std::cerr << "ground = " << ground << "\n";
+
+  if(strcmp(filename, "")!=0) {
+    ground = cvLoadImage(filename, 0);
+  }
+  else
+    if(ccv::debug) std::cerr << "ERROR - No filename\n";
+}
+
+void
+Stereo::setFindError(bool fe)
+{
+  find_error = fe;
 }

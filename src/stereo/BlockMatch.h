@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: BlockMatch.h,v 1.3 2003/09/05 12:36:36 cygnus78 Exp $
+   $Id: BlockMatch.h,v 1.4 2003/09/25 23:49:26 cygnus78 Exp $
 
 *************************************************/
 
@@ -31,7 +31,7 @@ class BlockMatch : public Stereo
 
  public:
   BlockMatch(string left, string right, string out);
-  BlockMatch(string left, string right, string out, 
+  BlockMatch(string left, string right, string out,
 	     bool c, int maxd=15, int bls=3, bool f=false, bool sq=false);
   bool calculateDisparity();
   bool calculateDisparityFast();

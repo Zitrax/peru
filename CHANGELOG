@@ -2,6 +2,9 @@
 
 * Switched colored buttons against a new led class which works better
   in different environments
+* Included the LICENSE file
+* Error measurment between calculated disparity map and provided
+  ground truth map is now available
 
 0.2.1
 

@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ccv.cpp,v 1.2 2003/09/07 19:59:54 cygnus78 Exp $
+   $Id: ccv.cpp,v 1.3 2003/09/25 23:49:27 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,6 +17,7 @@
 namespace ccv {
   
   int debug = 0;
+  bool ERRFLAG = false;
   
   uchar*
   pixel_u(IplImage* image,int x, int y)
