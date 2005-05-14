@@ -11,14 +11,14 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>884</width>
-            <height>746</height>
+            <width>862</width>
+            <height>687</height>
         </rect>
     </property>
     <property name="minimumSize">
         <size>
-            <width>870</width>
-            <height>404</height>
+            <width>812</width>
+            <height>421</height>
         </size>
     </property>
     <property name="caption">
@@ -31,6 +31,131 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
+        <widget class="QLed" row="4" column="0">
+            <property name="name">
+                <cstring>calibLed1</cstring>
+            </property>
+        </widget>
+        <widget class="QLabel" row="4" column="1">
+            <property name="name">
+                <cstring>ledCalibL</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Calib. params</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Global camera parameters (or left cam for stereo)</string>
+            </property>
+        </widget>
+        <widget class="QLed" row="4" column="2">
+            <property name="name">
+                <cstring>calibLed2</cstring>
+            </property>
+        </widget>
+        <spacer row="4" column="6" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>spacer4</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>295</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QLabel" row="4" column="3" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>ledCalibL_2</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Stereo Calib. params</string>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>If green - parameters also assigned to right camera</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox" row="4" column="9">
+            <property name="name">
+                <cstring>debugCB</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>11</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Debug</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+            <property name="checked">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Turn on debug to cerr</string>
+            </property>
+        </widget>
+        <widget class="QPushButton" row="4" column="10">
+            <property name="name">
+                <cstring>quitB</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Helvetica</family>
+                    <pointsize>9</pointsize>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property name="text">
+                <string>Quit</string>
+            </property>
+            <property name="accel">
+                <string></string>
+            </property>
+        </widget>
         <widget class="QPushButton" row="2" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>openImageB</cstring>
@@ -56,50 +181,6 @@
             </property>
             <property name="toolTip" stdset="0">
                 <string>Open a new image</string>
-            </property>
-        </widget>
-        <widget class="QScrollView" row="1" column="0" rowspan="1" colspan="8">
-            <property name="name">
-                <cstring>scrollView</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>7</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="minimumSize">
-                <size>
-                    <width>100</width>
-                    <height>0</height>
-                </size>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Helvetica</family>
-                    <pointsize>9</pointsize>
-                </font>
-            </property>
-        </widget>
-        <widget class="QLabel" row="0" column="0" rowspan="1" colspan="7">
-            <property name="name">
-                <cstring>TextLabel1</cstring>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Bitstream Charter</family>
-                    <pointsize>14</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>PERU - Version 0.4.0 CVS</string>
-            </property>
-        </widget>
-        <widget class="QLed" row="4" column="0">
-            <property name="name">
-                <cstring>calibLed1</cstring>
             </property>
         </widget>
         <widget class="QCheckBox" row="2" column="2" rowspan="1" colspan="2">
@@ -146,6 +227,9 @@
             <property name="text">
                 <string>Undistort</string>
             </property>
+            <property name="accel">
+                <string></string>
+            </property>
             <property name="toolTip" stdset="0">
                 <string>Undistort displayed image</string>
             </property>
@@ -162,14 +246,14 @@
             </property>
             <property name="sizeHint">
                 <size>
-                    <width>160</width>
+                    <width>192</width>
                     <height>20</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QLabel" row="4" column="1">
+        <widget class="QProgressBar" row="2" column="8" rowspan="1" colspan="2">
             <property name="name">
-                <cstring>ledCalibL</cstring>
+                <cstring>calibPB</cstring>
             </property>
             <property name="sizePolicy">
                 <sizepolicy>
@@ -179,115 +263,19 @@
                     <verstretch>0</verstretch>
                 </sizepolicy>
             </property>
-            <property name="font">
-                <font>
-                    <family>Helvetica</family>
-                    <pointsize>9</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>Calib. params</string>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Global camera parameters (or left cam for stereo)</string>
-            </property>
-        </widget>
-        <widget class="QLed" row="4" column="2">
-            <property name="name">
-                <cstring>calibLed2</cstring>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="2" column="7">
-            <property name="name">
-                <cstring>saveImageB</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="font">
-                <font>
-                    <pointsize>8</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>Save</string>
-            </property>
-            <property name="flat">
-                <bool>false</bool>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Save displayed image</string>
-            </property>
-        </widget>
-        <spacer row="4" column="6" rowspan="1" colspan="3">
-            <property name="name">
-                <cstring>spacer4</cstring>
-            </property>
-            <property name="orientation">
-                <enum>Horizontal</enum>
-            </property>
-            <property name="sizeType">
-                <enum>Expanding</enum>
-            </property>
-            <property name="sizeHint">
+            <property name="minimumSize">
                 <size>
-                    <width>310</width>
-                    <height>20</height>
+                    <width>241</width>
+                    <height>0</height>
                 </size>
             </property>
-        </spacer>
-        <widget class="QLabel" row="4" column="3" rowspan="1" colspan="3">
-            <property name="name">
-                <cstring>ledCalibL_2</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>4</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Helvetica</family>
-                    <pointsize>9</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>Stereo Calib. params</string>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>If green - parameters also assigned to right camera</string>
-            </property>
         </widget>
-        <widget class="QCheckBox" row="4" column="9">
+        <widget class="QPushButton" row="2" column="10">
             <property name="name">
-                <cstring>debugCB</cstring>
+                <cstring>stopB</cstring>
             </property>
-            <property name="font">
-                <font>
-                    <pointsize>11</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>Debug</string>
-            </property>
-            <property name="checked">
+            <property name="enabled">
                 <bool>false</bool>
-            </property>
-            <property name="toolTip" stdset="0">
-                <string>Turn on debug to cerr</string>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="4" column="10">
-            <property name="name">
-                <cstring>quitB</cstring>
             </property>
             <property name="sizePolicy">
                 <sizepolicy>
@@ -305,7 +293,7 @@
                 </font>
             </property>
             <property name="text">
-                <string>Quit</string>
+                <string>Stop</string>
             </property>
         </widget>
         <widget class="QTabWidget" row="3" column="0" rowspan="1" colspan="11">
@@ -345,86 +333,6 @@
                 <attribute name="title">
                     <string>Calib</string>
                 </attribute>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>calibB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>50</y>
-                            <width>111</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>8</pointsize>
-                            <bold>1</bold>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Calibrate</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Starts the calibration</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>undistortB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>90</y>
-                            <width>111</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Undistort images</string>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Undistorts a serie of images</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>sortCornersCB</cstring>
-                    </property>
-                    <property name="enabled">
-                        <bool>false</bool>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>440</x>
-                            <y>10</y>
-                            <width>100</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Sort Corners</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Will sort the found corners from top left to bottom right (recommended) (CURRENTLY NOT AVAILABLE)</string>
-                    </property>
-                </widget>
                 <widget class="QPushButton">
                     <property name="name">
                         <cstring>topHatB</cstring>
@@ -521,6 +429,9 @@
                     </property>
                     <property name="text">
                         <string>View/Modify Parameters</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
                     </property>
                     <property name="flat">
                         <bool>false</bool>
@@ -686,6 +597,92 @@
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>If the calibration pattern do not consist of squares but rectangles you have to change these values</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>calibB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>50</y>
+                            <width>111</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                            <bold>1</bold>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Calibrate</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Starts the calibration</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>undistortB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>90</y>
+                            <width>111</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Undistort images</string>
+                    </property>
+                    <property name="accel">
+                        <string></string>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Undistorts a serie of images</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>sortCornersCB</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>10</y>
+                            <width>100</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Sort Corners</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Will sort the found corners from top left to bottom right (recommended) (CURRENTLY NOT AVAILABLE)</string>
                     </property>
                 </widget>
                 <widget class="QLabel">
@@ -1828,31 +1825,9 @@
                 </widget>
             </widget>
         </widget>
-        <widget class="QProgressBar" row="2" column="8" rowspan="1" colspan="2">
+        <widget class="QPushButton" row="2" column="7">
             <property name="name">
-                <cstring>calibPB</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>4</hsizetype>
-                    <vsizetype>0</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="minimumSize">
-                <size>
-                    <width>241</width>
-                    <height>0</height>
-                </size>
-            </property>
-        </widget>
-        <widget class="QPushButton" row="2" column="10">
-            <property name="name">
-                <cstring>stopB</cstring>
-            </property>
-            <property name="enabled">
-                <bool>false</bool>
+                <cstring>saveImageB</cstring>
             </property>
             <property name="sizePolicy">
                 <sizepolicy>
@@ -1864,14 +1839,110 @@
             </property>
             <property name="font">
                 <font>
-                    <family>Helvetica</family>
-                    <pointsize>9</pointsize>
-                    <bold>1</bold>
+                    <pointsize>8</pointsize>
                 </font>
             </property>
             <property name="text">
-                <string>Stop</string>
+                <string>Save</string>
             </property>
+            <property name="accel">
+                <string></string>
+            </property>
+            <property name="flat">
+                <bool>false</bool>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Save displayed image</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="8" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Bitstream Charter</family>
+                    <pointsize>14</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>PERU - Version 0.4.0 CVS</string>
+            </property>
+        </widget>
+        <widget class="QTabWidget" row="0" column="0" rowspan="2" colspan="8">
+            <property name="name">
+                <cstring>imageTabWidget</cstring>
+            </property>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>ImageView</string>
+                </attribute>
+                <widget class="QScrollView">
+                    <property name="name">
+                        <cstring>scrollView</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>1</x>
+                            <y>0</y>
+                            <width>530</width>
+                            <height>340</height>
+                        </rect>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>7</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>0</width>
+                            <height>0</height>
+                        </size>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Helvetica</family>
+                            <pointsize>9</pointsize>
+                        </font>
+                    </property>
+                </widget>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>Thumbnails</string>
+                </attribute>
+                <widget class="MontageView">
+                    <property name="name">
+                        <cstring>montageView</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>0</x>
+                            <y>0</y>
+                            <width>550</width>
+                            <height>410</height>
+                        </rect>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>7</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                </widget>
+            </widget>
         </widget>
         <widget class="QTextEdit" row="1" column="8" rowspan="1" colspan="3">
             <property name="name">
@@ -1879,7 +1950,7 @@
             </property>
             <property name="sizePolicy">
                 <sizepolicy>
-                    <hsizetype>4</hsizetype>
+                    <hsizetype>7</hsizetype>
                     <vsizetype>7</vsizetype>
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
@@ -1954,6 +2025,22 @@
             <verstretch>0</verstretch>
         </sizepolicy>
         <pixmap>image0</pixmap>
+    </customwidget>
+    <customwidget>
+        <class>MontageView</class>
+        <header location="global">/home/danielbe/cvs/peru/gui/montageview.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+        <pixmap>image1</pixmap>
     </customwidget>
 </customwidgets>
 <actions>
@@ -2100,6 +2187,9 @@
     <image name="image0">
         <data format="XBM.GZ" length="79">789c534e494dcbcc4b554829cdcdad8c2fcf4c29c95030e0524611cd48cd4ccf28010a1797249664262b2467241641a592324b8aa363156c15aab914146aadb90067111b1f</data>
     </image>
+    <image name="image1">
+        <data format="PNG" length="1002">89504e470d0a1a0a0000000d4948445200000016000000160806000000c4b46c3b000003b149444154388dad945f4c5b551cc73fe7dc4b7b4bcba0762d45c43114323599ee6192609c51d883892ce083f1718b3ebb185f8dc91e972cf39d2d2a2f1af664b6f1e0fe3863a0718969700eb0c52142da0242a1bd6d696f7bcff101585203ceb8fd9ece39f99dcff9fe7edf939f88c562ec465f5f9fe609442c161362173c3e3eae7b7a7ac8e7f36432196cdbfe4f907c3e4f2291201e8fe338cec3737357e9e8e828aded1e229d650e1f2d51754b082110124c13a4dc5ea341eb9dc284c0558a853f3ce8cb0677ef500fde7d39d2596679e326597b8e9abb85d7a770ab16ab6983ec5a05b487a70e36f0f4e10afe408d6a558310980108478dba4a1e8233990c5d474b64ed39aa3a8fe5f3317fbf81dbd70bccfeb205947632fd74f6589c1c6ea2f70d03a58ba0c1f2c9bdc1b66de3b8256a6e11cbe7e3ee1d181b590124fe2693aeee08d223c82c3a2c24b7b874bec8f26288774f7bd054504aef0dde6e99c0eb83f9fb266323cb80a27fb0958141836044605a2ee5523393371cc646fee2da37195aa35d0c0c5b4859ac03d7e91712dcaac5adab3650a3ff9d08ef7dd8404bb48869e5d958b5b87dadc4c9a1464e9f0d0326df7ebd86bd2e310cb1bf62d384d59441f2d70a070e1c60e09489929b988681bdd9cc97170bcc4c65595f71f8e0e3301337fc24a7732467831875a47f289652b0be5e4151e6d07316c1b0c0340d8ab92023e76d66a6b2840e36d2fb7a13fee632475e6edc367ea98a90fb98b7dd6310ca0328a44761582e1bab41befabcc0ec940d28bc5e93b68e064cab84e1d9beaeb48934eac1f53b01c1b000fca496aa54b61a99fcde61662a4b4b4b23d1680be9d426173e4df3602a48ea411989a4fd590f52a8fd156b05ed9d350e3defe3cfdf4b4c7ce770ea7d3fb9f520afbe1620daeee5c26735d20b9b9cfb6811a754a439e4e5c5639a4caa1e5caf586bfc0197b78702005cb9b4cae4cd3267ce8638fe964bd72b393e39d74928d242617303a756a37f284447770dcdbffc6384a05a85de1306e9a52057c7527c7131c3c42d3f475eb2303c82d4fc3276d6811db37efeb148723082d9b08f79f97c1e5729109a9a28307cc622d2d6cdf52b2b24efe548dedb00142009862cfa879ee1a71f6cec928353511472fbf4389148b0b0e0c108081412458dfe21c9f11351e67e7358595468246d1d1e5e38a6e9e851bc39d84ab502a669331dafec0d8ec7e3e8cb06e1a881d727d1ae40180a434a8c9db129a54126ad48a7358c2b4c5352c8c374bcccdab2bb37d8719cba79fab8211f9df218e0582c261e95f8bfc04f1a1e8bc5c4dfe0a190172af6a9690000000049454e44ae426082</data>
+    </image>
 </images>
 <connections>
     <connection>
@@ -2192,6 +2282,9 @@
     <tabstop>load_groundB</tabstop>
     <tabstop>errorCB</tabstop>
 </tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">Perubase.ui.h</include>
+</includes>
 <slots>
     <slot>calibImageOpen()</slot>
     <slot>viewTopHatSettings()</slot>
@@ -2201,8 +2294,9 @@
 <pixmapinproject/>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
+    <includehint>qled.h</includehint>
+    <includehint>qled.h</includehint>
     <includehint>qscrollview.h</includehint>
-    <includehint>qled.h</includehint>
-    <includehint>qled.h</includehint>
+    <includehint>montageview.h</includehint>
 </includehints>
 </UI>
