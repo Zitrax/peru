@@ -17,14 +17,14 @@ class KStartupLogo : public QWidget  {
    Q_OBJECT
 
 public:
-KStartupLogo(QWidget *parent=0, const char *name=0);
-~KStartupLogo();
-
-void setHideEnabled(bool bEnabled) { m_bReadyToHide = bEnabled; };
-
+   KStartupLogo(QWidget *parent=0, const char *name=0);
+   ~KStartupLogo(){}
+   
+   void setHideEnabled(bool bEnabled) { m_bReadyToHide = bEnabled; };
+   
 protected:
-  virtual void mousePressEvent( QMouseEvent*);
-  bool m_bReadyToHide;
+   virtual void mousePressEvent( QMouseEvent*);
+   bool m_bReadyToHide;
 };
 
 #endif
