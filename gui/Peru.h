@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.11 2004/10/18 22:44:00 cygnus78 Exp $
+   $Id: Peru.h,v 1.12 2005/05/14 00:17:03 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,7 +17,7 @@
 #define PERU_H
 
 #include "ccv.h"
-#include "Perubase.h"
+#include ".ui/Perubase.h"
 #include "CCOCV.h"
 #include "ImageWidget.h"
 #include "kstartuplogo.h"
@@ -37,6 +37,7 @@
 #include "CalibrationParameters.h"
 #include "QLed.h"
 #include "preferences.h"
+#include "MontageView.h"
 
 #include <string>
 #include <iostream>
@@ -91,10 +92,14 @@ class Peru : public Perubase
    void initProgressBar(int start,      //!< Init and reset progressbar
 			int stop);      //!< Progress progressbar
    void increaseProgressBar();
-   void initializeCCOCV();               //!< Transfer settings to CCOCV
+   void initializeCCOCV();              //!< Transfer settings to CCOCV
+
+   bool eventFilter(QObject* target,         
+		    QEvent* e); 
 
  public slots:
-   void imageOpen();                    //!< Opens fdialog and display image
+   void imageOpen();
+   void imageOpen(QString);
    void calibImageOpen();               //!< Opens file dialog for
                                         //!< calibrationimages
    void calibrate();                    //!< Starts calibration
@@ -173,6 +178,13 @@ class Peru : public Perubase
    void updateImagesInQueueL();         //!< Updates label imgqL with correct data
    void updateParamsDialog();
    void err( const QString& err );      //!< Give error message to the textEdit
+   void imageOpen_(QString);
+
+   int findTabPage( QTabWidget* tab, const QString page ) const;
+
+  private slots:
+
+   void updateTabLayouts( QWidget* );   //!< Will update the content of the tabs
 };
 
 #endif
