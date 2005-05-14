@@ -9,12 +9,23 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.cpp,v 1.1 2004/12/21 23:00:48 cygnus78 Exp $
+   $Id: MontageView.cpp,v 1.2 2005/05/14 00:11:03 cygnus78 Exp $
 
 *************************************************/
 
 #include "MontageView.h"
 
 MontageView::MontageView( QWidget* parent, const char* name, WFlags f ) 
-  : QIconView( parent, name, f ){}
+  : QIconView( parent, name, f )
+{
+  if( parent )
+    setMinimumSize( parent->size() );
 
+  connect( this, SIGNAL( doubleClicked( QIconViewItem* ) ), 
+	   this,   SLOT( itemDoubleClicked( QIconViewItem* ) ));
+}
+
+void MontageView::itemDoubleClicked( QIconViewItem* item )
+{
+  emit openImage( item->text() );
+}
