@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.24.2.1 2004/12/21 23:02:11 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.24.2.2 2005/05/14 00:12:28 cygnus78 Exp $
 
 *************************************************/
 
@@ -19,7 +19,6 @@ const QString Peru::tmpImage = QString("tmp_montage.bmp");
 Peru::Peru( QWidget* parent, const char* name,
 	    WFlags fl) : Perubase(parent,name,fl), 
 			 calc_stop_flag(false),
-			 montage_v(0),
 			 correct_images(0),
 			 ccocv2(0),
 			 stereo(0)
@@ -66,10 +65,11 @@ Peru::Peru( QWidget* parent, const char* name,
   // Create Forms and Initially hide them
   ths = new TopHatSettings( ccocv, this, this );
   ths->hide();
+
+  // Used to fix layouts (resizing) inside the tabs
+  imageTabWidget->installEventFilter(this);
 }
 
-
-// Not strictly needed...
 Peru::~Peru(){
   if(ccv::debug) std::cerr << "DESTRUCTING Peru\n"; 
 
@@ -93,144 +93,94 @@ Peru::connectSignalsToSlots()
    * Connect Signals to Slots
    **************************/
 
-  connect( scaleCB,                                    // Scale image checkbox
-	   SIGNAL( toggled(bool) ), 
-	   Image_widget, 
-	   SLOT( setScaled(bool) ) 
-	   );
+  // Scale image checkbox
+  connect( scaleCB,      SIGNAL(        toggled(bool) ), 
+	   Image_widget,   SLOT(      setScaled(bool) ));
 
-  connect( calibCB,                                    // Undistort checkbox
-	   SIGNAL( toggled(bool) ),
-	   this, 
-	   SLOT( undistortImage(bool) )
-	   );
+  // Undistort checkbox
+  connect( calibCB,      SIGNAL(        toggled(bool) ),
+	   this,           SLOT( undistortImage(bool) ));
 
-  connect( this,                                       // Receives string 
-	   SIGNAL( stringSignal(const QString&) ),     // and prints them
-	   infoText,
-	   SLOT( insert(const QString&) )
-	   );
+  // Receives string and prints them
+  connect( this,         SIGNAL( stringSignal(const QString&) ),     
+	   infoText,       SLOT(       insert(const QString&) ));
 
-  connect( calibB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( calibrate() )
-	   );
+  connect( calibB,       SIGNAL(   clicked() ),
+	   this,	   SLOT( calibrate() ));
 
-  connect( montageCB,
-	   SIGNAL( toggled(bool) ),
-	   this,
-	   SLOT( montageCheck(bool) )
-	   );
+  connect( montageCB,    SIGNAL(      toggled(bool) ),
+	   this,           SLOT( montageCheck(bool) ));
 
-  connect( saveParamsB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( saveParams() )
-	   );
+  connect( saveParamsB,  SIGNAL(    clicked() ),
+	   this,           SLOT( saveParams() ));
 
-  connect( load_leftB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( setFileNameL() )
-	   );
+  connect( load_leftB,   SIGNAL(      clicked() ),
+	   this,           SLOT( setFileNameL() ));
 
-  connect( load_rightB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( setFileNameR() )
-	   );
+  connect( load_rightB,  SIGNAL(      clicked() ),
+	   this,	   SLOT( setFileNameR() ));
   
-  connect( loadParamsB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( loadParams() )
-	   );
+  connect( loadParamsB,  SIGNAL(    clicked() ),
+	   this,	   SLOT( loadParams() ));
 
-  connect( left_paramsB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( loadParams() )
-	   );
+  connect( left_paramsB, SIGNAL(    clicked() ),
+	   this,           SLOT( loadParams() ));
 
-  connect( right_paramsB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( loadParams2() )
-	   );
+  connect( right_paramsB,SIGNAL(     clicked() ),
+	   this,           SLOT( loadParams2() ));
 
-  connect( undistortB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( undistortSerie() )
-	   );
+  connect( undistortB,   SIGNAL(        clicked() ),
+	   this,           SLOT( undistortSerie() ));
 
-  connect( calculateB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( calculateStereo() )
-	   );
+  connect( calculateB,   SIGNAL(         clicked() ),
+	   this,           SLOT( calculateStereo() ));
 
-  connect( sortCornersCB,
-	   SIGNAL( toggled(bool) ),
-	   this,
-	   SLOT( setSort(bool) )
-	   );
+  connect( sortCornersCB,SIGNAL( toggled(bool) ),
+	   this,	   SLOT( setSort(bool) ));
 
-  connect( wthCB,
-	   SIGNAL( toggled(bool) ),
-	   this,
-	   SLOT( setWth(bool) )
-	   );
+  connect( wthCB,        SIGNAL( toggled(bool) ),
+	   this,	   SLOT(  setWth(bool) ));
   
-  connect( stereo_algCOB,
-	   SIGNAL( activated( const QString &) ),
-	   this, 
-	   SLOT( toggleParameters(const QString&) )
-	   );
+  connect( stereo_algCOB,SIGNAL(        activated(const QString&) ),
+	   this, 	   SLOT( toggleParameters(const QString&) ));
 
-  connect( debugCB,
-	   SIGNAL( toggled(bool) ),
-	   this,
-	   SLOT( debugToggle(bool) )
-	   );
+  connect( debugCB,      SIGNAL(     toggled(bool) ),
+	   this,           SLOT( debugToggle(bool) ));
 
-  connect( saveImageB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( saveImage() )
-	   );
+  connect( saveImageB,   SIGNAL(   clicked() ),
+	   this,           SLOT( saveImage() ));
 
-  connect( load_groundB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( setFileNameG() )
-	   );
+  connect( load_groundB, SIGNAL( clicked() ),
+	   this,           SLOT( setFileNameG() ));
 
-  connect( calPar,
-	   SIGNAL( parametersEdited() ),
-	   this,
-	   SLOT( undistortImage() )
-	   );
+  connect( calPar,       SIGNAL( parametersEdited() ),
+	   this,           SLOT( undistortImage() ));
 
-  connect( stopB,
-	   SIGNAL( clicked() ),
-	   this,
-	   SLOT( stopCalculation() )
-	   );
+  connect( stopB,         SIGNAL( clicked() ),
+	   this,            SLOT( stopCalculation() ));
 
+  connect( imageTabWidget,SIGNAL(   currentChanged( QWidget* ) ),
+	   this,            SLOT( updateTabLayouts( QWidget* ) ));
+
+  connect( montageView,   SIGNAL( openImage( QString ) ),
+ 	   this,            SLOT( imageOpen( QString ) ));
 }
 
-void 
-Peru::imageOpen()
-{
-  QString filename;
+void Peru::imageOpen( QString filename ) { imageOpen_(filename); }
+void Peru::imageOpen( ) { imageOpen_( QString::null ); }
 
-  filename = QFileDialog::getOpenFileName( "",
-					   supportedFormats,
-					   this,
-					   "open file dialog"
-					   "Choose a file" );
+void 
+Peru::imageOpen_( QString filename )
+{
+
+  if( filename.isEmpty() ) {
+
+    filename = QFileDialog::getOpenFileName( "",
+					     supportedFormats,
+					     this,
+					     "open file dialog"
+					     "Choose a file" );
+  }
  
   if(filename.isEmpty()) { if(ccv::debug) std::cerr << "Error empty file\n"; }
   else { 
@@ -284,6 +234,7 @@ Peru::imageOpen(QImage& image)
 {
   if(ccv::debug) std::cerr << "Running imageOpen2\n";
   Image_widget->displayImage(image);
+  imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, QString("ImageView")) );
 }
 
 // Adds calibration pattern images to calibration class
@@ -472,20 +423,12 @@ Peru::scaled()
   return scaleCB->isChecked();
 }
 
-// This makes small thumbnails of all
-// the images chosen as input calibration patterns.
-// Currently a system call to ImageMagicks montage is 
-// made.
 void
 Peru::montage(QStringList flist)
 {
   if(montageCB->isChecked() && !flist.isEmpty()){
     
-    if( !montage_v ){
-      montage_v = new MontageView(scrollView->viewport());
-      scrollView->addChild(montage_v);
-    }
-    montage_v->show();
+    montageView->show();
 
     QStringList::ConstIterator it  = flist.begin();
     QStringList::ConstIterator end = flist.end();
@@ -497,37 +440,10 @@ Peru::montage(QStringList flist)
 	QPixmap icon_p = icon.smoothScale( icon_size );
 	
 	if(ccv::debug) std::cerr << "Adding " << *it << " to montage view\n";
-	QIconViewItem* item = new QIconViewItem(montage_v, *it, icon_p );
+	QIconViewItem* item = new QIconViewItem(montageView, *it, icon_p );
       }
 
-
-
-//     QString command;
-//     QTextStream ts( &command, IO_WriteOnly );
-//     int tiles = static_cast<int>(sqrt(static_cast<float>(images)));
-//     if(tiles*tiles<images) tiles++;
-//     ts << "montage -geometry 100x+1+0 -borderwidth 0x0 -label \"%f\""
-//        << " -filter triangle -font ps:courier -pointsize 12"
-//        << " -tile " 
-//        << tiles << "x" << tiles << " ";
-//     if(ccv::debug) std::cerr << command;;
-    
-//     command.append(image_list);
-//     command.append(tmp);
-    
-//     write("Making thumbnails...\n");
-
-//     system(command.latin1());
-
-//     write("Done\n");
-
-//     QImage* p_image = new QImage(tmp,0);
-//     if (*p_image==NULL) { err("ERROR - image\n"); }
-//     else {
-//       imageOpen(*p_image);
-//       zap(p_image);
-//       // system("rm "+tmp);
-//     }
+    imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, QString("Thumbnails")) );
 
   }
   else return;
@@ -1047,3 +963,36 @@ void Peru::err( const QString& err )
   emit stringSignal( err );
   infoText->setColor( c );  
 } 
+
+bool Peru::eventFilter(QObject* target, QEvent* e)
+{
+  //  if(ccv::debug) std::cerr << "EV: " << e->type() << " TG: " << target << "\n";
+
+  if( (target == imageTabWidget) && (e->type() == QEvent::Resize) ) {
+    if( scrollView->isVisible() )
+      scrollView->resize(imageTabWidget->currentPage()->size());
+    else if( montageView->isVisible() )
+      montageView->resize(imageTabWidget->currentPage()->size());
+  }
+
+  return Perubase::eventFilter(target,e);
+}
+
+void Peru::updateTabLayouts( QWidget* )
+{
+  if(ccv::debug) std::cerr << "Updating tab layouts\n";
+
+  if( scrollView->isVisible() )
+    scrollView->resize(imageTabWidget->currentPage()->size());
+  else if( montageView->isVisible() )
+    montageView->resize(imageTabWidget->currentPage()->size());
+}
+
+int Peru::findTabPage( QTabWidget* tab, const QString page ) const
+{
+  for( int i=0; i<tab->count(); ++i )
+    if( tab->label(i) == page )
+      return i;
+
+  return -1;
+}
