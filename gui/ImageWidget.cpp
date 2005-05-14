@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ImageWidget.cpp,v 1.5 2004/10/02 11:10:02 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.6 2005/05/14 00:09:45 cygnus78 Exp $
 
 *************************************************/
 
@@ -41,7 +41,6 @@ ImageWidget::displayImage(QImage& im)
 void
 ImageWidget::paintEvent( QPaintEvent *e)
 {
-  if(ccv::debug) std::cerr << "PaintEvent\n";
   if( sImage.isNull() ) 
     smoothScaleImage();
 
@@ -205,7 +204,6 @@ bool
 ImageWidget::eventFilter( QObject* target, QEvent* event )
 {
   if( target == parentWidget() && event->type() == QEvent::Resize ) {
-    if(ccv::debug) std::cerr << "Resize event\n";
     smoothScaleImage();
   }
 
