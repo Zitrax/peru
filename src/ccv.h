@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ccv.h,v 1.5 2004/09/24 21:36:42 cygnus78 Exp $
+   $Id: ccv.h,v 1.6 2005/05/14 00:19:51 cygnus78 Exp $
 
 *************************************************/
 
@@ -16,6 +16,7 @@
 #define CCV_H
 
 #include <qstring.h>
+#include <qstringlist.h>
 #include <qimage.h>
 
 #include <opencv/cv.h>
@@ -57,6 +58,8 @@ namespace ccv{
 			   int color = 1 );
 
   IplImage* qImageToIplImage(QImage* qimg);
+
+  void print( const QStringList& str_list );
 }
 
 std::ostream& operator<<(std::ostream& os, const CvMat& m);

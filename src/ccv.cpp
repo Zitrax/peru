@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: ccv.cpp,v 1.4 2004/09/24 21:36:42 cygnus78 Exp $
+   $Id: ccv.cpp,v 1.5 2005/05/14 00:19:51 cygnus78 Exp $
 
 *************************************************/
 
@@ -167,6 +167,14 @@ std::ostream& operator<<(std::ostream& os, const CvMat& m)
     os << "\n";
   }
   return os;
+}
 
+void ccv::print( const QStringList& str_list )
+{
+  QStringList::ConstIterator it  = str_list.begin();
+  QStringList::ConstIterator end = str_list.end();
+
+  for( it; it!=end; ++it )
+    std::cout << *it << std::endl;
 }
 
