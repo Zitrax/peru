@@ -1929,17 +1929,9 @@
                         <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>550</width>
-                            <height>410</height>
+                            <width>530</width>
+                            <height>340</height>
                         </rect>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>7</hsizetype>
-                            <vsizetype>7</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
                     </property>
                 </widget>
             </widget>
@@ -2028,7 +2020,7 @@
     </customwidget>
     <customwidget>
         <class>MontageView</class>
-        <header location="global">/home/danielbe/cvs/peru/gui/montageview.h</header>
+        <header location="global">/home/danielbe/cvs/peru/gui/MontageView.h</header>
         <sizehint>
             <width>-1</width>
             <height>-1</height>
