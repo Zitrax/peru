@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.12 2005/05/14 00:17:03 cygnus78 Exp $
+   $Id: Peru.h,v 1.13 2005/05/24 20:33:35 cygnus78 Exp $
 
 *************************************************/
 
@@ -106,6 +106,8 @@ class Peru : public Perubase
    void setCalibrated(bool c,int cam);  //!< Toggles calibration leds
    void undistortImage(bool undistort); //!< Undistorts image according to 
                                         //!< calculated parameters
+   void removeImageFromCalibrationQueue(QString image);
+   void clearCalibrationQueue();
    void undistortImage();               //!< Undistorts according to checkbox
    void loadParams();                   //!< Load cam1/left parameters
    void loadParams2();                  //!< Load cam2/right parameters 

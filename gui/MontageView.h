@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.h,v 1.2 2005/05/14 00:11:03 cygnus78 Exp $
+   $Id: MontageView.h,v 1.3 2005/05/24 20:33:35 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,6 +17,8 @@
 #define MONTAGEVIEW_H
 
 #include <qiconview.h>
+#include <qpopupmenu.h>
+#include <qaction.h>
 
 class MontageView : public QIconView
 {
@@ -33,10 +35,24 @@ protected:
 
 private slots:
   void itemDoubleClicked( QIconViewItem* item );
+  void showContextMenu(QIconViewItem* item, const QPoint& pos);
+  void removeAllItems();
+  void removeItem();
+  void openItem();
 
 signals:
   void openImage( QString );
+  void removedItem( QString );
+  void removedAllItems();
 
+private:
+  void initActions();
+  
+  QPopupMenu m_item_menu;
+  QAction* m_remove_action;
+  QAction* m_remove_all_action;
+  QAction* m_open_action;
+  
 };
 
 #endif //MONTAGEVIEW_H

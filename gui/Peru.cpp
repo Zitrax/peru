@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.25 2005/05/14 00:17:03 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.26 2005/05/24 20:33:35 cygnus78 Exp $
 
 *************************************************/
 
@@ -164,6 +164,13 @@ Peru::connectSignalsToSlots()
 
   connect( montageView,   SIGNAL( openImage( QString ) ),
  	   this,            SLOT( imageOpen( QString ) ));
+
+  connect( montageView,   SIGNAL(                     removedItem(QString) ),
+	   this,            SLOT( removeImageFromCalibrationQueue(QString)));
+
+  connect( montageView,   SIGNAL(       removedAllItems() ),
+	   this,            SLOT( clearCalibrationQueue() ));
+
 }
 
 void Peru::imageOpen( QString filename ) { imageOpen_(filename); }
@@ -206,6 +213,7 @@ Peru::calibImageOpen()
   if(filelist.isEmpty()) { err("Error - No files\n"); }
   else { 
     calibPB->reset();
+    montage(filelist);
     // Add images to calibration class
     while(!filelist.isEmpty()){
       filename = filelist.back();
@@ -214,8 +222,6 @@ Peru::calibImageOpen()
       calibImageOpen(filename);
       filelist.pop_back();
     }
-    // Make montage (thumbnails)
-    montage(ccocv->getFiles());
   }
 }
 
@@ -283,6 +289,8 @@ Peru::calibrate()
     return;
   }
 
+  QStringList all_files = ccocv->getFiles();
+
   correct_images = 0;
 
   initializeCCOCV();
@@ -301,7 +309,7 @@ Peru::calibrate()
   while(ccocv->findCorners(corners)==1){
     if(corners==(etxSB->value()-1)*(etySB->value()-1)) correct_images++;
     calibPB->setProgress(calibPB->progress()+1);
-    str="";
+    ts.device()->reset();
     if( corners < 0 )
       ts << "\nFound " << -1*corners << " chess corners (Rejected by sort)";
     else {
@@ -318,7 +326,7 @@ Peru::calibrate()
       calc_stop_flag = false;
       correct_images = 0;
       err("\nABORTED - Throwing away data\n");
-      ccocv->clearFileList();
+      clearCalibrationQueue();
       break;
     }
       
@@ -326,7 +334,7 @@ Peru::calibrate()
 
   updateImagesInQueueL();
 
-  str = QString::null;
+  ts.device()->reset();
   ts << "\n" << correct_images << " images correctly calibrated\n";
 
   // If we have camera parameters (successful calibration)
@@ -366,6 +374,10 @@ Peru::calibrate()
   }
 
   stopB->setEnabled( false );
+
+  // Reset the que to the original state
+  ccocv->setFileList(all_files);
+  updateImagesInQueueL();
 }
 
 void
@@ -995,4 +1007,17 @@ int Peru::findTabPage( QTabWidget* tab, const QString page ) const
       return i;
 
   return -1;
+}
+
+void Peru::removeImageFromCalibrationQueue(QString image)
+{
+  ccocv->removeFileName(image.latin1());
+  updateImagesInQueueL();    
+}
+
+void 
+Peru::clearCalibrationQueue() 
+{ 
+  ccocv->clearFileList();
+  updateImagesInQueueL();    
 }

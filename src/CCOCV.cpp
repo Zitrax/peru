@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.13 2005/05/14 00:20:45 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.14 2005/05/24 20:33:34 cygnus78 Exp $
 
 *************************************************/
 
@@ -371,6 +371,12 @@ CCOCV::addFileName(string name)
   if(ccv::debug) 
     std::cerr << "Filenames now has string '" << filenames.back() 
 	      << "' as last element\n";
+}
+
+void
+CCOCV::removeFileName(string name)
+{
+  filenames.remove(name);
 }
 
 int 
