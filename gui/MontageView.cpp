@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.cpp,v 1.3 2005/05/24 20:33:35 cygnus78 Exp $
+   $Id: MontageView.cpp,v 1.4 2005/05/25 21:04:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -55,9 +55,12 @@ void MontageView::showContextMenu(QIconViewItem* item, const QPoint& pos)
 
 void MontageView::initActions()
 {
-  m_remove_action     = new QAction( tr("Remove"), CTRL+Key_R, this );
-  m_remove_all_action = new QAction( tr("Remove All "), CTRL+SHIFT+Key_R, this );
-  m_open_action       = new QAction( tr("Open"), CTRL+Key_O, this );
+  m_remove_action     = new QAction( tr("Remove item from calibration list"), 
+				     tr("Remove"), CTRL+Key_R, this );
+  m_remove_all_action = new QAction( tr("Remove all images from calibration list"), 
+				     tr("Remove All "), CTRL+SHIFT+Key_R, this );
+  m_open_action       = new QAction( tr("Open this image"), 
+				     tr("Open"), CTRL+Key_O, this );
   
   connect( m_remove_action,     SIGNAL( activated() ), this, SLOT( removeItem()     ));
   connect( m_remove_all_action, SIGNAL( activated() ), this, SLOT( removeAllItems() ));
