@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>856</width>
-            <height>673</height>
+            <width>934</width>
+            <height>701</height>
         </rect>
     </property>
     <property name="minimumSize">
@@ -1882,39 +1882,36 @@
                     <attribute name="title">
                         <string>ImageView</string>
                     </attribute>
-                    <widget class="QScrollView">
+                    <grid>
                         <property name="name">
-                            <cstring>scrollView</cstring>
+                            <cstring>unnamed</cstring>
                         </property>
-                        <property name="geometry">
-                            <rect>
-                                <x>1</x>
-                                <y>0</y>
-                                <width>530</width>
-                                <height>340</height>
-                            </rect>
-                        </property>
-                        <property name="sizePolicy">
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>7</vsizetype>
-                                <horstretch>0</horstretch>
-                                <verstretch>0</verstretch>
-                            </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                            <size>
-                                <width>0</width>
-                                <height>0</height>
-                            </size>
-                        </property>
-                        <property name="font">
-                            <font>
-                                <family>Helvetica</family>
-                                <pointsize>9</pointsize>
-                            </font>
-                        </property>
-                    </widget>
+                        <widget class="QScrollView" row="0" column="0">
+                            <property name="name">
+                                <cstring>scrollView</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>7</hsizetype>
+                                    <vsizetype>7</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="minimumSize">
+                                <size>
+                                    <width>0</width>
+                                    <height>0</height>
+                                </size>
+                            </property>
+                            <property name="font">
+                                <font>
+                                    <family>Helvetica</family>
+                                    <pointsize>9</pointsize>
+                                </font>
+                            </property>
+                        </widget>
+                    </grid>
                 </widget>
                 <widget class="QWidget">
                     <property name="name">
@@ -1923,19 +1920,16 @@
                     <attribute name="title">
                         <string>Thumbnails</string>
                     </attribute>
-                    <widget class="MontageView">
+                    <grid>
                         <property name="name">
-                            <cstring>montageView</cstring>
+                            <cstring>unnamed</cstring>
                         </property>
-                        <property name="geometry">
-                            <rect>
-                                <x>0</x>
-                                <y>0</y>
-                                <width>530</width>
-                                <height>340</height>
-                            </rect>
-                        </property>
-                    </widget>
+                        <widget class="MontageView" row="0" column="0">
+                            <property name="name">
+                                <cstring>montageView</cstring>
+                            </property>
+                        </widget>
+                    </grid>
                 </widget>
             </widget>
             <widget class="QLayoutWidget">

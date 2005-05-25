@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.27 2005/05/25 21:05:36 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.28 2005/05/25 21:29:30 cygnus78 Exp $
 
 *************************************************/
 
@@ -67,9 +67,6 @@ Peru::Peru( QWidget* parent, const char* name,
   // Create Forms and Initially hide them
   ths = new TopHatSettings( ccocv, this, this );
   ths->hide();
-
-  // Used to fix layouts (resizing) inside the tabs
-  imageTabWidget->installEventFilter(this);
 
   // Fix splitter layout
   QValueList<int> sizes;
@@ -166,9 +163,6 @@ Peru::connectSignalsToSlots()
 
   connect( stopB,         SIGNAL( clicked() ),
 	   this,            SLOT( stopCalculation() ));
-
-  connect( imageTabWidget,SIGNAL(   currentChanged( QWidget* ) ),
-	   this,            SLOT( updateTabLayouts( QWidget* ) ));
 
   connect( montageView,   SIGNAL( openImage( QString ) ),
  	   this,            SLOT( imageOpen( QString ) ));
@@ -936,7 +930,8 @@ Peru::saveImage()
     }
   }
   
-  err("\nERROR - Not a valid filename (must have valid suffix)\n");
+  if( !filename.isEmpty() )
+    err("\nERROR - Not a valid filename (must have valid suffix)\n");
   
 }  
 
@@ -983,30 +978,6 @@ void Peru::err( const QString& err )
   emit stringSignal( err );
   infoText->setColor( c );  
 } 
-
-bool Peru::eventFilter(QObject* target, QEvent* e)
-{
-  //  if(ccv::debug) std::cerr << "EV: " << e->type() << " TG: " << target << "\n";
-
-  if( (target == imageTabWidget) && (e->type() == QEvent::Resize) ) {
-    if( scrollView->isVisible() )
-      scrollView->resize(imageTabWidget->currentPage()->size());
-    else if( montageView->isVisible() )
-      montageView->resize(imageTabWidget->currentPage()->size());
-  }
-
-  return Perubase::eventFilter(target,e);
-}
-
-void Peru::updateTabLayouts( QWidget* )
-{
-  if(ccv::debug) std::cerr << "Updating tab layouts\n";
-
-  if( scrollView->isVisible() )
-    scrollView->resize(imageTabWidget->currentPage()->size());
-  else if( montageView->isVisible() )
-    montageView->resize(imageTabWidget->currentPage()->size());
-}
 
 int Peru::findTabPage( QTabWidget* tab, const QString page ) const
 {

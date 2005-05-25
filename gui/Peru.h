@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.13 2005/05/24 20:33:35 cygnus78 Exp $
+   $Id: Peru.h,v 1.14 2005/05/25 21:29:30 cygnus78 Exp $
 
 *************************************************/
 
@@ -93,9 +93,6 @@ class Peru : public Perubase
 			int stop);      //!< Progress progressbar
    void increaseProgressBar();
    void initializeCCOCV();              //!< Transfer settings to CCOCV
-
-   bool eventFilter(QObject* target,         
-		    QEvent* e); 
 
  public slots:
    void imageOpen();
@@ -183,10 +180,6 @@ class Peru : public Perubase
    void imageOpen_(QString);
 
    int findTabPage( QTabWidget* tab, const QString page ) const;
-
-  private slots:
-
-   void updateTabLayouts( QWidget* );   //!< Will update the content of the tabs
 };
 
 #endif
