@@ -8,11 +8,13 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.26 2005/05/24 20:33:35 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.27 2005/05/25 21:05:36 cygnus78 Exp $
 
 *************************************************/
 
 #include "Peru.h"
+
+#include <qsplitter.h>
 
 const QString Peru::tmpImage = QString("tmp_montage.bmp");
 
@@ -68,6 +70,12 @@ Peru::Peru( QWidget* parent, const char* name,
 
   // Used to fix layouts (resizing) inside the tabs
   imageTabWidget->installEventFilter(this);
+
+  // Fix splitter layout
+  QValueList<int> sizes;
+  sizes.append( 300 );
+  sizes.append( 100 );
+  tab_text_splitter->setSizes(sizes);
 }
 
 Peru::~Peru(){
