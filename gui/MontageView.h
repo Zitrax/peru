@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.h,v 1.3 2005/05/24 20:33:35 cygnus78 Exp $
+   $Id: MontageView.h,v 1.4 2005/05/25 22:03:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -27,11 +27,6 @@ Q_OBJECT
 public:
   MontageView( QWidget* parent, const char* name=0, WFlags f=0 );
   ~MontageView(){}
-
-protected:
-
-  // Disable dragging
-  virtual void startDrag() { return; }
 
 private slots:
   void itemDoubleClicked( QIconViewItem* item );

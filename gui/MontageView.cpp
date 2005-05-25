@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.cpp,v 1.4 2005/05/25 21:04:54 cygnus78 Exp $
+   $Id: MontageView.cpp,v 1.5 2005/05/25 22:03:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -23,6 +23,8 @@ MontageView::MontageView( QWidget* parent, const char* name, WFlags f )
 
 {
   initActions();
+
+  setItemsMovable(false);
 
   connect( this, SIGNAL( doubleClicked( QIconViewItem* ) ), 
 	   this,   SLOT( itemDoubleClicked( QIconViewItem* ) ));
@@ -81,7 +83,7 @@ void MontageView::removeItem()
   if( item ) {
     emit removedItem( item->text() );
     delete item;
-    adjustItems();
+    arrangeItemsInGrid();
   }
 }
 

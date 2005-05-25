@@ -472,33 +472,6 @@
                 </widget>
                 <widget class="QCheckBox">
                     <property name="name">
-                        <cstring>montageCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>440</x>
-                            <y>50</y>
-                            <width>100</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>7</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Montage</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Makes a montage on load of calibration images</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
                         <cstring>wthCB</cstring>
                     </property>
                     <property name="geometry">
@@ -655,36 +628,6 @@
                         <string>Undistorts a serie of images</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>sortCornersCB</cstring>
-                    </property>
-                    <property name="enabled">
-                        <bool>false</bool>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>440</x>
-                            <y>10</y>
-                            <width>100</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Sort Corners</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Will sort the found corners from top left to bottom right (recommended) (CURRENTLY NOT AVAILABLE)</string>
-                    </property>
-                </widget>
                 <widget class="QLabel">
                     <property name="name">
                         <cstring>etyL_2</cstring>
@@ -835,6 +778,36 @@
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Number of images in calibration queue (images to be calibrated)</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>sortCornersCB</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>10</y>
+                            <width>100</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Sort Corners</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Will sort the found corners from top left to bottom right (recommended) (CURRENTLY NOT AVAILABLE)</string>
                     </property>
                 </widget>
             </widget>
@@ -2269,7 +2242,6 @@
     <tabstop>saveParamsB</tabstop>
     <tabstop>sortCornersCB</tabstop>
     <tabstop>wthCB</tabstop>
-    <tabstop>montageCB</tabstop>
     <tabstop>topHatB</tabstop>
     <tabstop>debugCB</tabstop>
     <tabstop>infoText</tabstop>

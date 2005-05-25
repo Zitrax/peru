@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.14 2005/05/25 21:29:30 cygnus78 Exp $
+   $Id: Peru.h,v 1.15 2005/05/25 22:03:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -66,7 +66,6 @@
 using namespace std;
 
 class CCOCV;
-class Matcher;
 class TopHatSettings;
 class CalibrationParameters;
 class Stereo;
@@ -84,7 +83,7 @@ class Peru : public Perubase
    bool scaled();                       //!< Returns true if image
                                         //!< should be scaled
 
-   void montage(QStringList flist);     //!< Makes a montage image
+   void montage(QStringList flist);     //!< Adds images to the MontageView
 
    void write(const QString& str);      //!< Emits string signals from outside
    void write(const char* str);         //!< Emits string signals from outside
@@ -109,7 +108,6 @@ class Peru : public Perubase
    void loadParams();                   //!< Load cam1/left parameters
    void loadParams2();                  //!< Load cam2/right parameters 
    void undistortSerie();               //!< Undistorts a serie of images
-   void montageCheck(bool checked);     //!< Checks if montage is possible
    void saveParams();                   //!< Saves found parameters to file
 
    void calculateStereo();              /*!< Calculate disparity maps for
@@ -143,7 +141,6 @@ class Peru : public Perubase
 					  object for stereo cameras */
    Stereo* stereo;                      /*!< Pointer to stereo class which
 					  calculates the disparity maps */
-   Matcher* matcher;                    //<! Matcher for ct/disp data
 
    QImage* currentDisplayedImage;       //<! Image displayed in ImageWidget
 
@@ -151,7 +148,7 @@ class Peru : public Perubase
    
    TopHatSettings* ths;                 //!< Dialog for TopHatSettings
 
-   CalibrationParameters* calPar;       //!< Constatnly updates parameters dialog
+   CalibrationParameters* calPar;       //!< Constantly updates parameters dialog
 
    Preferences* prefs;                  //!< This file handles the stored settings
 
@@ -159,17 +156,10 @@ class Peru : public Perubase
 
    QStringList openFiles();             //!< Returns a list of files from a dialog
    string fileName;                     //!< Name of currently displayed image
-   bool magick;                         //!< True if imagemagick is available
    int correct_images;                  //!< Number of correctly calibrated images
-   int colormodel;                      //!< Color model for raycaster
-   int slicestart;                      //!< Used in view distMap
-   int slicestop;                       //!< Used in view distMap
    bool calibrated;                     //!< Do we have parameter values ?
    bool calibrated2;                    //!< Is camera2 calibrated
-   bool matcherAllocated;               //!< Marks if matcher class object exists
    bool calc_stop_flag;                 //!< True if a calculation should stop
-
-   const static QString tmpImage;       //!< Temporary filename of montage image
 
    void loadParams(int cam);            //!< Loads saved parameter file
    void connectSignalsToSlots();        //!< Take a wild guess
@@ -179,6 +169,12 @@ class Peru : public Perubase
    void err( const QString& err );      //!< Give error message to the textEdit
    void imageOpen_(QString);
 
+  /**
+   * Find the index of a tabbed page in a QTabWidget
+   * @param tab The TabWidget to search
+   * @param page The name of the page you want to find the index of
+   * @return The index of the named page or -1 if not found
+   */
    int findTabPage( QTabWidget* tab, const QString page ) const;
 };
 

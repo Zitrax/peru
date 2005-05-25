@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.28 2005/05/25 21:29:30 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.29 2005/05/25 22:03:54 cygnus78 Exp $
 
 *************************************************/
 
@@ -16,14 +16,20 @@
 
 #include <qsplitter.h>
 
-const QString Peru::tmpImage = QString("tmp_montage.bmp");
-
 Peru::Peru( QWidget* parent, const char* name,
 	    WFlags fl) : Perubase(parent,name,fl), 
-			 calc_stop_flag(false),
-			 correct_images(0),
+			 ccocv(0),
 			 ccocv2(0),
-			 stereo(0)
+			 stereo(0),
+			 currentDisplayedImage(0),
+			 Image_widget(0),
+			 ths(0),
+			 calPar(0),
+			 prefs(0),
+			 correct_images(0),
+			 calibrated(false),
+			 calibrated2(false),
+			 calc_stop_flag(false)
 {
   prefs = new Preferences(this);
   prefs->readSettings();
@@ -44,13 +50,6 @@ Peru::Peru( QWidget* parent, const char* name,
   calPar = new CalibrationParameters( ccocv, this, this );
   calPar->hide();
   
-  magick = !system("montage > /dev/null");             // Check if montage 
-                                                       // exists in path
-  if(!magick) {
-    montageCB->setChecked(false);
-    montageCB->setEnabled(false);
-  }
-
   connectSignalsToSlots();
 
   KStartupLogo *start_logo = new KStartupLogo();
@@ -112,9 +111,6 @@ Peru::connectSignalsToSlots()
 
   connect( calibB,       SIGNAL(   clicked() ),
 	   this,	   SLOT( calibrate() ));
-
-  connect( montageCB,    SIGNAL(      toggled(bool) ),
-	   this,           SLOT( montageCheck(bool) ));
 
   connect( saveParamsB,  SIGNAL(    clicked() ),
 	   this,           SLOT( saveParams() ));
@@ -347,25 +343,24 @@ Peru::calibrate()
     int tiles = static_cast<int>(sqrt(static_cast<float>(orig_nr_images)));
     if(tiles*tiles<orig_nr_images) tiles++;
 
-    if( montageCB->isChecked() ){
-      ccocv->drawCorners(tmpImage,1,12,
-			 tiles,
-			 100,
-			 static_cast<int> (100*(static_cast<float> 
-						(ccocv->getImageSizeY())/
-						ccocv->getImageSizeX())),
-			 ccocv->getImageSizeX(),
-			 ccocv->getImageSizeY(), true);
-      
-      QImage* p_image = new QImage(tmpImage,0);
-      if (*p_image==NULL) { err("ERROR - Image (drawCorners)\n"); }
-      else {
-	fileName = tmpImage.operator std::string();
-	imageOpen(*p_image);
-	zap(p_image);
-      }
-    }
-
+#warning "drawCorners currently disabled"    
+//     ccocv->drawCorners(tmpImage,1,12,
+// 		       tiles,
+// 		       100,
+// 		       static_cast<int> (100*(static_cast<float> 
+// 					      (ccocv->getImageSizeY())/
+// 					      ccocv->getImageSizeX())),
+// 		       ccocv->getImageSizeX(),
+// 		       ccocv->getImageSizeY(), true);
+    
+//     QImage* p_image = new QImage(tmpImage,0);
+//     if (*p_image==NULL) { err("ERROR - Image (drawCorners)\n"); }
+//     else {
+//       fileName = tmpImage.operator std::string();
+//       imageOpen(*p_image);
+//       zap(p_image);
+//     }
+    
     updateParamsDialog();
     setCalibrated(true,1);
     write(str);
@@ -440,7 +435,7 @@ Peru::scaled()
 void
 Peru::montage(QStringList flist)
 {
-  if(montageCB->isChecked() && !flist.isEmpty()){
+  if(!flist.isEmpty()){
     
     montageView->show();
 
@@ -461,16 +456,6 @@ Peru::montage(QStringList flist)
 
   }
   else return;
-}
-
-void 
-Peru::montageCheck(bool checked)
-{
-  if(!magick && checked) {
-    montageCB->setChecked(false);
-    err("ERROR - Can't fint montage in your path\n");
-  }
-  
 }
 
 void
