@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>198</width>
-            <height>251</height>
+            <width>199</width>
+            <height>217</height>
         </rect>
     </property>
     <property name="caption">
@@ -21,282 +21,183 @@
     <property name="toolTip" stdset="0">
         <string>Trial is performed on the first image in the calib image queue</string>
     </property>
-    <widget class="QLabel">
+    <grid>
         <property name="name">
-            <cstring>topL2</cstring>
+            <cstring>unnamed</cstring>
         </property>
-        <property name="geometry">
-            <rect>
-                <x>10</x>
-                <y>40</y>
-                <width>50</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>helvetica</family>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="frameShape">
-            <enum>NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-            <enum>Plain</enum>
-        </property>
-        <property name="text">
-            <string>Shape</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>topL1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>10</x>
-                <y>10</y>
-                <width>50</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>helvetica</family>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Iterations</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>topL3</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>10</x>
-                <y>70</y>
-                <width>50</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>helvetica</family>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>X Size</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>topL4</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>10</x>
-                <y>100</y>
-                <width>50</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>helvetica</family>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Y Size</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>topL5</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>10</x>
-                <y>130</y>
-                <width>50</width>
-                <height>16</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <family>helvetica</family>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Threshold</string>
-        </property>
-    </widget>
-    <widget class="QComboBox">
-        <item>
-            <property name="text">
-                <string>Ellipse</string>
+        <widget class="QLabel" row="1" column="0">
+            <property name="name">
+                <cstring>topL2</cstring>
             </property>
-        </item>
-        <item>
-            <property name="text">
-                <string>Rectangle</string>
+            <property name="font">
+                <font>
+                    <family>helvetica</family>
+                    <pointsize>8</pointsize>
+                </font>
             </property>
-        </item>
-        <item>
-            <property name="text">
-                <string>Cross</string>
+            <property name="frameShape">
+                <enum>NoFrame</enum>
             </property>
-        </item>
-        <property name="name">
-            <cstring>shapeCB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>40</y>
-                <width>92</width>
-                <height>23</height>
-            </rect>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Shape of the structuring element</string>
-        </property>
-    </widget>
-    <widget class="QCheckBox">
-        <property name="name">
-            <cstring>realTimeCB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>170</y>
-                <width>110</width>
-                <height>21</height>
-            </rect>
-        </property>
-        <property name="text">
-            <string>Realtime trial</string>
-        </property>
-    </widget>
-    <widget class="QLCDNumber">
-        <property name="name">
-            <cstring>foundLCD</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>120</x>
-                <y>210</y>
-                <width>64</width>
-                <height>23</height>
-            </rect>
-        </property>
-    </widget>
-    <widget class="QSpinBox">
-        <property name="name">
-            <cstring>thresholdSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>130</y>
-                <width>50</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="maxValue">
-            <number>255</number>
-        </property>
-        <property name="value">
-            <number>220</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Thresholding value to binarize the image with</string>
-        </property>
-    </widget>
-    <widget class="QSpinBox">
-        <property name="name">
-            <cstring>ysizeSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>100</y>
-                <width>50</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="value">
-            <number>9</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Use only odd values here</string>
-        </property>
-    </widget>
-    <widget class="QSpinBox">
-        <property name="name">
-            <cstring>xsizeSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>70</y>
-                <width>50</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="value">
-            <number>9</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Use only odd values here</string>
-        </property>
-    </widget>
-    <widget class="QSpinBox">
-        <property name="name">
-            <cstring>iterationsSB</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>70</x>
-                <y>10</y>
-                <width>50</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="value">
-            <number>1</number>
-        </property>
-        <property name="toolTip" stdset="0">
-            <string>Number of iterations for the opening</string>
-        </property>
-    </widget>
-    <widget class="QLabel">
-        <property name="name">
-            <cstring>textLabel1</cstring>
-        </property>
-        <property name="geometry">
-            <rect>
-                <x>20</x>
-                <y>210</y>
-                <width>90</width>
-                <height>20</height>
-            </rect>
-        </property>
-        <property name="font">
-            <font>
-                <pointsize>8</pointsize>
-            </font>
-        </property>
-        <property name="text">
-            <string>Corners found</string>
-        </property>
-    </widget>
+            <property name="frameShadow">
+                <enum>Plain</enum>
+            </property>
+            <property name="text">
+                <string>Shape</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="0">
+            <property name="name">
+                <cstring>topL1</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <family>helvetica</family>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Iterations</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="2" column="0">
+            <property name="name">
+                <cstring>topL3</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <family>helvetica</family>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>X Size</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="3" column="0">
+            <property name="name">
+                <cstring>topL4</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <family>helvetica</family>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Y Size</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="4" column="0">
+            <property name="name">
+                <cstring>topL5</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <family>helvetica</family>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Threshold</string>
+            </property>
+        </widget>
+        <widget class="QComboBox" row="1" column="1" rowspan="1" colspan="2">
+            <item>
+                <property name="text">
+                    <string>Ellipse</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Rectangle</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Cross</string>
+                </property>
+            </item>
+            <property name="name">
+                <cstring>shapeCB</cstring>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Shape of the structuring element</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox" row="5" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>realTimeCB</cstring>
+            </property>
+            <property name="text">
+                <string>Realtime trial</string>
+            </property>
+        </widget>
+        <widget class="QLCDNumber" row="6" column="2">
+            <property name="name">
+                <cstring>foundLCD</cstring>
+            </property>
+        </widget>
+        <widget class="QSpinBox" row="4" column="1">
+            <property name="name">
+                <cstring>thresholdSB</cstring>
+            </property>
+            <property name="maxValue">
+                <number>255</number>
+            </property>
+            <property name="value">
+                <number>220</number>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Thresholding value to binarize the image with</string>
+            </property>
+        </widget>
+        <widget class="QSpinBox" row="3" column="1">
+            <property name="name">
+                <cstring>ysizeSB</cstring>
+            </property>
+            <property name="value">
+                <number>9</number>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Use only odd values here</string>
+            </property>
+        </widget>
+        <widget class="QSpinBox" row="2" column="1">
+            <property name="name">
+                <cstring>xsizeSB</cstring>
+            </property>
+            <property name="value">
+                <number>9</number>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Use only odd values here</string>
+            </property>
+        </widget>
+        <widget class="QSpinBox" row="0" column="1">
+            <property name="name">
+                <cstring>iterationsSB</cstring>
+            </property>
+            <property name="value">
+                <number>1</number>
+            </property>
+            <property name="toolTip" stdset="0">
+                <string>Number of iterations for the opening</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="6" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>textLabel1</cstring>
+            </property>
+            <property name="font">
+                <font>
+                    <pointsize>8</pointsize>
+                </font>
+            </property>
+            <property name="text">
+                <string>Corners found</string>
+            </property>
+        </widget>
+    </grid>
 </widget>
 <connections>
     <connection>
