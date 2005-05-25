@@ -11,14 +11,14 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>862</width>
-            <height>687</height>
+            <width>856</width>
+            <height>673</height>
         </rect>
     </property>
     <property name="minimumSize">
         <size>
             <width>812</width>
-            <height>421</height>
+            <height>418</height>
         </size>
     </property>
     <property name="caption">
@@ -31,12 +31,12 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLed" row="4" column="0">
+        <widget class="QLed" row="3" column="0">
             <property name="name">
                 <cstring>calibLed1</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="4" column="1">
+        <widget class="QLabel" row="3" column="1">
             <property name="name">
                 <cstring>ledCalibL</cstring>
             </property>
@@ -61,12 +61,12 @@
                 <string>Global camera parameters (or left cam for stereo)</string>
             </property>
         </widget>
-        <widget class="QLed" row="4" column="2">
+        <widget class="QLed" row="3" column="2">
             <property name="name">
                 <cstring>calibLed2</cstring>
             </property>
         </widget>
-        <spacer row="4" column="6" rowspan="1" colspan="3">
+        <spacer row="3" column="5" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>spacer4</cstring>
             </property>
@@ -78,12 +78,12 @@
             </property>
             <property name="sizeHint">
                 <size>
-                    <width>295</width>
+                    <width>299</width>
                     <height>20</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QLabel" row="4" column="3" rowspan="1" colspan="3">
+        <widget class="QLabel" row="3" column="3" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>ledCalibL_2</cstring>
             </property>
@@ -108,7 +108,7 @@
                 <string>If green - parameters also assigned to right camera</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="4" column="9">
+        <widget class="QCheckBox" row="3" column="8">
             <property name="name">
                 <cstring>debugCB</cstring>
             </property>
@@ -130,7 +130,7 @@
                 <string>Turn on debug to cerr</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="4" column="10">
+        <widget class="QPushButton" row="3" column="9">
             <property name="name">
                 <cstring>quitB</cstring>
             </property>
@@ -156,7 +156,7 @@
                 <string></string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="0" rowspan="1" colspan="2">
+        <widget class="QPushButton" row="1" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>openImageB</cstring>
             </property>
@@ -183,7 +183,7 @@
                 <string>Open a new image</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="2" column="2" rowspan="1" colspan="2">
+        <widget class="QCheckBox" row="1" column="2" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>scaleCB</cstring>
             </property>
@@ -207,7 +207,7 @@
                 <string>Check if the image should be scaled to fit in window</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="2" column="4">
+        <widget class="QCheckBox" row="1" column="4">
             <property name="name">
                 <cstring>calibCB</cstring>
             </property>
@@ -234,7 +234,7 @@
                 <string>Undistort displayed image</string>
             </property>
         </widget>
-        <spacer row="2" column="5" rowspan="1" colspan="2">
+        <spacer row="1" column="5">
             <property name="name">
                 <cstring>spacer3</cstring>
             </property>
@@ -251,7 +251,7 @@
                 </size>
             </property>
         </spacer>
-        <widget class="QProgressBar" row="2" column="8" rowspan="1" colspan="2">
+        <widget class="QProgressBar" row="1" column="7" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>calibPB</cstring>
             </property>
@@ -270,7 +270,7 @@
                 </size>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="10">
+        <widget class="QPushButton" row="1" column="9">
             <property name="name">
                 <cstring>stopB</cstring>
             </property>
@@ -296,7 +296,7 @@
                 <string>Stop</string>
             </property>
         </widget>
-        <widget class="QTabWidget" row="3" column="0" rowspan="1" colspan="11">
+        <widget class="QTabWidget" row="2" column="0" rowspan="1" colspan="10">
             <property name="name">
                 <cstring>tabWidget</cstring>
             </property>
@@ -1825,7 +1825,7 @@
                 </widget>
             </widget>
         </widget>
-        <widget class="QPushButton" row="2" column="7">
+        <widget class="QPushButton" row="1" column="6">
             <property name="name">
                 <cstring>saveImageB</cstring>
             </property>
@@ -1855,120 +1855,155 @@
                 <string>Save displayed image</string>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="8" rowspan="1" colspan="3">
+        <widget class="QSplitter" row="0" column="0" rowspan="1" colspan="10">
             <property name="name">
-                <cstring>TextLabel1</cstring>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Bitstream Charter</family>
-                    <pointsize>14</pointsize>
-                </font>
-            </property>
-            <property name="text">
-                <string>PERU - Version 0.4.0 CVS</string>
-            </property>
-        </widget>
-        <widget class="QTabWidget" row="0" column="0" rowspan="2" colspan="8">
-            <property name="name">
-                <cstring>imageTabWidget</cstring>
-            </property>
-            <widget class="QWidget">
-                <property name="name">
-                    <cstring>tab</cstring>
-                </property>
-                <attribute name="title">
-                    <string>ImageView</string>
-                </attribute>
-                <widget class="QScrollView">
-                    <property name="name">
-                        <cstring>scrollView</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>1</x>
-                            <y>0</y>
-                            <width>530</width>
-                            <height>340</height>
-                        </rect>
-                    </property>
-                    <property name="sizePolicy">
-                        <sizepolicy>
-                            <hsizetype>7</hsizetype>
-                            <vsizetype>7</vsizetype>
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                        </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                        <size>
-                            <width>0</width>
-                            <height>0</height>
-                        </size>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>Helvetica</family>
-                            <pointsize>9</pointsize>
-                        </font>
-                    </property>
-                </widget>
-            </widget>
-            <widget class="QWidget">
-                <property name="name">
-                    <cstring>tab</cstring>
-                </property>
-                <attribute name="title">
-                    <string>Thumbnails</string>
-                </attribute>
-                <widget class="MontageView">
-                    <property name="name">
-                        <cstring>montageView</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>0</x>
-                            <y>0</y>
-                            <width>530</width>
-                            <height>340</height>
-                        </rect>
-                    </property>
-                </widget>
-            </widget>
-        </widget>
-        <widget class="QTextEdit" row="1" column="8" rowspan="1" colspan="3">
-            <property name="name">
-                <cstring>infoText</cstring>
-            </property>
-            <property name="sizePolicy">
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>7</vsizetype>
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                </sizepolicy>
-            </property>
-            <property name="minimumSize">
-                <size>
-                    <width>300</width>
-                    <height>0</height>
-                </size>
-            </property>
-            <property name="font">
-                <font>
-                    <family>Bitstream Charter</family>
-                    <pointsize>9</pointsize>
-                </font>
+                <cstring>tab_text_splitter</cstring>
             </property>
             <property name="frameShape">
-                <enum>HLine</enum>
+                <enum>NoFrame</enum>
             </property>
-            <property name="readOnly">
-                <bool>true</bool>
+            <property name="orientation">
+                <enum>Horizontal</enum>
             </property>
-            <property name="toolTip" stdset="0">
-                <string>Info field</string>
-            </property>
+            <widget class="QTabWidget">
+                <property name="name">
+                    <cstring>imageTabWidget</cstring>
+                </property>
+                <property name="minimumSize">
+                    <size>
+                        <width>300</width>
+                        <height>0</height>
+                    </size>
+                </property>
+                <widget class="QWidget">
+                    <property name="name">
+                        <cstring>tab</cstring>
+                    </property>
+                    <attribute name="title">
+                        <string>ImageView</string>
+                    </attribute>
+                    <widget class="QScrollView">
+                        <property name="name">
+                            <cstring>scrollView</cstring>
+                        </property>
+                        <property name="geometry">
+                            <rect>
+                                <x>1</x>
+                                <y>0</y>
+                                <width>530</width>
+                                <height>340</height>
+                            </rect>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>7</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                            <size>
+                                <width>0</width>
+                                <height>0</height>
+                            </size>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <family>Helvetica</family>
+                                <pointsize>9</pointsize>
+                            </font>
+                        </property>
+                    </widget>
+                </widget>
+                <widget class="QWidget">
+                    <property name="name">
+                        <cstring>tab</cstring>
+                    </property>
+                    <attribute name="title">
+                        <string>Thumbnails</string>
+                    </attribute>
+                    <widget class="MontageView">
+                        <property name="name">
+                            <cstring>montageView</cstring>
+                        </property>
+                        <property name="geometry">
+                            <rect>
+                                <x>0</x>
+                                <y>0</y>
+                                <width>530</width>
+                                <height>340</height>
+                            </rect>
+                        </property>
+                    </widget>
+                </widget>
+            </widget>
+            <widget class="QLayoutWidget">
+                <property name="name">
+                    <cstring>layout1</cstring>
+                </property>
+                <vbox>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="QLabel">
+                        <property name="name">
+                            <cstring>TextLabel1</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>0</hsizetype>
+                                <vsizetype>0</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <family>Bitstream Charter</family>
+                                <pointsize>14</pointsize>
+                            </font>
+                        </property>
+                        <property name="text">
+                            <string>PERU - Version 0.4.0 CVS</string>
+                        </property>
+                    </widget>
+                    <widget class="QTextEdit">
+                        <property name="name">
+                            <cstring>infoText</cstring>
+                        </property>
+                        <property name="sizePolicy">
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>7</vsizetype>
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                            </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                            <size>
+                                <width>0</width>
+                                <height>0</height>
+                            </size>
+                        </property>
+                        <property name="font">
+                            <font>
+                                <family>Bitstream Charter</family>
+                                <pointsize>9</pointsize>
+                            </font>
+                        </property>
+                        <property name="frameShape">
+                            <enum>HLine</enum>
+                        </property>
+                        <property name="readOnly">
+                            <bool>true</bool>
+                        </property>
+                        <property name="toolTip" stdset="0">
+                            <string>Info field</string>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
         </widget>
     </grid>
 </widget>
@@ -2020,7 +2055,7 @@
     </customwidget>
     <customwidget>
         <class>MontageView</class>
-        <header location="global">/home/danielbe/cvs/peru/gui/MontageView.h</header>
+        <header location="global">MontageView.h</header>
         <sizehint>
             <width>-1</width>
             <height>-1</height>
