@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: preferences.cpp,v 1.2 2005/05/25 21:08:10 cygnus78 Exp $
+   $Id: preferences.cpp,v 1.3 2005/05/26 14:10:22 cygnus78 Exp $
 
 *************************************************/
 
@@ -31,7 +31,6 @@ void Preferences::readSettings() const
 
   // Calibration Tab
   m_peru->wthCB->setChecked( settings.readBoolEntry( "/peru/white_top_hat", false ) );
-  m_peru->montageCB->setChecked( settings.readBoolEntry( "/peru/montage", true ) );
   m_peru->debugCB->setChecked( settings.readBoolEntry( "/peru/debug", false ) );
 
   m_peru->etxSB->setValue( settings.readNumEntry( "/peru/eta_x_size", 4 ) );
@@ -82,7 +81,6 @@ void Preferences::writeSettings()
 
   // Calibration Tab
   settings.writeEntry( "/peru/white_top_hat", m_peru->wthCB->isChecked() );
-  settings.writeEntry( "/peru/montage", m_peru->montageCB->isChecked() );
   settings.writeEntry( "/peru/debug", m_peru->debugCB->isChecked() );
   
   settings.writeEntry( "/peru/eta_x_size", m_peru->etxSB->value() );
