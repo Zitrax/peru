@@ -6,6 +6,8 @@ disparity maps from stereo pairs of images. There is no manual
 available but hovering the mouse over most widgets will
 provide basic help.
 
+This documentation is for version 0.4 and was last updated 2005-05-25
+
 You will need the following installed on your computer:
 
 REQUIREMENTS  
@@ -17,11 +19,6 @@ OpenCV        Version: 0.9.6
 Qt            Version: 3.1.1 ( Currently using 3.3.3 )
               http://www.trolltech.com/      
 
-ImageMagick   Version: 5.5.5 (Do not use earlier versions!)
-              http://www.imagemagick.org/
-              Newer versions (5.5.5+) has changed the height of label
-              and thus ygap to drawCorners had to be modified.
-              ( Future versions will probably remove need of ImageMagick )
 
 INSTALL INSTRUCTIONS
 --------------------
@@ -33,35 +30,27 @@ Compile and install opencv. Remember to specify something like -Wl,rpath,/path
 to g++ if you are specifying --prefix to a path that are not in ld.so.conf.
 OpenCV needs some additional programs, see it's INSTALL file.
 
-OpenCV 0.9.3 has a 'bug' in highgui.h that should be fixed in the next version
-but if you use 0.9.3 you need to remove the line that redefines resize.
-
-OpenCV 0.9.4 change line in cv.h that includes "ipl.h" to <ipl/ipl.h>
-
-** The above errors does not apply to OpenCV >= 0.9.5 **
-
 Install qt3. (Using rpm's for redhat, install both qt and qt-devel). 
-
-Install ImageMagick. (I built 5.5.6 from source)
 
 Descend into gui folder.
 Check that the entries in Peru.pro are correct for your system. 
 Run 'qmake Peru.pro'
 
 Due to use of exceptions we have to make a change in the generated Makefile.
-This is definitely going to be changed in later versions, but until now you 
-have to manually remove the two occurrences of -fno-exceptions in the 
-generated Makefile. ( Update: This can now be done more easily by running
-the file fixmake in the gui folder if you have perl installed )
+We remove the two occurrences of -fno-exceptions in the generated Makefile. 
+This can easily be done by running the file fixmake in the gui folder if you 
+have perl installed.
 
 then run 'make' in the gui folder. 
 
 When compiled, you can run the program with ./Peru
 
+All in all: cd gui;qmake Peru.pro;fixmake;make;./Peru
+
 PROBLEMS ?
 ----------
 
-* See so that no old version of the libraries are used at runtime
+* See such that no old version of the libraries are used at runtime
   this can generate segmentation faults. ( Built with the new libs
   and runned with the old ) What ? Noo I did not do that ! ;)
 
@@ -73,6 +62,11 @@ PROBLEMS ?
   pattern and a sixth that is too similar to one of the first 
   five can give faulty results.
 
+* OpenCV 0.9.3 has a 'bug' in highgui.h that should be fixed in the next version
+  but if you use 0.9.3 you need to remove the line that redefines resize.
+  OpenCV 0.9.4 change line in cv.h that includes "ipl.h" to <ipl/ipl.h>
+  - The above errors does not apply to OpenCV >= 0.9.5 
+
 -----------------------------------------------------
 
-Still got problems? Mail daniel@bengtssons.info
+Still got problems? Mail the author at daniel@bengtssons.info
