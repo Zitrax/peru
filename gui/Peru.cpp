@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.29 2005/05/25 22:03:54 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.30 2005/06/05 22:02:00 cygnus78 Exp $
 
 *************************************************/
 
@@ -183,7 +183,7 @@ Peru::imageOpen_( QString filename )
     filename = QFileDialog::getOpenFileName( "",
 					     supportedFormats,
 					     this,
-					     "open file dialog"
+					     "open file dialog",
 					     "Choose a file" );
   }
  
@@ -195,7 +195,7 @@ Peru::imageOpen_( QString filename )
     if (*p_image==NULL) { err("ERROR - Could not open image\n"); }
     else {
       imageOpen(*p_image);
-      write("\nOpened image: "+filename+"\n");
+      write(tr("\nOpened image: ")+filename+"\n");
       zap(p_image);
     }
   }
@@ -208,14 +208,14 @@ Peru::calibImageOpen()
   QStringList filelist = openFiles();
   QString filename;
   
-  if(filelist.isEmpty()) { err("Error - No files\n"); }
+  if(filelist.isEmpty()) { err(tr("Error - No files\n")); }
   else { 
     calibPB->reset();
     montage(filelist);
     // Add images to calibration class
     while(!filelist.isEmpty()){
       filename = filelist.back();
-      write("Added calib image: "+filename+"\n");
+      write(tr("Added calib image: ")+filename+"\n");
       if(ccv::debug) std::cerr << filename << "\n"; 
       calibImageOpen(filename);
       filelist.pop_back();
@@ -229,7 +229,7 @@ Peru::openFiles()
   return QFileDialog::getOpenFileNames( supportedFormats,
 					"",
 					this,
-					"open file dialog"
+					"open file dialog",
 					"Choose a file" );
 }
 
@@ -467,7 +467,7 @@ Peru::saveParams()
   filename = QFileDialog::getSaveFileName( "",
 					   "Calibration parameters (*.ccv)",
 					   this,
-					   "open file dialog"
+					   "open file dialog",
 					   "Choose a file" );
   
   if(ccv::debug) std::cerr << "filename = " << filename << "\n";
@@ -501,7 +501,7 @@ Peru::loadParams(int cam)
   filename = QFileDialog::getOpenFileName( "",
 					   "Calibration parameters (*.ccv)",
 					   this,
-					   "open file dialog"
+					   "open file dialog",
 					   "Choose a file" );
   
   if(filename.isEmpty()) {  
@@ -582,7 +582,7 @@ Peru::calculateStereo()
   try {
 
     if( undistort_frames && (!calibrated2 || !calibrated)) {
-      throw ccv::error("ERROR - You have not calibrated all cameras\n");
+      throw ccv::error(tr("ERROR - You have not calibrated all cameras\n"));
     }
     
     if(ccv::debug) std::cerr << "Method = " 
@@ -598,7 +598,7 @@ Peru::calculateStereo()
     string out   = string(c_out);
 
     if(left.length()==0 || right.length()==0) 
-      throw ccv::error("ERROR - No filename provided\n");
+      throw ccv::error(tr("ERROR - No filename provided\n"));
 
     // Create the chosen stereo algorithm
     // ----------------------------------
@@ -625,11 +625,11 @@ Peru::calculateStereo()
 				colorCB->isChecked() );
     else {
       if(ccv::debug) std::cerr << "ERROR - stereo algorithm not recognized\n";
-      throw ccv::error("ERROR - stereo algorithm not recognized\n");
+      throw ccv::error(tr("ERROR - stereo algorithm not recognized\n"));
     }
 
     if( !stereo->getStatus() ) 
-      throw ccv::error("ERROR - loading images\n");
+      throw ccv::error(tr("ERROR - loading images\n"));
     // ----------------------------------
 
     // START FILTERS *****
@@ -667,7 +667,7 @@ Peru::calculateStereo()
     calibPB->setTotalSteps(stop-start+1);
     calibPB->setProgress(calibPB->progress()+1);
 
-    write("Calculating stereo...\n");
+    write(tr("Calculating stereo...\n"));
 
     clock_t start_time = clock(); 
 
@@ -698,7 +698,7 @@ Peru::calculateStereo()
       }
       else {
 	if( errorCB->isChecked() ) {
-	  err("ERROR - Could not calculate error (turned off)\n");
+	  err(tr("ERROR - Could not calculate error (turned off)\n"));
 	  errorCB->setChecked(false);
 	}
 	stereo->setFindError(false);
@@ -717,7 +717,7 @@ Peru::calculateStereo()
 	if(errorCB->isChecked() && stereo->getFindError() ) {
 	  QString str;
 	  QTextStream ts( &str, IO_WriteOnly );
-	  ts << "Error: " 
+	  ts << tr("Error: ") 
 	     << error << "\n";
 	  write(str);
 	}	  
@@ -731,7 +731,7 @@ Peru::calculateStereo()
 	}
       }
       else {
-	throw ccv::error( ccv::ERROR_MESSAGE.isEmpty() ? "ERROR - Stereoparameters\n" : 
+	throw ccv::error( ccv::ERROR_MESSAGE.isEmpty() ? tr("ERROR - Stereoparameters\n") : 
 			  ccv::ERROR_MESSAGE );
 	ccv::resetError();
       }
@@ -740,7 +740,7 @@ Peru::calculateStereo()
       qApp->processEvents();
       if( calc_stop_flag ) {
 	calc_stop_flag = false;
-	throw ccv::error("ABORTED\n");
+	throw ccv::error(tr("ABORTED\n"));
       }
     }
 
@@ -749,14 +749,14 @@ Peru::calculateStereo()
 
     QString str;
     QTextStream ts( &str, IO_WriteOnly );
-    ts << "Total time used: " 
+    ts << tr("Total time used: ") 
        << running_time
-       << " seconds, fps = " << ((stop-start)+1)/running_time << endl;
+       << tr(" seconds, fps = ") << ((stop-start)+1)/running_time << endl;
     write(str);
 
     if(ccv::debug) std::cerr << "freeing commandstring and stereo\n";
 
-       write("Done\n");
+       write(tr("Done\n"));
 
     zap(stereo);
     if(ccv::debug) std::cerr << "deleted stereo...\n";
@@ -809,7 +809,7 @@ Peru::setFileName(QLineEdit* le)
     ( QFileDialog::getOpenFileName( "",
 				    supportedFormats,
 				    this,
-				    "open file dialog"
+				    "open file dialog",
 				    "Choose a file" ) );
 }
 
@@ -890,7 +890,7 @@ Peru::saveImage()
     QFileDialog::getSaveFileName( "",
 				  saveFormats,
 				  this,
-				  "Save Image Dialog"
+				  "Save Image Dialog",
 				  "Choose a file" );
 
   QStringList file = QStringList::split( QChar('.'), filename );
@@ -904,19 +904,19 @@ Peru::saveImage()
 
     if( formats.find( suffix.upper() ) != -1 ) {
       if( Image_widget->saveImage( filename, suffix.upper() ) )
-	write("\nSaved image as " + filename + "\n");
+	write(tr("\nSaved image as ") + filename + "\n");
       else
-	err("\nERROR - Could not save image\n");
+	err(tr("\nERROR - Could not save image\n"));
       return;
     }
     else {
-      err("\nERROR - Not a valid filetype\n");
+      err(tr("\nERROR - Not a valid filetype\n"));
       return;
     }
   }
   
   if( !filename.isEmpty() )
-    err("\nERROR - Not a valid filename (must have valid suffix)\n");
+    err(tr("\nERROR - Not a valid filename (must have valid suffix)\n"));
   
 }  
 
@@ -935,7 +935,7 @@ Peru::updateImagesInQueueL()
   QString str;
   QTextStream ts( &str, IO_WriteOnly );
 
-  ts << "Images in queue: " << nr;
+  ts << tr("Images in queue: ") << nr;
 
   imgqL->setText(str);
 }

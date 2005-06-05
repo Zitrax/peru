@@ -82,6 +82,8 @@ FORMS	= Perubase.ui \
           TopHatSettingsBase.ui \
           CalibrationParametersBase.ui
 
+TRANSLATIONS = peru_se.ts
+
 IMAGES	= images/filenew    \
           images/fileopen   \
           images/filesave   \
