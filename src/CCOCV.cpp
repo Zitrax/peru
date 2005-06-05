@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.14 2005/05/24 20:33:34 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.15 2005/06/05 22:00:33 cygnus78 Exp $
 
 *************************************************/
 
@@ -630,6 +630,7 @@ CCOCV::drawCorners(string filename, int xgap, int pointsize,
   if(ccv::debug) std::cerr << "CURRENTLY DISABLED DUE TO IMAGEMAGIC REMOVAL\n";
   return;
 
+#if 0
   // xgap is the gap set in imagemagick
   // ygap must be manually checked on montageimage and hardcoded
 
@@ -761,6 +762,8 @@ CCOCV::drawCorners(string filename, int xgap, int pointsize,
   cvvSaveImage(filename.c_str(),image);
   
   cvReleaseImage(&image);
+
+#endif // 0
 }
 
 void
