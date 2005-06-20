@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.h,v 1.9 2005/05/24 20:33:34 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.10 2005/06/20 22:17:07 cygnus78 Exp $
 
 *************************************************/
 
@@ -117,6 +117,9 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
 
   int getImageSizeY();
 
+  QPointArray getCorners
+  (const QSize& size);      //!< Get the found corners
+  
   void drawCorners          //!< Draw found corners on montageimage
     ( string filename,
       int xgap, int pointsize,

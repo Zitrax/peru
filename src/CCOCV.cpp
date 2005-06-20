@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: CCOCV.cpp,v 1.15 2005/06/05 22:00:33 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.16 2005/06/20 22:17:07 cygnus78 Exp $
 
 *************************************************/
 
@@ -367,7 +367,7 @@ CCOCV::addFileName(string name)
 {
   if(ccv::debug) 
     std::cerr << "Inside addFileName with string '" << name << "'\n";
-  filenames.push_back(name);
+  filenames.push_front(name);
   if(ccv::debug) 
     std::cerr << "Filenames now has string '" << filenames.back() 
 	      << "' as last element\n";
@@ -618,6 +618,23 @@ CCOCV::setSort(bool b) {
   sortCorners = b; 
   if(ccv::debug) std::cerr << "CCOCV has recieved a sort toggle (" << sortCorners << ")\n" ;
 }
+
+QPointArray
+CCOCV::getCorners(const QSize& size)
+{
+  int no_corners = etalon_size.width*etalon_size.height;
+  QPointArray pa(no_corners*no_images);
+  
+  double xs = static_cast<double>(size.width())/getImageSizeX();
+  double ys = static_cast<double>(size.height())/getImageSizeY();
+
+  for( int i=0; i < no_corners*no_images; i++ ) {
+    pa.setPoint( i, allcorners[i].x*xs, allcorners[i].y*ys );
+  }
+  
+  return pa;
+}
+
 
 void
 CCOCV::drawCorners(string filename, int xgap, int pointsize, 
