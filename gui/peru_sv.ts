@@ -58,32 +58,38 @@
     <message>
         <source>ERROR - You have not calibrated all cameras
 </source>
-        <translation>FEL - Du har inte kalibrerat alla kameror</translation>
+        <translation>FEL - Du har inte kalibrerat alla kameror
+</translation>
     </message>
     <message>
         <source>ERROR - No filename provided
 </source>
-        <translation>FEL - Inget filnamn</translation>
+        <translation>FEL - Inget filnamn
+</translation>
     </message>
     <message>
         <source>ERROR - stereo algorithm not recognized
 </source>
-        <translation>FEL - Okänd stereo algoritm</translation>
+        <translation>FEL - Okänd stereo algoritm
+</translation>
     </message>
     <message>
         <source>ERROR - loading images
 </source>
-        <translation>FEL - Öppna bilder</translation>
+        <translation>FEL - Öppna bilder
+</translation>
     </message>
     <message>
         <source>Calculating stereo...
 </source>
-        <translation>Beräknar stereo...</translation>
+        <translation>Beräknar stereo...
+</translation>
     </message>
     <message>
         <source>ERROR - Could not calculate error (turned off)
 </source>
-        <translation>FEL - Kunde inte beräkna felet (avstängd)</translation>
+        <translation>FEL - Kunde inte beräkna felet (avstängd)
+</translation>
     </message>
     <message>
         <source>Error: </source>
@@ -97,7 +103,8 @@
     <message>
         <source>ABORTED
 </source>
-        <translation>AVBRUTEN</translation>
+        <translation>AVBRUTEN
+</translation>
     </message>
     <message>
         <source>Total time used: </source>
@@ -110,30 +117,35 @@
     <message>
         <source>Done
 </source>
-        <translation>Klart</translation>
+        <translation>Klart
+</translation>
     </message>
     <message>
         <source>
 Saved image as </source>
-        <translation>Sparade bild som</translation>
+        <translation>
+Sparade bild som</translation>
     </message>
     <message>
         <source>
 ERROR - Could not save image
 </source>
-        <translation>FEL - Kunde inte spara bild</translation>
+        <translation>
+FEL - Kunde inte spara bild</translation>
     </message>
     <message>
         <source>
 ERROR - Not a valid filetype
 </source>
-        <translation>FEL - Filtypen stöds inte</translation>
+        <translation>
+FEL - Filtypen stöds inte</translation>
     </message>
     <message>
         <source>
 ERROR - Not a valid filename (must have valid suffix)
 </source>
-        <translation>FEL - Filnamnet har en okänd filtyp</translation>
+        <translation>
+FEL - Filnamnet har en okänd filtyp</translation>
     </message>
     <message>
         <source>Images in queue: </source>
@@ -147,7 +159,8 @@ Opened image: </source>
     <message>
         <source>Error - No files
 </source>
-        <translation>FEL - Inga filer</translation>
+        <translation>FEL - Inga filer
+</translation>
     </message>
     <message>
         <source>Added calib image: </source>
@@ -290,7 +303,7 @@ Opened image: </source>
     </message>
     <message>
         <source>Undistort images</source>
-        <translation>Korrigerar bilder</translation>
+        <translation>Korrigera bilder</translation>
     </message>
     <message>
         <source>Undistorts a serie of images</source>
@@ -422,11 +435,11 @@ Opened image: </source>
     </message>
     <message>
         <source>Left Frame Name</source>
-        <translation>Vänster bild namn</translation>
+        <translation>Vänster bild filnamn</translation>
     </message>
     <message>
         <source>Right Frame Name</source>
-        <translation>Höger bild namn</translation>
+        <translation>Höger bild filnamn</translation>
     </message>
     <message>
         <source>Ground Truth</source>
