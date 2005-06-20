@@ -9,14 +9,17 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.cpp,v 1.5 2005/05/25 22:03:54 cygnus78 Exp $
+   $Id: MontageView.cpp,v 1.6 2005/06/20 22:09:34 cygnus78 Exp $
 
 *************************************************/
 
 #include "MontageView.h"
 
+#include "ccv.h"
+
 MontageView::MontageView( QWidget* parent, const char* name, WFlags f ) 
   : QIconView( parent, name, f ),
+    m_dirty(false),
     m_remove_action(0),
     m_remove_all_action(0),
     m_open_action(0)
@@ -91,4 +94,60 @@ void MontageView::removeAllItems()
 {
   clear();
   emit removedAllItems();
+}
+
+void MontageView::drawPoints(const QPointArray& pa, QValueList<int>& corners)
+{
+  QIconViewItem* item = firstItem();
+  if( !item )
+    return;
+
+  m_dirty = true;
+
+  QImage img = item->pixmap()->convertToImage();
+  
+  int item_nr = 0;
+
+  for( int i=0; i<pa.count()+1; ++i ){
+    if(ccv::debug) std::cerr << "Point: " << i << " Image: " << item_nr 
+			     << " (" << pa[i].x() << "," << pa[i].y() << ")\n"; 
+
+    if( corners[item_nr] == 0 ) {
+
+      QPixmap pm(img);
+      item->setPixmap( pm );
+      item = item->nextItem();
+      if( !item )
+	return;
+
+      img = item->pixmap()->convertToImage();
+
+      item_nr++;
+    }    
+
+    img.setPixel( pa[i].x()  , pa[i].y()-1, qRgb(255,255,0) );
+    img.setPixel( pa[i].x()-1, pa[i].y()  , qRgb(255,255,0) );
+    img.setPixel( pa[i].x()  , pa[i].y()  , qRgb(255,0,0) );
+    img.setPixel( pa[i].x()+1, pa[i].y()  , qRgb(255,255,0) );
+    img.setPixel( pa[i].x()  , pa[i].y()+1, qRgb(255,255,0) );
+    
+    corners[item_nr]--;
+  }
+}
+
+void MontageView::resetIcons()
+{
+  if( !m_dirty )
+    return;
+
+  m_dirty = false;
+
+  // FixMe: This should be optimized by caching the old images instead
+  for( QIconViewItem* item = firstItem(); item; item = item->nextItem() ) {
+    QPixmap pm = *item->pixmap();
+    QSize size = pm.size();
+    QImage icon( item->text() );
+    pm = icon.smoothScale( size );
+  }
+
 }

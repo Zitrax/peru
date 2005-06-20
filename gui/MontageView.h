@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.h,v 1.4 2005/05/25 22:03:54 cygnus78 Exp $
+   $Id: MontageView.h,v 1.5 2005/06/20 22:09:34 cygnus78 Exp $
 
 *************************************************/
 
@@ -19,6 +19,7 @@
 #include <qiconview.h>
 #include <qpopupmenu.h>
 #include <qaction.h>
+#include <qpointarray.h>
 
 class MontageView : public QIconView
 {
@@ -28,11 +29,21 @@ public:
   MontageView( QWidget* parent, const char* name=0, WFlags f=0 );
   ~MontageView(){}
 
+  /**
+   * Draws points on all item-thumbnails at the positions in the pointarray.
+   * @param pa This contains coordinates where marks should be made
+   * @param corners This list should contain the number of points that should be drawn on each image.
+   */
+  void drawPoints(const QPointArray& pa, QValueList<int>& corners );
+
+  /** Resets the icons to the original images */
+  void resetIcons();
+
 private slots:
   void itemDoubleClicked( QIconViewItem* item );
   void showContextMenu(QIconViewItem* item, const QPoint& pos);
-  void removeAllItems();
   void removeItem();
+  void removeAllItems();
   void openItem();
 
 signals:
@@ -43,6 +54,7 @@ signals:
 private:
   void initActions();
   
+  bool m_dirty;
   QPopupMenu m_item_menu;
   QAction* m_remove_action;
   QAction* m_remove_all_action;
