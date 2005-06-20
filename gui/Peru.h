@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.15 2005/05/25 22:03:54 cygnus78 Exp $
+   $Id: Peru.h,v 1.16 2005/06/20 22:12:03 cygnus78 Exp $
 
 *************************************************/
 
@@ -111,7 +111,7 @@ class Peru : public Perubase
    void saveParams();                   //!< Saves found parameters to file
 
    void calculateStereo();              /*!< Calculate disparity maps for
-					  serie of images-pairs */
+					  serie of image-pairs */
    void setSort(bool b);                //!< Toggles corner sort in CCOCV
    void setWth(bool b);                 //!< Use white top hat
    void toggleParameters
@@ -160,6 +160,8 @@ class Peru : public Perubase
    bool calibrated;                     //!< Do we have parameter values ?
    bool calibrated2;                    //!< Is camera2 calibrated
    bool calc_stop_flag;                 //!< True if a calculation should stop
+
+   QSize icon_size;                     //!< Size of the thumbnails
 
    void loadParams(int cam);            //!< Loads saved parameter file
    void connectSignalsToSlots();        //!< Take a wild guess

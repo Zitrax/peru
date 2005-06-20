@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.30 2005/06/05 22:02:00 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.31 2005/06/20 22:12:03 cygnus78 Exp $
 
 *************************************************/
 
@@ -29,7 +29,8 @@ Peru::Peru( QWidget* parent, const char* name,
 			 correct_images(0),
 			 calibrated(false),
 			 calibrated2(false),
-			 calc_stop_flag(false)
+			 calc_stop_flag(false),
+			 icon_size(100,100)
 {
   prefs = new Preferences(this);
   prefs->readSettings();
@@ -220,7 +221,17 @@ Peru::calibImageOpen()
       calibImageOpen(filename);
       filelist.pop_back();
     }
+    // Fixme: Save dir here.
   }
+}
+
+// Adds calibration pattern images to calibration class
+void
+Peru::calibImageOpen(const QString& name)
+{
+  if(ccv::debug) std::cerr << "Inside calibImageOpen with string " << name << "\n";
+  ccocv->addFileName(name.latin1());
+  updateImagesInQueueL();
 }
 
 QStringList
@@ -238,18 +249,8 @@ Peru::imageOpen(QImage& image)
 {
   if(ccv::debug) std::cerr << "Running imageOpen2\n";
   Image_widget->displayImage(image);
-  imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, QString("ImageView")) );
+  imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, tr("ImageView")) );
 }
-
-// Adds calibration pattern images to calibration class
-void
-Peru::calibImageOpen(const QString& name)
-{
-  if(ccv::debug) std::cerr << "Inside calibImageOpen with string " << name << "\n";
-  ccocv->addFileName(name.latin1());
-  updateImagesInQueueL();
-}
-
 
 // Run to initialize ccocv with current settings
 // applied in the gui.
@@ -302,13 +303,15 @@ Peru::calibrate()
   calibPB->setTotalSteps(ccocv->getNumberOfFilesInList()-1);
   calibPB->reset();
   
+  QValueList<int> found_corners;
+
   // Run through all images in CCOCV
   // findCorners returns 1 as long as there are more images to read
   while(ccocv->findCorners(corners)==1){
     if(corners==(etxSB->value()-1)*(etySB->value()-1)) correct_images++;
     calibPB->setProgress(calibPB->progress()+1);
     ts.device()->reset();
-    if( corners < 0 )
+    if( corners < 0 ) 
       ts << "\nFound " << -1*corners << " chess corners (Rejected by sort)";
     else {
       ts << "\nFound " << corners << " chess corners";
@@ -316,6 +319,7 @@ Peru::calibrate()
 	ts << " *";
       updateImagesInQueueL();
     }
+    found_corners << corners;
   
     write(str);
     repaint();
@@ -336,30 +340,11 @@ Peru::calibrate()
   ts << "\n" << correct_images << " images correctly calibrated\n";
 
   // If we have camera parameters (successful calibration)
-  // we draw the corners onto the montage image (if used)
+  // we draw the corners onto the thumbnails
   // and enable saving of parameters.
   if(correct_images>0) {
 
-    int tiles = static_cast<int>(sqrt(static_cast<float>(orig_nr_images)));
-    if(tiles*tiles<orig_nr_images) tiles++;
-
-#warning "drawCorners currently disabled"    
-//     ccocv->drawCorners(tmpImage,1,12,
-// 		       tiles,
-// 		       100,
-// 		       static_cast<int> (100*(static_cast<float> 
-// 					      (ccocv->getImageSizeY())/
-// 					      ccocv->getImageSizeX())),
-// 		       ccocv->getImageSizeX(),
-// 		       ccocv->getImageSizeY(), true);
-    
-//     QImage* p_image = new QImage(tmpImage,0);
-//     if (*p_image==NULL) { err("ERROR - Image (drawCorners)\n"); }
-//     else {
-//       fileName = tmpImage.operator std::string();
-//       imageOpen(*p_image);
-//       zap(p_image);
-//     }
+    montageView->drawPoints(ccocv->getCorners(icon_size), found_corners);
     
     updateParamsDialog();
     setCalibrated(true,1);
@@ -400,7 +385,7 @@ Peru::undistortImage(bool undistort)
       if(ccv::debug) std::cerr << "Reverting\n";
       p_image = new QImage(fileName,0);    
     }
-    imageOpen(*p_image);
+    Image_widget->displayImage(*p_image);
     zap(p_image);
   }
   else
@@ -415,10 +400,10 @@ Peru::undistortSerie()
 
   if(calibrated) {
     while( !filelist.isEmpty() ) {
-      filename = filelist.back();
+      filename = filelist.front();
       ccocv->undistortImage(filename.latin1(),true);
       write("\nUndistorted image "+filename);
-      filelist.pop_back();
+      filelist.pop_front();
     }
   }
   else err("WARNING - You have not calibrated "
@@ -437,22 +422,25 @@ Peru::montage(QStringList flist)
 {
   if(!flist.isEmpty()){
     
-    montageView->show();
+    //    montageView->show();
+    montageView->resetIcons();
 
-    QStringList::ConstIterator it  = flist.begin();
-    QStringList::ConstIterator end = flist.end();
+    QStringList::ConstIterator begin  = flist.begin();
+    QStringList::ConstIterator it = flist.end();
     
-    QSize icon_size(100,100);
-    for( it; it!=end; ++it )
+    while(true)
       {
+	--it;
 	QImage icon( *it );
 	QPixmap icon_p = icon.smoothScale( icon_size );
 	
 	if(ccv::debug) std::cerr << "Adding " << *it << " to montage view\n";
 	QIconViewItem* item = new QIconViewItem(montageView, *it, icon_p );
+	if( it == begin )
+	  break;
       }
 
-    imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, QString("Thumbnails")) );
+    imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, tr("Thumbnails")) );
 
   }
   else return;
