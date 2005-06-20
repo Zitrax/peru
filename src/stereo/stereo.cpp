@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, danielbe@ifi.uio.no
 
  Version:
-   $Id: stereo.cpp,v 1.7 2004/09/03 21:53:19 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.8 2005/06/20 22:17:51 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,7 +17,9 @@
 Stereo::Stereo(string left,
 	       string right,
 	       string out,
-	       bool m)
+	       bool m) :
+  preFilters(0),
+  postFilters(0)
 { 
 
   if(ccv::debug) std::cerr << "Running Stereo constructor\n";
@@ -50,6 +52,18 @@ Stereo::Stereo(string left,
   cvGetImageRawData(leftI, 0, 0, &imageSize);         // Get size of image
   width = imageSize.width;
   height = imageSize.height;
+
+  // We must check such that the images has the same size
+  CvSize imageSizeR;
+  cvGetImageRawData(rightI, 0, 0, &imageSizeR);
+  int widthR = imageSizeR.width;
+  int heightR = imageSizeR.height;
+
+  if( (width != widthR) || (height != heightR) ) {
+    if(ccv::debug) std::cerr << "ERROR - Image sizes not equal!\n";
+    status = false;
+    return;
+  }
 
   preFilters = new vector<Filter*>;
   postFilters = new vector<Filter*>;
