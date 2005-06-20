@@ -7,10 +7,11 @@ int main( int argc, char ** argv )
     QApplication a( argc, argv );
 
     QString locale = QTextCodec::locale();
+    locale = locale.left( locale.find(QChar('.')) );
 
     fprintf(stderr, "Starting Peru, locale='%s'\n", locale.latin1() );
 
-    bool ok = false;
+     bool ok = false;
 
     // translation file for Qt
     QTranslator qt( 0 );
