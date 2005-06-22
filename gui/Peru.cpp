@@ -8,7 +8,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.cpp,v 1.31 2005/06/20 22:12:03 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.32 2005/06/22 16:29:13 cygnus78 Exp $
 
 *************************************************/
 
@@ -53,14 +53,7 @@ Peru::Peru( QWidget* parent, const char* name,
   
   connectSignalsToSlots();
 
-  KStartupLogo *start_logo = new KStartupLogo();
-  start_logo->show();
-
-  start_logo->raise();
-  start_logo->setHideEnabled( true );
-  QApplication::flushX();
-  sleep( 1 );
-  zap(start_logo);
+  showStartupLogo();
 
   supportedFormats = "Images (*.bmp *.jpg *.ppm *.png)";
 
@@ -89,6 +82,21 @@ Peru::~Peru(){
   zap(ths);
   zap(calPar);
   zap(Image_widget);
+}
+
+void
+Peru::showStartupLogo() const
+{
+  KStartupLogo* start_logo = new KStartupLogo();
+  if( start_logo->haveImage() ) {
+    start_logo->show();
+    
+    start_logo->raise();
+    start_logo->setHideEnabled( true );
+    QApplication::flushX();
+    sleep( 1 );
+  }
+  zap(start_logo);
 }
 
 void

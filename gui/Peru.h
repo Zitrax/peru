@@ -9,7 +9,7 @@
    Daniel Bengtsson, danielbe@ifi.uio.no
 
  Version:
-   $Id: Peru.h,v 1.16 2005/06/20 22:12:03 cygnus78 Exp $
+   $Id: Peru.h,v 1.17 2005/06/22 16:29:13 cygnus78 Exp $
 
 *************************************************/
 
@@ -170,6 +170,7 @@ class Peru : public Perubase
    void updateParamsDialog();
    void err( const QString& err );      //!< Give error message to the textEdit
    void imageOpen_(QString);
+  void showStartupLogo() const;
 
   /**
    * Find the index of a tabbed page in a QTabWidget

@@ -22,9 +22,13 @@ public:
    
    void setHideEnabled(bool bEnabled) { m_bReadyToHide = bEnabled; };
    
+   /** Returns true if we have an image to show */
+   bool haveImage() const { return m_have_image; }
+
 protected:
    virtual void mousePressEvent( QMouseEvent*);
    bool m_bReadyToHide;
+   bool m_have_image;
 };
 
 #endif
