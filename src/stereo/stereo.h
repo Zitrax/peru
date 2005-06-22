@@ -7,10 +7,10 @@
    Stero is an abstract class.
 
  Author:
-   Daniel Bengtsson 2002, danielbe@ifi.uio.no
+   Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: stereo.h,v 1.6 2004/09/03 21:53:19 cygnus78 Exp $
+   $Id: stereo.h,v 1.7 2005/06/22 23:14:13 cygnus78 Exp $
 
 *************************************************/
 

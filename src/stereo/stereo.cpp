@@ -5,10 +5,10 @@
    that generates disparity maps.
 
  Author:
-   Daniel Bengtsson 2002, danielbe@ifi.uio.no
+   Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: stereo.cpp,v 1.8 2005/06/20 22:17:51 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.9 2005/06/22 23:14:23 cygnus78 Exp $
 
 *************************************************/
 

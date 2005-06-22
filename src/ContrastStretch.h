@@ -4,10 +4,10 @@
    This class implements Contrast Stretching
 
  Author:
-   Daniel Bengtsson 2003, danielbe@ifi.uio.no
+   Daniel Bengtsson 2003-2005, daniel@bengtssons.info
 
  Version:
-   $Id: ContrastStretch.h,v 1.1 2003/09/04 21:11:25 cygnus78 Exp $
+   $Id: ContrastStretch.h,v 1.2 2005/06/22 23:14:24 cygnus78 Exp $
 
 *************************************************/
 

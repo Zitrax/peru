@@ -4,10 +4,10 @@
    Display and do simple manipulations on images
 
  Author:
-   Daniel Bengtsson 2002, danielbe@ifi.uio.no
+   Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ImageWidget.cpp,v 1.6 2005/05/14 00:09:45 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.7 2005/06/22 23:14:25 cygnus78 Exp $
 
 *************************************************/
 

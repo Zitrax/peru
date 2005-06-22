@@ -4,10 +4,10 @@
    Display and do simple manipulations on images
 
  Author:
-   Daniel Bengtsson, danielbe@ifi.uio.no
+   Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: ImageWidget.h,v 1.5 2004/10/02 11:10:02 cygnus78 Exp $
+   $Id: ImageWidget.h,v 1.6 2005/06/22 23:14:25 cygnus78 Exp $
 *************************************************/
 
 #ifndef IMAGEWIDGET_H

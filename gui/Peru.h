@@ -6,10 +6,10 @@
    made in designer.
 
  Author:
-   Daniel Bengtsson, danielbe@ifi.uio.no
+   Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.h,v 1.17 2005/06/22 16:29:13 cygnus78 Exp $
+   $Id: Peru.h,v 1.18 2005/06/22 23:14:24 cygnus78 Exp $
 
 *************************************************/
 

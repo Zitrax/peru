@@ -6,10 +6,10 @@
    Implements a blockmatching stereo algorithm
 
  Author:
-   Daniel Bengtsson 2002, danielbe@ifi.uio.no
+   Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: BlockMatch.h,v 1.5 2004/09/24 21:36:42 cygnus78 Exp $
+   $Id: BlockMatch.h,v 1.6 2005/06/22 23:14:23 cygnus78 Exp $
 
 *************************************************/
 

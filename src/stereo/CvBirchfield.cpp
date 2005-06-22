@@ -5,10 +5,10 @@
    that comes with OpenCv 0.9.4 beta3
 
  Author:
-   Daniel Bengtsson, danielbe@ifi.uio.no
+   Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: CvBirchfield.cpp,v 1.3 2003/09/25 23:49:26 cygnus78 Exp $
+   $Id: CvBirchfield.cpp,v 1.4 2005/06/22 23:14:23 cygnus78 Exp $
 
 *************************************************/
 

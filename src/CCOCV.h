@@ -7,10 +7,10 @@
    Using Intels OpenCV
 
  Author:
-   Daniel Bengtsson 2002, danielbe@ifi.uio.no
+   Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.h,v 1.10 2005/06/20 22:17:07 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.11 2005/06/22 23:14:24 cygnus78 Exp $
 
 *************************************************/
 

@@ -5,10 +5,10 @@
    contains useful constructions and methods
 
  Author:
-   Daniel Bengtsson 2002, danielbe@ifi.uio.no
+   Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ccv.cpp,v 1.5 2005/05/14 00:19:51 cygnus78 Exp $
+   $Id: ccv.cpp,v 1.6 2005/06/22 23:14:24 cygnus78 Exp $
 
 *************************************************/
 

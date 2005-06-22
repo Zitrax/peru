@@ -5,10 +5,10 @@
    sessions.
 
  Author:
-   Daniel Bengtsson, danielbe@ifi.uio.no
+   Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: preferences.h,v 1.1 2004/10/02 11:15:11 cygnus78 Exp $
+   $Id: preferences.h,v 1.2 2005/06/22 23:14:24 cygnus78 Exp $
 
 *************************************************/
 

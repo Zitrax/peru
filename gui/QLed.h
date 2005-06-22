@@ -6,12 +6,12 @@
    as a green/red (on/off) led/diode.
 
  Author:
-   Daniel Bengtsson 2003, danielbe@ifi.uio.no
+   Daniel Bengtsson 2003-2005, daniel@bengtssons.info
    Based on a post by Neil Zanella in the
    Qt-interest Archive.
 
  Version:
-   $Id: QLed.h,v 1.1 2003/09/22 19:40:53 cygnus78 Exp $
+   $Id: QLed.h,v 1.2 2005/06/22 23:14:24 cygnus78 Exp $
 
 *************************************************/
 

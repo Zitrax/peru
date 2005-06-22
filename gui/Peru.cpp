@@ -5,10 +5,10 @@
    made in designer.
 
  Author:
-   Daniel Bengtsson, danielbe@ifi.uio.no
+   Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.32 2005/06/22 16:29:13 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.33 2005/06/22 23:14:24 cygnus78 Exp $
 
 *************************************************/
 

@@ -5,10 +5,10 @@
    of the TopHat transformation.
 
  Author:
-   Daniel Bengtsson, danielbe@ifi.uio.no
+   Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: TopHatSettings.cpp,v 1.4 2004/05/22 23:22:55 cygnus78 Exp $
+   $Id: TopHatSettings.cpp,v 1.5 2005/06/22 23:14:24 cygnus78 Exp $
 
 *************************************************/
 

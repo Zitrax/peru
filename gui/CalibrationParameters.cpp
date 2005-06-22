@@ -6,10 +6,10 @@
    enter new parameters.
 
  Author:
-   Daniel Bengtsson, danielbe@ifi.uio.no
+   Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: CalibrationParameters.cpp,v 1.4 2004/10/02 11:09:05 cygnus78 Exp $
+   $Id: CalibrationParameters.cpp,v 1.5 2005/06/22 23:14:25 cygnus78 Exp $
 
 *************************************************/
 
