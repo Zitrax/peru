@@ -3,7 +3,7 @@
     <name>CalibrationParametersBase</name>
     <message>
         <source>CalibrationParameters</source>
-        <translation>Kalibreringsparamterar</translation>
+        <translation>Kalibreringsparametrar</translation>
     </message>
     <message>
         <source>Focallength</source>
@@ -166,6 +166,45 @@ Opened image: </source>
         <source>Added calib image: </source>
         <translation>La till kalibreringsbild:</translation>
     </message>
+    <message>
+        <source>ImageView</source>
+        <translation>BildVy</translation>
+    </message>
+    <message>
+        <source>Thumbnails</source>
+        <translation>Tumnaglar</translation>
+    </message>
+    <message>
+        <source>ERROR - Could not open image
+</source>
+        <translation>FEL - Kunde inte öppna bild
+</translation>
+    </message>
+    <message>
+        <source>ERROR - Must add some images to calibrate first
+</source>
+        <translation>FEL - Du måste välja några bilder att kalibrera först
+</translation>
+    </message>
+    <message>
+        <source>ERROR - You must use more than one image
+</source>
+        <translation>FEL - Du måste använda mer än en bild
+</translation>
+    </message>
+    <message>
+        <source>
+ABORTED - Throwing away data
+</source>
+        <translation>AVBRÖT - Rensar data
+</translation>
+    </message>
+    <message>
+        <source>WARNING - You have not calibrated or calibration has failed
+</source>
+        <translation>VARNING - Du har inte kalibrerat eller kalibreringen var misslyckad
+</translation>
+    </message>
 </context>
 <context>
     <name>Perubase</name>
@@ -243,11 +282,11 @@ Opened image: </source>
     </message>
     <message>
         <source>Save parameters</source>
-        <translation>Spara paramterar</translation>
+        <translation>Spara parametrar</translation>
     </message>
     <message>
         <source>Save found camera parameters</source>
-        <translation>Spara beräknade kamera paramterar</translation>
+        <translation>Spara beräknade kamera parametrar</translation>
     </message>
     <message>
         <source>Read calib images</source>
@@ -582,10 +621,6 @@ Opened image: </source>
         <translation>Tumnaglar</translation>
     </message>
     <message>
-        <source>PERU - Version 0.4.0 CVS</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Info field</source>
         <translation>Info fält</translation>
     </message>
@@ -672,6 +707,10 @@ Opened image: </source>
     <message>
         <source>&amp;About...</source>
         <translation>&amp;Om...</translation>
+    </message>
+    <message>
+        <source>PERU - Version 0.4.0</source>
+        <translation></translation>
     </message>
 </context>
 <context>
