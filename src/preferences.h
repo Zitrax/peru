@@ -8,12 +8,14 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: preferences.h,v 1.2 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: preferences.h,v 1.3 2005/07/01 22:30:21 cygnus78 Exp $
 
 *************************************************/
 
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
+
+#include <qstring.h>
 
 class Peru;
 
@@ -27,6 +29,8 @@ public:
  
   void readSettings() const;
   void writeSettings();
+
+  QString getCalibrationPath() const;
 
 private:
 

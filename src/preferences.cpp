@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: preferences.cpp,v 1.4 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: preferences.cpp,v 1.5 2005/07/01 22:30:21 cygnus78 Exp $
 
 *************************************************/
 
@@ -79,6 +79,8 @@ void Preferences::writeSettings()
   settings.writeEntry( "/peru/scale_image", m_peru->scaleCB->isChecked() );
   settings.writeEntry( "/peru/undistort_image", m_peru->calibCB->isChecked() );
 
+  settings.writeEntry( "/peru/calibration_path", m_peru->getCalibrationPath() );
+
   // Calibration Tab
   settings.writeEntry( "/peru/white_top_hat", m_peru->wthCB->isChecked() );
   settings.writeEntry( "/peru/debug", m_peru->debugCB->isChecked() );
@@ -118,4 +120,11 @@ void Preferences::writeSettings()
   settings.writeEntry( "/peru/post_perspective_corr", m_peru->perspectivecCB->isChecked() );
   settings.writeEntry( "/peru/post_contrast_stretch", m_peru->contrastCB->isChecked() );
 
+}
+
+QString Preferences::getCalibrationPath() const
+{
+  QSettings settings( QSettings::Ini );
+  settings.setPath( "bengtssons.info", "Peru" );
+  return settings.readEntry( "/peru/calibration_path" );  
 }
