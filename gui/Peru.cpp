@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.33 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.34 2005/07/01 22:34:58 cygnus78 Exp $
 
 *************************************************/
 
@@ -201,7 +201,7 @@ Peru::imageOpen_( QString filename )
     fileName = filename.latin1();
     if(ccv::debug) std::cerr << filename << "\n"; 
     QImage *p_image = new QImage(filename,0);
-    if (*p_image==NULL) { err("ERROR - Could not open image\n"); }
+    if (*p_image==NULL) { err(tr("ERROR - Could not open image\n")); }
     else {
       imageOpen(*p_image);
       write(tr("\nOpened image: ")+filename+"\n");
@@ -212,13 +212,32 @@ Peru::imageOpen_( QString filename )
 }
 
 void 
+Peru::imageOpen(QImage& image)
+{
+  if(ccv::debug) std::cerr << "Running imageOpen2\n";
+  if( !calibCB->isChecked() || modeTabWidget->label( modeTabWidget->currentPageIndex() ) == tr("Stereo") )
+    Image_widget->displayImage(image);
+  else
+    undistortImage(true);
+  imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, tr("ImageView")) );
+}
+
+void 
 Peru::calibImageOpen()
 {
-  QStringList filelist = openFiles();
+  QString dir = QString::null;
+  if( calibration_path.isNull() ) {
+    calibration_path = prefs->getCalibrationPath();
+    dir = calibration_path;
+  }
+
+  QStringList filelist = openFiles(dir);
   QString filename;
   
   if(filelist.isEmpty()) { err(tr("Error - No files\n")); }
   else { 
+    QFileInfo fi(filelist.back());
+    calibration_path = fi.dirPath(true);
     calibPB->reset();
     montage(filelist);
     // Add images to calibration class
@@ -243,21 +262,13 @@ Peru::calibImageOpen(const QString& name)
 }
 
 QStringList
-Peru::openFiles()
+Peru::openFiles(const QString& dir )
 {
   return QFileDialog::getOpenFileNames( supportedFormats,
-					"",
+					dir,
 					this,
 					"open file dialog",
 					"Choose a file" );
-}
-
-void 
-Peru::imageOpen(QImage& image)
-{
-  if(ccv::debug) std::cerr << "Running imageOpen2\n";
-  Image_widget->displayImage(image);
-  imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, tr("ImageView")) );
 }
 
 // Run to initialize ccocv with current settings
@@ -292,9 +303,11 @@ Peru::calibrate()
   int orig_nr_images = ccocv->getNumberOfFilesInList();
 
   if( !orig_nr_images ) {
-    err("ERROR - Must add some images to calibrate first\n");
+    err(tr("ERROR - Must add some images to calibrate first\n"));
     return;
   }
+  if( ccocv->getNumberOfFilesInList() <= 1 )
+    err(tr("WARNING - You should use more than one image\n"));
 
   QStringList all_files = ccocv->getFiles();
 
@@ -335,25 +348,21 @@ Peru::calibrate()
     if( calc_stop_flag ) {
       calc_stop_flag = false;
       correct_images = 0;
-      err("\nABORTED - Throwing away data\n");
-      clearCalibrationQueue();
-      break;
+      err(tr("\nABORTED - Throwing away data\n"));
+      zap(ccocv);
+      ccocv = new CCOCV();
+      goto cleanup;
     }
       
   }
+  if(ccv::debug) std::cerr << "Finding corners done\n";
 
   updateImagesInQueueL();
 
   ts.device()->reset();
   ts << "\n" << correct_images << " images correctly calibrated\n";
 
-  // If we have camera parameters (successful calibration)
-  // we draw the corners onto the thumbnails
-  // and enable saving of parameters.
-  if(correct_images>0) {
-
-    montageView->drawPoints(ccocv->getCorners(icon_size), found_corners);
-    
+  if(correct_images>0) {    
     updateParamsDialog();
     setCalibrated(true,1);
     write(str);
@@ -362,6 +371,10 @@ Peru::calibrate()
     setCalibrated(false,1);
     err(str);
   }
+
+  montageView->drawPoints(ccocv->getCorners(icon_size), found_corners, (etxSB->value()-1)*(etySB->value()-1));
+
+cleanup:
 
   stopB->setEnabled( false );
 
@@ -414,8 +427,7 @@ Peru::undistortSerie()
       filelist.pop_front();
     }
   }
-  else err("WARNING - You have not calibrated "
-	   "or calibration has failed\n");
+  else err(tr("WARNING - You have not calibrated or calibration has failed\n"));
 
 }
 
