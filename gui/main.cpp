@@ -10,7 +10,13 @@ using namespace PeruGlobals;
 
 int main( int argc, char ** argv )
 {
-    execLocation = QString(getenv("PWD")) + QChar('/') + QString(argv[0]);
+    QString argv_string = QString(argv[0]);
+    if( argv_string[0] == QChar('/') ||
+	argv_string[0] == QChar('~') )
+      execLocation = argv_string;
+    else
+      execLocation = QString(getenv("PWD")) + QChar('/') + QString(argv[0]);
+
     execLocation = execLocation.left( execLocation.findRev(QChar('/')) + 1 );
   
     QApplication a( argc, argv );
