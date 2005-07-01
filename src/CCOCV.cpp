@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.17 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.18 2005/07/01 22:29:41 cygnus78 Exp $
 
 *************************************************/
 
@@ -622,16 +622,56 @@ CCOCV::setSort(bool b) {
 QPointArray
 CCOCV::getCorners(const QSize& size)
 {
+  if(ccv::debug) std::cerr << "CCOCV::getCorners\n";
+
   int no_corners = etalon_size.width*etalon_size.height;
-  QPointArray pa(no_corners*no_images);
+  int total_corners = no_corners*no_images + totalFailedCorners-1;
+  QPointArray pa( total_corners );
   
+  if(ccv::debug) std::cerr << "Corners = " << total_corners << "(" << no_corners*no_images << "+" << totalFailedCorners-1 << ")\n";
+
+  // Scales
   double xs = static_cast<double>(size.width())/getImageSizeX();
   double ys = static_cast<double>(size.height())/getImageSizeY();
 
-  for( int i=0; i < no_corners*no_images; i++ ) {
-    pa.setPoint( i, allcorners[i].x*xs, allcorners[i].y*ys );
+  // Create order of failed/correct images
+  bool* images = new bool[t_no_images];
+  for( int i=0; i<no_images; ++i )
+    images[correct[i]] = true;
+  for( int i=0; i<failed_index; ++i )
+    images[failed[i]] = false;
+
+  // Run through all images and fill the pointarray 
+  // ----------------------------------------------
+  int total_failed = 0; // Current index among the failed corners
+  int ac = 0;           // Current index among the correct corners
+  int tp = 0;           // Current total index
+
+  for( int i=0; i<t_no_images; i++ ) {
+
+    // Add correct points
+    if( images[i] ) {
+      for( int j = 0; j<no_corners; ++j ) {
+	if(ccv::debug) std::cerr << "Adding C(" << tp << "," << allcorners[ac+j].x*xs << "," << allcorners[ac+j].y*ys << ")\n";
+	pa.setPoint( tp, allcorners[ac+j].x*xs, allcorners[ac+j].y*ys );
+	tp++;
+      }
+      ac += no_corners;
+    }
+
+    // Add failed points
+    else {
+      for( int j = 1; j<=failcorners[total_failed].x; ++j ) {
+	if(ccv::debug) std::cerr << "Adding F(" << j << "," << failcorners[total_failed+j].x*xs << "," << failcorners[total_failed+j].y*ys << ")\n";
+	pa.setPoint( tp, failcorners[total_failed+j].x*xs, failcorners[total_failed+j].y*ys );
+	tp++;
+      }
+      total_failed += failcorners[total_failed].x + 1 ;
+    }
   }
   
+  delete images;
+
   return pa;
 }
 
