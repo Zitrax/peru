@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.cpp,v 1.6 2005/06/20 22:09:34 cygnus78 Exp $
+   $Id: MontageView.cpp,v 1.7 2005/07/01 22:36:34 cygnus78 Exp $
 
 *************************************************/
 
@@ -96,8 +96,10 @@ void MontageView::removeAllItems()
   emit removedAllItems();
 }
 
-void MontageView::drawPoints(const QPointArray& pa, QValueList<int>& corners)
+void MontageView::drawPoints(const QPointArray& pa, QValueList<int>& corners, int correct)
 {
+  if(ccv::debug) std::cerr << "MontageView::drawPoints - pa = " << pa.count() << " corners = " << corners.count() << "\n";
+
   QIconViewItem* item = firstItem();
   if( !item )
     return;
@@ -108,9 +110,9 @@ void MontageView::drawPoints(const QPointArray& pa, QValueList<int>& corners)
   
   int item_nr = 0;
 
+  bool failed = corners[item_nr] != correct;
+
   for( int i=0; i<pa.count()+1; ++i ){
-    if(ccv::debug) std::cerr << "Point: " << i << " Image: " << item_nr 
-			     << " (" << pa[i].x() << "," << pa[i].y() << ")\n"; 
 
     if( corners[item_nr] == 0 ) {
 
@@ -123,14 +125,27 @@ void MontageView::drawPoints(const QPointArray& pa, QValueList<int>& corners)
       img = item->pixmap()->convertToImage();
 
       item_nr++;
+      failed = corners[item_nr] != correct;
     }    
 
-    img.setPixel( pa[i].x()  , pa[i].y()-1, qRgb(255,255,0) );
-    img.setPixel( pa[i].x()-1, pa[i].y()  , qRgb(255,255,0) );
-    img.setPixel( pa[i].x()  , pa[i].y()  , qRgb(255,0,0) );
-    img.setPixel( pa[i].x()+1, pa[i].y()  , qRgb(255,255,0) );
-    img.setPixel( pa[i].x()  , pa[i].y()+1, qRgb(255,255,0) );
-    
+    if(ccv::debug) std::cerr << "Point: " << i << " Image: " << item_nr 
+			     << " (" << pa[i].x() << "," << pa[i].y() << ")\n"; 
+
+    if( !failed ) {
+      img.setPixel( pa[i].x()  , pa[i].y()-1, qRgb(255,255,0) );
+      img.setPixel( pa[i].x()-1, pa[i].y()  , qRgb(255,255,0) );
+      img.setPixel( pa[i].x()  , pa[i].y()  , qRgb(255,0,0)   );
+      img.setPixel( pa[i].x()+1, pa[i].y()  , qRgb(255,255,0) );
+      img.setPixel( pa[i].x()  , pa[i].y()+1, qRgb(255,255,0) );
+    }
+    else {
+      img.setPixel( pa[i].x()  , pa[i].y()-1, qRgb(255,0,0)   );
+      img.setPixel( pa[i].x()-1, pa[i].y()  , qRgb(255,0,0)   );
+      img.setPixel( pa[i].x()  , pa[i].y()  , qRgb(255,255,0) );
+      img.setPixel( pa[i].x()+1, pa[i].y()  , qRgb(255,0,0)   );
+      img.setPixel( pa[i].x()  , pa[i].y()+1, qRgb(255,0,0)   );
+    }
+
     corners[item_nr]--;
   }
 }

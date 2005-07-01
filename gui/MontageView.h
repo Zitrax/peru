@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.h,v 1.5 2005/06/20 22:09:34 cygnus78 Exp $
+   $Id: MontageView.h,v 1.6 2005/07/01 22:36:34 cygnus78 Exp $
 
 *************************************************/
 
@@ -33,8 +33,9 @@ public:
    * Draws points on all item-thumbnails at the positions in the pointarray.
    * @param pa This contains coordinates where marks should be made
    * @param corners This list should contain the number of points that should be drawn on each image.
+   * @param correct Correct number of points ( Marked specially )
    */
-  void drawPoints(const QPointArray& pa, QValueList<int>& corners );
+  void drawPoints(const QPointArray& pa, QValueList<int>& corners, int correct = 0 );
 
   /** Resets the icons to the original images */
   void resetIcons();
