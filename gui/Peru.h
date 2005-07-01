@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.h,v 1.18 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: Peru.h,v 1.19 2005/07/01 22:35:48 cygnus78 Exp $
 
 *************************************************/
 
@@ -93,6 +93,9 @@ class Peru : public Perubase
    void increaseProgressBar();
    void initializeCCOCV();              //!< Transfer settings to CCOCV
 
+   QString getCalibrationPath() const   //!< Last used path for calibration pattern images
+   { return calibration_path; }
+
  public slots:
    void imageOpen();
    void imageOpen(QString);
@@ -153,8 +156,11 @@ class Peru : public Perubase
    Preferences* prefs;                  //!< This file handles the stored settings
 
    QString supportedFormats;            //!< Image extensions
+   QString calibration_path;            //!< Last path to calibration images 
 
-   QStringList openFiles();             //!< Returns a list of files from a dialog
+   QStringList openFiles
+   (const QString& dir = QString::null);//!< Returns a list of files from a dialog
+
    string fileName;                     //!< Name of currently displayed image
    int correct_images;                  //!< Number of correctly calibrated images
    bool calibrated;                     //!< Do we have parameter values ?
@@ -170,7 +176,7 @@ class Peru : public Perubase
    void updateParamsDialog();
    void err( const QString& err );      //!< Give error message to the textEdit
    void imageOpen_(QString);
-  void showStartupLogo() const;
+   void showStartupLogo() const;
 
   /**
    * Find the index of a tabbed page in a QTabWidget
