@@ -298,7 +298,7 @@
         </widget>
         <widget class="QTabWidget" row="2" column="0" rowspan="1" colspan="10">
             <property name="name">
-                <cstring>tabWidget</cstring>
+                <cstring>modeTabWidget</cstring>
             </property>
             <property name="sizePolicy">
                 <sizepolicy>
@@ -1850,7 +1850,7 @@
                             </font>
                         </property>
                         <property name="text">
-                            <string>PERU - Version 0.4.0 CVS</string>
+                            <string>PERU - Version 0.4.0</string>
                         </property>
                     </widget>
                     <widget class="QTextEdit">
@@ -2144,7 +2144,7 @@
     <tabstop>calibCB</tabstop>
     <tabstop>saveImageB</tabstop>
     <tabstop>quitB</tabstop>
-    <tabstop>tabWidget</tabstop>
+    <tabstop>modeTabWidget</tabstop>
     <tabstop>readCalibB</tabstop>
     <tabstop>calibB</tabstop>
     <tabstop>undistortB</tabstop>
