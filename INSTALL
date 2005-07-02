@@ -2,9 +2,9 @@ PROJECT PERU
 ------------
 
 This application provides functionality for generation of
-disparity maps from stereo pairs of images. There is no manual
-available but hovering the mouse over most widgets will
-provide basic help.
+disparity maps from stereo pairs of images and calibration of 
+cameras. There is no manual available but hovering the mouse over 
+most widgets will provide basic help.
 
 This documentation is for version 0.4 and was last updated 2005-05-25
 
