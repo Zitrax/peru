@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: preferences.h,v 1.3 2005/07/01 22:30:21 cygnus78 Exp $
+   $Id: preferences.h,v 1.4 2005/07/20 22:24:02 cygnus78 Exp $
 
 *************************************************/
 
@@ -31,6 +31,7 @@ public:
   void writeSettings();
 
   QString getCalibrationPath() const;
+  QString getStereoImagePath() const;
 
 private:
 

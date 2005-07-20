@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.34 2005/07/01 22:34:58 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.35 2005/07/20 22:24:06 cygnus78 Exp $
 
 *************************************************/
 
@@ -813,12 +813,20 @@ Peru::toggleParameters(const QString& string)
 void 
 Peru::setFileName(QLineEdit* le)
 {
+  QString dir = QString::null;
+  if( stereo_image_path.isNull() ) {
+    stereo_image_path = prefs->getStereoImagePath();
+    dir = stereo_image_path;
+  }
+
   le->setText
-    ( QFileDialog::getOpenFileName( "",
+    ( QFileDialog::getOpenFileName( dir,
 				    supportedFormats,
 				    this,
 				    "open file dialog",
 				    "Choose a file" ) );
+  QFileInfo fi(le->text());
+  stereo_image_path = fi.dirPath(true);
 }
 
 void 

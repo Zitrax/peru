@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.h,v 1.19 2005/07/01 22:35:48 cygnus78 Exp $
+   $Id: Peru.h,v 1.20 2005/07/20 22:24:05 cygnus78 Exp $
 
 *************************************************/
 
@@ -96,6 +96,9 @@ class Peru : public Perubase
    QString getCalibrationPath() const   //!< Last used path for calibration pattern images
    { return calibration_path; }
 
+   QString getStereoImagePath() const   //!< Last used path for stereo images
+   { return stereo_image_path; }
+
  public slots:
    void imageOpen();
    void imageOpen(QString);
@@ -157,6 +160,7 @@ class Peru : public Perubase
 
    QString supportedFormats;            //!< Image extensions
    QString calibration_path;            //!< Last path to calibration images 
+   QString stereo_image_path;           //!< Last path to stereo images
 
    QStringList openFiles
    (const QString& dir = QString::null);//!< Returns a list of files from a dialog

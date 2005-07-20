@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: preferences.cpp,v 1.5 2005/07/01 22:30:21 cygnus78 Exp $
+   $Id: preferences.cpp,v 1.6 2005/07/20 22:24:03 cygnus78 Exp $
 
 *************************************************/
 
@@ -80,6 +80,7 @@ void Preferences::writeSettings()
   settings.writeEntry( "/peru/undistort_image", m_peru->calibCB->isChecked() );
 
   settings.writeEntry( "/peru/calibration_path", m_peru->getCalibrationPath() );
+  settings.writeEntry( "/peru/stereo_image_path", m_peru->getStereoImagePath() );
 
   // Calibration Tab
   settings.writeEntry( "/peru/white_top_hat", m_peru->wthCB->isChecked() );
@@ -127,4 +128,11 @@ QString Preferences::getCalibrationPath() const
   QSettings settings( QSettings::Ini );
   settings.setPath( "bengtssons.info", "Peru" );
   return settings.readEntry( "/peru/calibration_path" );  
+}
+
+QString Preferences::getStereoImagePath() const
+{
+  QSettings settings( QSettings::Ini );
+  settings.setPath( "bengtssons.info", "Peru" );
+  return settings.readEntry( "/peru/stereo_image_path" );  
 }
