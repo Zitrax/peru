@@ -6,7 +6,7 @@ disparity maps from stereo pairs of images and calibration of
 cameras. There is no manual available but hovering the mouse over 
 most widgets will provide basic help.
 
-This documentation is for version 0.4 and was last updated 2005-05-25
+This documentation is for version 0.5 and was last updated 2006-10-17.
 
 You will need the following installed on your computer:
 
@@ -16,16 +16,39 @@ OpenCV        Version: 0.9.6 (Beta 4)
               http://sourceforge.net/projects/opencvlibrary/
               http://www.intel.com/research/mrl/research/opencv/
 
+              *************************************
+              ** Note that versions > 0.9.6 will **
+              ** _NOT_ work and support will     **
+              ** probably not be added in the    **
+              ** near future.                    **
+              *************************************
+
+              OpenCV needs ffmpeg-0.4.8 and as that file is
+              currently no longer available at it's original
+              location I am supplying it at the peru
+              repository so you can get it there.
+              
 Qt            Version: 3.1.1 ( Currently using 3.3.4 )
-              http://www.trolltech.com/      
+              http://www.trolltech.com/ 
+
+              Qt 4 is not yet supported.     
 
 
 INSTALL INSTRUCTIONS
 --------------------
 
-Compile and install opencv. If you install it to some other dir than the default by specifying a prefix you may have a look at INSTALL.old
+Compile and install opencv. If you install it to some other dir than 
+the default by specifying a prefix you may have a look at INSTALL.old
 
-Install qt3. (If using rpm's install both qt and qt-devel). 
+OpenCV might require ffmpeg. But as the compatible ffmpeg version is no
+longer available at it's original location I will provide it at perus
+projectpage as sourceforge. Get it from there if you need it. Note that
+you get alot of errors if you use compilers newer than gcc 3.3, using
+3.3 works fine for me. 
+
+Install qt3. If using rpm's install both qt and qt-devel.
+For debian based distributions you can install qt3-apps-dev
+and qt3-dev-tools. 
 
 Type 'make'.
 
@@ -35,7 +58,7 @@ PROBLEMS ?
 
 * See such that no old version of the libraries are used at runtime
   this can generate segmentation faults. ( Built with the new libs
-  and runned with the old ) What ? Noo I did not do that ! ;)
+  and executed with the old ) What ? Noo I did not do that ! ;)
 
 * See that the angle and position of the calibration
   pattern is different enough, otherwise faulty calibration

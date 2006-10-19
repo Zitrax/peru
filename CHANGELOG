@@ -1,3 +1,8 @@
+0.4.1
+* Fixed crashbug when trying do draw 0 found corners
+* Storing path to stereo images
+* Added some info to the INSTALL file
+
 0.4.0
 * See such that we don't update the parameters in CCOCV too often
 * The incorrect montage on appending more calibration images bug is now fixed
