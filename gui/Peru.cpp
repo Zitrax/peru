@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.35 2005/07/20 22:24:06 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.36 2006/10/19 21:17:22 cygnus78 Exp $
 
 *************************************************/
 
@@ -366,13 +366,12 @@ Peru::calibrate()
     updateParamsDialog();
     setCalibrated(true,1);
     write(str);
+    montageView->drawPoints(ccocv->getCorners(icon_size), found_corners, (etxSB->value()-1)*(etySB->value()-1));
   }
   else {
     setCalibrated(false,1);
     err(str);
   }
-
-  montageView->drawPoints(ccocv->getCorners(icon_size), found_corners, (etxSB->value()-1)*(etySB->value()-1));
 
 cleanup:
 
