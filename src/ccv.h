@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ccv.h,v 1.7 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: ccv.h,v 1.8 2006/10/23 18:58:49 cygnus78 Exp $
 
 *************************************************/
 
@@ -35,7 +35,10 @@ namespace ccv{
 
   enum{ERROR, NOTUSED};
 
+  /// Used to abort all calculations
   extern bool ERRFLAG;
+
+  extern bool ABORTFLAG;
 
   void resetError();
 

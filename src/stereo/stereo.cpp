@@ -8,11 +8,13 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: stereo.cpp,v 1.9 2005/06/22 23:14:23 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.10 2006/10/23 18:58:49 cygnus78 Exp $
 
 *************************************************/
 
 #include "stereo.h"
+
+#include "../gui/Peru.h"
 
 Stereo::Stereo(string left,
 	       string right,
@@ -67,7 +69,10 @@ Stereo::Stereo(string left,
 
   preFilters = new vector<Filter*>;
   postFilters = new vector<Filter*>;
-  
+
+  Peru* gui = Peru::getInstance();
+  connect(this,SIGNAL(percentageDone(double)),
+	  gui, SLOT(setProgress(double)));
 }
 
 Stereo::~Stereo()

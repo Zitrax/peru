@@ -97,7 +97,7 @@ IMAGES	= images/filenew    \
 
 TEMPLATE = app
 
-CONFIG	+= qt warn_off release #debug
+CONFIG	+= qt warn_off release debug
 
 DBFILE	 = Peru.db
 

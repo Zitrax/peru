@@ -8,13 +8,13 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.36 2006/10/19 21:17:22 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.37 2006/10/23 18:58:49 cygnus78 Exp $
 
 *************************************************/
 
 #include "Peru.h"
 
-#include <qsplitter.h>
+Peru* Peru::s_instance = 0;
 
 Peru::Peru( QWidget* parent, const char* name,
 	    WFlags fl) : Perubase(parent,name,fl), 
@@ -30,8 +30,12 @@ Peru::Peru( QWidget* parent, const char* name,
 			 calibrated(false),
 			 calibrated2(false),
 			 calc_stop_flag(false),
+			 calculating(false),
 			 icon_size(100,100)
 {
+  assert( s_instance == 0 );
+  s_instance = this;
+
   prefs = new Preferences(this);
   prefs->readSettings();
   toggleParameters( stereo_algCOB->currentText() );
@@ -561,6 +565,8 @@ Peru::setCalibrated(bool c, int cam)
 void
 Peru::calculateStereo()
 {
+  calculating = true;
+
   // Many variables are initialized here to make 
   // code in the rest of this method block easier to read.
   int start             = framestartLE->text().toInt();
@@ -585,6 +591,8 @@ Peru::calculateStereo()
   char* c_out   = static_cast<char*>(malloc(300));
 
   stopB->setEnabled( true );
+  // Make sure the ui actually gets this before the calculation starts
+  qApp->processEvents(); 
 
   try {
 
@@ -671,8 +679,9 @@ Peru::calculateStereo()
     stereo->setDisparityToDisk(write_disparityCB->isChecked());
 
     calibPB->reset();
-    calibPB->setTotalSteps(stop-start+1);
+    calibPB->setTotalSteps((stop-start+1)*100);
     calibPB->setProgress(calibPB->progress()+1);
+    current_progress = 0;
 
     write(tr("Calculating stereo...\n"));
 
@@ -680,6 +689,7 @@ Peru::calculateStereo()
 
     // Reset global errorflag before use
     ccv::resetError();
+    ccv::ABORTFLAG = false;
 
     for( int i = start; i <=stop; i++ ) {
 
@@ -718,7 +728,7 @@ Peru::calculateStereo()
       if( !ccv::ERRFLAG ) {
 	if(ccv::debug) std::cerr << "after start\n";
 
-	calibPB->setProgress(calibPB->progress()+1);
+	current_progress+=100;
 	if(ccv::debug) std::cerr << "after setProgress\n";
 
 	if(errorCB->isChecked() && stereo->getFindError() ) {
@@ -771,10 +781,11 @@ Peru::calculateStereo()
     free(c_left);
     free(c_right);
     free(c_out);
-    
+
+    calibPB->setProgress(calibPB->totalSteps()); 
   }
   catch (ccv::error e) {
-    // Must free everything allocated until error is throws
+    // Must free everything allocated until error is thrown
     // Should probably change this to the zap-macros later.
     free(c_left);
     free(c_right);
@@ -784,6 +795,7 @@ Peru::calculateStereo()
 
   stopB->setEnabled( false );
 
+  calculating = false;
 }
 
 void
@@ -874,6 +886,23 @@ void
 Peru::increaseProgressBar()
 {
   calibPB->setProgress(calibPB->progress()+1); 
+  qApp->processEvents();
+}
+
+void
+Peru::setProgress(double part)
+{
+  qApp->processEvents();
+
+  if( calc_stop_flag ) {
+    // Raise global abortflag
+    ccv::ABORTFLAG = true;
+  }
+  else {
+    int steps = current_progress+static_cast<int>(part*100);
+    if(ccv::debug) std::cerr << "Progress steps =" << steps << "\n";
+    calibPB->setProgress(steps);
+  }
 }
 
 void
@@ -999,4 +1028,22 @@ Peru::clearCalibrationQueue()
 { 
   ccocv->clearFileList();
   updateImagesInQueueL();    
+}
+
+void
+Peru::closeEvent( QCloseEvent* e )
+{
+  if( !calculating || (
+      QMessageBox::warning(this,tr("Exit"),
+			   tr("Calculation in progress! Are you sure you want to exit?"),
+			   QMessageBox::Yes,
+			   QMessageBox::No,
+			   QMessageBox::NoButton) == QMessageBox::Yes )) {
+    
+    ccv::ABORTFLAG = true;
+    calc_stop_flag = true;
+    e->accept();
+  }
+  else
+    e->ignore();
 }

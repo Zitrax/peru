@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ccv.cpp,v 1.6 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: ccv.cpp,v 1.7 2006/10/23 18:58:49 cygnus78 Exp $
 
 *************************************************/
 
@@ -18,6 +18,7 @@ namespace ccv {
   
   int debug = 0;
   bool ERRFLAG = false;
+  bool ABORTFLAG = false;
   QString ERROR_MESSAGE = QString::null;
   
   void resetError()

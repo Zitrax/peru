@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.h,v 1.20 2005/07/20 22:24:05 cygnus78 Exp $
+   $Id: Peru.h,v 1.21 2006/10/23 18:58:49 cygnus78 Exp $
 
 *************************************************/
 
@@ -60,6 +60,8 @@
 #include <qslider.h>
 #include <qtabwidget.h>
 #include <qdial.h>
+#include <qsplitter.h>
+#include <qmessagebox.h>
 
 #include <opencv/cv.h>
 
@@ -78,6 +80,12 @@ class Peru : public Perubase
 	    const char* name = 0,
 	    WFlags fl = 0 );
    ~Peru();
+
+  static Peru* getInstance()            //!< Get the gui
+  { return s_instance; }
+
+  static Peru* s_instance;
+
    void imageOpen(QImage& image);       //!< Displays image on widget
    void calibImageOpen(const QString&); //!< Adds an image to CCOCV
    bool scaled();                       //!< Returns true if image
@@ -136,9 +144,15 @@ class Peru : public Perubase
    void stopCalculation()               //!< Will stop the current calculation
    { calc_stop_flag = true; } 
 
+   void setProgress(double part);       //!< Sets the progress based on current img
+
  signals:
 
    void stringSignal(const QString&);   //!< Emits a signal with a string ;)
+
+ protected:
+
+  void closeEvent( QCloseEvent* e );    //!< May ask to close Peru
 
  private:
    CCOCV* ccocv;                        /*!< Pointer to CCOCV class which does
@@ -170,6 +184,8 @@ class Peru : public Perubase
    bool calibrated;                     //!< Do we have parameter values ?
    bool calibrated2;                    //!< Is camera2 calibrated
    bool calc_stop_flag;                 //!< True if a calculation should stop
+   bool calculating;                    //!< If we are currently calculating
+   int current_progress;                //!< Currently processed progressteps
 
    QSize icon_size;                     //!< Size of the thumbnails
 

@@ -8,7 +8,7 @@ namespace PeruGlobals {
 
 using namespace PeruGlobals;
 
-int main( int argc, char ** argv )
+int main( int argc, char** argv )
 {
     QString argv_string = QString(argv[0]);
     if( argv_string[0] == QChar('/') ||
@@ -41,7 +41,7 @@ int main( int argc, char ** argv )
     a.installTranslator( &myapp );
     fprintf(stderr, "App Translation = %i\n", ok );
 
-    Peru *w = new Peru;
+    Peru* w = new Peru;
     w->show();
     a.connect( &a, SIGNAL( lastWindowClosed() ), &a, SLOT( quit() ) );
     

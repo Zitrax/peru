@@ -2,6 +2,9 @@
 * Fixed crashbug when trying do draw 0 found corners
 * Storing path to stereo images
 * Added some info to the INSTALL file
+* Exit dialog
+* Do not lock the ui during stereo-calculations
+* Better progressupdates
 
 0.4.0
 * See such that we don't update the parameters in CCOCV too often

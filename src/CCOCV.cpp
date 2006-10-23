@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.18 2005/07/01 22:29:41 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.19 2006/10/23 18:58:49 cygnus78 Exp $
 
 *************************************************/
 
@@ -626,51 +626,58 @@ CCOCV::getCorners(const QSize& size)
 
   int no_corners = etalon_size.width*etalon_size.height;
   int total_corners = no_corners*no_images + totalFailedCorners-1;
-  QPointArray pa( total_corners );
+
+  QPointArray pa( total_corners > 0 ? total_corners : 0 );
+
+  if( total_corners ) {
   
-  if(ccv::debug) std::cerr << "Corners = " << total_corners << "(" << no_corners*no_images << "+" << totalFailedCorners-1 << ")\n";
+      if(ccv::debug) std::cerr << "Corners = " << total_corners << "(" << no_corners*no_images << "+" << totalFailedCorners-1 << ")\n";
+      
+      // Scales
+      double xs = static_cast<double>(size.width())/getImageSizeX();
+      double ys = static_cast<double>(size.height())/getImageSizeY();
+  
+      // Create order of failed/correct images
+      bool* images = new bool[t_no_images];
+      for( int i=0; i<no_images; ++i )
+	images[correct[i]] = true;
+      for( int i=0; i<failed_index; ++i )
+	images[failed[i]] = false;
 
-  // Scales
-  double xs = static_cast<double>(size.width())/getImageSizeX();
-  double ys = static_cast<double>(size.height())/getImageSizeY();
+      // Run through all images and fill the pointarray 
+      // ----------------------------------------------
+      int total_failed = 0; // Current index among the failed corners
+      int ac = 0;           // Current index among the correct corners
+      int tp = 0;           // Current total index
 
-  // Create order of failed/correct images
-  bool* images = new bool[t_no_images];
-  for( int i=0; i<no_images; ++i )
-    images[correct[i]] = true;
-  for( int i=0; i<failed_index; ++i )
-    images[failed[i]] = false;
+      for( int i=0; i<t_no_images; i++ ) {
 
-  // Run through all images and fill the pointarray 
-  // ----------------------------------------------
-  int total_failed = 0; // Current index among the failed corners
-  int ac = 0;           // Current index among the correct corners
-  int tp = 0;           // Current total index
+	// Add correct points
+	if( images[i] ) {
+	  for( int j = 0; j<no_corners; ++j ) {
+	    if(ccv::debug) std::cerr << "Adding C(" << tp << "," << allcorners[ac+j].x*xs << "," << allcorners[ac+j].y*ys << ")\n";
+	    pa.setPoint( tp, allcorners[ac+j].x*xs, allcorners[ac+j].y*ys );
+	    tp++;
+	  }
+	  ac += no_corners;
+	}
 
-  for( int i=0; i<t_no_images; i++ ) {
-
-    // Add correct points
-    if( images[i] ) {
-      for( int j = 0; j<no_corners; ++j ) {
-	if(ccv::debug) std::cerr << "Adding C(" << tp << "," << allcorners[ac+j].x*xs << "," << allcorners[ac+j].y*ys << ")\n";
-	pa.setPoint( tp, allcorners[ac+j].x*xs, allcorners[ac+j].y*ys );
-	tp++;
+	// Add failed points
+	else {
+	  for( int j = 1; j<=failcorners[total_failed].x; ++j ) {
+	    if(ccv::debug) std::cerr << "Adding F(" << j << "," << failcorners[total_failed+j].x*xs << "," << failcorners[total_failed+j].y*ys << ")\n";
+	    pa.setPoint( tp, failcorners[total_failed+j].x*xs, failcorners[total_failed+j].y*ys );
+	    tp++;
+	  }
+	  total_failed += failcorners[total_failed].x + 1 ;
+	}
       }
-      ac += no_corners;
-    }
-
-    // Add failed points
-    else {
-      for( int j = 1; j<=failcorners[total_failed].x; ++j ) {
-	if(ccv::debug) std::cerr << "Adding F(" << j << "," << failcorners[total_failed+j].x*xs << "," << failcorners[total_failed+j].y*ys << ")\n";
-	pa.setPoint( tp, failcorners[total_failed+j].x*xs, failcorners[total_failed+j].y*ys );
-	tp++;
-      }
-      total_failed += failcorners[total_failed].x + 1 ;
-    }
+  
+      delete images;
+      
   }
-  
-  delete images;
+  else
+    if(ccv::debug) std::cerr << "CCOCV::getCorners() - No corners to draw\n";
 
   return pa;
 }

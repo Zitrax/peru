@@ -8,14 +8,17 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: BlockMatch.cpp,v 1.4 2005/06/22 23:14:23 cygnus78 Exp $
+   $Id: BlockMatch.cpp,v 1.5 2006/10/23 18:58:49 cygnus78 Exp $
 
 *************************************************/
 
 #include "BlockMatch.h"
 
+#include <qapplication.h>
+
 BlockMatch::BlockMatch(string left, string right, string out) 
-  : Stereo(left, right, out) {}
+  : Stereo(left, right, out) 
+{}
 BlockMatch::BlockMatch(string left, string right, string out, 
 		       bool c, int maxd, int bls, bool f, bool sq) 
   : Stereo(left, right, out) { MAXD = maxd; color = c; 
@@ -73,6 +76,10 @@ BlockMatch::calculateDisparityFast()
 	rC[x+1][y+1]+=rptr[c];
       }
     }
+    if( x%10 == 1 )
+      emit percentageDone( static_cast<double>(x)/width );
+    if( ccv::ABORTFLAG )
+      break;
   }
 
   int mse; int disparity; int val; uchar value; uchar* dptr;
@@ -146,6 +153,8 @@ BlockMatch::calculateDisparity()
 
   int bs2 = bs/2;
 
+  // Copy image data into larger images such that
+  // the algorithm do not run outside the images.
   for(int x=0; x<leftI->width; x++)
     for(int y=0; y<leftI->height; y++) 
       for(int c=0; c<leftI->nChannels; c++) {
@@ -183,6 +192,9 @@ BlockMatch::calculateDisparity()
 //       (dptr)[1] = val;     // green
 //       (dptr)[2] = val;     // red
     }
+    emit percentageDone( static_cast<double>(x)/leftI->width );
+    if( ccv::ABORTFLAG )
+      break;
   }
 
   zapImg( tmpL );
