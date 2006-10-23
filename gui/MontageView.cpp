@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.cpp,v 1.7 2005/07/01 22:36:34 cygnus78 Exp $
+   $Id: MontageView.cpp,v 1.8 2006/10/23 20:27:43 cygnus78 Exp $
 
 *************************************************/
 
@@ -128,8 +128,9 @@ void MontageView::drawPoints(const QPointArray& pa, QValueList<int>& corners, in
       failed = corners[item_nr] != correct;
     }    
 
-    if(ccv::debug) std::cerr << "Point: " << i << " Image: " << item_nr 
-			     << " (" << pa[i].x() << "," << pa[i].y() << ")\n"; 
+    if(ccv::debug) std::cerr << " Point: " << i << " Image: " << item_nr 
+			     << " (" << pa[i].x() << "," << pa[i].y() << ")" 
+			     << " Corners: " << corners[item_nr] << "\n"; 
 
     if( !failed ) {
       img.setPixel( pa[i].x()  , pa[i].y()-1, qRgb(255,255,0) );
@@ -145,7 +146,6 @@ void MontageView::drawPoints(const QPointArray& pa, QValueList<int>& corners, in
       img.setPixel( pa[i].x()+1, pa[i].y()  , qRgb(255,0,0)   );
       img.setPixel( pa[i].x()  , pa[i].y()+1, qRgb(255,0,0)   );
     }
-
     corners[item_nr]--;
   }
 }

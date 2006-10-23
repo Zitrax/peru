@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.19 2006/10/23 18:58:49 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.20 2006/10/23 20:27:42 cygnus78 Exp $
 
 *************************************************/
 
@@ -625,13 +625,13 @@ CCOCV::getCorners(const QSize& size)
   if(ccv::debug) std::cerr << "CCOCV::getCorners\n";
 
   int no_corners = etalon_size.width*etalon_size.height;
-  int total_corners = no_corners*no_images + totalFailedCorners-1;
+  int total_corners = no_corners*no_images + totalFailedCorners;
 
   QPointArray pa( total_corners > 0 ? total_corners : 0 );
 
   if( total_corners ) {
   
-      if(ccv::debug) std::cerr << "Corners = " << total_corners << "(" << no_corners*no_images << "+" << totalFailedCorners-1 << ")\n";
+      if(ccv::debug) std::cerr << "Corners = " << total_corners << "(" << no_corners*no_images << "+" << totalFailedCorners << ")\n";
       
       // Scales
       double xs = static_cast<double>(size.width())/getImageSizeX();

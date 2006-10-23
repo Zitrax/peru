@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.37 2006/10/23 18:58:49 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.38 2006/10/23 20:27:43 cygnus78 Exp $
 
 *************************************************/
 
@@ -461,6 +461,7 @@ Peru::montage(QStringList flist)
 	QIconViewItem* item = new QIconViewItem(montageView, *it, icon_p );
 	if( it == begin )
 	  break;
+	qApp->processEvents();
       }
 
     imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, tr("Thumbnails")) );

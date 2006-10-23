@@ -3,8 +3,9 @@
 * Storing path to stereo images
 * Added some info to the INSTALL file
 * Exit dialog
-* Do not lock the ui during stereo-calculations
+* Do not lock the ui during stereo-calculations and calibaddition
 * Better progressupdates
+* Drawing corners on last image
 
 0.4.0
 * See such that we don't update the parameters in CCOCV too often
