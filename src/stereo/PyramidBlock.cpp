@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: PyramidBlock.cpp,v 1.5 2005/06/22 23:14:23 cygnus78 Exp $
+   $Id: PyramidBlock.cpp,v 1.6 2006/10/23 20:54:37 cygnus78 Exp $
 
 *************************************************/
 
@@ -156,7 +156,7 @@ PyramidBlock::blockmatch(int level)
 
   for(int x=0;x<(currSize.width-gmaxd);x++) {
     for(int y=0;y<currSize.height;y++) {     // This must be taken care of !!!!!!!!
-      if(ccv::debug) std::cerr << "x,y=" << x << "," << y << endl;
+      //if(ccv::debug) std::cerr << "x,y=" << x << "," << y << endl;
       mse = 1e13; disparity = 0;
       // Getting pixel at x,y
       rptr = (uchar*)(pyramid_right[level]->imageData + y*wStep + x*3);
@@ -168,7 +168,7 @@ PyramidBlock::blockmatch(int level)
 	 y!=0                      &&
 	 y!=currSize.height-1) {
 
-	if(ccv::debug) std::cerr << "inner\n";
+	//if(ccv::debug) std::cerr << "inner\n";
 
 	if(level!=levels){
 	  maxd = 
@@ -176,13 +176,13 @@ PyramidBlock::blockmatch(int level)
 	       pyr_disp[level+1][(x/2-1>=0) ? x/2-1 : 0 ][y/2] + 
 	       pyr_disp[level+1]
 	       [(x/2+1<currSize.width/2) ? x/2+1 : x/2][y/2])/3 + tolerance[level];
-	  if(ccv::debug) std::cerr << "Setting max,min\n";
+	  //if(ccv::debug) std::cerr << "Setting max,min\n";
 	  if( maxd>gmaxd ) maxd=gmaxd;
 	  if( maxd<0 ) maxd=0; // NNN
 	  mind = maxd-2*tolerance[level];
 	  if( mind < 0 ) mind = 0;
 
-	  if(ccv::debug) std::cerr << "(" << mind << "," << maxd << ") \n";
+	  //if(ccv::debug) std::cerr << "(" << mind << "," << maxd << ") \n";
 
 	  lptr+=leftI->nChannels*mind;
 	}
@@ -253,6 +253,12 @@ PyramidBlock::blockmatch(int level)
 	}
       }
     }
+
+    double progress = static_cast<double>(x)/(currSize.width-gmaxd);
+    double p = (levels-level-1+progress)/levels;
+    emit percentageDone( p );
+    if( ccv::ABORTFLAG )
+      break;
   }
 }
 
