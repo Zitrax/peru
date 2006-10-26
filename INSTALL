@@ -23,12 +23,7 @@ OpenCV        Version: 0.9.6 (Beta 4)
               ** near future.                    **
               *************************************
 
-              OpenCV needs ffmpeg-0.4.8 and as that file is
-              currently no longer available at it's original
-              location I am supplying it at the peru
-              repository so you can get it there.
-              
-Qt            Version: 3.1.1 ( Currently using 3.3.4 )
+Qt            Version: 3.1.1 ( Currently using 3.3.6 )
               http://www.trolltech.com/ 
 
               Qt 4 is not yet supported.     
