@@ -23,6 +23,10 @@ OpenCV        Version: 0.9.6 (Beta 4)
               ** near future.                    **
               *************************************
 
+              You should also compile OpenCV with a 3.x version
+              of GCC. If compiled with 4.x we seem to crash during
+              calibration.
+
 Qt            Version: 3.1.1 ( Currently using 3.3.6 )
               http://www.trolltech.com/ 
 
