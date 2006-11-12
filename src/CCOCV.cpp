@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.20 2006/10/23 20:27:42 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.20.2.1 2006/11/12 18:28:38 cygnus78 Exp $
 
 *************************************************/
 
@@ -25,8 +25,8 @@ CCOCV::CCOCV() :
   failcorners(0),
   objectPoints(0),
   numPoints(0),
+  corner_count(0),
   rgb_image(0),
-  thresh(0),
   gray_image(0),
   tmpwth(0)
 {
@@ -41,6 +41,9 @@ CCOCV::CCOCV() :
   ths->xsize      = 9;
   ths->ysize      = 9;
   ths->threshold  = 220;
+
+  // Zero-initialize struct
+  cp = (CameraParams) {0};
 }
 
 CCOCV::~CCOCV()
@@ -50,12 +53,18 @@ CCOCV::~CCOCV()
   zapArr(allcorners);
   zapArr(failcorners);
   zapArr(corners);
-  zapArr(objectPoints);
+  zapMat(objectPoints);
+  zapArr(corner_count);
+  zapArr(numPoints);
+
+  // For some reason we crash if we delete these.
+  // But they are reported as leaked...
+  // zapArr(cp.rotMatr);
+  // zapArr(cp.transVect);
 
   delete ths;
 
   zapImg(rgb_image);
-  zapImg(thresh);
   zapImg(gray_image);
   zapImg(tmpwth);
 }
@@ -88,7 +97,9 @@ CCOCV::initializeCalibration()
   totalFailedCorners = 0;
 
   no_images = filenames.size();
-  
+  zapArr(corner_count);
+  corner_count = new int[no_images];
+
   images_processed = 0;
   t_no_images = 0;
 
@@ -130,47 +141,73 @@ CCOCV::findCorners(int& corners_found){
       break;
     }
     else {
-      if(ccv::debug) 
-	std::cerr << "numPoints are going to be initialized..." << endl;
-      if(ccv::debug) 
-	std::cerr << "no_images=" << no_images << endl;
-      
-      zapArr(numPoints);
-      numPoints = new int[no_images];
-      for(int i=0;i<no_images;i++) numPoints[i]=no_corners;
-      
-      if(ccv::debug) 
-	std::cerr << "numPoints initialized..." << endl;
-      
-      zapArr(objectPoints);
-      objectPoints = new CvPoint3D64d[no_images*no_corners];
+        if(ccv::debug) 
+            std::cerr << "numPoints are going to be initialized..." << endl;
+        if(ccv::debug) 
+            std::cerr << "no_images=" << no_images << endl;
+        
+        zapArr(numPoints);
+        numPoints = new int[no_images];
+        for(int i=0;i<no_images;i++) numPoints[i]=no_corners;
+        
+        if(ccv::debug) 
+            std::cerr << "numPoints initialized..." << endl;
+        
+        float* temppoints = new float[no_images*no_corners*3];
+        float SquareSize = 1;
+        for (int i = 0 ; i < no_images ; i++)
+            for (int j = 0; j < etalon_size.height; j++)
+                for (int k = 0; k < etalon_size.width; k++)
+                {
+                    temppoints[(i*no_corners*3)+(j*etalon_size.width + k)*3]=(float)j*SquareSize;
+                    temppoints[(i*no_corners*3)+(j*etalon_size.width + k)*3+1]=(float)k*SquareSize;
+                    temppoints[(i*no_corners*3)+(j*etalon_size.width + k)*3+2]=0.f;
+                }
 
-      for(int i=0;i<no_images;i++)               //number of images
-	for(int j=0;j<etalon_size.height;j++)    //vertical component (Y)
-	  for(int k=0;k<etalon_size.width;k++)   //horizontal component (X)
-	    {
-	      objectPoints[i*no_corners+(etalon_size.width-k-1)+
-			   etalon_size.width*j].x = k*dimx;
-	      objectPoints[i*no_corners+(etalon_size.width-k-1)+
-			   etalon_size.width*j].y = j*dimy;
-	      objectPoints[i*no_corners+(etalon_size.width-k-1)+
-			   etalon_size.width*j].z = 0;
-	    }
-      //printObjectPoints(no_images);
-    
-      cp.rotMatr = new double[no_images*9];
-      cp.transVect = new double[no_images*3];
+        zapMat(objectPoints);
+        objectPoints = cvCreateMat(no_images*no_corners,3,CV_32FC1);
+        cvInitMatHeader(objectPoints,no_images*no_corners,3,CV_32FC1, temppoints);
+        
+        if(ccv::debug) std::cerr << "Printing object points\n";
+        printObjectPoints(no_images);
+      
+        zapArr(cp.rotMatr);
+        zapArr(cp.transVect);
+        cp.rotMatr = new double[no_images*9];
+        cp.transVect = new double[no_images*3];
+        
+        if(ccv::debug) std::cerr << "Calibrating...\n" ;
+        if(ccv::debug) std::cerr 
+            << "Size x=" 
+            << imageSize.width << " y=" 
+            << imageSize.height << endl;
+        
 
-      if(ccv::debug) std::cerr << "Calibrating...\n" ;
-      if(ccv::debug) std::cerr 
-	<< "Size x=" 
-	<< imageSize.width << " y=" 
-	<< imageSize.height << endl;
+//---
+      int i, total = 0; 
+      int flags = 0;
 
-      cvCalibrateCamera_64d( no_images, numPoints, imageSize, allcorners, 
-			     objectPoints, &cp.distortion[0], cp.matrix, 
-			     cp.transVect, cp.rotMatr, 0);
-    
+      CvMat* point_counts = cvCreateMat(no_images,1,CV_32SC1);
+      cvSetData( point_counts, corner_count, sizeof(int));      
+
+      CvMat image_points, object_points;
+      CvMat dist_coeffs = cvMat( 4, 1, CV_64FC1, cp.distortion );
+      CvMat camera_matrix = cvMat( 3, 3, CV_64FC1, cp.matrix );
+      CvMat rotation_matrices = cvMat( no_images, 9, CV_64FC1, cp.rotMatr );
+      CvMat translation_vectors = cvMat( no_images, 3, CV_64FC1, cp.transVect );
+      
+      for( i = 0; i < no_images; i++ )
+          total += numPoints[i];
+      
+      image_points = cvMat( total, 1, CV_64FC2, allcorners );
+      
+      cvCalibrateCamera2( objectPoints, &image_points, point_counts, imageSize,
+                          &camera_matrix, &dist_coeffs, &rotation_matrices, &translation_vectors,
+                          flags );
+      
+      if(ccv::debug) std::cerr << "Calibrated: d1= " << cp.distortion[0] << " d1=" << cvmGet(&dist_coeffs,0,0) << endl;
+//---
+      
       calibrated = true;             // Should also check if successfull!
     
       cp.focalLength[0]    = cp.matrix[0];  // So this is actually stored twice
@@ -179,6 +216,17 @@ CCOCV::findCorners(int& corners_found){
       cp.principalPoint[1] = cp.matrix[5];  //  older .ccv files )
 
       if(ccv::debug) std::cerr << "Calibrated!" << endl;
+
+      // Clean up
+      cvReleaseMat(&point_counts);
+//       cvReleaseMat(&image_points);
+//       cvReleaseMat(&object_points);
+//       cvReleaseMat(&dist_coeffs);
+//       cvReleaseMat(&camera_matrix);
+//       cvReleaseMat(&rotation_matrices);
+//       cvReleaseMat(&translation_vectors);
+
+      zapArr(temppoints);
 
       printParams(no_images);
       initialized=false;
@@ -230,12 +278,6 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
   if(filenames.size()>0){
     int etalon_points = etalon_size.width * etalon_size.height;
 
-    /* Obviously it's important to declare
-       how many points we are expected to
-       find. (Update: OpenCV searches for
-       max this number of corners. ) */
-    corner_count = etalon_points; 
-					
     if(ccv::debug) 
       std::cerr << "Loading image: '" << filenames.back() << "'\n";
 
@@ -250,10 +292,6 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
     // Get size of image
     cvGetImageRawData(rgb_image, 0, 0, &imageSize);         
 
-    // Create temporary image
-    zapImg(thresh);
-    thresh     = cvCreateImage(imageSize,IPL_DEPTH_8U, 1); 
-    
     // Prepare gray image
     zapImg(gray_image);
     gray_image = cvCreateImage(imageSize,IPL_DEPTH_8U, 1); 
@@ -262,98 +300,63 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
     //    iplColorToGray( rgb_image, gray_image );
     cvCvtColor(rgb_image,gray_image,CV_BGR2GRAY);
 
-    // Make thresh contain copy of image
-    zapImg(thresh);
-    thresh = cvCloneImage( gray_image );
-
     if(ccv::debug) std::cerr << "Image depth = " << gray_image->depth << "\n";
-
-    //    cvvSaveImage("gray_image.bmp",gray_image);
-
-    CvMemStorage *storage;
-    storage = cvCreateMemStorage(0);  // Should be freed ? 
 
     if(ccv::debug) std::cerr << "Trying to find corners...\n";
     int status = 
-      cvFindChessBoardCornerGuesses( gray_image, thresh, storage,
-				     etalon_size, corners, &corner_count );
+        cvFindChessboardCorners( gray_image, etalon_size, corners, &corner_count[images_processed] );
     if(ccv::debug) 
       std::cerr << "Done trying to find corners. status=" << status << endl;
     if(ccv::debug) 
-      std::cerr << "Found " << corner_count << " corners\n";    
+      std::cerr << "Found " << corner_count[images_processed] << " corners\n";    
 
-    if(wth && corner_count!=etalon_points){
-      corner_count = etalon_points; 
-      
-      if(ccv::debug) 
-	std::cerr << "Trying to find more corners using wth\n" << endl;
-      zapImg(tmpwth);
-      tmpwth = cvCloneImage( gray_image );
-      whiteTopHat( tmpwth, ths );
-      status = 
-	cvFindChessBoardCornerGuesses( tmpwth, thresh, storage,
-				       etalon_size, corners, &corner_count );
-      if(ccv::debug) std::cerr << "Now found " << corner_count << " corners\n";
-      
-      // Try some other parameters if the first try was unsuccessful 
-//       if( corner_count != etalon_points ) {
-// 	corner_count = etalon_points;
-// 	zapImg(tmpwth);
-// 	tmpwth = cvCloneImage( gray_image );
-// 	ths->threshold-=10;
-// 	whiteTopHat( tmpwth, ths);
-// 	status = 
-// 	  cvFindChessBoardCornerGuesses( tmpwth, thresh, storage,
-// 					 etalon_size, corners, &corner_count );
-// 	if(ccv::debug) 
-// 	  std::cerr << "Now found " << corner_count << " corners\n";
-//       }
+    if(status && wth && corner_count[images_processed]!=etalon_points)
+    {
+        corner_count[images_processed] = etalon_points; 
+        
+        if(ccv::debug) 
+            std::cerr << "Trying to find more corners using wth\n" << endl;
+        zapImg(tmpwth);
+        tmpwth = cvCloneImage( gray_image );
+        whiteTopHat( tmpwth, ths );
+        status = 
+            cvFindChessboardCorners( tmpwth, etalon_size, corners, &corner_count[images_processed] );
+#warning "Should check result"      
+        if(ccv::debug) std::cerr << "Now found " << corner_count << " corners\n";
+        
 
       if(!singleTrial) zapImg(tmpwth);
     }          
 
-    corners_found=corner_count;
+    corners_found=corner_count[images_processed];
 
-    if(corners_found==etalon_points){              // Only if we find them all
-
-      printCorners(corners_found);
+    // Only if we find them all
+    if(corners_found==etalon_points)   
+    {
+        
+        printCorners(corners_found);
       
-
-      if(ccv::debug) std::cerr << "Refining found corners..." << endl;
-      
-      cvFindCornerSubPix(gray_image, corners, 
-			 corners_found, 
-			 cvSize(5,5), cvSize(-1, -1),
-			 cvTermCriteria (CV_TERMCRIT_ITER|
-					 CV_TERMCRIT_EPS, 10, 0.1));
-
-//       if(sortCorners) {
-// 	if(ccv::debug) std::cerr << "Sorting corners\n" << endl;
-// 	if(!(new SortCorners(corners,corners_found,
-// 			     etalon_size.width, 
-// 			     etalon_size.height))->getSuccess())
-// 	  {
-// 	    corners_found *= -1;
-// 	  }
-//       }
-      
+        
+        if(ccv::debug) std::cerr << "Refining found corners..." << endl;
+        
+        cvFindCornerSubPix(gray_image, corners, 
+                           corners_found, 
+                           cvSize(5,5), cvSize(-1, -1),
+                           cvTermCriteria (CV_TERMCRIT_ITER|
+                                           CV_TERMCRIT_EPS, 10, 0.1));
+        
     }
     
     // Later to make this faster, 
     // we can use the same image all the time
 
-    cvReleaseMemStorage( &storage );
-    if(ccv::debug) std::cerr << "storage is released...\n";
-
     cvReleaseImage(&gray_image);            // Should maybe be moved later
     if(ccv::debug) std::cerr << "gray_mage is released...\n";
     cvReleaseImage(&rgb_image);             // Should maybe be moved later
     if(ccv::debug) std::cerr << "rgb_image is released...\n";
-    cvReleaseImage(&thresh);                // Should maybe be moved later
-    if(ccv::debug) std::cerr << "thresh is released...\n";
-
+    
     printCorners(corners_found);
-
+    
     if(corners_found==etalon_points)
       return CORRECT_IMAGE;
     else return FAILED_IMAGE;               // Corners not detected properly
@@ -365,12 +368,13 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
 void
 CCOCV::addFileName(string name)
 {
-  if(ccv::debug) 
-    std::cerr << "Inside addFileName with string '" << name << "'\n";
-  filenames.push_front(name);
-  if(ccv::debug) 
-    std::cerr << "Filenames now has string '" << filenames.back() 
-	      << "' as last element\n";
+    if(ccv::debug) 
+        std::cerr << "Inside addFileName with string '" << name << "'\n";
+ 
+    filenames.push_front(name);
+    if(ccv::debug) 
+        std::cerr << "Filenames now has string '" << filenames.back() 
+                  << "' as last element\n";
 }
 
 void
@@ -442,17 +446,33 @@ CCOCV::printParams(int no_images)
 void
 CCOCV::printObjectPoints(int no_images)
 {
-  for(int i=0;i<etalon_size.width*etalon_size.height*no_images;i++){
-    if(ccv::debug) std::cerr << "x=" << objectPoints[i].x
-	 << " y=" << objectPoints[i].y
-	 << " z=" << objectPoints[i].z << endl;
-  }
+    if(ccv::debug) std::cerr << *objectPoints << endl;
+
+//     for(int i=0;i<etalon_size.width*etalon_size.height*no_images;i+=3){
+//         if(ccv::debug) std::cerr << "x='" << objectPoints[i] << "'"
+//                                  << " y='" << objectPoints[i+1] << "'"
+//                                  << " z=" << objectPoints[i+2] << "'" << endl;
+//     }
 }
 
 IplImage*
 CCOCV::rectifyImage(string srcImageName, bool write)
 {
   if(ccv::debug) std::cerr << "CCOCV::rectify\n";
+
+//   CvCalibFilter* cf = new CvCalibFilter();
+//   IplImage* src = cvLoadImage(srcImageName.c_str());
+//   CvSize warpSize = cvSize( src->width, src->height );
+//   IplImage* dst = cvCreateImage( warpSize, src->depth, src->nChannels);
+//   if(calibrated)
+//     {
+//       cvZero(dst);
+//       cf->Rectify( &src, &dst );
+
+      
+//       zapImg(src);
+//   return dst;
+
   if(&srcImageName && (srcImageName.size() > 0) ) {
 
     IplImage* src = cvLoadImage(srcImageName.c_str());      
@@ -475,11 +495,13 @@ CCOCV::rectifyImage(string srcImageName, bool write)
       
       cvComputePerspectiveMap(*coeffs, tmpMap);
       
-      cvConvertMap(src,tmpMap,rectMap,1);
+      //cvConvertMap(src,tmpMap,rectMap,1);
       
       cvReleaseMat(&tmpMap);
       
-      cvRemap( src, dst, rectMap, 1 );
+      //cvRemap( src, dst, rectMap, 1 );
+
+      cvUnDistort( src, dst, rectMap, 1 );
     }
     
     zapImg(src);
@@ -626,8 +648,9 @@ CCOCV::getCorners(const QSize& size)
 
   int no_corners = etalon_size.width*etalon_size.height;
   int total_corners = no_corners*no_images + totalFailedCorners;
-
-  QPointArray pa( total_corners > 0 ? total_corners : 0 );
+  QPointArray pa( total_corners );
+  
+  if(ccv::debug) std::cerr << "Corners = " << total_corners << "(" << no_corners*no_images << "+" << totalFailedCorners-1 << ")\n";
 
   if( total_corners ) {
   
@@ -673,7 +696,7 @@ CCOCV::getCorners(const QSize& size)
 	}
       }
   
-      delete images;
+      delete [] images;
       
   }
   else

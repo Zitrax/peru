@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.h,v 1.11 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.11.2.1 2006/11/12 18:28:38 cygnus78 Exp $
 
 *************************************************/
 
@@ -155,15 +155,14 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   CvPoint2D32f* corners;    //!< Pointer to the corner array found
   CvPoint2D64d* allcorners; //!< Corners found in correct calibration images
   CvPoint2D64d* failcorners;//!< Corners found in failed calibration images
-  CvPoint3D64d*             //!< Coordinates of the chessboard
-    objectPoints;
+  CvMat* objectPoints;      //!< Coordinates of the chessboard
+    
   int*   numPoints;         //!< Number of points in each image
-  int  corner_count;        //!< Numbers of corners found... 
+  int* corner_count;        //!< Numbers of corners found... 
   int totalFailedCorners;   //!< Total number of failed corners found
   CvSize imageSize;         //!< Size of images
   IplImage* rgb_image;      //!< Source chessboard view; must have IPL_DEPTH_8U
   IplImage* gray_image;     //!< Source chessboard view; must have IPL_DEPTH_8U 
-  IplImage* thresh;         //!< Tmp image same size and format as source image
   IplImage* tmpwth;         //!< TopHat transformed image
 
   QStringList filenames;    //!< Filenames for calibration images         
