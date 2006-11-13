@@ -9,11 +9,104 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.20 2006/10/23 20:27:42 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.21 2006/11/13 22:40:23 cygnus78 Exp $
 
 *************************************************/
 
 #include "CCOCV.h"
+
+
+CameraParams::CameraParams() :
+    rotMatr(0),
+    transVect(0),
+    rotMatrSize(0),
+    transVectSize(0)
+{
+    // Isnt there a nicer way to initialize these ?
+    for(int i=0;i<2;i++)
+    {
+        focalLength[i] = 0;
+        principalPoint[i]=0;
+    }
+
+    for(int i=0;i<4;++i)
+    {
+        distortion[i]=0;
+        distortionf[i]=0;
+    }
+
+    for(int i=0;i<9;++i)
+    {
+        matrix[i] = 0;
+        matrixf[i] = 0;
+    }
+}
+
+CameraParams::~CameraParams()
+{
+    zapArr(rotMatr);
+    zapArr(transVect);
+}
+
+CameraParams::CameraParams(const CameraParams& rhs) :
+    rotMatr(0),
+    transVect(0),
+    rotMatrSize(rhs.rotMatrSize),
+    transVectSize(rhs.transVectSize)
+{
+    // Just initialize everything using the assignment operator
+    *this = rhs;
+}
+
+CameraParams& CameraParams::operator=(const CameraParams& rhs)
+{
+    if( this == &rhs )
+        return *this;
+
+    for(int i=0;i<2;i++)
+    {
+        focalLength[i] = rhs.focalLength[i];
+        principalPoint[i] = rhs.principalPoint[i];
+    }
+
+    for(int i=0;i<2;i++)
+    {    
+        distortion[i] = rhs.distortion[i];
+        distortionf[i] = rhs.distortionf[i];
+    }
+
+    for(int i=0;i<2;i++)
+    {    
+        matrix[i] = rhs.matrix[i];
+        matrixf[i] = rhs.matrixf[i];
+    }
+
+    // Be sure they are in sync
+    assert( XNOR(rhs.rotMatr  ,rhs.rotMatrSize  ) );
+    assert( XNOR(rhs.transVect,rhs.transVectSize) );
+
+    rotMatrSize    = rhs.rotMatrSize;
+    transVectSize  = rhs.transVectSize;
+
+    delete [] rotMatr;
+    delete [] transVect;
+    
+    if(rhs.rotMatr)
+    {
+        rotMatr = new double[rotMatrSize];
+        for(int i=0;i<rotMatrSize;++i)
+            rotMatr[i]=rhs.rotMatr[i];
+    }
+    else rotMatr = 0;
+
+    if(rhs.transVect)
+    {
+        transVect = new double[transVectSize];
+        for(int i=0;i<transVectSize;++i)
+            transVect[i]=rhs.transVect[i];
+    }
+    else transVect = 0;
+}
 
 CCOCV::CCOCV() : 
   initialized(false),
@@ -50,6 +143,7 @@ CCOCV::~CCOCV()
   zapArr(allcorners);
   zapArr(failcorners);
   zapArr(corners);
+  zapArr(numPoints);
   zapArr(objectPoints);
 
   delete ths;
@@ -158,15 +252,19 @@ CCOCV::findCorners(int& corners_found){
 	    }
       //printObjectPoints(no_images);
     
-      cp.rotMatr = new double[no_images*9];
-      cp.transVect = new double[no_images*3];
+      zapArr(cp.rotMatr);
+      zapArr(cp.transVect);
+      cp.rotMatrSize = no_images*9;
+      cp.transVectSize = no_images*3;
+      cp.rotMatr = new double[cp.rotMatrSize];
+      cp.transVect = new double[cp.transVectSize];
 
       if(ccv::debug) std::cerr << "Calibrating...\n" ;
       if(ccv::debug) std::cerr 
-	<< "Size x=" 
-	<< imageSize.width << " y=" 
-	<< imageSize.height << endl;
-
+          << "Size x=" 
+          << imageSize.width << " y=" 
+          << imageSize.height << endl;
+      
       cvCalibrateCamera_64d( no_images, numPoints, imageSize, allcorners, 
 			     objectPoints, &cp.distortion[0], cp.matrix, 
 			     cp.transVect, cp.rotMatr, 0);
@@ -673,7 +771,7 @@ CCOCV::getCorners(const QSize& size)
 	}
       }
   
-      delete images;
+      delete [] images;
       
   }
   else
@@ -979,7 +1077,9 @@ void
 CCOCV::setCameraParams(struct CameraParams cp)
 {
   if(ccv::debug) std::cerr << "CCOCV::setCameraParameters\n";
+
   this->cp = cp;
+
   calibrated = true;
   if(ccv::debug) 
     printParams(1);

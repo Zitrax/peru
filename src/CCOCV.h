@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.h,v 1.11 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.12 2006/11/13 22:40:23 cygnus78 Exp $
 
 *************************************************/
 
@@ -34,15 +34,26 @@ const int CORRECT_IMAGE = 1;
 const int FAILED_IMAGE = -1;
 
 //! Holds all camera parameters
-struct CameraParams {
-  double focalLength[2];
-  double distortion[4];
-  float distortionf[4]; 
-  double principalPoint[2];
-  double matrix[9];
-  float matrixf[9];
-  double* rotMatr;
-  double* transVect;
+class CameraParams {
+public:
+
+    CameraParams();
+    ~CameraParams();
+
+    CameraParams(const CameraParams& rhs);
+    CameraParams& operator=(const CameraParams& rhs);
+
+    double focalLength[2];
+    double distortion[4];
+    float distortionf[4]; 
+    double principalPoint[2];
+    double matrix[9];
+    float matrixf[9];
+    double* rotMatr;
+    double* transVect;
+
+    unsigned int rotMatrSize;
+    unsigned int transVectSize;
 
 };
 
