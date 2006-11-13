@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ccv.cpp,v 1.7 2006/10/23 18:58:49 cygnus78 Exp $
+   $Id: ccv.cpp,v 1.8 2006/11/13 22:41:20 cygnus78 Exp $
 
 *************************************************/
 
@@ -162,12 +162,15 @@ namespace ccv {
 
 std::ostream& operator<<(std::ostream& os, const CvMat& m)
 {
-  for(int c=0; c<m.cols; c++) {
+    os << "PRINTING MATRIX (rows=" << m.rows << ",cols=" << m.cols << ")\n";
+
     for(int r=0; r<m.rows; r++)
-      os << CV_MAT_ELEM( m, float, r, c ) << "\t";
-    os << "\n";
-  }
-  return os;
+    {
+        for(int c=0; c<m.cols; c++) 
+            os << CV_MAT_ELEM( m, float, r, c ) << "\t";
+        os << "\n";
+    }
+    return os;
 }
 
 void ccv::print( const QStringList& str_list )
