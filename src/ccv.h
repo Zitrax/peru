@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ccv.h,v 1.8 2006/10/23 18:58:49 cygnus78 Exp $
+   $Id: ccv.h,v 1.9 2006/11/14 20:54:30 cygnus78 Exp $
 
 *************************************************/
 
@@ -26,6 +26,9 @@
 #define zapImg(x) if(x){cvReleaseImage(&x); x=0;}
 #define zap(x) if(x){delete(x); x=0;}
 #define zapArr(x) if(x){delete [] x; x=0;}
+
+#define XOR(a,b) (!(a) != !(b))
+#define XNOR(a,b) ( (!a&&!b) || (a&&b) )
 
 namespace ccv{
   
@@ -47,7 +50,8 @@ namespace ccv{
     error(QString s) : msg(s){}
   };
 
-  uchar* pixel_u(IplImage* image, //!< More convenient way of accessing pixels
+  //! More convenient way of accessing pixels
+  uchar* pixel_u(IplImage* image, 
 			int x, int y);
 
   float* pixel_f(IplImage* image, 
@@ -63,6 +67,14 @@ namespace ccv{
   IplImage* qImageToIplImage(QImage* qimg);
 
   void print( const QStringList& str_list );
+
+  //! Not exception safe however
+  struct delete_object
+  {
+      template <typename T> void operator()(const T* ptr) const
+          { delete ptr; }
+  };
+
 }
 
 std::ostream& operator<<(std::ostream& os, const CvMat& m);
