@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.38 2006/10/23 20:27:43 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.39 2006/11/14 20:57:15 cygnus78 Exp $
 
 *************************************************/
 
@@ -382,6 +382,7 @@ cleanup:
   stopB->setEnabled( false );
 
   // Reset the que to the original state
+  assert(!all_files.isEmpty());
   ccocv->setFileList(all_files);
   updateImagesInQueueL();
 }
@@ -455,6 +456,8 @@ Peru::montage(QStringList flist)
       {
 	--it;
 	QImage icon( *it );
+	double aspect = static_cast<double>(icon.width())/icon.height();
+	icon_size.setHeight(icon_size.width()/aspect);
 	QPixmap icon_p = icon.smoothScale( icon_size );
 	
 	if(ccv::debug) std::cerr << "Adding " << *it << " to montage view\n";

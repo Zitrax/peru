@@ -1,3 +1,8 @@
+0.4.2
+* Fixed a couple of minor memoryleaks
+* Some code cleaning
+* Aspect ratio of thumbnails
+
 0.4.1
 * Fixed crashbug when trying do draw 0 found corners
 * Storing path to stereo images
