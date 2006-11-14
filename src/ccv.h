@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ccv.h,v 1.9 2006/11/14 20:54:30 cygnus78 Exp $
+   $Id: ccv.h,v 1.10 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -74,6 +74,11 @@ namespace ccv{
       template <typename T> void operator()(const T* ptr) const
           { delete ptr; }
   };
+
+  inline int round(double x)
+  {
+      return int(x > 0.0 ? x + 0.5 : x - 0.5);
+  }
 
 }
 

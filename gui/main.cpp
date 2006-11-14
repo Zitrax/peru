@@ -3,7 +3,7 @@
 #include "Peru.h"
 
 namespace PeruGlobals {
-  extern QString execLocation = QString::null;
+  QString execLocation = QString::null;
 };
 
 using namespace PeruGlobals;

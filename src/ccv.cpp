@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ccv.cpp,v 1.8 2006/11/13 22:41:20 cygnus78 Exp $
+   $Id: ccv.cpp,v 1.9 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -156,6 +156,8 @@ namespace ccv {
 	*(iplimg->imageData + y*iplimg->widthStep + x*iplimg->nChannels) 
 	  = qRed(c);
       }
+
+    return iplimg;
   }
   
 }
@@ -178,7 +180,7 @@ void ccv::print( const QStringList& str_list )
   QStringList::ConstIterator it  = str_list.begin();
   QStringList::ConstIterator end = str_list.end();
 
-  for( it; it!=end; ++it )
+  for( ; it!=end; ++it )
     std::cout << *it << std::endl;
 }
 

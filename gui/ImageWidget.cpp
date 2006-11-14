@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ImageWidget.cpp,v 1.7 2005/06/22 23:14:25 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.8 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -39,7 +39,7 @@ ImageWidget::displayImage(QImage& im)
 }
 
 void
-ImageWidget::paintEvent( QPaintEvent *e)
+ImageWidget::paintEvent( QPaintEvent* )
 {
   if( sImage.isNull() ) 
     smoothScaleImage();

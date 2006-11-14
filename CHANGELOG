@@ -1,6 +1,6 @@
 0.4.2
 * Fixed a couple of minor memoryleaks
-* Some code cleaning
+* Some code cleaning (mostly warnings)
 * Aspect ratio of thumbnails
 
 0.4.1

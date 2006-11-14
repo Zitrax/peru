@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.cpp,v 1.8 2006/10/23 20:27:43 cygnus78 Exp $
+   $Id: MontageView.cpp,v 1.9 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -112,7 +112,7 @@ void MontageView::drawPoints(const QPointArray& pa, QValueList<int>& corners, in
 
   bool failed = corners[item_nr] != correct;
 
-  for( int i=0; i<pa.count()+1; ++i ){
+  for( uint i=0; i<pa.count()+1; ++i ){
 
     if( corners[item_nr] == 0 ) {
 

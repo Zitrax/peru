@@ -8,7 +8,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.39 2006/11/14 20:57:15 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.40 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -453,19 +453,19 @@ Peru::montage(QStringList flist)
     QStringList::ConstIterator it = flist.end();
     
     while(true)
-      {
-	--it;
-	QImage icon( *it );
-	double aspect = static_cast<double>(icon.width())/icon.height();
-	icon_size.setHeight(icon_size.width()/aspect);
-	QPixmap icon_p = icon.smoothScale( icon_size );
-	
-	if(ccv::debug) std::cerr << "Adding " << *it << " to montage view\n";
-	QIconViewItem* item = new QIconViewItem(montageView, *it, icon_p );
-	if( it == begin )
-	  break;
-	qApp->processEvents();
-      }
+    {
+	  --it;
+      QImage icon( *it );
+      double aspect = static_cast<double>(icon.width())/icon.height();
+      icon_size.setHeight( ccv::round(icon_size.width()/aspect) );
+      QPixmap icon_p = icon.smoothScale( icon_size );
+      
+      if(ccv::debug) std::cerr << "Adding " << *it << " to montage view\n";
+      new QIconViewItem(montageView, *it, icon_p );
+      if( it == begin )
+        break;
+      qApp->processEvents();
+    }
 
     imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, tr("Thumbnails")) );
 

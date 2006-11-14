@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: BlockMatch.cpp,v 1.5 2006/10/23 18:58:49 cygnus78 Exp $
+   $Id: BlockMatch.cpp,v 1.6 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -94,7 +94,7 @@ BlockMatch::calculateDisparityFast()
   
   for(int x=1;x<(width-MAXD);x++) {
     for(int y=1;y<(height-1);y++) {
-      mse = 1e13; disparity = 0;
+      mse = INT_MAX; disparity = 0;
       for(int offset=0;offset<MAXD;offset++) {
 	val = abs(rC[x+1][y+1] - lC[x+offset+1][y+1]);
 	if(val<mse) {
@@ -172,7 +172,7 @@ BlockMatch::calculateDisparity()
   for(int x=0; x<leftI->width; x++) {
     for(int y=0; y<leftI->height; y++) {
       
-      int mse = 1e13; int disparity = 0;
+      int mse = INT_MAX; int disparity = 0;
       uchar* dptr = ccv::pixel_u(dispI,x,y);
       uchar* rptr = ccv::pixel_u(tmpR,x+bs2,y+bs2);
       uchar* lptr = ccv::pixel_u(tmpL,x+bs2,y+bs2);
@@ -210,7 +210,6 @@ BlockMatch::windowDiff(uchar* l, uchar* r, int wstep, int n, int nc)
   
   int diff=0;
 
-  int c;
   if(!color) nc=1;
 
   for(int x=-(n/2); x<(n/2); x++)

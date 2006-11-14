@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.h,v 1.12 2006/11/13 22:40:23 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.13 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -104,8 +104,7 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   CameraParams getParams()  //!< Returns the camera-parameters struct
   { return cp; }
 
-  void printParams          //!< Prints all found parameters to stdout
-    (int no_images);    
+  void printParams();       //!< Prints all found parameters to stdout
 
   void saveParams           //!< Saves found parameters to file with name file
     (const char* file);     

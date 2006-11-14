@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: PyramidBlock.cpp,v 1.6 2006/10/23 20:54:37 cygnus78 Exp $
+   $Id: PyramidBlock.cpp,v 1.7 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -137,7 +137,7 @@ PyramidBlock::blockmatch(int level)
   int wStep = pyramid_right[level]->widthStep;
   double mse;
   int gmaxd,maxd,mind;
-  int disparity,diffV,rightV;
+  int disparity,diffV;
 
   CvSize currSize = cvGetSize( pyramid_right[level] );
   uchar* rptr;

@@ -8,7 +8,7 @@
    Daniel Bengtsson 2003-2005, daniel@bengtssons.info
 
  Version:
-   $Id: PerspectiveCorrect.cpp,v 1.2 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: PerspectiveCorrect.cpp,v 1.3 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -39,7 +39,7 @@ PerspectiveCorrect::apply(IplImage* image)
 
   int stop    =  0; 
   int start   = -1;
-  uchar val   = -1;
+  uchar val   =  0;
   uchar tmp   =  0;
   uchar* tmp2 =  0;
   double midpoint = 0;

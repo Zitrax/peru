@@ -10,7 +10,7 @@
    Daniel Bengtsson 2003-2005, daniel@bengtssons.info
 
  Version:
-   $Id: GradientRemoval.h,v 1.2 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: GradientRemoval.h,v 1.3 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -25,6 +25,8 @@ class GradientRemoval : public Filter
 public:
   
   GradientRemoval();
+  virtual ~GradientRemoval(){}
+
   void apply(IplImage* image);
 
 };

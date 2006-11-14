@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.21 2006/11/13 22:40:23 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.22 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -94,7 +94,7 @@ CameraParams& CameraParams::operator=(const CameraParams& rhs)
     if(rhs.rotMatr)
     {
         rotMatr = new double[rotMatrSize];
-        for(int i=0;i<rotMatrSize;++i)
+        for(uint i=0;i<rotMatrSize;++i)
             rotMatr[i]=rhs.rotMatr[i];
     }
     else rotMatr = 0;
@@ -102,25 +102,27 @@ CameraParams& CameraParams::operator=(const CameraParams& rhs)
     if(rhs.transVect)
     {
         transVect = new double[transVectSize];
-        for(int i=0;i<transVectSize;++i)
+        for(uint i=0;i<transVectSize;++i)
             transVect[i]=rhs.transVect[i];
     }
     else transVect = 0;
+
+    return *this;
 }
 
 CCOCV::CCOCV() : 
-  initialized(false),
-  calibrated(false),
   sortCorners(false),
   wth(false),
+  initialized(false),
+  calibrated(false),
   corners(0),
   allcorners(0),
   failcorners(0),
   objectPoints(0),
   numPoints(0),
   rgb_image(0),
-  thresh(0),
   gray_image(0),
+  thresh(0),
   tmpwth(0)
 {
   correct = new int[100];
@@ -278,7 +280,7 @@ CCOCV::findCorners(int& corners_found){
 
       if(ccv::debug) std::cerr << "Calibrated!" << endl;
 
-      printParams(no_images);
+      printParams();
       initialized=false;
     
       break;
@@ -498,7 +500,7 @@ CCOCV::printCorners(int nr)
 }
 
 void
-CCOCV::printParams(int no_images) 
+CCOCV::printParams() 
 {
   if(calibrated) {
     
@@ -521,17 +523,6 @@ CCOCV::printParams(int no_images)
       if(ccv::debug) std::cerr << cp.matrix[i] << " ";
     if(ccv::debug) std::cerr << endl;
 
-//     if(ccv::debug) std::cerr << "rotMatr = "; 
-//     for(int i=0;i<no_images*9;i++)
-//       if(ccv::debug) std::cerr << cp.rotMatr[i] << " ";
-//     if(ccv::debug) std::cerr << endl;
-
-//     if(ccv::debug) std::cerr << "transVect = ";
-//     for(int i=0;i<no_images*9;i++)
-//       if(ccv::debug) std::cerr << cp.transVect[i] << " ";
-//     if(ccv::debug) std::cerr << endl;
-
-    
   }
   else 
     if(ccv::debug) std::cerr << "No calibration performed!" << endl;
@@ -548,7 +539,7 @@ CCOCV::printObjectPoints(int no_images)
 }
 
 IplImage*
-CCOCV::rectifyImage(string srcImageName, bool write)
+CCOCV::rectifyImage(string srcImageName, bool /*write*/)
 {
   if(ccv::debug) std::cerr << "CCOCV::rectify\n";
   if(&srcImageName && (srcImageName.size() > 0) ) {
@@ -560,9 +551,6 @@ CCOCV::rectifyImage(string srcImageName, bool write)
     double coeffs[2][3][3];
     
     if( calibrated ) {
-      
-      IplImage src_stub;
-      IplImage dst_stub;
       
       cvZero( dst );
       
@@ -705,7 +693,7 @@ CCOCV::loadParams(const char* file)
   cp.matrix[7]         = atof(words[23]);
   cp.matrix[8]         = atof(words[24]);
   
-  printParams(0);
+  printParams();
 
   return true;
 
@@ -754,7 +742,7 @@ CCOCV::getCorners(const QSize& size)
 	if( images[i] ) {
 	  for( int j = 0; j<no_corners; ++j ) {
 	    if(ccv::debug) std::cerr << "Adding C(" << tp << "," << allcorners[ac+j].x*xs << "," << allcorners[ac+j].y*ys << ")\n";
-	    pa.setPoint( tp, allcorners[ac+j].x*xs, allcorners[ac+j].y*ys );
+	    pa.setPoint( tp, ccv::round(allcorners[ac+j].x*xs), ccv::round(allcorners[ac+j].y*ys) );
 	    tp++;
 	  }
 	  ac += no_corners;
@@ -764,10 +752,10 @@ CCOCV::getCorners(const QSize& size)
 	else {
 	  for( int j = 1; j<=failcorners[total_failed].x; ++j ) {
 	    if(ccv::debug) std::cerr << "Adding F(" << j << "," << failcorners[total_failed+j].x*xs << "," << failcorners[total_failed+j].y*ys << ")\n";
-	    pa.setPoint( tp, failcorners[total_failed+j].x*xs, failcorners[total_failed+j].y*ys );
+	    pa.setPoint( tp, ccv::round(failcorners[total_failed+j].x*xs), ccv::round(failcorners[total_failed+j].y*ys) );
 	    tp++;
 	  }
-	  total_failed += failcorners[total_failed].x + 1 ;
+	  total_failed += static_cast<int>(failcorners[total_failed].x + 1);
 	}
       }
   
@@ -1041,7 +1029,7 @@ CCOCV::trialCalib(int& corners_found)
       p.x = 10;
       p.y = 50;
       CvFont font;
-      cvInitFont( &font, CV_FONT_VECTOR0, 0.5f, 0.5f, 0, 1.0f );
+      cvInitFont( &font, CV_FONT_VECTOR0, 0.5f, 0.5f, 0, 1 );
       tmp = cvCreateImage(imageSize, IPL_DEPTH_8U, 1);
       cvZero( tmp );
       cvPutText( tmp, "TopHat not needed on this image", p,
@@ -1060,8 +1048,8 @@ CCOCV::trialCalib(int& corners_found)
       axes2.width = 5; axes2.height = 5;
 
       for(int i=0; i<corners_found;i++) {
-	p.x = corners[i].x;
-	p.y = corners[i].y;
+	p.x = ccv::round(corners[i].x);
+	p.y = ccv::round(corners[i].y);
 	cvEllipse(tmp, p, axes1, 0, 0, 360, CV_RGB(255,0,0) );
 	cvEllipse(tmp, p, axes2, 0, 0, 360, CV_RGB(255,255,0) );
       }
@@ -1070,7 +1058,9 @@ CCOCV::trialCalib(int& corners_found)
 
     return tmp;
 
-  }    
+  } 
+
+  return 0;
 }
 
 void
@@ -1082,7 +1072,7 @@ CCOCV::setCameraParams(struct CameraParams cp)
 
   calibrated = true;
   if(ccv::debug) 
-    printParams(1);
+    printParams();
 }
 
 void

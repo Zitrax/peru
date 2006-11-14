@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: stereo.cpp,v 1.11 2006/11/14 20:55:15 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.12 2006/11/14 22:05:24 cygnus78 Exp $
 
 *************************************************/
 
@@ -188,8 +188,8 @@ Stereo::preProcess()
   if(ccv::debug) std::cerr << "I(stereo): " << right << "\n";
 
   if(preFilters->size()>0) {
-    vector<Filter*>::iterator p = preFilters->begin();
-    for(p; p!=preFilters->end(); p++) {
+    for(vector<Filter*>::iterator p = preFilters->begin(); p!=preFilters->end(); p++) 
+    {
       static_cast<Filter*>(*p)->apply(leftI);
       static_cast<Filter*>(*p)->apply(rightI);
     }
@@ -200,8 +200,7 @@ void
 Stereo::postProcess()
 {
   if(postFilters->size()>0) {
-    vector<Filter*>::iterator p = postFilters->begin();
-    for(p; p!=postFilters->end(); p++) 
+    for(vector<Filter*>::iterator p = postFilters->begin(); p!=postFilters->end(); p++) 
       static_cast<Filter*>(*p)->apply(dispI);
   }
 }
