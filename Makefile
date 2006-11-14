@@ -19,5 +19,5 @@ peru: peru_sv.qm fixed_Makefile
 	make -C gui
 
 clean: fixed_Makefile
-	cd gui && make clean && rm -f *.qm
+	cd gui && make clean && rm -f *.qm && rm -f Makefile
 
