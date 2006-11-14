@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: stereo.cpp,v 1.10 2006/10/23 18:58:49 cygnus78 Exp $
+   $Id: stereo.cpp,v 1.11 2006/11/14 20:55:15 cygnus78 Exp $
 
 *************************************************/
 
@@ -83,7 +83,9 @@ Stereo::~Stereo()
   zapImg(rightI);
   zapImg(ground);
 
+  for_each( postFilters->begin(), postFilters->end(), ccv::delete_object());
   zap(postFilters);
+  for_each( preFilters->begin(), preFilters->end(), ccv::delete_object());
   zap(preFilters);
 
   if(ccv::debug) std::cerr << "Destructing Stereo\n";
