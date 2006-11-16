@@ -3,7 +3,7 @@ all: peru
 
 .PHONY: fixed_Makefile clean
 
-gui/Makefile:
+gui/Makefile: gui/Peru.pro
 	cd gui && qmake Peru.pro
 
 # Some versions of qmake added the no exceptions
