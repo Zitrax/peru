@@ -9,106 +9,11 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.22 2006/11/14 22:05:24 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.23 2006/11/16 23:48:31 cygnus78 Exp $
 
 *************************************************/
 
 #include "CCOCV.h"
-
-
-CameraParams::CameraParams() :
-    rotMatr(0),
-    transVect(0),
-    rotMatrSize(0),
-    transVectSize(0)
-{
-    // Isnt there a nicer way to initialize these ?
-    for(int i=0;i<2;i++)
-    {
-        focalLength[i] = 0;
-        principalPoint[i]=0;
-    }
-
-    for(int i=0;i<4;++i)
-    {
-        distortion[i]=0;
-        distortionf[i]=0;
-    }
-
-    for(int i=0;i<9;++i)
-    {
-        matrix[i] = 0;
-        matrixf[i] = 0;
-    }
-}
-
-CameraParams::~CameraParams()
-{
-    zapArr(rotMatr);
-    zapArr(transVect);
-}
-
-CameraParams::CameraParams(const CameraParams& rhs) :
-    rotMatr(0),
-    transVect(0),
-    rotMatrSize(rhs.rotMatrSize),
-    transVectSize(rhs.transVectSize)
-{
-    // Just initialize everything using the assignment operator
-    *this = rhs;
-}
-
-CameraParams& CameraParams::operator=(const CameraParams& rhs)
-{
-    if( this == &rhs )
-        return *this;
-
-    for(int i=0;i<2;i++)
-    {
-        focalLength[i] = rhs.focalLength[i];
-        principalPoint[i] = rhs.principalPoint[i];
-    }
-
-    for(int i=0;i<2;i++)
-    {    
-        distortion[i] = rhs.distortion[i];
-        distortionf[i] = rhs.distortionf[i];
-    }
-
-    for(int i=0;i<2;i++)
-    {    
-        matrix[i] = rhs.matrix[i];
-        matrixf[i] = rhs.matrixf[i];
-    }
-
-    // Be sure they are in sync
-    assert( XNOR(rhs.rotMatr  ,rhs.rotMatrSize  ) );
-    assert( XNOR(rhs.transVect,rhs.transVectSize) );
-
-    rotMatrSize    = rhs.rotMatrSize;
-    transVectSize  = rhs.transVectSize;
-
-    delete [] rotMatr;
-    delete [] transVect;
-    
-    if(rhs.rotMatr)
-    {
-        rotMatr = new double[rotMatrSize];
-        for(uint i=0;i<rotMatrSize;++i)
-            rotMatr[i]=rhs.rotMatr[i];
-    }
-    else rotMatr = 0;
-
-    if(rhs.transVect)
-    {
-        transVect = new double[transVectSize];
-        for(uint i=0;i<transVectSize;++i)
-            transVect[i]=rhs.transVect[i];
-    }
-    else transVect = 0;
-
-    return *this;
-}
 
 CCOCV::CCOCV() : 
   sortCorners(false),
@@ -280,7 +185,7 @@ CCOCV::findCorners(int& corners_found){
 
       if(ccv::debug) std::cerr << "Calibrated!" << endl;
 
-      printParams();
+      cp.print();
       initialized=false;
     
       break;
@@ -500,35 +405,6 @@ CCOCV::printCorners(int nr)
 }
 
 void
-CCOCV::printParams() 
-{
-  if(calibrated) {
-    
-    if(ccv::debug) std::cerr << "Focallength = " 
-	 << cp.focalLength[0] << " "
-	 << cp.focalLength[1] << endl;
-
-    if(ccv::debug) std::cerr << "Distortion = "
-	 << cp.distortion[0] << " "
-	 << cp.distortion[1] << " "
-	 << cp.distortion[2] << " "
-	 << cp.distortion[3] << endl;
-
-    if(ccv::debug) std::cerr << "PrincipalPoint = " 
-	 << cp.principalPoint[0] << " "
-	 << cp.principalPoint[1] << endl;
-
-    if(ccv::debug) std::cerr << "Matrix = ";
-    for(int i=0;i<9;i++)
-      if(ccv::debug) std::cerr << cp.matrix[i] << " ";
-    if(ccv::debug) std::cerr << endl;
-
-  }
-  else 
-    if(ccv::debug) std::cerr << "No calibration performed!" << endl;
-}
-
-void
 CCOCV::printObjectPoints(int no_images)
 {
   for(int i=0;i<etalon_size.width*etalon_size.height*no_images;i++){
@@ -609,94 +485,20 @@ CCOCV::undistortImage(string srcImageName, bool write)
   return dstImage;
 }
 
-void
+bool
 CCOCV::saveParams(const char* file)
 {
-  if(ccv::debug) std::cerr << "Saving parameters\n";
+    if(calibrated)
+        return cp.save(file);
 
-  if(calibrated) {
-    
-    ofstream of(file);
-
-    of << "Focallength = " 
-       << cp.focalLength[0] << " "
-       << cp.focalLength[1] << " " << endl;
-
-    of << "Distortion = "
-       << cp.distortion[0] << " "
-       << cp.distortion[1] << " "
-       << cp.distortion[2] << " "
-       << cp.distortion[3] << " " << endl;
-
-    of << "PrincipalPoint = " 
-       << cp.principalPoint[0] << " "
-       << cp.principalPoint[1] << " " << endl;
-
-    of << "Matrix = "
-       << cp.matrix[0] << " "
-       << cp.matrix[1] << " "
-       << cp.matrix[2] << " " << endl
-       << cp.matrix[3] << " " 
-       << cp.matrix[4] << " "
-       << cp.matrix[5] << " " << endl
-       << cp.matrix[6] << " "
-       << cp.matrix[7] << " "
-       << cp.matrix[8] << " " << endl;
-   
-    of.close();
-
-  }
-  if(ccv::debug) std::cerr << "Parameters saved\n";
-  
+    return false;
 }
 
 bool
 CCOCV::loadParams(const char* file)
 {
-  int MAX_LENGTH=40;
-  int MAX_WORDS=40;
-  char words[MAX_WORDS][MAX_LENGTH];
-
-  int i=0;
-  
-  ifstream in(file);
-
-  while(in.getline(words[i++],MAX_LENGTH,' ') && i<MAX_WORDS)
-    if(ccv::debug) std::cerr << "i=%d" << i-1 << " : " << words[i-1] << endl;
-  
-  if(i<13) return false;
-
-
-  calibrated=true;
-
-  if(ccv::debug) std::cerr << "Read from file...\n";
-  for(int k=0;k<i;k++) if(ccv::debug) std::cerr << words[k] << endl;
-  
-  cp.focalLength[0]    = atof(words[2]);
-  cp.focalLength[1]    = atof(words[3]);
-  
-  cp.distortion[0]     = atof(words[6]);
-  cp.distortion[1]     = atof(words[7]);
-  cp.distortion[2]     = atof(words[8]);
-  cp.distortion[3]     = atof(words[9]);
-  
-  cp.principalPoint[0] = atof(words[12]);
-  cp.principalPoint[1] = atof(words[13]);
-  
-  cp.matrix[0]         = atof(words[16]);
-  cp.matrix[1]         = atof(words[17]);
-  cp.matrix[2]         = atof(words[18]);
-  cp.matrix[3]         = atof(words[19]);
-  cp.matrix[4]         = atof(words[20]);
-  cp.matrix[5]         = atof(words[21]);
-  cp.matrix[6]         = atof(words[22]);
-  cp.matrix[7]         = atof(words[23]);
-  cp.matrix[8]         = atof(words[24]);
-  
-  printParams();
-
-  return true;
-
+    calibrated = cp.load(file);
+    return calibrated;
 }
 
 void 
@@ -1072,7 +874,7 @@ CCOCV::setCameraParams(struct CameraParams cp)
 
   calibrated = true;
   if(ccv::debug) 
-    printParams();
+    cp.print();
 }
 
 void

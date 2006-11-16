@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: CalibrationParameters.cpp,v 1.5 2005/06/22 23:14:25 cygnus78 Exp $
+   $Id: CalibrationParameters.cpp,v 1.6 2006/11/16 23:48:31 cygnus78 Exp $
 
 *************************************************/
 
@@ -71,7 +71,7 @@ CalibrationParameters::parametersChanged()
 {
   if(ccv::debug) std::cerr << "CalibrationParameters::parametersChanged\n";
 
-  struct CameraParams cp;
+  CameraParams cp;
 
   cp.focalLength[0] = focalLengthLE  ->text().toDouble();
   cp.focalLength[1] = focalLengthLE_2->text().toDouble();

@@ -1,3 +1,4 @@
+// -*- mode: C++; -*-
 /*************************************************
 
  Purpose:
@@ -8,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.40 2006/11/14 22:05:24 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.41 2006/11/16 23:48:31 cygnus78 Exp $
 
 *************************************************/
 

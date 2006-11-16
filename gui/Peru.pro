@@ -30,7 +30,8 @@ SOURCES	+= Peru.cpp                              \
            ../src/ContrastStretch.cpp            \
            ../src/PerspectiveCorrect.cpp         \
            ../src/ccv.cpp                        \
-           ../src/preferences.cpp
+           ../src/preferences.cpp                \
+           ../src/CameraParams.cpp
 
 HEADERS	+= Peru.h                                \
            ../src/CCOCV.h                        \ 
@@ -54,7 +55,8 @@ HEADERS	+= Peru.h                                \
            ../src/ContrastStretch.h              \
            ../src/PerspectiveCorrect.h           \
            ../src/ccv.h                          \
-           ../src/preferences.h
+           ../src/preferences.h                  \
+           ../src/CameraParams.h
 
 count( CVPATH, 1 ) {
 INCLUDEPATH += $$CVPATH/include                  \
@@ -109,7 +111,6 @@ LIBS += -L$$CVPATH/lib -Wl,-rpath,$$CVPATH/lib
 LIBS += -lcv  \
         -lcxcore \
         -lhighgui \
-        -lavcodec \
         -lcvaux   \
         -ltiff
 

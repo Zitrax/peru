@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.h,v 1.13 2006/11/14 22:05:24 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.14 2006/11/16 23:48:31 cygnus78 Exp $
 
 *************************************************/
 
@@ -20,42 +20,17 @@
 #include <opencv/cv.h>
 
 #include "Peru.h"
-//#include "SortCorners.h"
+#include "CameraParams.h"
 #include "ccv.h"
 
 #include <string>
 #include <iostream>
-#include <fstream>
 
 using namespace std;
 
 const int MAXFILES = 20;
 const int CORRECT_IMAGE = 1;
 const int FAILED_IMAGE = -1;
-
-//! Holds all camera parameters
-class CameraParams {
-public:
-
-    CameraParams();
-    ~CameraParams();
-
-    CameraParams(const CameraParams& rhs);
-    CameraParams& operator=(const CameraParams& rhs);
-
-    double focalLength[2];
-    double distortion[4];
-    float distortionf[4]; 
-    double principalPoint[2];
-    double matrix[9];
-    float matrixf[9];
-    double* rotMatr;
-    double* transVect;
-
-    unsigned int rotMatrSize;
-    unsigned int transVectSize;
-
-};
 
 //! All settings to the TopHat function
 struct sTopHatSettings {
@@ -100,13 +75,10 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
 
   QStringList getFiles();   //!< Get the list of files of calibration images
 
-
   CameraParams getParams()  //!< Returns the camera-parameters struct
   { return cp; }
 
-  void printParams();       //!< Prints all found parameters to stdout
-
-  void saveParams           //!< Saves found parameters to file with name file
+  bool saveParams           //!< Saves found parameters to file with name file
     (const char* file);     
 
   bool loadParams           //!< Load parameters from file with name file
