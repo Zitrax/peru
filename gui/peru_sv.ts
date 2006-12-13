@@ -145,7 +145,8 @@ FEL - Filtypen stöds inte</translation>
 ERROR - Not a valid filename (must have valid suffix)
 </source>
         <translation>
-FEL - Filnamnet har en okänd filtyp</translation>
+FEL - Filnamnet har en okänd filtyp
+</translation>
     </message>
     <message>
         <source>Images in queue: </source>
@@ -486,7 +487,7 @@ ABORTED - Throwing away data
     </message>
     <message>
         <source>Left params</source>
-        <translation>Vänter parametrar</translation>
+        <translation>Vänster parametrar</translation>
     </message>
     <message>
         <source>Right params</source>
