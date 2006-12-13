@@ -7,7 +7,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: ImageWidget.h,v 1.6 2005/06/22 23:14:25 cygnus78 Exp $
+   $Id: ImageWidget.h,v 1.7 2006/12/13 23:05:13 cygnus78 Exp $
 *************************************************/
 
 #ifndef IMAGEWIDGET_H
@@ -18,6 +18,7 @@
 #include <qpainter.h>
 #include <qevent.h>
 #include <qcolor.h>
+#include <qpopupmenu.h>
 
 #include "../src/ccv.h"
 
@@ -50,7 +51,8 @@ public slots:
 signals:
   void sendMousePressed(QMouseEvent* e);
   void sendMouseReleased(QMouseEvent* e);
-  
+  void saveImage();
+
 protected:
   void paintEvent(QPaintEvent *e);
   void mousePressEvent(QMouseEvent* e);
@@ -62,7 +64,7 @@ private:
   QImage oImage;                      //!< Original image
   QImage sImage;                      //!< Scaled image
   bool scaled;                        //!< Should the image be scaled ?
-
+  QPopupMenu m_item_menu;
 };
 
 #endif

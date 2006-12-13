@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.41 2006/11/16 23:48:31 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.42 2006/12/13 23:05:13 cygnus78 Exp $
 
 *************************************************/
 
@@ -183,6 +183,8 @@ Peru::connectSignalsToSlots()
   connect( montageView,   SIGNAL(       removedAllItems() ),
 	   this,            SLOT( clearCalibrationQueue() ));
 
+  connect( Image_widget,  SIGNAL( saveImage() ),
+	   this,            SLOT( saveImage() ));
 }
 
 void Peru::imageOpen( QString filename ) { imageOpen_(filename); }
@@ -222,8 +224,8 @@ Peru::imageOpen(QImage& image)
   if(ccv::debug) std::cerr << "Running imageOpen2\n";
   if( !calibCB->isChecked() || modeTabWidget->label( modeTabWidget->currentPageIndex() ) == tr("Stereo") )
     Image_widget->displayImage(image);
-  else
-    undistortImage(true);
+  else if( !undistortImage(true) )
+    Image_widget->displayImage(image);
   imageTabWidget->setCurrentPage( findTabPage( imageTabWidget, tr("ImageView")) );
 }
 
@@ -395,7 +397,7 @@ Peru::undistortImage()
   undistortImage( calibCB->isChecked() );
 }
 
-void
+bool
 Peru::undistortImage(bool undistort)
 {
   if(ccv::debug) std::cerr << "Peru::undistortImage(bool undistort)\n";
@@ -413,9 +415,13 @@ Peru::undistortImage(bool undistort)
     }
     Image_widget->displayImage(*p_image);
     zap(p_image);
+    return true;
   }
   else
-    if(ccv::debug) std::cerr << "Not undistorting - no params\n";
+    {
+      if(ccv::debug) std::cerr << "Not undistorting - no params\n";
+      return false;
+    }
 }
 
 void 

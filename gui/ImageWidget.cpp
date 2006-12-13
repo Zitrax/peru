@@ -7,7 +7,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ImageWidget.cpp,v 1.8 2006/11/14 22:05:24 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.9 2006/12/13 23:05:13 cygnus78 Exp $
 
 *************************************************/
 
@@ -16,12 +16,19 @@
 #include <qscrollview.h>
 #include <iostream>
 #include <qapplication.h>
+#include <qaction.h>
 
 ImageWidget::ImageWidget( QWidget *parent, const char *name, bool scale) 
   : QWidget( parent, name)
 {
   parent->installEventFilter(this);
   setScaled( scale );
+
+  QAction* saveAction = new QAction( tr("Save image"), tr("Save"), CTRL+Key_S, this);
+  connect( saveAction, SIGNAL( activated() ), 
+	   this, SIGNAL( saveImage() ) );
+  saveAction->addTo(&m_item_menu);
+  saveAction->setEnabled(true);
 }
 
 ImageWidget::~ImageWidget(){}
@@ -108,6 +115,9 @@ ImageWidget::mousePressEvent(QMouseEvent* e)
 {
   if(ccv::debug) std::cerr << "MousePressed at " << e->x() 
 			   << "," << e->y() <<"\n";
+
+  if( e->button() == Qt::RightButton )
+    m_item_menu.exec(e->globalPos());
 
   emit sendMousePressed(e);  
 }

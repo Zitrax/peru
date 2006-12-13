@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.h,v 1.21 2006/10/23 18:58:49 cygnus78 Exp $
+   $Id: Peru.h,v 1.22 2006/12/13 23:05:13 cygnus78 Exp $
 
 *************************************************/
 
@@ -114,7 +114,7 @@ class Peru : public Perubase
                                         //!< calibrationimages
    void calibrate();                    //!< Starts calibration
    void setCalibrated(bool c,int cam);  //!< Toggles calibration leds
-   void undistortImage(bool undistort); //!< Undistorts image according to 
+   bool undistortImage(bool undistort); //!< Undistorts image according to 
                                         //!< calculated parameters
    void removeImageFromCalibrationQueue(QString image);
    void clearCalibrationQueue();
