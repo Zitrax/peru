@@ -1,12 +1,21 @@
-PROJECT PERU
-------------
+PERU
+----
 
 This application provides functionality for generation of
 disparity maps from stereo pairs of images and calibration of 
 cameras. There is no manual available but hovering the mouse over 
 most widgets will provide basic help.
 
-This documentation is for version 0.5 and was last updated 2006-10-17.
+Also note that from version 0.4.1 and higher there will
+be a precompiled binary available statically linked against
+OpenCV if you want a quick try without compiling yourself.
+
+The static binary is at the moment compiled using
+g++ 4.0.3 on Kubuntu 6.10. But note that you will miss
+the Swedish translation if just download the binary.
+
+This documentation is for version 0.4.2 and was last 
+updated 2006-12-14.
 
 You will need the following installed on your computer:
 
@@ -42,7 +51,7 @@ the default by specifying a prefix you may have a look at INSTALL.old
 OpenCV might require ffmpeg. But as the compatible ffmpeg version is no
 longer available at it's original location I will provide it at perus
 projectpage as sourceforge. Get it from there if you need it. Note that
-you get alot of errors if you use compilers newer than gcc 3.3, using
+you get a lot of errors if you use compilers newer than g++ 3.3, using
 3.3 works fine for me. 
 
 Install qt3. If using rpm's install both qt and qt-devel.
@@ -55,14 +64,14 @@ Type 'make'.
 PROBLEMS ?
 ----------
 
-* See such that no old version of the libraries are used at runtime
+* See such that no old version of the libraries are used at run-time
   this can generate segmentation faults. ( Built with the new libs
   and executed with the old ) What ? Noo I did not do that ! ;)
 
 * See that the angle and position of the calibration
   pattern is different enough, otherwise faulty calibration
   results will occur. For example using frames from 
-  a videosequence where two frames next to each other
+  a video-sequence where two frames next to each other
   in time are very similar. Even using for example five different 
   pattern and a sixth that is too similar to one of the first 
   five can give faulty results.

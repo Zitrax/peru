@@ -2,6 +2,10 @@
 * Fixed a couple of minor memoryleaks
 * Some code cleaning (mostly warnings)
 * Aspect ratio of thumbnails
+* Small fix in Swedish translation
+* Opening single images when not calibrated fix
+* Updated installation notes
+* Made sure you can save images by rightclick
 
 0.4.1
 * Fixed crashbug when trying do draw 0 found corners
