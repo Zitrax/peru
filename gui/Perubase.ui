@@ -1156,50 +1156,6 @@
                         <string></string>
                     </property>
                 </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>left_paramsB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>130</x>
-                            <y>100</y>
-                            <width>70</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>7</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Left params</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton">
-                    <property name="name">
-                        <cstring>right_paramsB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>210</x>
-                            <y>100</y>
-                            <width>70</width>
-                            <height>20</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>helvetica</family>
-                            <pointsize>7</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Right params</string>
-                    </property>
-                </widget>
                 <widget class="QCheckBox">
                     <property name="name">
                         <cstring>display_disparityCB</cstring>
@@ -1225,33 +1181,6 @@
                     </property>
                     <property name="toolTip" stdset="0">
                         <string>Display the disparity image in the output window after it's calculated</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox">
-                    <property name="name">
-                        <cstring>write_disparityCB</cstring>
-                    </property>
-                    <property name="geometry">
-                        <rect>
-                            <x>190</x>
-                            <y>120</y>
-                            <width>170</width>
-                            <height>21</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>8</pointsize>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Write disparity images</string>
-                    </property>
-                    <property name="checked">
-                        <bool>false</bool>
-                    </property>
-                    <property name="toolTip" stdset="0">
-                        <string>Writes the disparity images to disc (in the directory you started from)</string>
                     </property>
                 </widget>
                 <widget class="QCheckBox">
@@ -1709,6 +1638,77 @@
                         <string>Gaussian smoothing</string>
                     </property>
                 </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>write_disparityCB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>190</x>
+                            <y>120</y>
+                            <width>170</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>8</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Write disparity images</string>
+                    </property>
+                    <property name="checked">
+                        <bool>false</bool>
+                    </property>
+                    <property name="toolTip" stdset="0">
+                        <string>Writes the disparity images to disc (in the directory you started from)</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>left_paramsB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>120</x>
+                            <y>100</y>
+                            <width>80</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Left params</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>right_paramsB</cstring>
+                    </property>
+                    <property name="geometry">
+                        <rect>
+                            <x>210</x>
+                            <y>100</y>
+                            <width>80</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>7</pointsize>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Right params</string>
+                    </property>
+                </widget>
             </widget>
         </widget>
         <widget class="QPushButton" row="1" column="6">
@@ -1844,7 +1844,7 @@
                             </font>
                         </property>
                         <property name="text">
-                            <string>PERU - Version 0.4.1</string>
+                            <string>PERU - Version 0.4.2</string>
                         </property>
                     </widget>
                     <widget class="QTextEdit">
