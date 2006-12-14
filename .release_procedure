@@ -1,0 +1,10 @@
+1. Tag the build.
+   - cvs rtag PERU-XXX peru
+2. Create a static build, strip it and name it peru-bin-static-0.4.2.bz2.
+3. Create source package.
+   - cvs -z3 -d:ext:cygnus78@peru.cvs.sourceforge.net:/cvsroot/peru export -r PERU-042 peru
+   - rename peru folder to peru-x.y.z and compress it to peru-x.y.z.tar.bz2
+4. Upload and release
+   - ftp upload.sourceforge.net (user anonymous, password email)
+   - bin, cd incoming, put file
+   - then go to the frs and add the release
