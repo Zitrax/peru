@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.23 2006/11/16 23:48:31 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.24 2006/12/14 19:37:15 cygnus78 Exp $
 
 *************************************************/
 
@@ -276,7 +276,7 @@ CCOCV::findCorners2(int& corners_found, bool singleTrial)
     //    cvvSaveImage("gray_image.bmp",gray_image);
 
     CvMemStorage *storage;
-    storage = cvCreateMemStorage(0);  // Should be freed ? 
+    storage = cvCreateMemStorage(0); 
 
     if(ccv::debug) std::cerr << "Trying to find corners...\n";
     int status = 
@@ -814,7 +814,7 @@ CCOCV::trialCalib(int& corners_found)
 
     findCorners2(corners_found, true);
 
-    // Importans such that real calib starts from scratch
+    // Important such that real calib starts from scratch
     zapArr(allcorners);
     zapArr(failcorners);
     initialized = false;
