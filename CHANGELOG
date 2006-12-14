@@ -2,7 +2,7 @@
 * Fixed a couple of minor memoryleaks
 * Some code cleaning (mostly warnings)
 * Aspect ratio of thumbnails
-* Small fix in Swedish translation
+* Updated Swedish translation
 * Opening single images when not calibrated fix
 * Updated installation notes
 * Made sure you can save images by rightclick

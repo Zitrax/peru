@@ -27,6 +27,17 @@
     </message>
 </context>
 <context>
+    <name>ImageWidget</name>
+    <message>
+        <source>Save image</source>
+        <translation>Spara bild</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Spara</translation>
+    </message>
+</context>
+<context>
     <name>MontageView</name>
     <message>
         <source>Remove item from calibration list</source>
@@ -190,7 +201,7 @@ Opened image: </source>
     <message>
         <source>ERROR - You must use more than one image
 </source>
-        <translation>FEL - Du måste använda mer än en bild
+        <translation type="obsolete">FEL - Du måste använda mer än en bild
 </translation>
     </message>
     <message>
@@ -205,6 +216,24 @@ ABORTED - Throwing away data
 </source>
         <translation>VARNING - Du har inte kalibrerat eller kalibreringen var misslyckad
 </translation>
+    </message>
+    <message>
+        <source>Stereo</source>
+        <translation>Stereo</translation>
+    </message>
+    <message>
+        <source>WARNING - You should use more than one image
+</source>
+        <translation>VARNING - Du måste använda mer än en bild
+</translation>
+    </message>
+    <message>
+        <source>Exit</source>
+        <translation>Avsluta</translation>
+    </message>
+    <message>
+        <source>Calculation in progress! Are you sure you want to exit?</source>
+        <translation>Beräkning pågår! Är du säker på att du vill avsluta?</translation>
     </message>
 </context>
 <context>
@@ -710,7 +739,7 @@ ABORTED - Throwing away data
         <translation>&amp;Om...</translation>
     </message>
     <message>
-        <source>PERU - Version 0.4.0</source>
+        <source>PERU - Version 0.4.2</source>
         <translation></translation>
     </message>
 </context>
