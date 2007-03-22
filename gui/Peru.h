@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.h,v 1.22 2006/12/13 23:05:13 cygnus78 Exp $
+   $Id: Peru.h,v 1.23 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,7 +17,6 @@
 #define PERU_H
 
 #include "ccv.h"
-#include ".ui/Perubase.h"
 #include "CCOCV.h"
 #include "ImageWidget.h"
 #include "kstartuplogo.h"
@@ -39,31 +38,7 @@
 #include "preferences.h"
 #include "MontageView.h"
 
-#include <string>
-#include <iostream>
-#include <cmath>
-#include <unistd.h>
-#include <time.h>
-
-#include <qcheckbox.h>
-#include <qtextedit.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
-#include <qlineedit.h>
-#include <qfiledialog.h>
-#include <qimage.h>
-#include <qstring.h>
-#include <qprogressbar.h>
-#include <qcolor.h>
-#include <qcombobox.h>
-#include <qlabel.h>
-#include <qslider.h>
-#include <qtabwidget.h>
-#include <qdial.h>
-#include <qsplitter.h>
-#include <qmessagebox.h>
-
-#include <opencv/cv.h>
+#include "inc/Peru_externals.h"
 
 using namespace std;
 

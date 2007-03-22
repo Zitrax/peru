@@ -7,16 +7,11 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ImageWidget.cpp,v 1.9 2006/12/13 23:05:13 cygnus78 Exp $
+   $Id: ImageWidget.cpp,v 1.10 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
 #include "ImageWidget.h"
-#include <qcheckbox.h>
-#include <qscrollview.h>
-#include <iostream>
-#include <qapplication.h>
-#include <qaction.h>
 
 ImageWidget::ImageWidget( QWidget *parent, const char *name, bool scale) 
   : QWidget( parent, name)

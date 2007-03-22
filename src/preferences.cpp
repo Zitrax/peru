@@ -8,14 +8,12 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: preferences.cpp,v 1.6 2005/07/20 22:24:03 cygnus78 Exp $
+   $Id: preferences.cpp,v 1.7 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
 #include "preferences.h"
 #include "Peru.h"
-
-#include <qsettings.h>
 
 Preferences::Preferences( Peru* peru ) : m_peru( peru ) {}
 

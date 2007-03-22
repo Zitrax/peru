@@ -8,7 +8,7 @@
    Daniel Bengtsson 2003-2005, daniel@bengtssons.info
 
  Version:
-   $Id: MeanCorrection.cpp,v 1.2 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: MeanCorrection.cpp,v 1.3 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -23,13 +23,13 @@ MeanCorrection::MeanCorrection(IplImage** i1,
 }
 
 void
-MeanCorrection::apply(IplImage* image)
+MeanCorrection::apply(IplImage* /*image*/)
 {
   if(ccv::debug) std::cerr << "Applying MeanCorrection filter\n";
 
   if(!flip) {
     int add = cvRound(findMean(*image1)-findMean(*image2));
-    if(ccv::debug) std::cout << "Add: " << add << "\n";
+    if(ccv::debug) std::cout << "Mean difference: " << add << "\n";
     addC(*image2,add);
   }
   
@@ -60,6 +60,7 @@ MeanCorrection::findMean(IplImage* img)
   if(img->nChannels != 3) mean = static_cast<double>(sum)/nop;
   else mean = static_cast<double>(sum)/(3*nop);
 
+  if(ccv::debug) std::cerr << "Mean for " << img << " is: " << mean << "\n";
   return mean;
 }
 

@@ -8,7 +8,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: PyramidBlock.h,v 1.5 2005/06/22 23:14:23 cygnus78 Exp $
+   $Id: PyramidBlock.h,v 1.6 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -39,6 +39,12 @@ class PyramidBlock : public Stereo
 	       int tol,
 	       bool c);
   ~PyramidBlock();
+
+  /// Forbid copying
+  PyramidBlock(const PyramidBlock&);
+  /// Forbid assignment
+  const PyramidBlock& operator=(const PyramidBlock&);
+
  protected:
   bool calculateDisparity();
   void blockmatch(int level);

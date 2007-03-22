@@ -8,13 +8,11 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: BlockMatch.cpp,v 1.6 2006/11/14 22:05:24 cygnus78 Exp $
+   $Id: BlockMatch.cpp,v 1.7 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
 #include "BlockMatch.h"
-
-#include <qapplication.h>
 
 BlockMatch::BlockMatch(string left, string right, string out) 
   : Stereo(left, right, out) 
@@ -218,7 +216,7 @@ BlockMatch::windowDiff(uchar* l, uchar* r, int wstep, int n, int nc)
 	if(!square)
 	  diff += abs( (r+y*wstep+x*nc)[c] - (l+y*wstep+x*nc)[c] );
 	else
-	  diff += pow(static_cast<float>((r+y*wstep+x*nc)[c]) - (l+y*wstep+x*nc)[c], 2);
+	  diff += static_cast<int>(pow(static_cast<float>((r+y*wstep+x*nc)[c]) - (l+y*wstep+x*nc)[c], 2));
 
   
   return diff;

@@ -10,21 +10,18 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.h,v 1.14 2006/11/16 23:48:31 cygnus78 Exp $
+   $Id: CCOCV.h,v 1.15 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
 #ifndef CCOCV_H
 #define CCOCV_H
 
-#include <opencv/cv.h>
-
 #include "Peru.h"
 #include "CameraParams.h"
 #include "ccv.h"
 
-#include <string>
-#include <iostream>
+#include "inc/CCOCV_externals.h"
 
 using namespace std;
 
@@ -47,6 +44,10 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   CCOCV();                  //!< Constructor is silent for now
   ~CCOCV();                 //!< Hmm destruction, danger, horror, terror...
   
+  CCOCV(const CCOCV&);      //!< Forbid copying
+  const CCOCV& operator=    //!< Forbid assignment
+  (const CCOCV&);
+
   void setEtalonSize        //!< Set number of inner corners on chessboard 
     (int x, int y);  
 
@@ -102,14 +103,6 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   QPointArray getCorners
   (const QSize& size);      //!< Get the found corners
   
-  void drawCorners          //!< Draw found corners on montageimage
-    ( string filename,
-      int xgap, int pointsize,
-      int nx, 
-      int bw, int bh,
-      int ow, int oh,
-      bool drawFailed=false);
-
   void setTopHatSettings
     (int iterations, 
      int shape,
@@ -131,9 +124,9 @@ class CCOCV                 //!< abbr: Camera Calibration OpenCV
   bool calibrated;          //!< Have a calibration been successfully performed
   CameraParams camP;        //!< Camera parameters will be stored here
   CvSize etalon_size;       /*! Number of inner corners per chessboard 
-			      row and column. The width (the number of columns) 
-			      must be less or equal to the height (the number 
-			      of rows) */
+                              row and column. The width (the number of columns) 
+                              must be less or equal to the height (the number 
+                              of rows) */
   CvPoint2D32f* corners;    //!< Pointer to the corner array found
   CvPoint2D64d* allcorners; //!< Corners found in correct calibration images
   CvPoint2D64d* failcorners;//!< Corners found in failed calibration images

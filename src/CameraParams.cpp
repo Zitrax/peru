@@ -8,14 +8,14 @@
    Daniel Bengtsson 2002-2006, daniel@bengtssons.info
 
  Version:
-   $Id: CameraParams.cpp,v 1.1 2006/11/16 23:48:31 cygnus78 Exp $
+   $Id: CameraParams.cpp,v 1.2 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
 #include "CameraParams.h"
 
 #include "ccv.h"
-#include <fstream>
+#include <fstream> // Warn ok
 
 using namespace std;
 

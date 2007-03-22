@@ -10,7 +10,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: CalibrationParameters.h,v 1.5 2005/06/22 23:14:25 cygnus78 Exp $
+   $Id: CalibrationParameters.h,v 1.6 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -22,8 +22,7 @@
 #include "CCOCV.h"
 #include "Peru.h"
 
-#include <qwidget.h>
-
+#include "inc/CalibrationParameters_externals.h"
 
 class CCOCV;
 class Peru;

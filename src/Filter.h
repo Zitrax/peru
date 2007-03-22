@@ -8,7 +8,7 @@
    Daniel Bengtsson 2003-2005, daniel@bengtssons.info
 
  Version:
-   $Id: Filter.h,v 1.3 2006/11/14 22:05:24 cygnus78 Exp $
+   $Id: Filter.h,v 1.4 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -16,9 +16,8 @@
 #define FILTERS_H
 
 #include "ccv.h"
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
-#include <iostream>
+
+#include "inc/Filter_externals.h"
 
 class Filter
 {

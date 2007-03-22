@@ -9,7 +9,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: CCOCV.cpp,v 1.24 2006/12/14 19:37:15 cygnus78 Exp $
+   $Id: CCOCV.cpp,v 1.25 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -571,6 +571,7 @@ CCOCV::getCorners(const QSize& size)
 }
 
 
+#if 0  // THIS IS OBSOLETE BUT KEPT FOR NOSTALGIC REASONS :)
 void
 CCOCV::drawCorners(string filename, int xgap, int pointsize, 
 		   int nx, int bw, int bh,
@@ -582,7 +583,6 @@ CCOCV::drawCorners(string filename, int xgap, int pointsize,
   if(ccv::debug) std::cerr << "CURRENTLY DISABLED DUE TO IMAGEMAGIC REMOVAL\n";
   return;
 
-#if 0
   // xgap is the gap set in imagemagick
   // ygap must be manually checked on montageimage and hardcoded
 
@@ -715,8 +715,8 @@ CCOCV::drawCorners(string filename, int xgap, int pointsize,
   
   cvReleaseImage(&image);
 
-#endif // 0
 }
+#endif // 0
 
 void
 CCOCV::whiteTopHat(IplImage* source, struct sTopHatSettings* ts)

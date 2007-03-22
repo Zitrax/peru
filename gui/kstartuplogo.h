@@ -4,10 +4,7 @@
 #ifndef KSTARTUPLOGO_H
 #define KSTARTUPLOGO_H
 
-#include <qwidget.h>
-#include <qcursor.h>
-#include <qpixmap.h>
-#include <qapplication.h>
+#include "inc/kstartuplogo_externals.h"
 
 /**
   *@author Kai Heitkamp

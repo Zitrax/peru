@@ -8,14 +8,14 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: preferences.h,v 1.4 2005/07/20 22:24:02 cygnus78 Exp $
+   $Id: preferences.h,v 1.5 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
 #ifndef PREFERENCES_H
 #define PREFERENCES_H
 
-#include <qstring.h>
+#include "inc/preferences_externals.h"
 
 class Peru;
 

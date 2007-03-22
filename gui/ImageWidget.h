@@ -7,18 +7,13 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: ImageWidget.h,v 1.7 2006/12/13 23:05:13 cygnus78 Exp $
+   $Id: ImageWidget.h,v 1.8 2007/03/22 23:42:39 cygnus78 Exp $
 *************************************************/
 
 #ifndef IMAGEWIDGET_H
 #define IMAGEWIDGET_H
 
-#include <qwidget.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qevent.h>
-#include <qcolor.h>
-#include <qpopupmenu.h>
+#include "inc/ImageWidget_externals.h"
 
 #include "../src/ccv.h"
 

@@ -10,7 +10,7 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: stereo.h,v 1.8 2006/10/23 18:58:49 cygnus78 Exp $
+   $Id: stereo.h,v 1.9 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -18,15 +18,9 @@
 #define STEREO_H
 
 #include "../ccv.h"
-#include <opencv/cv.h>
-#include <iostream> 
-#include <math.h>
-#include <string>
-#include <vector>
-
-#include <qobject.h>
-
 #include "../Filter.h"
+
+#include "inc/stereo_externals.h"
 
 using namespace std;
 
@@ -81,6 +75,9 @@ class Stereo : public QObject
 	 bool m=false); 
 
   virtual ~Stereo();                     //!< Destructor (virtual)
+
+  Stereo(const Stereo&);                 //!< Forbid copying
+  const Stereo& operator=(const Stereo&);//!< Forbid assignment
 
   double start();                        //!< Start the algorithm
 

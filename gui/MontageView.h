@@ -9,17 +9,14 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.h,v 1.6 2005/07/01 22:36:34 cygnus78 Exp $
+   $Id: MontageView.h,v 1.7 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
 #ifndef MONTAGEVIEW_H
 #define MONTAGEVIEW_H
 
-#include <qiconview.h>
-#include <qpopupmenu.h>
-#include <qaction.h>
-#include <qpointarray.h>
+#include "inc/MontageView_externals.h"
 
 class MontageView : public QIconView
 {

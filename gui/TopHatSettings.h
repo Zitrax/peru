@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: TopHatSettings.h,v 1.5 2005/06/22 23:14:24 cygnus78 Exp $
+   $Id: TopHatSettings.h,v 1.6 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -21,8 +21,7 @@
 #include "CCOCV.h"
 #include "Peru.h"
 
-#include <qwidget.h>
-#include <qlcdnumber.h>
+#include "inc/TopHatSettings_externals.h"
 
 class CCOCV;
 class Peru;

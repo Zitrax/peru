@@ -8,19 +8,14 @@
    Daniel Bengtsson 2002, daniel@bengtssons.info
 
  Version:
-   $Id: ccv.h,v 1.10 2006/11/14 22:05:24 cygnus78 Exp $
+   $Id: ccv.h,v 1.11 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
 #ifndef CCV_H
 #define CCV_H
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qimage.h>
-
-#include <opencv/cv.h>
-#include <iostream>
+#include "inc/ccv_externals.h"
 
 #define zapMat(x) if(x){if(ccv::debug) std::cerr << "Zapping\n"; cvReleaseMat(&x); x=0;}
 #define zapImg(x) if(x){cvReleaseImage(&x); x=0;}

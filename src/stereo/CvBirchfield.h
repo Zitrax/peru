@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: CvBirchfield.h,v 1.4 2005/06/22 23:14:23 cygnus78 Exp $
+   $Id: CvBirchfield.h,v 1.5 2007/03/22 23:42:39 cygnus78 Exp $
 
 *************************************************/
 
@@ -17,7 +17,8 @@
 #define CVBIRCHFIELD_H
 
 #include "stereo.h"
-#include <opencv/cvaux.h>
+
+#include "inc/CvBirchfield_externals.h"
 
 class CvBirchfield : public Stereo
 {
