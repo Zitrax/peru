@@ -10,7 +10,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: CalibrationParameters.h,v 1.6 2007/03/22 23:42:39 cygnus78 Exp $
+   $Id: CalibrationParameters.h,v 1.7 2007/09/14 21:34:59 cygnus78 Exp $
 
 *************************************************/
 
@@ -18,7 +18,6 @@
 #define CALIBRATIONPARAMETERS_H
 
 #include "ccv.h"
-#include "CalibrationParametersBase.h"
 #include "CCOCV.h"
 #include "Peru.h"
 
@@ -37,7 +36,12 @@ public:
 			 const char* name = 0,
 			 WFlags fl = 0 );
   ~CalibrationParameters();
- 
+
+  /// Forbid copying
+  CalibrationParameters(const CalibrationParameters&);
+  /// Forbid assignment
+  const CalibrationParameters& operator=(const CalibrationParameters&);
+
   void updateParameters(struct CameraParams cp, bool block_signals=false);
 
 public slots:

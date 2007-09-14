@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: MontageView.h,v 1.7 2007/03/22 23:42:39 cygnus78 Exp $
+   $Id: MontageView.h,v 1.8 2007/09/14 21:34:59 cygnus78 Exp $
 
 *************************************************/
 
@@ -25,6 +25,11 @@ Q_OBJECT
 public:
   MontageView( QWidget* parent, const char* name=0, WFlags f=0 );
   ~MontageView(){}
+
+  /// Forbid copying
+  MontageView(const MontageView&);
+  /// Forbid assignment
+  const MontageView& operator=(const MontageView&);
 
   /**
    * Draws points on all item-thumbnails at the positions in the pointarray.

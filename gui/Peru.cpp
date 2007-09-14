@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.cpp,v 1.42 2006/12/13 23:05:13 cygnus78 Exp $
+   $Id: Peru.cpp,v 1.43 2007/09/14 21:34:59 cygnus78 Exp $
 
 *************************************************/
 
@@ -18,7 +18,7 @@
 Peru* Peru::s_instance = 0;
 
 Peru::Peru( QWidget* parent, const char* name,
-	    WFlags fl) : Perubase(parent,name,fl), 
+            WFlags fl) : Perubase(parent,name,fl), 
 			 ccocv(0),
 			 ccocv2(0),
 			 stereo(0),
@@ -26,12 +26,17 @@ Peru::Peru( QWidget* parent, const char* name,
 			 Image_widget(0),
 			 ths(0),
 			 calPar(0),
-			 prefs(0),
+             prefs(0),
+             supportedFormats(QString::null),
+             calibration_path(QString::null),
+             stereo_image_path(QString::null),
+             fileName(""),
 			 correct_images(0),
 			 calibrated(false),
 			 calibrated2(false),
 			 calc_stop_flag(false),
 			 calculating(false),
+             current_progress(0),
 			 icon_size(100,100)
 {
   assert( s_instance == 0 );
@@ -67,10 +72,10 @@ Peru::Peru( QWidget* parent, const char* name,
   ths->hide();
 
   // Fix splitter layout
-  QValueList<int> sizes;
-  sizes.append( 300 );
-  sizes.append( 100 );
-  tab_text_splitter->setSizes(sizes);
+//   QValueList<int> sizes;
+//   sizes.append( 300 );
+//   sizes.append( 100 );
+//   tab_text_splitter->setSizes(sizes);
 }
 
 Peru::~Peru(){

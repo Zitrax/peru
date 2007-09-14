@@ -1,10 +1,9 @@
-#include <qapplication.h>
-#include <qtextcodec.h>
+#include "inc/main_externals.h"
 #include "Peru.h"
 
 namespace PeruGlobals {
   QString execLocation = QString::null;
-};
+}
 
 using namespace PeruGlobals;
 

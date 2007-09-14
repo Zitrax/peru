@@ -3,11 +3,6 @@
 
 #include "kstartuplogo.h"
 
-#include <ctime>
-#include <cstdlib>
-
-#include <qdir.h>
-
 #include "../src/ccv.h"
 
 namespace PeruGlobals{

@@ -9,7 +9,7 @@
    Daniel Bengtsson, daniel@bengtssons.info
 
  Version:
-   $Id: Peru.h,v 1.23 2007/03/22 23:42:39 cygnus78 Exp $
+   $Id: Peru.h,v 1.24 2007/09/14 21:34:59 cygnus78 Exp $
 
 *************************************************/
 
@@ -50,11 +50,17 @@ class Stereo;
 class Peru : public Perubase
 {
    Q_OBJECT
+
  public:
    Peru( QWidget* parent = 0, 
 	    const char* name = 0,
 	    WFlags fl = 0 );
    ~Peru();
+
+  /// Forbid copying
+  Peru(const Peru&);
+  /// Forbid assignment
+  const Peru& operator=(const Peru&);
 
   static Peru* getInstance()            //!< Get the gui
   { return s_instance; }

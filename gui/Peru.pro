@@ -4,9 +4,6 @@
 # Next line sets path to opencv
 CVPATH = /usr/local
 
-# Path to directory over directory magick
-MAGICKPATH =
-
 SOURCES	+= Peru.cpp                              \
            main.cpp                              \
            ImageWidget.cpp                       \
@@ -69,11 +66,6 @@ INCLUDEPATH += /usr/local/include/opencv
 
 INCLUDEPATH += ../src ../src/stereo
 
-# GL things that are not yet used
-# SOURCES += ImageWidgetGL.cpp GLWindow.cpp
-# HEADERS += ImageWidgetGL.h GLWindow.h
-# LIBS += -lGL -lGLU 
-
 unix {
   UI_DIR = .ui
   MOC_DIR = .moc
@@ -99,7 +91,7 @@ IMAGES	= images/filenew    \
 
 TEMPLATE = app
 
-CONFIG	+= qt warn_off release #debug
+CONFIG	+= qt warn_on release #debug
 
 DBFILE	 = Peru.db
 
@@ -108,19 +100,9 @@ LANGUAGE = C++
 count( CVPATH, 1 ) {
 LIBS += -L$$CVPATH/lib -Wl,-rpath,$$CVPATH/lib 
 }
-LIBS += -lcv  \
-        -lcxcore \
+LIBS += -lcv      \
+        -lcxcore  \
         -lhighgui \
-        -lcvaux   \
-        -ltiff
+        -lcvaux   
 
-
-# For ImageMagick
-# LIBS += `Magick++-config --ldflags --libs` 
-# INCLUDEPATH += $$MAGICKPATH/magick    \
-#               $$MAGICKPATH           \
-#               /usr/X11R6/include     \
-#               /usr/include/freetype2 \
-#               /usr/include/libxml2
-# DEFINES += _REENTRANT _FILE_OFFSET_BITS=64
-
+QMAKE_CXXFLAGS += -Werror
